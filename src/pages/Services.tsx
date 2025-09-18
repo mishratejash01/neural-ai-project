@@ -9,7 +9,6 @@ import {
   Brain, 
   Cog, 
   Zap,
-  CheckCircle2,
   ArrowRight,
   Clock,
   TrendingUp,
@@ -21,92 +20,38 @@ const Services = () => {
     {
       icon: MessageSquare,
       title: "AI-Powered Chatbots",
-      description: "Our AI-powered chatbots are designed to streamline customer support, lead generation, and sales engagement. Unlike traditional bots, these systems understand natural language, learn from past interactions, and adapt to customer needs.",
-      benefits: [
-        "24/7 customer support availability",
-        "Reduces response time by 90%",
-        "Natural language understanding",
-        "Seamless integration with existing platforms",
-        "Learns and improves from interactions",
-        "Multi-channel deployment (web, mobile, social)"
-      ],
-      details: "With 24/7 availability, they reduce response time, improve customer satisfaction, and free up human agents for complex queries. Businesses can integrate these bots on websites, apps, and social platforms to create seamless customer experiences.",
-      example: "An e-commerce chatbot that helps customers find products, track orders, process returns, and even provides personalized recommendations based on browsing history."
+      description: "Streamline customer support with intelligent chatbots that understand natural language and learn from interactions.",
+      slug: "chatbots"
     },
     {
       icon: Cog,
       title: "Custom AI Solutions",
-      description: "We provide tailor-made AI solutions that solve unique business challenges. Whether it's automating repetitive tasks, analyzing large datasets for insights, or creating recommendation engines, our team develops AI systems that align with your goals.",
-      benefits: [
-        "Tailored to specific business needs",
-        "Scalable architecture design",
-        "Enterprise-grade security",
-        "Seamless system integration",
-        "Ongoing optimization support",
-        "ROI-focused development"
-      ],
-      details: "Each solution is scalable, secure, and built to integrate smoothly with your existing workflows. We work closely with your team to ensure the AI system not only meets current needs but adapts to future requirements.",
-      example: "A custom inventory management AI that predicts demand, optimizes stock levels, and automatically reorders products while considering seasonal trends and market fluctuations."
+      description: "Tailored AI systems that solve unique business challenges with scalable, secure architecture.",
+      slug: "custom-ai"
     },
     {
       icon: BarChart,
       title: "Data Analytics & Insights",
-      description: "Our analytics solutions help businesses transform raw data into actionable intelligence. Using advanced machine learning models, we uncover hidden patterns, predict future trends, and provide visual dashboards that empower data-driven decision-making.",
-      benefits: [
-        "Advanced pattern recognition",
-        "Predictive trend analysis",
-        "Interactive visual dashboards",
-        "Real-time data processing",
-        "Automated report generation",
-        "Data-driven strategy recommendations"
-      ],
-      details: "From sales forecasting to customer behavior analysis, we turn complexity into clarity. Our solutions process vast amounts of data to provide insights that drive strategic business decisions.",
-      example: "A retail analytics platform that analyzes customer purchase patterns, predicts seasonal demands, identifies profitable product combinations, and recommends optimal pricing strategies."
+      description: "Transform raw data into actionable intelligence with advanced machine learning models.",
+      slug: "data-analytics"
     },
     {
       icon: Eye,
       title: "Computer Vision Applications",
-      description: "Harness the power of computer vision to revolutionize operations. We build AI models that can detect objects, recognize faces, process images, and even monitor production lines for defects.",
-      benefits: [
-        "Automated quality control",
-        "Real-time object detection",
-        "Facial recognition systems",
-        "Medical image analysis",
-        "Security monitoring",
-        "Production line optimization"
-      ],
-      details: "Industries such as retail, healthcare, security, and manufacturing benefit from automated visual intelligence, reducing errors and boosting efficiency. Our computer vision solutions process visual data faster and more accurately than human inspection.",
-      example: "A manufacturing quality control system that inspects products on assembly lines, detects microscopic defects, categorizes issues, and automatically routes defective items for correction."
+      description: "Harness visual intelligence for object detection, quality control, and automated monitoring.",
+      slug: "computer-vision"
     },
     {
       icon: Brain,
-      title: "Natural Language Processing (NLP)",
-      description: "We create AI models that understand, interpret, and generate human language. NLP powers chatbots, sentiment analysis tools, content summarization, and automated translation.",
-      benefits: [
-        "Multi-language processing",
-        "Sentiment analysis at scale",
-        "Automated content generation",
-        "Document processing and extraction",
-        "Voice-to-text conversion",
-        "Brand reputation monitoring"
-      ],
-      details: "Our solutions help businesses analyze customer feedback, monitor brand reputation, and provide multilingual support at scale. From processing legal documents to creating marketing content, NLP transforms how businesses handle text data.",
-      example: "A customer feedback analysis system that processes thousands of reviews, identifies sentiment trends, extracts key concerns, and provides actionable insights for product improvement."
+      title: "Natural Language Processing",
+      description: "Create AI models that understand, interpret, and generate human language at scale.",
+      slug: "nlp"
     },
     {
       icon: Zap,
-      title: "AI in Marketing Automation",
-      description: "Boost your marketing with AI-driven personalization. Our systems analyze customer behavior, segment audiences, and recommend strategies that maximize ROI.",
-      benefits: [
-        "Personalized customer experiences",
-        "Automated campaign optimization",
-        "Predictive customer analytics",
-        "Dynamic content generation",
-        "Cross-channel integration",
-        "Real-time performance tracking"
-      ],
-      details: "From automated email campaigns to predictive customer engagement, we ensure every marketing dollar drives measurable results. Our AI analyzes customer journeys and optimizes touchpoints for maximum conversion.",
-      example: "A marketing automation platform that personalizes email campaigns, predicts customer lifetime value, optimizes ad spend across channels, and automatically A/B tests campaign elements."
+      title: "Marketing Automation",
+      description: "Boost marketing with AI-driven personalization and automated campaign optimization.",
+      slug: "marketing-automation"
     }
   ];
 
@@ -125,7 +70,6 @@ const Services = () => {
               we have the expertise to drive your digital transformation with measurable results.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
@@ -164,57 +108,28 @@ const Services = () => {
             </p>
           </div>
           
-          <div className="space-y-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="shadow-card hover-lift overflow-hidden bg-white border-border rounded-3xl">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                  <CardHeader className="p-12 space-y-8">
-                    <div className="flex items-center space-x-6">
-                      <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center shadow-accent">
-                        <service.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <CardTitle className="text-3xl font-bold text-foreground">{service.title}</CardTitle>
-                    </div>
-                    
-                    <CardDescription className="text-lg text-muted-foreground leading-relaxed">
-                      {service.description}
-                    </CardDescription>
-
-                    <div className="p-6 rounded-2xl bg-gradient-hero border border-border">
-                      <p className="text-muted-foreground leading-relaxed">{service.details}</p>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-2xl border border-border shadow-soft">
-                      <h4 className="font-semibold mb-3 text-accent">Real-World Application:</h4>
-                      <p className="text-muted-foreground italic">{service.example}</p>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="p-12 bg-gradient-hero">
-                    <div className="space-y-8">
-                      <div>
-                        <h4 className="text-2xl font-bold mb-6 text-primary">Key Benefits:</h4>
-                        <div className="space-y-4">
-                          {service.benefits.map((benefit, benefitIndex) => (
-                            <div key={benefitIndex} className="flex items-start space-x-4 group">
-                              <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-smooth" />
-                              <span className="text-muted-foreground text-lg leading-relaxed">{benefit}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="pt-6">
-                        <Link to="/contact">
-                          <Button size="lg" className="w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-4 text-lg font-semibold shadow-accent">
-                            Get Started With This Service
-                            <ArrowRight className="ml-3 w-5 h-5" />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </CardContent>
-                </div>
+              <Card key={index} className="shadow-card hover-lift overflow-hidden bg-white border-border rounded-3xl group">
+                <CardHeader className="p-8 text-center">
+                  <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
+                    <service.icon className="w-8 h-8 text-white" />
+                  </div>
+                  <CardTitle className="text-2xl font-bold text-foreground mb-4">
+                    {service.title}
+                  </CardTitle>
+                  <CardDescription className="text-lg text-muted-foreground leading-relaxed mb-6">
+                    {service.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="p-8 pt-0">
+                  <Link to={`/services/${service.slug}`}>
+                    <Button className="w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-3 text-lg font-semibold shadow-accent group-hover:shadow-xl" size="lg">
+                      Learn More
+                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-smooth" />
+                    </Button>
+                  </Link>
+                </CardContent>
               </Card>
             ))}
           </div>
@@ -231,7 +146,6 @@ const Services = () => {
               on-time, and delivers measurable results.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {[
               { step: "01", title: "Discovery", description: "We analyze your business needs and identify AI opportunities" },
@@ -264,13 +178,13 @@ const Services = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="hero" size="lg">
+                <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth">
                   Get Free Consultation
-                  <ArrowRight className="ml-2" />
+                  <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link to="/demo">
-                <Button variant="neural" size="lg">
+                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
                   Watch Our Demo
                 </Button>
               </Link>
