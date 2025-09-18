@@ -13,6 +13,12 @@ import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
+import ChatbotsService from "./pages/services/ChatbotsService";
+import CustomAIService from "./pages/services/CustomAIService";
+import DataAnalyticsService from "./pages/services/DataAnalyticsService";
+import ComputerVisionService from "./pages/services/ComputerVisionService";
+import NLPService from "./pages/services/NLPService";
+import MarketingAutomationService from "./pages/services/MarketingAutomationService";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +32,12 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/chatbots" element={<ChatbotsService />} />
+          <Route path="/services/custom-ai" element={<CustomAIService />} />
+          <Route path="/services/data-analytics" element={<DataAnalyticsService />} />
+          <Route path="/services/computer-vision" element={<ComputerVisionService />} />
+          <Route path="/services/nlp" element={<NLPService />} />
+          <Route path="/services/marketing-automation" element={<MarketingAutomationService />} />
           <Route path="/demo" element={<Demo />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/portfolio" element={<Portfolio />} />
