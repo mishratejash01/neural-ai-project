@@ -8,56 +8,59 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 220 17% 7%;
-    --foreground: 210 40% 98%;
+    /* Clean White Theme with Teal & Navy Accents */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 15%;
 
-    --card: 220 13% 9%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 15%;
 
-    --popover: 220 13% 9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 15%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 220 17% 7%;
+    --primary: 220 70% 25%;  /* Deep Navy */
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 220 13% 96%;  /* Light Gray */
+    --secondary-foreground: 220 13% 15%;
 
-    --muted: 220 13% 15%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 220 13% 96%;
+    --muted-foreground: 220 13% 45%;
 
-    --accent: 191 91% 55%;
-    --accent-foreground: 220 17% 7%;
+    --accent: 173 80% 45%;  /* Professional Teal */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 50%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 13% 15%;
-    --input: 220 13% 15%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 173 80% 45%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;  /* More rounded for modern look */
 
-    /* Neural AI Brand Colors */
-    --neural-primary: 217 91% 60%;
-    --neural-accent: 191 91% 55%;
-    --neural-dark: 220 17% 7%;
-    --neural-surface: 220 13% 9%;
-    --neural-border: 220 13% 15%;
+    /* Neural AI Professional Brand Colors */
+    --neural-navy: 220 70% 25%;     /* Deep Navy */
+    --neural-teal: 173 80% 45%;     /* Professional Teal */
+    --neural-light-teal: 173 60% 85%; /* Light Teal */
+    --neural-gray: 220 13% 96%;     /* Light Gray */
+    --neural-dark-gray: 220 13% 45%; /* Dark Gray */
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--neural-primary)), hsl(var(--neural-accent)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--neural-dark)) 0%, hsl(220 13% 9%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(var(--neural-surface)), hsl(220 13% 11%));
+    /* Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--neural-navy)), hsl(var(--neural-teal)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--neural-light-teal)) 0%, hsl(0 0% 100%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(var(--neural-gray)));
+    --gradient-teal: linear-gradient(135deg, hsl(var(--neural-teal)), hsl(173 60% 55%));
     
-    /* Shadows */
-    --shadow-primary: 0 10px 40px -10px hsl(var(--neural-primary) / 0.3);
-    --shadow-accent: 0 10px 40px -10px hsl(var(--neural-accent) / 0.3);
-    --shadow-card: 0 8px 32px -8px hsl(220 17% 7% / 0.4);
+    /* Professional Shadows */
+    --shadow-primary: 0 4px 20px -4px hsl(var(--neural-navy) / 0.15);
+    --shadow-accent: 0 4px 20px -4px hsl(var(--neural-teal) / 0.15);
+    --shadow-card: 0 2px 16px -2px hsl(220 13% 15% / 0.08);
+    --shadow-soft: 0 1px 3px hsl(220 13% 15% / 0.1);
     
-    /* Animation */
+    /* Smooth Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
 
     --sidebar-background: 0 0% 98%;
 
@@ -76,34 +79,34 @@ All colors MUST be HSL.
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .light {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+  .dark {
+    --background: 220 17% 7%;
+    --foreground: 210 40% 98%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 9%;
+    --card-foreground: 210 40% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 210 40% 98%;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 173 80% 45%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 220 13% 15%;
+    --secondary-foreground: 210 40% 98%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 191 91% 55%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 220 70% 25%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 62% 50%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 217 91% 60%;
+    --border: 220 13% 15%;
+    --input: 220 13% 15%;
+    --ring: 173 80% 45%;
   }
 }
 
@@ -132,6 +135,10 @@ All colors MUST be HSL.
     background: var(--gradient-card);
   }
   
+  .gradient-teal {
+    background: var(--gradient-teal);
+  }
+  
   .shadow-primary {
     box-shadow: var(--shadow-primary);
   }
@@ -142,6 +149,10 @@ All colors MUST be HSL.
   
   .shadow-card {
     box-shadow: var(--shadow-card);
+  }
+  
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
   }
   
   .transition-smooth {
@@ -157,5 +168,43 @@ All colors MUST be HSL.
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+  }
+
+  .hover-lift {
+    @apply transition-smooth hover:-translate-y-1 hover:shadow-card;
+  }
+
+  .hover-scale {
+    @apply transition-smooth hover:scale-105;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

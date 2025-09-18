@@ -15,26 +15,28 @@ import {
   Eye,
   Brain,
   Cog,
-  Zap
+  Zap,
+  CheckCircle2
 } from "lucide-react";
 
 const Portfolio = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce AI Customer Service Platform",
-      client: "RetailMax Corporation",
-      industry: "E-Commerce",
-      description: "Developed an intelligent chatbot system that handles 85% of customer inquiries automatically, with multilingual support and seamless human handoff.",
-      problem: "Customer service team was overwhelmed with repetitive inquiries, leading to long wait times and decreased satisfaction scores.",
-      solution: "Built a sophisticated AI chatbot with NLP capabilities, integrated with existing CRM, and trained on company-specific data for accurate responses.",
+      title: "Retail Chatbot for Lifestyle Store",
+      client: "Fashion Forward Mumbai",
+      industry: "Retail - Mumbai",
+      location: "Mumbai, Maharashtra",
+      description: "AI-powered shopping assistant deployed for a leading fashion retailer that helps customers browse products, check availability, and receive personalized outfit suggestions.",
+      problem: "The fashion retailer was struggling with high customer query volumes, slow response times, and difficulty in providing personalized shopping experiences during peak seasons.",
+      solution: "We developed an intelligent chatbot with natural language processing capabilities, integrated with their inventory system, and trained on fashion-specific data to provide style recommendations.",
       results: [
-        "90% reduction in average response time",
-        "85% of inquiries handled automatically", 
-        "40% increase in customer satisfaction",
-        "60% reduction in support costs"
+        "27% increase in sales conversion",
+        "40% reduction in customer queries",
+        "24/7 personalized shopping assistance",
+        "85% customer satisfaction rate"
       ],
-      technologies: ["Natural Language Processing", "Machine Learning", "API Integration", "Multi-language Support"],
+      technologies: ["Natural Language Processing", "Recommendation Engine", "Inventory Integration", "Multi-language Support"],
       icon: MessageSquare,
       color: "from-blue-500 to-purple-500",
       duration: "3 months",
@@ -42,103 +44,66 @@ const Portfolio = () => {
     },
     {
       id: 2,
-      title: "Manufacturing Quality Control AI",
-      client: "PrecisionTech Manufacturing",
-      industry: "Manufacturing",
-      description: "Computer vision system for automated quality inspection that detects defects with 99.8% accuracy, eliminating human error in production lines.",
-      problem: "Manual quality inspection was slow, inconsistent, and led to 5% defect rate reaching customers.",
-      solution: "Deployed computer vision AI with deep learning models trained on thousands of product images to identify even microscopic defects.",
+      title: "Predictive Analytics for Healthcare",
+      client: "HealthCare Plus Bangalore",
+      industry: "Healthcare - Bangalore",
+      location: "Bangalore, Karnataka",
+      description: "Advanced AI system that predicts patient admission rates for a major hospital chain, enabling optimized staffing and resource allocation.",
+      problem: "The hospital chain faced unpredictable patient admission patterns, leading to either overstaffing during quiet periods or understaffing during surges, affecting patient care quality.",
+      solution: "We created a predictive analytics platform that analyzes historical data, seasonal patterns, local events, and health trends to forecast admission rates with high accuracy.",
       results: [
-        "99.8% defect detection accuracy",
-        "Zero defective products shipped",
-        "75% faster inspection process",
-        "300% ROI within first year"
+        "33% reduction in patient wait times",
+        "Optimized staffing schedules",
+        "20% improvement in resource utilization",
+        "Improved patient satisfaction scores"
       ],
-      technologies: ["Computer Vision", "Deep Learning", "Real-time Processing", "Industrial Integration"],
-      icon: Eye,
+      technologies: ["Predictive Analytics", "Time Series Analysis", "Healthcare Data Integration", "Real-time Dashboards"],
+      icon: BarChart,
       color: "from-green-500 to-blue-500",
       duration: "4 months",
       teamSize: "6 specialists"
     },
     {
       id: 3,
-      title: "Healthcare Document Processing System",
-      client: "MedCenter Health Network",
-      industry: "Healthcare",
-      description: "NLP-powered system that processes medical documents, extracts key information, and ensures HIPAA compliance while reducing processing time by 80%.",
-      problem: "Medical staff spent 4 hours daily processing patient documents manually, creating bottlenecks and potential errors.",
-      solution: "Created HIPAA-compliant AI system using advanced NLP to extract, categorize, and digitize medical information automatically.",
+      title: "Computer Vision for Manufacturing",
+      client: "AutoParts Excellence Pune",
+      industry: "Manufacturing - Pune",
+      location: "Pune, Maharashtra",
+      description: "Computer vision solution for automotive parts manufacturing that detects defects in production lines with exceptional accuracy.",
+      problem: "The manufacturer was experiencing quality control issues with 8% defect rate in shipped products, leading to customer complaints and warranty claims.",
+      solution: "We implemented a computer vision system with deep learning models trained on thousands of product images to identify defects at microscopic levels during production.",
       results: [
-        "80% reduction in processing time",
-        "99.9% accuracy in data extraction",
-        "20 hours saved per staff per week",
-        "100% HIPAA compliance maintained"
+        "52% reduction in defective shipments",
+        "99.7% defect detection accuracy",
+        "Cost savings on warranty claims",
+        "Enhanced product quality reputation"
       ],
-      technologies: ["Natural Language Processing", "OCR Technology", "HIPAA Compliance", "Cloud Security"],
-      icon: Brain,
-      color: "from-purple-500 to-pink-500",
+      technologies: ["Computer Vision", "Deep Learning", "Real-time Processing", "Industrial Integration"],
+      icon: Eye,
+      color: "from-orange-500 to-red-500",
       duration: "5 months",
       teamSize: "7 specialists"
     },
     {
       id: 4,
-      title: "Financial Fraud Detection Engine",
-      client: "SecureBank Financial",
-      industry: "Finance",
-      description: "Real-time AI system that analyzes transaction patterns to detect and prevent fraudulent activities with 99.5% accuracy.",
-      problem: "Traditional rule-based fraud detection missed 15% of fraudulent transactions while flagging many legitimate ones.",
-      solution: "Built machine learning models that analyze hundreds of transaction variables in real-time to identify suspicious patterns.",
+      title: "AI Marketing Automation for FinTech",
+      client: "PayNext Solutions Delhi",
+      industry: "FinTech - Delhi",
+      location: "Delhi, India",
+      description: "AI-driven marketing automation platform that segments audiences and personalizes campaigns for a growing FinTech startup specializing in digital payments.",
+      problem: "The FinTech startup had low customer engagement rates and struggled to convert leads effectively, with generic marketing campaigns yielding poor results.",
+      solution: "We built an AI marketing platform that analyzes customer behavior, creates dynamic segments, personalizes content, and optimizes campaign timing for maximum impact.",
       results: [
-        "99.5% fraud detection accuracy",
-        "85% reduction in false positives",
-        "$2.3M prevented fraud in first quarter",
-        "50ms average detection time"
+        "2.4x increase in customer engagement",
+        "60% boost in lead conversions",
+        "Personalized customer journeys",
+        "ROI improvement of 180%"
       ],
-      technologies: ["Machine Learning", "Real-time Analytics", "Pattern Recognition", "Secure Processing"],
-      icon: BarChart,
-      color: "from-red-500 to-orange-500",
+      technologies: ["Machine Learning", "Customer Segmentation", "Marketing Automation", "Behavioral Analytics"],
+      icon: Brain,
+      color: "from-purple-500 to-pink-500",
       duration: "6 months",
       teamSize: "8 specialists"
-    },
-    {
-      id: 5,
-      title: "Supply Chain Optimization Platform",
-      client: "LogiFlow Global",
-      industry: "Logistics",
-      description: "Predictive analytics platform that optimizes supply chain operations, reducing costs by 35% through intelligent forecasting and routing.",
-      problem: "Inefficient routing and poor demand forecasting led to high operational costs and delivery delays.",
-      solution: "Developed AI models that predict demand, optimize routes, and automate inventory management across the entire supply chain.",
-      results: [
-        "35% reduction in operational costs",
-        "25% improvement in delivery times", 
-        "90% accuracy in demand forecasting",
-        "40% reduction in inventory waste"
-      ],
-      technologies: ["Predictive Analytics", "Optimization Algorithms", "IoT Integration", "Real-time Tracking"],
-      icon: Cog,
-      color: "from-cyan-500 to-blue-500",
-      duration: "7 months",
-      teamSize: "9 specialists"
-    },
-    {
-      id: 6,
-      title: "Educational Content Personalization Engine",
-      client: "LearnSmart Academy",
-      industry: "Education",
-      description: "AI-powered platform that personalizes learning content for each student, improving engagement by 70% and learning outcomes by 45%.",
-      problem: "One-size-fits-all approach to education led to poor engagement and inconsistent learning outcomes.",
-      solution: "Created adaptive learning AI that analyzes student performance and learning patterns to deliver personalized content and pacing.",
-      results: [
-        "70% increase in student engagement",
-        "45% improvement in learning outcomes",
-        "60% reduction in dropout rates",
-        "90% teacher satisfaction rate"
-      ],
-      technologies: ["Adaptive Learning", "Behavioral Analytics", "Content Recommendation", "Progress Tracking"],
-      icon: Zap,
-      color: "from-indigo-500 to-purple-500",
-      duration: "4 months",
-      teamSize: "6 specialists"
     }
   ];
 
@@ -152,27 +117,27 @@ const Portfolio = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-20 gradient-hero">
+      <section className="py-24 gradient-hero animate-fade-in">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">
-              Our <span className="text-gradient">Portfolio</span>
+          <div className="text-center mb-20">
+            <h1 className="text-6xl font-bold mb-8 animate-slide-up">
+              Success <span className="text-gradient">Stories</span> from India
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore real-world AI implementations that have transformed businesses 
-              across industries. Each project showcases our commitment to delivering 
-              measurable results through innovative AI solutions.
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              Discover how Neural AI has transformed businesses across India with cutting-edge 
+              AI solutions. Each case study represents real partnerships with measurable results 
+              that showcase our commitment to excellence and innovation.
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="w-8 h-8 text-white" />
+              <div key={index} className="text-center hover-lift bg-white/50 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent">
+                  <stat.icon className="w-10 h-10 text-white" />
                 </div>
-                <div className="text-3xl font-bold text-gradient mb-2">{stat.value}</div>
-                <div className="text-muted-foreground">{stat.label}</div>
+                <div className="text-4xl font-bold text-gradient mb-3">{stat.value}</div>
+                <div className="text-muted-foreground font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -180,84 +145,113 @@ const Portfolio = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-20">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="space-y-16">
+          <div className="text-center mb-20">
+            <h2 className="text-5xl font-bold mb-6 animate-slide-up">
+              Indian Client <span className="text-gradient">Success Stories</span>
+            </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Real partnerships with measurable results across major Indian cities
+            </p>
+          </div>
+          
+          <div className="space-y-20">
             {projects.map((project, index) => (
-              <Card key={project.id} className="gradient-card border-border shadow-card overflow-hidden">
-                <div className={`h-1 bg-gradient-to-r ${project.color}`} />
-                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-8">
+              <Card key={project.id} className="shadow-card hover-lift overflow-hidden bg-white border-border rounded-3xl">
+                <div className={`h-2 bg-gradient-to-r ${project.color}`} />
+                <div className="p-12">
                   {/* Project Header */}
-                  <div className="lg:col-span-3 border-b border-border pb-6 mb-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center space-x-4">
-                        <div className={`w-12 h-12 rounded-lg flex items-center justify-center bg-gradient-to-r ${project.color}`}>
-                          <project.icon className="w-6 h-6 text-white" />
+                  <div className="mb-12 pb-8 border-b border-border">
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex items-center space-x-6">
+                        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-r ${project.color} shadow-accent`}>
+                          <project.icon className="w-8 h-8 text-white" />
                         </div>
                         <div>
-                          <h2 className="text-2xl font-bold text-foreground">{project.title}</h2>
-                          <p className="text-primary font-medium">{project.client} • {project.industry}</p>
+                          <h2 className="text-3xl font-bold text-foreground mb-2">{project.title}</h2>
+                          <p className="text-accent font-semibold text-lg">{project.client}</p>
+                          <p className="text-muted-foreground">{project.industry} • {project.location}</p>
                         </div>
                       </div>
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+                      <div className="flex items-center space-x-6 text-sm text-muted-foreground bg-gradient-hero px-4 py-2 rounded-xl">
                         <div className="flex items-center">
-                          <Clock className="w-4 h-4 mr-1" />
+                          <Clock className="w-4 h-4 mr-2" />
                           {project.duration}
                         </div>
                         <div className="flex items-center">
-                          <Users className="w-4 h-4 mr-1" />
+                          <Users className="w-4 h-4 mr-2" />
                           {project.teamSize}
                         </div>
                       </div>
                     </div>
-                    <p className="text-lg text-muted-foreground">{project.description}</p>
+                    <p className="text-xl text-muted-foreground leading-relaxed">{project.description}</p>
                   </div>
 
-                  {/* Problem */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-red-400">The Problem</h3>
-                    <p className="text-muted-foreground">{project.problem}</p>
-                  </div>
-
-                  {/* Solution */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-blue-400">Our Solution</h3>
-                    <p className="text-muted-foreground mb-4">{project.solution}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="secondary" className="text-xs">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Results */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 text-green-400">The Results</h3>
-                    <div className="space-y-3">
-                      {project.results.map((result, resultIndex) => (
-                        <div key={resultIndex} className="flex items-center space-x-3">
-                          <TrendingUp className="w-5 h-5 text-green-400 flex-shrink-0" />
-                          <span className="text-muted-foreground">{result}</span>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                    {/* Problem */}
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-red-500 flex items-center">
+                        <div className="w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                          <span className="text-red-500 font-bold">!</span>
                         </div>
-                      ))}
+                        The Challenge
+                      </h3>
+                      <p className="text-muted-foreground leading-relaxed">{project.problem}</p>
+                    </div>
+
+                    {/* Solution */}
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-blue-500 flex items-center">
+                        <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                          <Cog className="w-4 h-4 text-blue-500" />
+                        </div>
+                        Our Solution
+                      </h3>
+                      <p className="text-muted-foreground mb-6 leading-relaxed">{project.solution}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {project.technologies.map((tech, techIndex) => (
+                          <Badge key={techIndex} className="bg-gradient-hero text-muted-foreground border-border px-3 py-1 rounded-full text-sm">
+                            {tech}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Results */}
+                    <div className="space-y-4">
+                      <h3 className="text-2xl font-bold text-green-500 flex items-center">
+                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                          <TrendingUp className="w-4 h-4 text-green-500" />
+                        </div>
+                        The Impact
+                      </h3>
+                      <div className="space-y-4">
+                        {project.results.map((result, resultIndex) => (
+                          <div key={resultIndex} className="flex items-start space-x-4 group hover-lift p-3 rounded-lg bg-gradient-hero">
+                            <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <CheckCircle2 className="w-4 h-4 text-green-500" />
+                            </div>
+                            <span className="text-muted-foreground leading-relaxed">{result}</span>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="px-8 pb-6">
-                  <div className="flex items-center justify-between">
-                    <Button variant="neural">
-                      <ExternalLink className="mr-2 w-4 h-4" />
-                      View Case Study
-                    </Button>
-                    <Link to="/contact">
-                      <Button variant="hero">
-                        Similar Project?
-                        <ArrowRight className="ml-2 w-4 h-4" />
+                  <div className="mt-12 pt-8 border-t border-border">
+                    <div className="flex items-center justify-between">
+                      <Button className="gradient-teal text-white hover:opacity-90 transition-smooth rounded-xl px-6 py-3 shadow-accent">
+                        <ExternalLink className="mr-3 w-5 h-5" />
+                        View Detailed Case Study
                       </Button>
-                    </Link>
+                      <Link to="/contact">
+                        <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl px-8 py-3 shadow-accent">
+                          Start Similar Project
+                          <ArrowRight className="ml-3 w-5 h-5" />
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </Card>
