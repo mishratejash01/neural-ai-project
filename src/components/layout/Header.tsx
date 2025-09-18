@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import logoImage from "@/assets/WhatsApp-Image-2025-08-22-at-02.28.15.jpg";
 
 const Header = () => {
   const location = useLocation();
@@ -20,12 +21,14 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">N</span>
-            </div>
+            <img 
+              src={logoImage} 
+              alt="Neural AI Logo" 
+              className="w-8 h-8 rounded-lg object-cover"
+            />
             <span className="text-xl font-bold text-gradient">Neural AI</span>
           </Link>
-
+          
           <nav className="hidden md:flex items-center space-x-1">
             {navItems.map((item) => (
               <Link key={item.href} to={item.href}>
@@ -45,7 +48,7 @@ const Header = () => {
 
           <div className="flex items-center space-x-3">
             <Link to="/contact">
-              <Button variant="hero" size="sm">
+              <Button size="sm" variant="hero">
                 Get Started
               </Button>
             </Link>
