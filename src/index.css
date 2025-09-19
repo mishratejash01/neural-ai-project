@@ -2,111 +2,104 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Dark Tech-Forward Design System with Neon Green Accents
+All colors MUST be HSL format for consistency */
 
 @layer base {
   :root {
-    /* Clean White Theme with Teal & Navy Accents */
-    --background: 0 0% 100%;
-    --foreground: 220 13% 15%;
+    /* Dark Tech Theme with Neon Green (#00F1A0) */
+    --background: 210 10% 3%;        /* #070707 - Ultra dark */
+    --foreground: 150 100% 95%;      /* #E9FFF7 - Light green-tinted text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 220 13% 15%;
+    --card: 210 8% 7%;               /* #0F1113 - Card surface */
+    --card-foreground: 150 100% 95%; /* #E9FFF7 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 13% 15%;
+    --popover: 210 8% 7%;
+    --popover-foreground: 150 100% 95%;
 
-    --primary: 220 70% 25%;  /* Deep Navy */
-    --primary-foreground: 0 0% 100%;
+    --primary: 160 100% 47%;         /* #00F1A0 - Neon green */
+    --primary-foreground: 210 10% 3%;
 
-    --secondary: 220 13% 96%;  /* Light Gray */
-    --secondary-foreground: 220 13% 15%;
+    --secondary: 160 81% 32%;        /* #00BFA6 - Darker green accent */
+    --secondary-foreground: 150 100% 95%;
 
-    --muted: 220 13% 96%;
-    --muted-foreground: 220 13% 45%;
+    --muted: 210 8% 7%;              /* Same as card for consistency */
+    --muted-foreground: 150 20% 65%; /* #A6B0A6 - Muted green */
 
-    --accent: 173 80% 45%;  /* Professional Teal */
-    --accent-foreground: 0 0% 100%;
+    --accent: 160 100% 47%;          /* Same as primary */
+    --accent-foreground: 210 10% 3%;
 
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 173 80% 45%;
+    --border: 210 8% 12%;            /* Subtle borders */
+    --input: 210 8% 12%;
+    --ring: 160 100% 47%;            /* Neon focus ring */
 
-    --radius: 1rem;  /* More rounded for modern look */
+    --radius: 0.75rem;               /* Modern rounded corners */
 
-    /* Neural AI Professional Brand Colors */
-    --neural-navy: 220 70% 25%;     /* Deep Navy */
-    --neural-teal: 173 80% 45%;     /* Professional Teal */
-    --neural-light-teal: 173 60% 85%; /* Light Teal */
-    --neural-gray: 220 13% 96%;     /* Light Gray */
-    --neural-dark-gray: 220 13% 45%; /* Dark Gray */
+    /* Neural AI Dark Brand Colors */
+    --neon-primary: 160 100% 47%;    /* #00F1A0 - Main neon */
+    --neon-secondary: 160 81% 32%;   /* #00BFA6 - Secondary accent */
+    --surface-dark: 210 8% 7%;       /* #0F1113 - Card surface */
+    --surface-darker: 210 10% 3%;    /* #070707 - Page background */
+    --text-light: 150 100% 95%;      /* #E9FFF7 - Primary text */
+    --text-muted: 150 20% 65%;       /* #A6B0A6 - Muted text */
     
-    /* Modern Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--neural-navy)), hsl(var(--neural-teal)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--neural-light-teal)) 0%, hsl(0 0% 100%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(var(--neural-gray)));
-    --gradient-teal: linear-gradient(135deg, hsl(var(--neural-teal)), hsl(173 60% 55%));
+    /* Neon Glow Effects */
+    --glow-primary: 0 4px 30px rgba(0, 241, 160, 0.14);
+    --glow-intense: 0 0 40px rgba(0, 241, 160, 0.25);
+    --glow-soft: 0 2px 20px rgba(0, 241, 160, 0.08);
+    
+    /* Tech Gradients */
+    --gradient-neon: linear-gradient(135deg, hsl(var(--neon-primary)), hsl(var(--neon-secondary)));
+    --gradient-dark: linear-gradient(135deg, hsl(var(--surface-darker)), hsl(var(--surface-dark)));
+    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 241, 160, 0.15) 0%, transparent 70%);
+    --gradient-hero: linear-gradient(135deg, rgba(0, 241, 160, 0.05) 0%, rgba(7, 7, 7, 1) 100%);
     
     /* Professional Shadows */
-    --shadow-primary: 0 4px 20px -4px hsl(var(--neural-navy) / 0.15);
-    --shadow-accent: 0 4px 20px -4px hsl(var(--neural-teal) / 0.15);
-    --shadow-card: 0 2px 16px -2px hsl(220 13% 15% / 0.08);
-    --shadow-soft: 0 1px 3px hsl(220 13% 15% / 0.1);
+    --shadow-neon: 0 4px 20px -4px rgba(0, 241, 160, 0.15);
+    --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
+    --shadow-elevated: 0 16px 64px -16px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 0 1px rgba(0, 241, 160, 0.1);
     
-    /* Smooth Animations */
+    /* Smooth Tech Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+    --transition-glow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar (if needed) */
+    --sidebar-background: 210 8% 5%;
+    --sidebar-foreground: 150 100% 95%;
+    --sidebar-primary: 160 100% 47%;
+    --sidebar-primary-foreground: 210 10% 3%;
+    --sidebar-accent: 210 8% 7%;
+    --sidebar-accent-foreground: 150 100% 95%;
+    --sidebar-border: 210 8% 12%;
+    --sidebar-ring: 160 100% 47%;
   }
 
+  /* Keep dark theme as fallback but make it same as root */
   .dark {
-    --background: 220 17% 7%;
-    --foreground: 210 40% 98%;
-
-    --card: 220 13% 9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 220 13% 9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 173 80% 45%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 220 13% 15%;
-    --muted-foreground: 215 20% 65%;
-
-    --accent: 220 70% 25%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62% 50%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 13% 15%;
-    --input: 220 13% 15%;
-    --ring: 173 80% 45%;
+    --background: 210 10% 3%;
+    --foreground: 150 100% 95%;
+    --card: 210 8% 7%;
+    --card-foreground: 150 100% 95%;
+    --popover: 210 8% 7%;
+    --popover-foreground: 150 100% 95%;
+    --primary: 160 100% 47%;
+    --primary-foreground: 210 10% 3%;
+    --secondary: 160 81% 32%;
+    --secondary-foreground: 150 100% 95%;
+    --muted: 210 8% 7%;
+    --muted-foreground: 150 20% 65%;
+    --accent: 160 100% 47%;
+    --accent-foreground: 210 10% 3%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 8% 12%;
+    --input: 210 8% 12%;
+    --ring: 160 100% 47%;
   }
 }
 
@@ -116,45 +109,76 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground;
+    font-family: 'Inter', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: hsl(var(--background));
     background-attachment: fixed;
+    /* Subtle tech texture */
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(0, 241, 160, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0, 241, 160, 0.01) 0%, transparent 50%);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus styles for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
   }
 }
 
 @layer utilities {
-  .gradient-primary {
-    background: var(--gradient-primary);
+  /* Neon Gradients */
+  .gradient-neon {
+    background: var(--gradient-neon);
+  }
+  
+  .gradient-dark {
+    background: var(--gradient-dark);
   }
   
   .gradient-hero {
     background: var(--gradient-hero);
   }
   
-  .gradient-card {
-    background: var(--gradient-card);
+  .gradient-glow {
+    background: var(--gradient-glow);
   }
   
-  .gradient-teal {
-    background: var(--gradient-teal);
-  }
-  
-  .shadow-primary {
-    box-shadow: var(--shadow-primary);
-  }
-  
-  .shadow-accent {
-    box-shadow: var(--shadow-accent);
+  /* Neon Shadows & Glows */
+  .shadow-neon {
+    box-shadow: var(--shadow-neon);
   }
   
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
   
-  .shadow-soft {
-    box-shadow: var(--shadow-soft);
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
   }
   
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-intense {
+    box-shadow: var(--glow-intense);
+  }
+  
+  .glow-soft {
+    box-shadow: var(--glow-soft);
+  }
+  
+  /* Transitions */
   .transition-smooth {
     transition: var(--transition-smooth);
   }
@@ -163,34 +187,100 @@ All colors MUST be HSL.
     transition: var(--transition-bounce);
   }
   
+  .transition-glow {
+    transition: var(--transition-glow);
+  }
+  
+  /* Text Effects */
+  .text-neon {
+    color: hsl(var(--neon-primary));
+    text-shadow: 0 0 10px rgba(0, 241, 160, 0.3);
+  }
+  
   .text-gradient {
-    background: var(--gradient-primary);
+    background: var(--gradient-neon);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
+  /* Hover Effects */
   .hover-lift {
-    @apply transition-smooth hover:-translate-y-1 hover:shadow-card;
+    @apply transition-smooth hover:-translate-y-2 hover:shadow-elevated;
   }
 
   .hover-scale {
     @apply transition-smooth hover:scale-105;
   }
 
+  .hover-glow {
+    @apply transition-glow hover:glow-primary hover:shadow-neon;
+  }
+
+  .hover-neon {
+    @apply transition-glow hover:text-neon hover:glow-soft;
+  }
+
+  /* Animations */
   .animate-fade-in {
-    animation: fade-in 0.6s ease-out;
+    animation: fade-in 0.8s ease-out;
   }
 
   .animate-slide-up {
-    animation: slide-up 0.8s ease-out;
+    animation: slide-up 1s ease-out;
+  }
+
+  .animate-glow {
+    animation: glow-pulse 2s ease-in-out infinite alternate;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* Particle Effects */
+  .particles-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .particles-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(0, 241, 160, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(0, 241, 160, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 241, 160, 0.05) 0%, transparent 50%);
+    animation: particles 20s linear infinite;
+    pointer-events: none;
+  }
+
+  /* Tech Grid Pattern */
+  .tech-grid {
+    background-image: 
+      linear-gradient(rgba(0, 241, 160, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 241, 160, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Backdrop Blur */
+  .backdrop-blur-neon {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(15, 17, 19, 0.8);
+    border: 1px solid rgba(0, 241, 160, 0.1);
   }
 }
 
+/* Enhanced Animations */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(30px);
   }
   to {
     opacity: 1;
@@ -201,10 +291,62 @@ All colors MUST be HSL.
 @keyframes slide-up {
   from {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(50px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes glow-pulse {
+  from {
+    box-shadow: 0 0 20px rgba(0, 241, 160, 0.2);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(0, 241, 160, 0.4);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes particles {
+  0% {
+    opacity: 0.8;
+    transform: rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+    transform: rotate(360deg);
+  }
+}
+
+/* Neural Network Lines Animation */
+@keyframes neural-pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Typing Effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
   }
 }

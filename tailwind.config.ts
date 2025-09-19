@@ -57,11 +57,34 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Neural AI Dark Theme Colors
+        neon: {
+          primary: "hsl(var(--neon-primary))",
+          secondary: "hsl(var(--neon-secondary))",
+        },
+        surface: {
+          dark: "hsl(var(--surface-dark))",
+          darker: "hsl(var(--surface-darker))",
+        },
+        text: {
+          light: "hsl(var(--text-light))",
+          muted: "hsl(var(--text-muted))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        'neon': '0 4px 30px rgba(0, 241, 160, 0.18)',
+        'neon-lg': '0 8px 60px rgba(0, 241, 160, 0.25)',
+        'glow': '0 0 40px rgba(0, 241, 160, 0.15)',
+        'glow-sm': '0 0 20px rgba(0, 241, 160, 0.1)',
+      },
+      fontFamily: {
+        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        sans: ['Inter', 'Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
