@@ -20,39 +20,69 @@ const Footer = () => {
               Building the future, one algorithm at a time.
             </p>
           </div>
-
+          
           {/* Quick Links */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-foreground">Quick Links</h4>
             <div className="space-y-2">
-              {["Home", "About", "Services", "Portfolio"].map((item) => (
-                <Link
-                  key={item}
-                  to={`/${item.toLowerCase()}`}
-                  className="block text-muted-foreground hover:text-primary transition-smooth"
-                >
-                  {item}
-                </Link>
-              ))}
+              <Link
+                to="/"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                Home
+              </Link>
+              <Link
+                to="/about"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                About
+              </Link>
+              <Link
+                to="/services"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                Services
+              </Link>
+              <Link
+                to="/portfolio"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                Portfolio
+              </Link>
             </div>
           </div>
-
+          
           {/* Support */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-foreground">Support</h4>
             <div className="space-y-2">
-              {["Contact", "FAQ", "Demo", "Careers"].map((item) => (
-                <Link
-                  key={item}
-                  to={`/${item.toLowerCase()}`}
-                  className="block text-muted-foreground hover:text-primary transition-smooth"
-                >
-                  {item}
-                </Link>
-              ))}
+              <Link
+                to="/contact"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                Contact
+              </Link>
+              <Link
+                to="/faq"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                FAQ
+              </Link>
+              <Link
+                to="/demo"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                Demo
+              </Link>
+              <Link
+                to="/careers"
+                className="block text-muted-foreground hover:text-primary transition-smooth"
+              >
+                Careers
+              </Link>
             </div>
           </div>
-
+          
           {/* Newsletter */}
           <div className="space-y-4">
             <h4 className="text-lg font-semibold text-foreground">Stay Updated</h4>
@@ -61,16 +91,17 @@ const Footer = () => {
             </p>
             <div className="space-y-2">
               <Input 
+                type="email" 
                 placeholder="Enter your email" 
                 className="bg-card border-border"
               />
-              <Button variant="hero" size="sm" className="w-full">
+              <Button className="w-full" size="sm" variant="hero">
                 Subscribe
               </Button>
             </div>
           </div>
         </div>
-
+        
         <div className="border-t border-border mt-12 pt-8 text-center">
           <p className="text-muted-foreground text-sm">
             © 2024 Neural AI. All rights reserved. Building intelligent solutions for tomorrow.
