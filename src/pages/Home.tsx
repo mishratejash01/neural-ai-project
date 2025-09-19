@@ -2,8 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import useParticleNetwork from "@/hooks/useParticleNetwork";
-import React from "react";
+import { SplineHero } from "@/components/layout/SplineHero"; // Import the new hero
 import { 
   Brain, 
   BarChart, 
@@ -11,7 +10,6 @@ import {
   MessageSquare, 
   Cog, 
   Zap,
-  CheckCircle2,
   ArrowRight,
   Shield,
   Clock,
@@ -21,9 +19,6 @@ import {
 } from "lucide-react";
 
 const Home = () => {
-  const canvasRef = React.useRef<HTMLCanvasElement>(null);
-  useParticleNetwork(canvasRef);
-
   const services = [
     {
       icon: Brain,
@@ -69,38 +64,11 @@ const Home = () => {
     { value: "300%", label: "Average ROI", icon: TrendingUp },
     { value: "24/7", label: "AI Monitoring", icon: Cpu }
   ];
-  
+
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-        <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />
-        <div className="container mx-auto px-4 z-10 text-center">
-          <div className="animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <span className="text-neon">Engineering the future of </span>
-              <span className="text-foreground">automation</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed">
-              We build custom ML models, production-ready pipelines and intelligent automation 
-              for businesses in retail, finance, healthcare and manufacturing.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link to="/demo">
-                <Button variant="neon" size="xl" className="group">
-                  Book a Demo
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/services">
-                <Button variant="neon-outline" size="xl">
-                  See Services
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* New Hero Section */}
+      <SplineHero />
 
       {/* Stats Section */}
       <section className="py-20 bg-surface-dark border-y border-border">
