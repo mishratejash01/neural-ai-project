@@ -7,7 +7,7 @@ import { ArrowRight } from "lucide-react";
 
 export function SplineHero() {
   return (
-    <Card className="w-full h-[550px] bg-black/[0.96] relative overflow-hidden border-none rounded-none">
+    <Card className="w-full h-screen -mt-16 bg-black/[0.96] relative overflow-hidden border-none rounded-none">
       <Spotlight
         className="-top-40 left-0 md:left-60 md:-top-20"
         fill="hsl(var(--primary))"
