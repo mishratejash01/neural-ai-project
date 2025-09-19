@@ -29,6 +29,18 @@ const Portfolio = () => {
       title: "AI Marketing Automation for FinTech",
       summary: "Marketing platform with 2.4x engagement increase and 60% boost in lead conversions for digital payments",
       slug: "ai-marketing-automation-fintech"
+    },
+    {
+      id: 5,
+      title: "NLP for EdTech",
+      summary: "Multilingual sentiment analysis to improve course offerings and student satisfaction.",
+      slug: "nlp-edtech"
+    },
+    {
+      id: 6,
+      title: "AI-Powered Logistics Optimization",
+      summary: "AI-based route planning and fleet tracking to reduce delays and costs.",
+      slug: "logistics-optimization"
     }
   ];
 
