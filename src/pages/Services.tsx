@@ -71,21 +71,21 @@ const Services = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+            <div className="text-center space-y-6 hover-lift bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-accent/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Clock className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Fast Deployment</h3>
               <p className="text-muted-foreground">Get your AI solutions up and running in weeks, not months, with our proven methodologies</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+            <div className="text-center space-y-6 hover-lift bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-accent/20">
               <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <TrendingUp className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Proven ROI</h3>
               <p className="text-muted-foreground">Our clients see average 300% ROI within the first year through optimized operations</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
+            <div className="text-center space-y-6 hover-lift bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-accent/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Shield className="w-10 h-10 text-white" />
               </div>
