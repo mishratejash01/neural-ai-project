@@ -71,21 +71,21 @@ const Services = () => {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center space-y-6 hover-lift bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-accent/20">
+            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Clock className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Fast Deployment</h3>
               <p className="text-muted-foreground">Get your AI solutions up and running in weeks, not months, with our proven methodologies</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-accent/20">
+            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <TrendingUp className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Proven ROI</h3>
               <p className="text-muted-foreground">Our clients see average 300% ROI within the first year through optimized operations</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-card/80 backdrop-blur-sm p-8 rounded-2xl border border-accent/20">
+            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Shield className="w-10 h-10 text-white" />
               </div>
@@ -97,7 +97,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 bg-background">
+      <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold mb-6 animate-slide-up">
@@ -110,7 +110,7 @@ const Services = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card className="shadow-card hover-lift overflow-hidden bg-card border-border rounded-3xl group" key={index}>
+              <Card key={index} className="shadow-card hover-lift overflow-hidden bg-white border-border rounded-3xl group">
                 <CardHeader className="p-8 text-center">
                   <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
                     <service.icon className="w-8 h-8 text-white" />
@@ -153,7 +153,7 @@ const Services = () => {
               { step: "03", title: "Development", description: "Our experts build and test your AI solution" },
               { step: "04", title: "Deployment", description: "We launch your solution and provide ongoing support" }
             ].map((item, index) => (
-              <div className="text-center space-y-4" key={index}>
+              <div key={index} className="text-center space-y-4">
                 <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto">
                   <span className="text-white font-bold text-lg">{item.step}</span>
                 </div>
@@ -178,13 +178,13 @@ const Services = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button className="gradient-primary text-white hover:opacity-90 transition-smooth" size="lg">
+                <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth">
                   Get Free Consultation
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link to="/demo">
-                <Button className="border-accent text-accent hover:bg-accent hover:text-white" size="lg" variant="outline">
+                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
                   Watch Our Demo
                 </Button>
               </Link>
