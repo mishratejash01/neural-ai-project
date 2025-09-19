@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Layout from "@/components/layout/Layout";
+import { Link } from "react-router-dom";
 import { 
   Mail, 
   Phone, 
@@ -78,7 +79,7 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {reasons.map((reason, index) => (
-              <div key={index} className="text-center space-y-4">
+              <div className="text-center space-y-4" key={index}>
                 <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto">
                   <reason.icon className="w-8 h-8 text-white" />
                 </div>
@@ -106,30 +107,27 @@ const Contact = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" className="bg-card border-border" />
+                    <Input className="bg-card border-border" id="firstName" placeholder="John" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" className="bg-card border-border" />
+                    <Input className="bg-card border-border" id="lastName" placeholder="Doe" />
                   </div>
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="john@company.com" className="bg-card border-border" />
+                  <Input className="bg-card border-border" id="email" placeholder="john@company.com" type="email" />
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="company">Company Name</Label>
-                    <Input id="company" placeholder="Your Company" className="bg-card border-border" />
+                    <Input className="bg-card border-border" id="company" placeholder="Your Company" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" placeholder="+1 (555) 123-4567" className="bg-card border-border" />
+                    <Input className="bg-card border-border" id="phone" placeholder="+1 (555) 123-4567" />
                   </div>
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject *</Label>
                   <Select>
@@ -147,16 +145,14 @@ const Contact = () => {
                     </SelectContent>
                   </Select>
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="message">Message *</Label>
-                  <Textarea 
+                  <Textarea
                     id="message"
                     placeholder="Tell us about your project, challenges, or questions. The more details you provide, the better we can help you."
                     className="bg-card border-border min-h-[120px]"
                   />
                 </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="budget">Project Budget (Optional)</Label>
                   <Select>
@@ -173,12 +169,10 @@ const Contact = () => {
                     </SelectContent>
                   </Select>
                 </div>
-
-                <Button variant="hero" size="lg" className="w-full">
+                <Button className="w-full" size="lg" variant="hero">
                   <Send className="mr-2" />
                   Send Message
                 </Button>
-
                 <p className="text-sm text-muted-foreground text-center">
                   By submitting this form, you agree to receive communications from Neural AI. 
                   We respect your privacy and will never share your information.
@@ -198,7 +192,7 @@ const Contact = () => {
 
               <div className="space-y-6">
                 {contactMethods.map((method, index) => (
-                  <Card key={index} className="gradient-card border-border shadow-card">
+                  <Card className="gradient-card border-border shadow-card" key={index}>
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
                         <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center flex-shrink-0">
@@ -228,11 +222,11 @@ const Contact = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button variant="hero" className="w-full">
+                  <Button className="w-full" variant="hero">
                     <Phone className="mr-2" />
                     Call Now: +1 (555) 123-4567
                   </Button>
-                  <Button variant="neural" className="w-full">
+                  <Button className="w-full" variant="neural">
                     <MessageSquare className="mr-2" />
                     Start Live Chat
                   </Button>
@@ -252,7 +246,6 @@ const Contact = () => {
               Quick answers to frequently asked questions about our services and process.
             </p>
           </div>
-
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
@@ -272,7 +265,7 @@ const Contact = () => {
                 answer: "We follow enterprise-grade security protocols, including encryption, secure data handling, and compliance with industry standards."
               }
             ].map((faq, index) => (
-              <Card key={index} className="gradient-card border-border shadow-card">
+              <Card className="gradient-card border-border shadow-card" key={index}>
                 <CardHeader>
                   <CardTitle className="text-lg">{faq.question}</CardTitle>
                 </CardHeader>
@@ -282,13 +275,14 @@ const Contact = () => {
               </Card>
             ))}
           </div>
-
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-6">Have more questions?</p>
-            <Button variant="hero" size="lg">
-              View Full FAQ
-              <ArrowRight className="ml-2" />
-            </Button>
+            <Link to="/faq">
+              <Button variant="hero" size="lg">
+                View Full FAQ
+                <ArrowRight className="ml-2" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
