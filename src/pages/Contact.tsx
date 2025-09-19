@@ -24,21 +24,21 @@ const Contact = () => {
       icon: Phone,
       title: "Call Us",
       description: "Speak directly with our AI experts",
-      info: "+1 (555) 123-4567",
-      availability: "Mon-Fri 9AM-6PM EST"
+      info: "+91 8160396630",
+      availability: "Mon-Fri 9AM-6PM IST"
     },
     {
       icon: Mail,
       title: "Email Us",
       description: "Get detailed responses to your questions",
-      info: "hello@neuralai.com",
+      info: "office@neuralai.in",
       availability: "We respond within 4 hours"
     },
     {
       icon: MapPin,
       title: "Visit Our Office",
       description: "Meet our team in person",
-      info: "123 AI Innovation Drive, Tech City, CA 94105",
+      info: "New Delhi, India",
       availability: "By appointment only"
     }
   ];
@@ -114,10 +114,12 @@ const Contact = () => {
                     <Input className="bg-card border-border" id="lastName" placeholder="Doe" />
                   </div>
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address *</Label>
                   <Input className="bg-card border-border" id="email" placeholder="john@company.com" type="email" />
                 </div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="company">Company Name</Label>
@@ -125,9 +127,10 @@ const Contact = () => {
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input className="bg-card border-border" id="phone" placeholder="+1 (555) 123-4567" />
+                    <Input className="bg-card border-border" id="phone" placeholder="+91 8617007380" />
                   </div>
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="subject">Subject *</Label>
                   <Select>
@@ -145,6 +148,7 @@ const Contact = () => {
                     </SelectContent>
                   </Select>
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="message">Message *</Label>
                   <Textarea
@@ -153,6 +157,7 @@ const Contact = () => {
                     className="bg-card border-border min-h-[120px]"
                   />
                 </div>
+
                 <div className="space-y-2">
                   <Label htmlFor="budget">Project Budget (Optional)</Label>
                   <Select>
@@ -169,10 +174,12 @@ const Contact = () => {
                     </SelectContent>
                   </Select>
                 </div>
+
                 <Button className="w-full" size="lg" variant="hero">
                   <Send className="mr-2" />
                   Send Message
                 </Button>
+
                 <p className="text-sm text-muted-foreground text-center">
                   By submitting this form, you agree to receive communications from Neural AI. 
                   We respect your privacy and will never share your information.
@@ -224,7 +231,7 @@ const Contact = () => {
                 <CardContent className="space-y-4">
                   <Button className="w-full" variant="hero">
                     <Phone className="mr-2" />
-                    Call Now: +1 (555) 123-4567
+                    Call Now: +91 8617007380
                   </Button>
                   <Button className="w-full" variant="neural">
                     <MessageSquare className="mr-2" />
@@ -246,6 +253,7 @@ const Contact = () => {
               Quick answers to frequently asked questions about our services and process.
             </p>
           </div>
+
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               {
@@ -275,10 +283,11 @@ const Contact = () => {
               </Card>
             ))}
           </div>
+
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-6">Have more questions?</p>
             <Link to="/faq">
-              <Button variant="hero" size="lg">
+              <Button size="lg" variant="hero">
                 View Full FAQ
                 <ArrowRight className="ml-2" />
               </Button>
