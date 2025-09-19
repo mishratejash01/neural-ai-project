@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import useParticleNetwork from "@/hooks/useParticleNetwork";
+import React from "react";
 import { 
   Brain, 
   BarChart, 
@@ -15,12 +17,13 @@ import {
   Clock,
   TrendingUp,
   Play,
-  Code,
-  Database,
   Cpu
 } from "lucide-react";
 
 const Home = () => {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+  useParticleNetwork(canvasRef);
+
   const services = [
     {
       icon: Brain,
@@ -66,53 +69,25 @@ const Home = () => {
     { value: "300%", label: "Average ROI", icon: TrendingUp },
     { value: "24/7", label: "AI Monitoring", icon: Cpu }
   ];
-
-  const valueProps = [
-    {
-      icon: Shield,
-      title: "Accuracy",
-      description: "Production-grade models with validated performance metrics"
-    },
-    {
-      icon: Cpu,
-      title: "Production-Ready",
-      description: "Scalable infrastructure with monitoring and auto-scaling"
-    },
-    {
-      icon: CheckCircle2,
-      title: "Privacy-First",
-      description: "Bank-level security and compliance built into every solution"
-    }
-  ];
-
+  
   return (
     <Layout>
-      {/* Hero Section with Particles */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden particles-bg tech-grid">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-surface-dark" />
-        
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-20 left-10 w-2 h-2 bg-primary rounded-full animate-float" style={{animationDelay: '0s'}} />
-          <div className="absolute top-40 right-20 w-1 h-1 bg-primary/60 rounded-full animate-float" style={{animationDelay: '1s'}} />
-          <div className="absolute bottom-40 left-1/3 w-1.5 h-1.5 bg-primary/40 rounded-full animate-float" style={{animationDelay: '2s'}} />
-          <div className="absolute bottom-60 right-1/4 w-1 h-1 bg-primary/80 rounded-full animate-float" style={{animationDelay: '0.5s'}} />
-        </div>
-
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+        <canvas ref={canvasRef} className="absolute top-0 left-0 w-full h-full z-0" />
         <div className="container mx-auto px-4 z-10 text-center">
           <div className="animate-fade-in">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Deploy practical <span className="text-gradient animate-glow">AI & ML</span>
-              <br />that drives measurable outcomes
+              <span className="text-neon">Engineering the future of </span>
+              <span className="text-foreground">automation</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl mx-auto leading-relaxed">
               We build custom ML models, production-ready pipelines and intelligent automation 
               for businesses in retail, finance, healthcare and manufacturing.
             </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link to="/demo">
                 <Button variant="neon" size="xl" className="group">
-                  <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform" />
                   Book a Demo
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
@@ -123,19 +98,6 @@ const Home = () => {
                 </Button>
               </Link>
             </div>
-          </div>
-
-          {/* Value Props */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16 animate-slide-up">
-            {valueProps.map((prop, index) => (
-              <div key={index} className="backdrop-blur-neon p-6 rounded-xl hover-lift hover-glow group">
-                <div className="w-16 h-16 gradient-neon rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-neon">
-                  <prop.icon className="w-8 h-8 text-primary-foreground" />
-                </div>
-                <h3 className="text-xl font-semibold mb-2 text-neon">{prop.title}</h3>
-                <p className="text-muted-foreground">{prop.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -160,7 +122,7 @@ const Home = () => {
       </section>
 
       {/* Services Preview */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden bg-background">
         <div className="absolute inset-0 tech-grid opacity-20" />
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 animate-fade-in">
@@ -222,7 +184,6 @@ const Home = () => {
               or try our interactive sandbox to experience the power of AI firsthand.
             </p>
 
-            {/* Demo Video Placeholder */}
             <div className="relative mb-12 group hover-lift">
               <div className="aspect-video bg-gradient-to-br from-surface-darker to-card rounded-2xl border border-border flex items-center justify-center shadow-elevated hover:shadow-neon-lg transition-all">
                 <div className="text-center">
@@ -253,7 +214,7 @@ const Home = () => {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 border-t border-border">
+      <section className="py-20 border-t border-border bg-background">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-2xl mx-auto">
             <h2 className="text-3xl font-bold mb-4">
