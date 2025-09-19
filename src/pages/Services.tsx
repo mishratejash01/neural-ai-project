@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { 
-  MessageSquare, 
-  BarChart, 
-  Eye, 
-  Brain, 
-  Cog, 
+import {
+  MessageSquare,
+  BarChart,
+  Eye,
+  Brain,
+  Cog,
   Zap,
   ArrowRight,
   Clock,
@@ -65,8 +65,8 @@ const Services = () => {
               Our <span className="text-gradient">AI Services</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              At Neural AI, we deliver cutting-edge artificial intelligence solutions that transform 
-              how businesses operate. From intelligent automation to predictive insights, 
+              At Neural AI, we deliver cutting-edge artificial intelligence solutions that transform
+              how businesses operate. From intelligent automation to predictive insights,
               we have the expertise to drive your digital transformation with measurable results.
             </p>
           </div>
@@ -97,7 +97,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-surface-dark">
         <div className="container mx-auto px-4">
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold mb-6 animate-slide-up">
@@ -107,10 +107,10 @@ const Services = () => {
               Explore our detailed service offerings designed to transform your business operations
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="shadow-card hover-lift overflow-hidden bg-white border-border rounded-3xl group">
+              <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
                 <CardHeader className="p-8 text-center">
                   <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
                     <service.icon className="w-8 h-8 text-white" />
@@ -118,7 +118,7 @@ const Services = () => {
                   <CardTitle className="text-2xl font-bold text-foreground mb-4">
                     {service.title}
                   </CardTitle>
-                  <CardDescription className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  <CardDescription className="text-lg text-text-muted leading-relaxed mb-6">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
@@ -142,7 +142,7 @@ const Services = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-6">Our Process</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We follow a proven methodology to ensure your AI implementation is successful, 
+              We follow a proven methodology to ensure your AI implementation is successful,
               on-time, and delivers measurable results.
             </p>
           </div>
@@ -173,7 +173,7 @@ const Services = () => {
               Not Sure Which Service You Need?
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Our AI experts will analyze your business and recommend the perfect solution. 
+              Our AI experts will analyze your business and recommend the perfect solution.
               Schedule a free consultation to get started.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
