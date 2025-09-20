@@ -15,6 +15,7 @@ import {
   Shield
 } from "lucide-react";
 import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import { motion } from "framer-motion";
 
 const Services = () => {
   const services = [
@@ -64,9 +65,15 @@ const Services = () => {
         title1="Our"
         title2="AI Services"
       />
-      <section className="py-24 gradient-hero animate-fade-in">
+      <section className="py-24 gradient-hero">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+          >
             <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Clock className="w-10 h-10 text-white" />
@@ -88,23 +95,35 @@ const Services = () => {
               <h3 className="text-2xl font-semibold text-foreground">Enterprise Security</h3>
               <p className="text-muted-foreground">Bank-level security and compliance built into every solution we deliver</p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Services Grid */}
       <section className="py-24 bg-surface-dark">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6 animate-slide-up">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+            className="text-center mb-20"
+          >
+            <h2 className="text-5xl font-bold mb-6">
               Comprehensive <span className="text-gradient">AI Solutions</span>
             </h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Explore our detailed service offerings designed to transform your business operations
             </p>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.4 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             {services.map((service, index) => (
               <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
                 <CardHeader className="p-8 text-center">
@@ -128,21 +147,33 @@ const Services = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Process Section */}
       <section className="py-20 gradient-hero">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="text-center mb-16"
+          >
             <h2 className="text-4xl font-bold mb-6">Our Process</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               We follow a proven methodology to ensure your AI implementation is successful,
               on-time, and delivers measurable results.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+            className="grid grid-cols-1 md:grid-cols-4 gap-8"
+          >
             {[
               { step: "01", title: "Discovery", description: "We analyze your business needs and identify AI opportunities" },
               { step: "02", title: "Strategy", description: "We design a custom AI roadmap tailored to your goals" },
@@ -157,14 +188,20 @@ const Services = () => {
                 <p className="text-muted-foreground">{item.description}</p>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+            className="max-w-3xl mx-auto"
+          >
             <h2 className="text-4xl font-bold mb-6">
               Not Sure Which Service You Need?
             </h2>
@@ -185,7 +222,7 @@ const Services = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </Layout>
