@@ -104,7 +104,7 @@ const Footer = () => {
         
         <div className="border-t border-border mt-12 pt-8 text-center">
           <p className="text-muted-foreground text-sm">
-            © 2024 Neural AI. All rights reserved. Building intelligent solutions for tomorrow.
+            © 2025 Neural AI. All rights reserved. Go Beyond Automation and Transform Your Business.
           </p>
         </div>
       </div>
