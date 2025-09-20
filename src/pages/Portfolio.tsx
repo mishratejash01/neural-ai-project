@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { ArrowRight, ExternalLink } from "lucide-react";
+import { LampContainer } from "@/components/ui/lamp";
+import { motion } from "framer-motion";
 
 const Portfolio = () => {
   const projects = [
@@ -47,19 +49,26 @@ const Portfolio = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-24 gradient-hero animate-fade-in">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h1 className="text-6xl font-bold mb-8 animate-slide-up">
-              Success <span className="text-gradient">Stories</span> from India
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              Discover how Neural AI has transformed businesses across India with cutting-edge
-              AI solutions. Each case study represents real partnerships with measurable results.
-            </p>
-          </div>
-        </div>
-      </section>
+      <LampContainer>
+        <motion.div
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="text-center"
+        >
+          <h1 className="text-6xl font-bold mb-8 text-white">
+            Success <span className="text-gradient">Stories</span> from India
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            Discover how Neural AI has transformed businesses across India with cutting-edge
+            AI solutions. Each case study represents real partnerships with measurable results.
+          </p>
+        </motion.div>
+      </LampContainer>
 
       {/* Projects Grid */}
       <section className="py-24 bg-surface-dark">
