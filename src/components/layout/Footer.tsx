@@ -17,7 +17,7 @@ const Footer = () => {
             </div>
             <p className="text-muted-foreground">
               Transforming businesses with intelligent AI solutions. 
-              Building the future, one algorithm at a time.
+              Increase revenue and drive business growth with AI-powered ecosystems that learn, adapt, and deliver bespoke solutions.
             </p>
           </div>
           
