@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
+import neuralAILogo from '@/assets/neural-ai.jpeg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +20,6 @@ const Header = () => {
     { href: "/contact", label: "Contact" },
   ];
 
-  // Effect to handle scroll detection
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -29,7 +28,6 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   
-  // Effect to close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -40,21 +38,19 @@ const Header = () => {
         className={cn(
           'transition-all duration-300 ease-in-out mx-auto',
           isScrolled
-            ? 'mt-2 max-w-5xl rounded-2xl border border-border/50 bg-background/50 backdrop-blur-lg' // Increased max-width here
+            ? 'mt-2 max-w-5xl rounded-2xl border border-border/50 bg-background/80 backdrop-blur-lg'
             : 'mt-0 max-w-none'
         )}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
-            {/* Logo */}
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center">
                 <img src={neuralAILogo} alt="Neural AI" className="h-10 w-auto" />
               </Link>
             </div>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex lg:space-x-2"> {/* Reduced space here */}
+            <nav className="hidden lg:flex lg:space-x-2">
               {navItems.map((item) => (
                 <Link key={item.href} to={item.href}>
                   <Button
@@ -72,7 +68,6 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Desktop CTA */}
             <div className="hidden lg:ml-6 lg:flex lg:items-center">
               <Link to="/demo">
                 <Button variant="neon-outline" size="sm">
@@ -81,7 +76,6 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Mobile Menu Button */}
             <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -96,10 +90,11 @@ const Header = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* --- MOBILE MENU FIX STARTS HERE --- */}
         {isMenuOpen && (
           <div className="lg:hidden" id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2">
+            {/* Added background, border, and padding to the container */}
+            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 bg-background/80 backdrop-blur-lg border-t border-border/50">
               {navItems.map((item) => (
                 <Link key={item.href} to={item.href}>
                   <Button
@@ -115,7 +110,7 @@ const Header = () => {
                   </Button>
                 </Link>
               ))}
-              <div className="border-t border-border/50 pt-4">
+              <div className="border-t border-border/50 pt-4 mt-4">
                 <Link to="/demo">
                     <Button variant="neon-outline" className="w-full">Book Demo</Button>
                 </Link>
@@ -123,6 +118,7 @@ const Header = () => {
             </div>
           </div>
         )}
+        {/* --- MOBILE MENU FIX ENDS HERE --- */}
       </div>
     </header>
   );
