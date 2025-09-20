@@ -75,6 +75,7 @@ const TeamSection = () => {
                                 </div>
                                 <span className="mt-4 block text-lg font-semibold">{member.name}</span>
                                 <span className="text-muted-foreground block text-sm">{member.role}</span>
+                                <span className="text-muted-foreground block text-xs">IIT MADRAS</span>
                             </div>
                         ))}
                     </div>
