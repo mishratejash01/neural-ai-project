@@ -17,11 +17,10 @@ export function SplineHero() {
         {/* Left content */}
         <div className="w-full md:w-1/2 p-8 relative z-10 flex flex-col justify-center items-center md:items-start text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
-            Engineering the future of automation
+            Engineering the future of Automation
           </h1>
           <p className="mt-4 text-neutral-300 max-w-lg">
-            Bring your UI to life with beautiful 3D scenes. Create immersive experiences 
-            that capture attention and enhance your design.
+            Building intelligent, ethical AI solutions that amplify human potential and help businesses achieve extraordinary results.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center mt-8">
               <Link to="/demo">
