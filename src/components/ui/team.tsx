@@ -30,21 +30,25 @@ const engineering = [
     {
         name: 'Srijan Anand',
         role: 'Technical Head',
+        university: 'IIT KANPUR',
         avatar: srijanAvatar,
     },
     {
         name: 'Harshil Handoo',
         role: 'AI ML Engineer',
+        university: 'IIIT DELHI',
         avatar: harshilAvatar,
     },
     {
         name: 'Jaydev Paul',
         role: 'AI ML Engineer',
+        university: 'NIT PODUCHERRY',
         avatar: jaydevAvatar,
     },
     {
         name: 'Phalgun Praveen',
         role: 'AI ML Engineer',
+        university: 'NIT ROURKELA',
         avatar: phalgunAvatar,
     },
 ];
@@ -91,6 +95,7 @@ const TeamSection = () => {
                                 </div>
                                 <span className="mt-3 block text-md font-medium">{member.name}</span>
                                 <span className="text-muted-foreground block text-xs">{member.role}</span>
+                                <span className="text-muted-foreground block text-xs">{member.university}</span>
                             </div>
                         ))}
                     </div>
