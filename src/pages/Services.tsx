@@ -14,8 +14,7 @@ import {
   TrendingUp,
   Shield
 } from "lucide-react";
-import { LampContainer } from "@/components/ui/lamp";
-import { motion } from "framer-motion";
+import { HeroGeometric } from "@/components/ui/shape-landing-hero";
 
 const Services = () => {
   const services = [
@@ -60,27 +59,11 @@ const Services = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <LampContainer>
-        <motion.div
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="text-center"
-        >
-          <h1 className="text-6xl font-bold mb-8 text-white">
-            Our <span className="text-gradient">AI Services</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            At Neural AI, we deliver cutting-edge artificial intelligence solutions that transform
-            how businesses operate. From intelligent automation to predictive insights,
-            we have the expertise to drive your digital transformation with measurable results.
-          </p>
-        </motion.div>
-      </LampContainer>
+      <HeroGeometric
+        badge="Our Expertise"
+        title1="Our"
+        title2="AI Services"
+      />
       <section className="py-24 gradient-hero animate-fade-in">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
