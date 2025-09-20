@@ -24,21 +24,21 @@ const Contact = () => {
       icon: Phone,
       title: "Call Us",
       description: "Speak directly with our AI experts",
-      info: "+1 (555) 123-4567",
+      info: "+91 8160396630, +91 8617007380",
       availability: "Mon-Fri 9AM-6PM EST"
     },
     {
       icon: Mail,
       title: "Email Us",
       description: "Get detailed responses to your questions",
-      info: "hello@neuralai.com",
+      info: "office@neuralai.in",
       availability: "We respond within 4 hours"
     },
     {
       icon: MapPin,
       title: "Visit Our Office",
       description: "Meet our team in person",
-      info: "123 AI Innovation Drive, Tech City, CA 94105",
+      info: "DELHI NCR, INDIA",
       availability: "By appointment only"
     }
   ];
@@ -160,11 +160,11 @@ const Contact = () => {
                       <SelectValue placeholder="Select your budget range" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="under-50k">Under $50k</SelectItem>
-                      <SelectItem value="50k-100k">$50k - $100k</SelectItem>
-                      <SelectItem value="100k-250k">$100k - $250k</SelectItem>
-                      <SelectItem value="250k-500k">$250k - $500k</SelectItem>
-                      <SelectItem value="over-500k">Over $500k</SelectItem>
+                      <SelectItem value="under-50k">Under 5k</SelectItem>
+                      <SelectItem value="50k-100k">5k - 10k</SelectItem>
+                      <SelectItem value="100k-250k">10k - 25k</SelectItem>
+                      <SelectItem value="250k-500k">25k - 50k</SelectItem>
+                      <SelectItem value="over-500k">Over 50k</SelectItem>
                       <SelectItem value="not-sure">Not sure yet</SelectItem>
                     </SelectContent>
                   </Select>
