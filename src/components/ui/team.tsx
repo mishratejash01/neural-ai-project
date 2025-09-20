@@ -1,15 +1,28 @@
 import React from 'react';
 
+// --- Import Founder Images ---
+import tejashAvatar from '@/assets/images/tejash-mishra.jpeg';
+import roshanAvatar from '@/assets/images/roshan-singh.jpeg';
+
+// --- Import Engineering Team Images ---
+import srijanAvatar from '@/assets/images/srijan-anand.jpeg';
+import harshilAvatar from '@/assets/images/harshil-handoo.jpeg';
+import jaydevAvatar from '@/assets/images/jaydev-paul.jpeg';
+import phalgunAvatar from '@/assets/images/phalgun-praveen.jpeg';
+
+// --- Import Mentor Images ---
+import saurabhAvatar from '@/assets/images/dr-saurabh-shanu.jpeg';
+
 const leadership = [
     {
         name: 'Tejash Mishra',
         role: 'Co-Founder',
-        avatar: 'https://avatars.githubusercontent.com/u/47919550?v=4',
+        avatar: tejashAvatar,
     },
     {
         name: 'Roshan Singh',
         role: 'Co-Founder',
-        avatar: 'https://avatars.githubusercontent.com/u/68236786?v=4',
+        avatar: roshanAvatar,
     },
 ];
 
@@ -17,22 +30,22 @@ const engineering = [
     {
         name: 'Srijan Anand',
         role: 'Technical Head',
-        avatar: 'https://avatars.githubusercontent.com/u/99137927?v=4',
+        avatar: srijanAvatar,
     },
     {
         name: 'Harshil Handoo',
         role: 'AI ML Engineer',
-        avatar: 'https://avatars.githubusercontent.com/u/31113941?v=4',
+        avatar: harshilAvatar,
     },
     {
         name: 'Jaydev Paul',
         role: 'AI ML Engineer',
-        avatar: 'https://avatars.githubusercontent.com/u/47919550?v=4',
+        avatar: jaydevAvatar,
     },
     {
         name: 'Phalgun Praveen',
         role: 'AI ML Engineer',
-        avatar: 'https://avatars.githubusercontent.com/u/68236786?v=4',
+        avatar: phalgunAvatar,
     },
 ];
 
@@ -40,7 +53,7 @@ const mentors = [
     {
         name: 'Dr. Saurabh Shanu',
         role: 'Mentor',
-        avatar: 'https://avatars.githubusercontent.com/u/99137927?v=4',
+        avatar: saurabhAvatar,
     },
 ];
 
@@ -53,7 +66,7 @@ const TeamSection = () => {
                 </h2>
 
                 <div>
-                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">Founders Team</h3>
+                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">Our Team</h3>
                     <div className="grid grid-cols-2 gap-8 border-t py-6 md:grid-cols-2">
                         {leadership.map((member, index) => (
                             <div key={index} className="text-center">
