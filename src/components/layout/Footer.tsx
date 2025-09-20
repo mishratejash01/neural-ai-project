@@ -3,8 +3,9 @@ import React from 'react';
 import type { ComponentProps, ReactNode } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { LinkedinIcon } from 'lucide-react';
-import neuralAILogo from '@/assets/neural-ai.jpeg'; // Import your logo
+import neuralAILogo from '@/assets/neural-ai.jpeg';
 
+// Helper types and data for the footer
 interface FooterLink {
 	title: string;
 	href: string;
@@ -16,7 +17,6 @@ interface FooterSection {
 	links: FooterLink[];
 }
 
-// Updated links to remove extra social media and add your LinkedIn URL
 const footerLinks: FooterSection[] = [
 	{
 		label: 'Product',
@@ -45,21 +45,21 @@ const footerLinks: FooterSection[] = [
 		],
 	},
 	{
-		label: 'Social Links',
+		label: 'Social',
 		links: [
 			{ title: 'LinkedIn', href: 'https://www.linkedin.com/company/autoneuralai', icon: LinkedinIcon },
 		],
 	},
 ];
 
-export function Footer() {
+
+// Main Footer Component
+const Footer = () => {
 	return (
-		// Replaced original background with your website's gradient-hero style
 		<footer className="gradient-hero border-t border-border w-full">
 			<div className="container mx-auto px-4 py-16">
 				<div className="grid w-full gap-8 xl:grid-cols-3 xl:gap-8">
 					<AnimatedContainer className="space-y-4">
-						{/* Replaced FrameIcon with your logo image */}
 						<div className="flex items-center space-x-3">
 							<img src={neuralAILogo} alt="Neural AI Logo" className="h-10" />
 							<span className="text-xl font-bold text-neon">Neural AI</span>
@@ -97,6 +97,8 @@ export function Footer() {
 	);
 };
 
+
+// Helper component for animations
 type ViewAnimationProps = {
 	delay?: number;
 	className?: ComponentProps<typeof motion.div>['className'];
@@ -122,3 +124,5 @@ function AnimatedContainer({ className, delay = 0.1, children }: ViewAnimationPr
 		</motion.div>
 	);
 };
+
+export default Footer;
