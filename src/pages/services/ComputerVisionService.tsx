@@ -11,6 +11,8 @@ import {
   Zap,
   Target
 } from "lucide-react";
+import { LampContainer } from "@/components/ui/lamp";
+import { motion } from "framer-motion";
 
 const ComputerVisionService = () => {
   const service = {
@@ -68,41 +70,29 @@ const ComputerVisionService = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="py-24 gradient-hero animate-fade-in">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Link className="inline-flex items-center text-accent hover:text-accent/80 mb-8 transition-smooth" to="/services">
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Services
-            </Link>
-            <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-accent">
-              <service.icon className="w-10 h-10 text-white" />
-            </div>
-            <h1 className="text-5xl font-bold mb-6 animate-slide-up">
-              {service.title}
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
-              {service.description}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button className="gradient-primary text-white hover:opacity-90 transition-smooth" size="lg">
-                  Get Started Today
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link to="/demo">
-                <Button className="border-accent text-accent hover:bg-accent hover:text-white" size="lg" variant="outline">
-                  Watch Demo
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <LampContainer>
+        <motion.div
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="text-center"
+        >
+          <h1 className="text-5xl font-bold mb-6 text-white">
+            {service.title}
+          </h1>
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            {service.description}
+          </p>
+        </motion.div>
+      </LampContainer>
+      
 
       {/* Features Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-6">Key Features</h2>
@@ -112,7 +102,7 @@ const ComputerVisionService = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {service.features.map((feature, index) => (
-              <Card className="shadow-card hover-lift border-border" key={index}>
+              <Card className="shadow-card hover-lift border-border bg-card" key={index}>
                 <CardHeader>
                   <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
                 </CardHeader>
@@ -138,7 +128,7 @@ const ComputerVisionService = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {service.benefits.map((benefit, index) => (
                 <div className="flex items-start space-x-4 group" key={index}>
-                  <CheckCircle2 className="w-6 h-6 text-accent flex-shrink-0 mt-0.5 group-hover:scale-110 transition-smooth" />
+                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-smooth" />
                   <span className="text-muted-foreground text-lg leading-relaxed">{benefit}</span>
                 </div>
               ))}
@@ -148,7 +138,7 @@ const ComputerVisionService = () => {
       </section>
 
       {/* Use Cases Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-6">Industry Applications</h2>
@@ -158,9 +148,9 @@ const ComputerVisionService = () => {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {service.useCases.map((useCase, index) => (
-              <Card className="shadow-card hover-lift border-border" key={index}>
+              <Card className="shadow-card hover-lift border-border bg-card" key={index}>
                 <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-accent">{useCase.industry}</CardTitle>
+                  <CardTitle className="text-xl font-semibold text-primary">{useCase.industry}</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">{useCase.description}</p>
@@ -176,8 +166,8 @@ const ComputerVisionService = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Success Story</h2>
-            <div className="bg-white p-8 rounded-2xl border border-border shadow-soft">
-              <h4 className="font-semibold mb-4 text-accent text-xl">Manufacturing Vision Success:</h4>
+            <div className="bg-card p-8 rounded-2xl border border-border shadow-soft">
+              <h4 className="font-semibold mb-4 text-primary text-xl">Manufacturing Vision Success:</h4>
               <p className="text-muted-foreground text-lg italic leading-relaxed">{service.example}</p>
             </div>
           </div>
@@ -185,24 +175,24 @@ const ComputerVisionService = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center space-y-6 hover-lift bg-gradient-hero p-8 rounded-2xl border border-border">
+            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Target className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">99.5% Accuracy</h3>
               <p className="text-muted-foreground">Object detection and classification precision across all models</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-gradient-hero p-8 rounded-2xl border border-border">
+            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
               <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Camera className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Real-time</h3>
               <p className="text-muted-foreground">Live video processing with sub-second response times</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-gradient-hero p-8 rounded-2xl border border-border">
+            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <Zap className="w-10 h-10 text-white" />
               </div>
