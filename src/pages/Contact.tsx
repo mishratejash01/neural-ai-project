@@ -6,6 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Mail, 
   Phone, 
@@ -19,6 +22,65 @@ import {
 } from "lucide-react";
 
 const Contact = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    phone: "",
+    subject: "",
+    message: "",
+    budget: ""
+  });
+  const { toast } = useToast();
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('resend_key_id', {
+        body: {
+          type: 'contact',
+          ...formData,
+          fullName: `${formData.firstName} ${formData.lastName}`
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent successfully!",
+        description: "We'll get back to you within 4 hours during business days.",
+      });
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        company: "",
+        phone: "",
+        subject: "",
+        message: "",
+        budget: ""
+      });
+    } catch (error) {
+      console.error('Form submission error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const contactMethods = [
     {
       icon: Phone,
@@ -104,79 +166,126 @@ const Contact = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input className="bg-card border-border" id="firstName" placeholder="John" />
+                <form onSubmit={handleSubmit}>
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName">First Name *</Label>
+                        <Input 
+                          className="bg-card border-border" 
+                          id="firstName" 
+                          placeholder="John" 
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName">Last Name *</Label>
+                        <Input 
+                          className="bg-card border-border" 
+                          id="lastName" 
+                          placeholder="Doe" 
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input 
+                        className="bg-card border-border" 
+                        id="email" 
+                        type="email" 
+                        placeholder="john@company.com" 
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="company">Company Name</Label>
+                        <Input 
+                          className="bg-card border-border" 
+                          id="company" 
+                          placeholder="Your Company" 
+                          value={formData.company}
+                          onChange={(e) => handleInputChange('company', e.target.value)}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input 
+                          className="bg-card border-border" 
+                          id="phone" 
+                          placeholder="+1 (555) 123-4567" 
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="subject">Subject *</Label>
+                      <Select value={formData.subject} onValueChange={(value) => handleInputChange('subject', value)}>
+                        <SelectTrigger className="bg-card border-border">
+                          <SelectValue placeholder="What can we help you with?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="consultation">Free Consultation</SelectItem>
+                          <SelectItem value="demo">Schedule Demo</SelectItem>
+                          <SelectItem value="pricing">Pricing Information</SelectItem>
+                          <SelectItem value="partnership">Partnership Opportunities</SelectItem>
+                          <SelectItem value="support">Technical Support</SelectItem>
+                          <SelectItem value="careers">Career Opportunities</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="message">Message *</Label>
+                      <Textarea
+                        id="message"
+                        placeholder="Tell us about your project, challenges, or questions. The more details you provide, the better we can help you."
+                        className="bg-card border-border min-h-[120px]"
+                        value={formData.message}
+                        onChange={(e) => handleInputChange('message', e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="budget">Project Budget (Optional)</Label>
+                      <Select value={formData.budget} onValueChange={(value) => handleInputChange('budget', value)}>
+                        <SelectTrigger className="bg-card border-border">
+                          <SelectValue placeholder="Select your budget range" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="under-50k">Under 5k</SelectItem>
+                          <SelectItem value="50k-100k">5k - 10k</SelectItem>
+                          <SelectItem value="100k-250k">10k - 25k</SelectItem>
+                          <SelectItem value="250k-500k">25k - 50k</SelectItem>
+                          <SelectItem value="over-500k">Over 50k</SelectItem>
+                          <SelectItem value="not-sure">Not sure yet</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <Button 
+                      className="w-full" 
+                      size="lg" 
+                      variant="hero" 
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      <Send className="mr-2" />
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </Button>
+                    <p className="text-sm text-muted-foreground text-center">
+                      By submitting this form, you agree to receive communications from Neural AI. 
+                      We respect your privacy and will never share your information.
+                    </p>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input className="bg-card border-border" id="lastName" placeholder="Doe" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address *</Label>
-                  <Input className="bg-card border-border" id="email" placeholder="john@company.com" type="email" />
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company Name</Label>
-                    <Input className="bg-card border-border" id="company" placeholder="Your Company" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input className="bg-card border-border" id="phone" placeholder="+1 (555) 123-4567" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject *</Label>
-                  <Select>
-                    <SelectTrigger className="bg-card border-border">
-                      <SelectValue placeholder="What can we help you with?" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="consultation">Free Consultation</SelectItem>
-                      <SelectItem value="demo">Schedule Demo</SelectItem>
-                      <SelectItem value="pricing">Pricing Information</SelectItem>
-                      <SelectItem value="partnership">Partnership Opportunities</SelectItem>
-                      <SelectItem value="support">Technical Support</SelectItem>
-                      <SelectItem value="careers">Career Opportunities</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us about your project, challenges, or questions. The more details you provide, the better we can help you."
-                    className="bg-card border-border min-h-[120px]"
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="budget">Project Budget (Optional)</Label>
-                  <Select>
-                    <SelectTrigger className="bg-card border-border">
-                      <SelectValue placeholder="Select your budget range" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="under-50k">Under 5k</SelectItem>
-                      <SelectItem value="50k-100k">5k - 10k</SelectItem>
-                      <SelectItem value="100k-250k">10k - 25k</SelectItem>
-                      <SelectItem value="250k-500k">25k - 50k</SelectItem>
-                      <SelectItem value="over-500k">Over 50k</SelectItem>
-                      <SelectItem value="not-sure">Not sure yet</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <Button className="w-full" size="lg" variant="hero">
-                  <Send className="mr-2" />
-                  Send Message
-                </Button>
-                <p className="text-sm text-muted-foreground text-center">
-                  By submitting this form, you agree to receive communications from Neural AI. 
-                  We respect your privacy and will never share your information.
-                </p>
+                </form>
               </CardContent>
             </Card>
 

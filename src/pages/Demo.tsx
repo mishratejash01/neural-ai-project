@@ -5,6 +5,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Layout from "@/components/layout/Layout";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Play, 
   Calendar, 
@@ -18,6 +21,65 @@ import {
 } from "lucide-react";
 
 const Demo = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    company: "",
+    industry: "",
+    interests: "",
+    timeframe: ""
+  });
+  const { toast } = useToast();
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('resend_key_id', {
+        body: {
+          type: 'demo',
+          ...formData,
+          fullName: `${formData.firstName} ${formData.lastName}`
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Demo booking request sent!",
+        description: "We'll contact you within 24 hours to schedule your personalized demo.",
+      });
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        company: "",
+        industry: "",
+        interests: "",
+        timeframe: ""
+      });
+    } catch (error) {
+      console.error('Demo booking error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const demoFeatures = [
     {
       icon: Monitor,
@@ -172,92 +234,139 @@ const Demo = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" className="bg-card border-border" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" className="bg-card border-border" />
-                  </div>
-                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName">First Name *</Label>
+                        <Input 
+                          id="firstName" 
+                          placeholder="John" 
+                          className="bg-card border-border" 
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName">Last Name *</Label>
+                        <Input 
+                          id="lastName" 
+                          placeholder="Doe" 
+                          className="bg-card border-border" 
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input id="email" type="email" placeholder="john@company.com" className="bg-card border-border" />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input 
+                          id="email" 
+                          type="email" 
+                          placeholder="john@company.com" 
+                          className="bg-card border-border" 
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="phone">Phone Number</Label>
+                        <Input 
+                          id="phone" 
+                          placeholder="+1 (555) 123-4567" 
+                          className="bg-card border-border" 
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="company">Company Name *</Label>
+                        <Input 
+                          id="company" 
+                          placeholder="Your Company" 
+                          className="bg-card border-border" 
+                          value={formData.company}
+                          onChange={(e) => handleInputChange('company', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="industry">Industry</Label>
+                        <Select value={formData.industry} onValueChange={(value) => handleInputChange('industry', value)}>
+                          <SelectTrigger className="bg-card border-border">
+                            <SelectValue placeholder="Select your industry" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="healthcare">Healthcare</SelectItem>
+                            <SelectItem value="finance">Finance</SelectItem>
+                            <SelectItem value="retail">Retail</SelectItem>
+                            <SelectItem value="manufacturing">Manufacturing</SelectItem>
+                            <SelectItem value="technology">Technology</SelectItem>
+                            <SelectItem value="education">Education</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="interests">What AI solutions are you interested in?</Label>
+                      <Textarea 
+                        id="interests"
+                        placeholder="Tell us about your specific needs, challenges, or AI use cases you'd like to explore..."
+                        className="bg-card border-border min-h-[100px]"
+                        value={formData.interests}
+                        onChange={(e) => handleInputChange('interests', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="timeframe">Implementation Timeframe</Label>
+                      <Select value={formData.timeframe} onValueChange={(value) => handleInputChange('timeframe', value)}>
+                        <SelectTrigger className="bg-card border-border">
+                          <SelectValue placeholder="When are you looking to implement?" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="immediate">Immediate (0-3 months)</SelectItem>
+                          <SelectItem value="short">Short term (3-6 months)</SelectItem>
+                          <SelectItem value="medium">Medium term (6-12 months)</SelectItem>
+                          <SelectItem value="long">Long term (12+ months)</SelectItem>
+                          <SelectItem value="exploring">Just exploring</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Button 
+                        variant="hero" 
+                        size="lg" 
+                        className="flex-1" 
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        <Calendar className="mr-2" />
+                        {isSubmitting ? 'Booking...' : 'Book My Demo'}
+                      </Button>
+                      <Button variant="neural" size="lg" className="flex-1" type="button">
+                        <Clock className="mr-2" />
+                        Call Me Instead
+                      </Button>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground text-center">
+                      By submitting this form, you agree to receive communications from Neural AI. 
+                      We respect your privacy and will never share your information.
+                    </p>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" placeholder="+1 (555) 123-4567" className="bg-card border-border" />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company Name *</Label>
-                    <Input id="company" placeholder="Your Company" className="bg-card border-border" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Select>
-                      <SelectTrigger className="bg-card border-border">
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="healthcare">Healthcare</SelectItem>
-                        <SelectItem value="finance">Finance</SelectItem>
-                        <SelectItem value="retail">Retail</SelectItem>
-                        <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="interests">What AI solutions are you interested in?</Label>
-                  <Textarea 
-                    id="interests"
-                    placeholder="Tell us about your specific needs, challenges, or AI use cases you'd like to explore..."
-                    className="bg-card border-border min-h-[100px]"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="timeframe">Implementation Timeframe</Label>
-                  <Select>
-                    <SelectTrigger className="bg-card border-border">
-                      <SelectValue placeholder="When are you looking to implement?" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="immediate">Immediate (0-3 months)</SelectItem>
-                      <SelectItem value="short">Short term (3-6 months)</SelectItem>
-                      <SelectItem value="medium">Medium term (6-12 months)</SelectItem>
-                      <SelectItem value="long">Long term (12+ months)</SelectItem>
-                      <SelectItem value="exploring">Just exploring</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button variant="hero" size="lg" className="flex-1">
-                    <Calendar className="mr-2" />
-                    Book My Demo
-                  </Button>
-                  <Button variant="neural" size="lg" className="flex-1">
-                    <Clock className="mr-2" />
-                    Call Me Instead
-                  </Button>
-                </div>
-
-                <p className="text-sm text-muted-foreground text-center">
-                  By submitting this form, you agree to receive communications from Neural AI. 
-                  We respect your privacy and will never share your information.
-                </p>
+                </form>
               </CardContent>
             </Card>
           </div>

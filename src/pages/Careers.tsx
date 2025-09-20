@@ -6,6 +6,9 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Layout from "@/components/layout/Layout";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 import { 
   Briefcase, 
   MapPin, 
@@ -24,6 +27,64 @@ import {
 } from "lucide-react";
 
 const Careers = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    position: "",
+    experience: "",
+    cover: ""
+  });
+  const { toast } = useToast();
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('resend_key_id', {
+        body: {
+          type: 'career',
+          ...formData,
+          fullName: `${formData.firstName} ${formData.lastName}`
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Application submitted successfully!",
+        description: "We'll review your application and get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        position: "",
+        experience: "",
+        cover: ""
+      });
+    } catch (error) {
+      console.error('Application submission error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or email us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
   const benefits = [
     {
       icon: DollarSign,
@@ -396,88 +457,129 @@ const Careers = () => {
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First Name *</Label>
-                    <Input id="firstName" placeholder="John" className="bg-card border-border" />
+                <form onSubmit={handleSubmit}>
+                  <div className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="firstName">First Name *</Label>
+                        <Input 
+                          id="firstName" 
+                          placeholder="John" 
+                          className="bg-card border-border" 
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="lastName">Last Name *</Label>
+                        <Input 
+                          id="lastName" 
+                          placeholder="Doe" 
+                          className="bg-card border-border" 
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="john@email.com" 
+                        className="bg-card border-border" 
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input 
+                        id="phone" 
+                        placeholder="+1 (555) 123-4567" 
+                        className="bg-card border-border" 
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="position">Interested Position</Label>
+                        <Select value={formData.position} onValueChange={(value) => handleInputChange('position', value)}>
+                          <SelectTrigger className="bg-card border-border">
+                            <SelectValue placeholder="Select position type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="engineering">Engineering</SelectItem>
+                            <SelectItem value="data-science">Data Science</SelectItem>
+                            <SelectItem value="product">Product Management</SelectItem>
+                            <SelectItem value="sales">Sales & Business Development</SelectItem>
+                            <SelectItem value="marketing">Marketing</SelectItem>
+                            <SelectItem value="operations">Operations</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="experience">Years of Experience</Label>
+                        <Select value={formData.experience} onValueChange={(value) => handleInputChange('experience', value)}>
+                          <SelectTrigger className="bg-card border-border">
+                            <SelectValue placeholder="Select experience level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="0-2">0-2 years</SelectItem>
+                            <SelectItem value="3-5">3-5 years</SelectItem>
+                            <SelectItem value="6-10">6-10 years</SelectItem>
+                            <SelectItem value="10+">10+ years</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="cover">Tell us about yourself *</Label>
+                      <Textarea 
+                        id="cover"
+                        placeholder="Share your background, interests, and why you'd like to work at Neural AI..."
+                        className="bg-card border-border min-h-[120px]"
+                        value={formData.cover}
+                        onChange={(e) => handleInputChange('cover', e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="resume">Resume/CV *</Label>
+                      <div className="border-2 border-dashed border-border rounded-lg p-8 text-center bg-card hover:bg-card/80 transition-smooth cursor-pointer">
+                        <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+                        <p className="text-muted-foreground">Click to upload or drag and drop</p>
+                        <p className="text-sm text-muted-foreground mt-1">PDF, DOC, or DOCX (max 5MB)</p>
+                      </div>
+                    </div>
+
+                    <Button 
+                      variant="hero" 
+                      size="lg" 
+                      className="w-full" 
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      <Send className="mr-2" />
+                      {isSubmitting ? 'Submitting...' : 'Submit Application'}
+                    </Button>
+
+                    <p className="text-sm text-muted-foreground text-center">
+                      By submitting this application, you consent to Neural AI storing and processing 
+                      your personal information for recruitment purposes.
+                    </p>
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last Name *</Label>
-                    <Input id="lastName" placeholder="Doe" className="bg-card border-border" />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address *</Label>
-                  <Input id="email" type="email" placeholder="john@email.com" className="bg-card border-border" />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="phone">Phone Number</Label>
-                  <Input id="phone" placeholder="+1 (555) 123-4567" className="bg-card border-border" />
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="position">Interested Position</Label>
-                    <Select>
-                      <SelectTrigger className="bg-card border-border">
-                        <SelectValue placeholder="Select position type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="engineering">Engineering</SelectItem>
-                        <SelectItem value="data-science">Data Science</SelectItem>
-                        <SelectItem value="product">Product Management</SelectItem>
-                        <SelectItem value="sales">Sales & Business Development</SelectItem>
-                        <SelectItem value="marketing">Marketing</SelectItem>
-                        <SelectItem value="operations">Operations</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="experience">Years of Experience</Label>
-                    <Select>
-                      <SelectTrigger className="bg-card border-border">
-                        <SelectValue placeholder="Select experience level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="0-2">0-2 years</SelectItem>
-                        <SelectItem value="3-5">3-5 years</SelectItem>
-                        <SelectItem value="6-10">6-10 years</SelectItem>
-                        <SelectItem value="10+">10+ years</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="cover">Tell us about yourself *</Label>
-                  <Textarea 
-                    id="cover"
-                    placeholder="Share your background, interests, and why you'd like to work at Neural AI..."
-                    className="bg-card border-border min-h-[120px]"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="resume">Resume/CV *</Label>
-                  <div className="border-2 border-dashed border-border rounded-lg p-8 text-center bg-card hover:bg-card/80 transition-smooth cursor-pointer">
-                    <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
-                    <p className="text-muted-foreground">Click to upload or drag and drop</p>
-                    <p className="text-sm text-muted-foreground mt-1">PDF, DOC, or DOCX (max 5MB)</p>
-                  </div>
-                </div>
-
-                <Button variant="hero" size="lg" className="w-full">
-                  <Send className="mr-2" />
-                  Submit Application
-                </Button>
-
-                <p className="text-sm text-muted-foreground text-center">
-                  By submitting this application, you consent to Neural AI storing and processing 
-                  your personal information for recruitment purposes.
-                </p>
+                </form>
               </CardContent>
             </Card>
           </div>
