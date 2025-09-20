@@ -54,11 +54,6 @@ const Header = () => {
                 Book Demo
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button variant="neon" size="sm">
-                Get Started
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -96,11 +91,6 @@ const Header = () => {
                 <Link to="/demo" onClick={() => setMobileMenuOpen(false)}>
                   <Button variant="neon-outline" size="sm" className="w-full">
                     Book Demo
-                  </Button>
-                </Link>
-                <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="neon" size="sm" className="w-full">
-                    Get Started
                   </Button>
                 </Link>
               </div>
