@@ -120,18 +120,18 @@ const Careers = () => {
 
   const openRoles = [
     {
-      title: "Senior AI Engineer",
+      title: "AI Engineer",
       department: "Engineering",
-      location: "San Francisco, CA / Remote",
+      location: "Remote",
       type: "Full-time",
-      salary: "$180k - $250k",
-      experience: "5+ years",
+      salary: "5-15k",
+      experience: "2+ years",
       description: "Lead the development of cutting-edge AI solutions and mentor junior engineers. Work on challenging projects across computer vision, NLP, and machine learning.",
       requirements: [
-        "5+ years experience in machine learning/AI",
+        "2+ years experience in machine learning/AI",
         "Strong Python programming skills",
         "Experience with TensorFlow/PyTorch",
-        "PhD or MS in Computer Science/AI preferred"
+        "BS/BTECH in Computer Science/AI preferred"
       ],
       responsibilities: [
         "Design and implement AI algorithms",
@@ -145,7 +145,7 @@ const Careers = () => {
       department: "Data Science", 
       location: "Remote",
       type: "Full-time",
-      salary: "$120k - $180k",
+      salary: "12k - 18k",
       experience: "3+ years",
       description: "Transform complex data into actionable insights using advanced analytics and machine learning techniques. Work directly with client data to solve business problems.",
       requirements: [
@@ -164,13 +164,13 @@ const Careers = () => {
     {
       title: "AI Product Manager",
       department: "Product",
-      location: "New York, NY / Remote",
+      location: "Remote",
       type: "Full-time", 
-      salary: "$140k - $200k",
-      experience: "4+ years",
+      salary: "8k - 15k",
+      experience: "2+ years",
       description: "Drive the product strategy for our AI solutions. Work closely with engineering, design, and sales teams to deliver world-class AI products.",
       requirements: [
-        "4+ years in product management",
+        "2+ years in product management",
         "Understanding of AI/ML technologies",
         "Experience with B2B software products",
         "Strong analytical and communication skills"
@@ -185,9 +185,9 @@ const Careers = () => {
     {
       title: "Machine Learning Intern",
       department: "Engineering",
-      location: "San Francisco, CA",
+      location: "Remote",
       type: "Internship",
-      salary: "$8k - $10k/month",
+      salary: "2k - 5k/month",
       experience: "Students/New Grads",
       description: "Join our team for a 12-week intensive internship program. Work on real client projects while learning from industry experts.",
       requirements: [
@@ -208,11 +208,11 @@ const Careers = () => {
       department: "Infrastructure",
       location: "Remote",
       type: "Full-time",
-      salary: "$130k - $180k", 
-      experience: "3+ years",
+      salary: "8k - 10k", 
+      experience: "1+ years",
       description: "Build and maintain the infrastructure that powers our AI solutions. Focus on scalability, security, and performance optimization.",
       requirements: [
-        "3+ years in DevOps/Infrastructure",
+        "1+ years in DevOps/Infrastructure",
         "Experience with AWS, Docker, Kubernetes",
         "Knowledge of CI/CD pipelines",
         "Familiarity with ML model deployment"
@@ -227,10 +227,10 @@ const Careers = () => {
     {
       title: "Business Development Representative",
       department: "Sales",
-      location: "Chicago, IL / Remote", 
+      location: "Remote", 
       type: "Full-time",
-      salary: "$60k - $80k + Commission",
-      experience: "1+ years",
+      salary: "6k - 8k + Commission",
+      experience: "2+ years",
       description: "Drive new business growth by identifying and qualifying potential clients. Be the first point of contact for companies interested in AI solutions.",
       requirements: [
         "1+ years in sales or business development",
