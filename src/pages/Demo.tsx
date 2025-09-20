@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Layout from "@/components/layout/Layout";
+import { BackgroundCells } from "@/components/blocks/background-ripple-effect";
 import { 
   Play, 
   Calendar, 
@@ -16,6 +17,23 @@ import {
   Smartphone,
   Globe
 } from "lucide-react";
+
+// New Hero Section Component for the Demo Page
+const DemoHero = () => {
+  return (
+    <BackgroundCells className="h-screen bg-background">
+      <div className=" p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0">
+        <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400 pointer-events-none">
+            Experience AI <br /> In Action
+        </h1>
+        <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
+            Don't just read about AI - see it working. Watch our live demonstrations or schedule a personalized demo to see how our solutions can transform your business.
+        </p>
+      </div>
+    </BackgroundCells>
+  );
+};
+
 
 const Demo = () => {
   const demoFeatures = [
@@ -46,33 +64,8 @@ const Demo = () => {
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h1 className="text-5xl font-bold mb-6">
-              Experience AI <span className="text-gradient">In Action</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Don't just read about AI - see it working. Watch our live demonstrations 
-              or schedule a personalized demo to see how our solutions can transform your business.
-            </p>
-          </div>
-
-          <div className="flex justify-center mb-12">
-            <div className="relative">
-              <div className="w-32 h-32 gradient-primary rounded-full flex items-center justify-center cursor-pointer group transition-bounce hover:scale-110 shadow-primary">
-                <Play className="w-12 h-12 text-white ml-2" />
-              </div>
-              <div className="absolute inset-0 rounded-full border-4 border-primary/30 animate-pulse"></div>
-            </div>
-          </div>
-
-          <p className="text-center text-muted-foreground mb-8">
-            Click to watch our 3-minute AI solutions overview
-          </p>
-        </div>
-      </section>
+      {/* New Hero Section */}
+      <DemoHero />
 
       {/* Demo Features */}
       <section className="py-20">
@@ -103,49 +96,6 @@ const Demo = () => {
                 </CardContent>
               </Card>
             ))}
-          </div>
-
-          {/* Demo Video Placeholder */}
-          <div className="max-w-4xl mx-auto">
-            <Card className="gradient-card border-border shadow-card overflow-hidden">
-              <div className="aspect-video bg-card/50 flex items-center justify-center">
-                <div className="text-center space-y-4">
-                  <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto">
-                    <Play className="w-8 h-8 text-white ml-1" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Interactive AI Demo</h3>
-                    <p className="text-muted-foreground">
-                      Watch our AI solutions in action across different industries and use cases
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Demo Benefits */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">Why Watch Our Demo?</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our demonstration isn't just a showcase - it's designed to help you understand 
-              exactly how AI can benefit your specific business needs.
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto">
-            <div className="space-y-4 mb-12">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center space-x-3">
-                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0" />
-                  <span className="text-lg">{benefit}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -260,31 +210,6 @@ const Demo = () => {
                 </p>
               </CardContent>
             </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Quick Contact */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6">
-              Need to Talk Right Away?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Our AI consultants are available for immediate discussions about your project. 
-              Get answers to your questions in minutes, not days.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg">
-                <Users className="mr-2" />
-                Talk to an Expert Now
-              </Button>
-              <Button variant="neural" size="lg">
-                <ArrowRight className="mr-2" />
-                View Our Services
-              </Button>
-            </div>
           </div>
         </div>
       </section>
