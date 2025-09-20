@@ -224,7 +224,7 @@ const Contact = () => {
                 <CardContent className="space-y-4">
                   <Button className="w-full" variant="hero">
                     <Phone className="mr-2" />
-                    Call Now: +1 (555) 123-4567
+                    Call Now: +91 8160396630
                   </Button>
                   <Button className="w-full" variant="neural">
                     <MessageSquare className="mr-2" />
