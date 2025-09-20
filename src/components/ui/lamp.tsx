@@ -13,7 +13,7 @@ export const LampContainer = ({
   return (
     <div
       className={cn(
-        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background w-full rounded-md z-0",
+        "relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-background w-full z-0",
         className
       )}
     >
@@ -74,7 +74,9 @@ export const LampContainer = ({
           className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-primary"
         ></motion.div>
 
-        <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-background "></div>
+        {/* --- THIS IS THE FIX --- */}
+        {/* Added "hidden md:block" to hide this element on mobile screens */}
+        <div className="hidden md:block absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-background "></div>
       </div>
 
       <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
