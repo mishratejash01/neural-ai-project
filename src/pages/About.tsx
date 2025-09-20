@@ -1,9 +1,29 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
+import { Spotlight, GridBackground } from "@/components/blocks/spotlight-new";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Target, Eye, Users, Award, ArrowRight } from "lucide-react";
 import TeamSection from "@/components/ui/team";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+
+// New Hero Section Component
+const AboutHero = () => {
+    return (
+        <div className="h-[40rem] w-full rounded-md flex md:items-center md:justify-center bg-black/[0.96] antialiased bg-grid-white/[0.02] relative overflow-hidden">
+            <GridBackground />
+            <Spotlight />
+            <div className=" p-4 max-w-7xl  mx-auto relative z-10  w-full pt-20 md:pt-0">
+                <h1 className="text-4xl md:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 bg-opacity-50">
+                    About <span className="text-gradient">Neural AI</span>
+                </h1>
+                <p className="mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto">
+                    We're a team of AI experts, engineers, and innovators dedicated to making artificial intelligence accessible and transformative for businesses of all sizes.
+                </p>
+            </div>
+        </div>
+    );
+};
+
 
 const About = () => {
     const values = [
@@ -26,20 +46,8 @@ const About = () => {
 
     return (
         <Layout>
-            {/* Hero Section */}
-            <section className="py-20 gradient-hero">
-                <div className="container mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <h1 className="text-5xl font-bold mb-6">
-                            About <span className="text-gradient">Neural AI</span>
-                        </h1>
-                        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                            We're a team of AI experts, engineers, and innovators dedicated to making
-                            artificial intelligence accessible and transformative for businesses of all sizes.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            {/* New Hero Section */}
+            <AboutHero />
 
             {/* Mission & Vision */}
             <section className="py-20">
