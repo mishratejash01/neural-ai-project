@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import neuralAILogo from "@/assets/neural-ai.jpeg"; // Imports your logo image
+import neuralAILogo from "@/assets/download__1_-removebg-preview.png"; // Imports your logo image
 
 const Header = () => {
   const location = useLocation();
