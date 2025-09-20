@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import Layout from "@/components/layout/Layout";
+import ScrollExpandMedia from '@/components/blocks/scroll-expansion-hero';
 import {
   MessageSquare,
   BarChart,
@@ -10,12 +10,9 @@ import {
   Cog,
   Zap,
   ArrowRight,
-  Clock,
-  TrendingUp,
-  Shield
 } from "lucide-react";
 
-const Services = () => {
+const ServicesPageContent = () => {
   const services = [
     {
       icon: MessageSquare,
@@ -56,143 +53,60 @@ const Services = () => {
   ];
 
   return (
-    <Layout>
-      {/* Hero Section */}
-      <section className="py-24 gradient-hero animate-fade-in">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h1 className="text-6xl font-bold mb-8 animate-slide-up">
-              Our <span className="text-gradient">AI Services</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-              At Neural AI, we deliver cutting-edge artificial intelligence solutions that transform
-              how businesses operate. From intelligent automation to predictive insights,
-              we have the expertise to drive your digital transformation with measurable results.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Clock className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">Fast Deployment</h3>
-              <p className="text-muted-foreground">Get your AI solutions up and running in weeks, not months, with our proven methodologies</p>
-            </div>
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <TrendingUp className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">Proven ROI</h3>
-              <p className="text-muted-foreground">Our clients see average 300% ROI within the first year through optimized operations</p>
-            </div>
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Shield className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">Enterprise Security</h3>
-              <p className="text-muted-foreground">Bank-level security and compliance built into every solution we deliver</p>
-            </div>
-          </div>
+    <div className="bg-surface-dark py-24">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-20">
+          <h2 className="text-5xl font-bold mb-6 animate-slide-up">
+            Comprehensive <span className="text-gradient">AI Solutions</span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            Explore our detailed service offerings designed to transform your business operations
+          </p>
         </div>
-      </section>
 
-      {/* Services Grid */}
-      <section className="py-24 bg-surface-dark">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6 animate-slide-up">
-              Comprehensive <span className="text-gradient">AI Solutions</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore our detailed service offerings designed to transform your business operations
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
-                <CardHeader className="p-8 text-center">
-                  <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
-                    <service.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-foreground mb-4">
-                    {service.title}
-                  </CardTitle>
-                  <CardDescription className="text-lg text-text-muted leading-relaxed mb-6">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-8 pt-0">
-                  <Link to={`/services/${service.slug}`}>
-                    <Button className="w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-3 text-lg font-semibold shadow-accent group-hover:shadow-xl" size="lg">
-                      Learn More
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-smooth" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">Our Process</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We follow a proven methodology to ensure your AI implementation is successful,
-              on-time, and delivers measurable results.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: "01", title: "Discovery", description: "We analyze your business needs and identify AI opportunities" },
-              { step: "02", title: "Strategy", description: "We design a custom AI roadmap tailored to your goals" },
-              { step: "03", title: "Development", description: "Our experts build and test your AI solution" },
-              { step: "04", title: "Deployment", description: "We launch your solution and provide ongoing support" }
-            ].map((item, index) => (
-              <div key={index} className="text-center space-y-4">
-                <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-white font-bold text-lg">{item.step}</span>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {services.map((service, index) => (
+            <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
+              <CardHeader className="p-8 text-center">
+                <div className="w-16 h-16 gradient-neon rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
+                  <service.icon className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
-          </div>
+                <CardTitle className="text-2xl font-bold text-foreground mb-4">
+                  {service.title}
+                </CardTitle>
+                <CardDescription className="text-lg text-text-muted leading-relaxed mb-6">
+                  {service.description}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="p-8 pt-0">
+                <Link to={`/services/${service.slug}`}>
+                  <Button className="w-full" size="lg">
+                    Learn More
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-smooth" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-      </section>
+      </div>
+    </div>
+  );
+};
 
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6">
-              Not Sure Which Service You Need?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Our AI experts will analyze your business and recommend the perfect solution.
-              Schedule a free consultation to get started.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth">
-                  Get Free Consultation
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <Link to="/demo">
-                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
-                  Watch Our Demo
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-    </Layout>
+const Services = () => {
+  return (
+    <ScrollExpandMedia
+      mediaType="image"
+      mediaSrc="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1280&auto=format&fit=crop"
+      bgImageSrc="https://images.unsplash.com/photo-1488229297570-58520851e868?q=80&w=1920&auto=format&fit=crop"
+      title="AI Services"
+      date="Our Solutions"
+      scrollToExpand="Scroll to explore our services"
+      textBlend
+    >
+      <ServicesPageContent />
+    </ScrollExpandMedia>
   );
 };
 
