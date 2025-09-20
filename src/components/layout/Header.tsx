@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import neuralAILogo from "@/assets/neural-ai.jpeg"; // Import your logo
+import neuralAILogo from "@/assets/neural-ai.jpeg"; // Imports your logo image
 
 const Header = () => {
   const location = useLocation();
@@ -23,12 +23,8 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="w-10 h-10 gradient-neon rounded-xl flex items-center justify-center shadow-neon group-hover:shadow-neon-lg transition-glow">
-              <span className="text-primary-foreground font-bold text-lg">N</span>
-            </div>
-            {/* Replace the span with an img tag */}
-            <img src={neuralAILogo} alt="Neural AI" className="h-8" />
+          <Link to="/" className="flex items-center group">
+            <img src={neuralAILogo} alt="Neural AI" className="h-10" />
           </Link>
 
           {/* Desktop Navigation */}
