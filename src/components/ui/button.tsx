@@ -41,7 +41,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           }}
         />
         <div className={cn(
-          "relative z-10 border text-foreground text-center text-sm font-medium py-2 px-4 rounded-lg",
+          "relative z-10 border text-foreground text-sm font-medium py-2 px-4 rounded-lg",
+          "inline-flex items-center justify-center gap-2 whitespace-nowrap", // <-- This line is the fix
           "bg-gradient-to-b from-background/90 to-muted/90 border-border/40",
           "group-hover:border-primary/60 transition-colors duration-300"
         )}>
