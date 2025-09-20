@@ -19,15 +19,13 @@ import DataAnalyticsService from "./pages/services/DataAnalyticsService";
 import ComputerVisionService from "./pages/services/ComputerVisionService";
 import NLPService from "./pages/services/NLPService";
 import MarketingAutomationService from "./pages/services/MarketingAutomationService";
-
-// Import the new case study pages
 import RetailChatbot from "./pages/RetailChatbot";
 import PredictiveAnalytics from "./pages/PredictiveAnalytics";
 import ComputerVisionPortfolio from "./pages/ComputerVisionPortfolio";
 import MarketingAutomationPortfolio from "./pages/MarketingAutomationPortfolio";
 import NLPEdTech from "./pages/NLPEdTech";
 import LogisticsOptimization from "./pages/LogisticsOptimization";
-
+import ScrollToTop from "@/components/ScrollToTop"; // <-- 1. Import the new component
 
 const queryClient = new QueryClient();
 
@@ -37,6 +35,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop /> {/* <-- 2. Add it here */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
@@ -50,19 +49,15 @@ const App = () => (
           <Route path="/demo" element={<Demo />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          
-          {/* Add routes for the detailed portfolio pages */}
           <Route path="/portfolio/retail-chatbot-lifestyle-store" element={<RetailChatbot />} />
           <Route path="/portfolio/predictive-analytics-healthcare" element={<PredictiveAnalytics />} />
           <Route path="/portfolio/computer-vision-manufacturing" element={<ComputerVisionPortfolio />} />
           <Route path="/portfolio/ai-marketing-automation-fintech" element={<MarketingAutomationPortfolio />} />
           <Route path="/portfolio/nlp-edtech" element={<NLPEdTech />} />
           <Route path="/portfolio/logistics-optimization" element={<LogisticsOptimization />} />
-
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
