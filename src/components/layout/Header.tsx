@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import logo from '@/assets/neural-ai.png'; // Make sure your logo is here: src/assets/neural-ai.png
 
 const Header = () => {
   const location = useLocation();
@@ -24,7 +23,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
-            <img src={logo} alt="Neural AI Logo" className="w-10 h-10" />
+            <div className="w-10 h-10 gradient-neon rounded-xl flex items-center justify-center shadow-neon group-hover:shadow-neon-lg transition-glow">
+              <span className="text-primary-foreground font-bold text-lg">N</span>
+            </div>
             <span className="text-xl font-bold text-neon">Neural AI</span>
           </Link>
 
@@ -69,8 +70,8 @@ const Header = () => {
           <div className="lg:hidden mt-4 pb-4 border-t border-border/50">
             <nav className="flex flex-col space-y-2 pt-4">
               {navItems.map((item) => (
-                <Link
-                  key={item.href}
+                <Link 
+                  key={item.href} 
                   to={item.href}
                   onClick={() => setMobileMenuOpen(false)}
                 >
