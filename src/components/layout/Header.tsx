@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
+import neuralAILogo from '@/assets/neural-ai.jpeg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,19 +90,17 @@ const Header = () => {
           </div>
         </div>
 
-        {/* --- MOBILE MENU FIX STARTS HERE --- */}
         {isMenuOpen && (
           <div className="lg:hidden" id="mobile-menu">
-            {/* Added background, border, and padding to the container */}
             <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 bg-background/80 backdrop-blur-lg border-t border-border/50">
               {navItems.map((item) => (
                 <Link key={item.href} to={item.href}>
                   <Button
                     variant="ghost"
                     className={cn(
-                      'block w-full text-left',
+                      'block w-full justify-start pl-3', // Changed text-left to justify-start and added padding
                       location.pathname === item.href
-                        ? 'text-primary bg-accent'
+                        ? 'text-primary bg-primary/10' // This is the updated, subtle highlight
                         : 'text-muted-foreground hover:text-primary hover:bg-accent'
                     )}
                   >
@@ -118,7 +116,6 @@ const Header = () => {
             </div>
           </div>
         )}
-        {/* --- MOBILE MENU FIX ENDS HERE --- */}
       </div>
     </header>
   );
