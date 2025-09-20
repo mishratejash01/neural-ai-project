@@ -234,6 +234,10 @@ All colors MUST be HSL format for consistency */
     animation: glow-pulse 2s ease-in-out infinite alternate;
   }
 
+  .animate-text-glow {
+    animation: text-glow-pulse 2s ease-in-out infinite alternate;
+  }
+
   .animate-float {
     animation: float 3s ease-in-out infinite;
   }
@@ -305,6 +309,15 @@ All colors MUST be HSL format for consistency */
   }
   to {
     box-shadow: 0 0 40px rgba(0, 241, 160, 0.4);
+  }
+}
+
+@keyframes text-glow-pulse {
+  from {
+    text-shadow: 0 0 10px rgba(0, 241, 160, 0.3);
+  }
+  to {
+    text-shadow: 0 0 20px rgba(0, 241, 160, 0.7);
   }
 }
 
