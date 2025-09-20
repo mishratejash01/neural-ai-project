@@ -40,7 +40,7 @@ const Header = () => {
         className={cn(
           'transition-all duration-300 ease-in-out mx-auto',
           isScrolled
-            ? 'mt-2 max-w-4xl rounded-2xl border border-border/50 bg-background/50 backdrop-blur-lg'
+            ? 'mt-2 max-w-5xl rounded-2xl border border-border/50 bg-background/50 backdrop-blur-lg' // Increased max-width here
             : 'mt-0 max-w-none'
         )}
       >
@@ -54,7 +54,7 @@ const Header = () => {
             </div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex lg:space-x-4">
+            <nav className="hidden lg:flex lg:space-x-2"> {/* Reduced space here */}
               {navItems.map((item) => (
                 <Link key={item.href} to={item.href}>
                   <Button
