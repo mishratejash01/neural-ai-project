@@ -53,7 +53,7 @@ const TeamSection = () => {
                 </h2>
 
                 <div>
-                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">Our Team</h3>
+                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">Founders Team</h3>
                     <div className="grid grid-cols-2 gap-8 border-t py-6 md:grid-cols-2">
                         {leadership.map((member, index) => (
                             <div key={index} className="text-center">
