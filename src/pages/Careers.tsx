@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import Layout from "@/components/layout/Layout";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,6 +29,8 @@ import {
 
 const Careers = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isJobDialogOpen, setIsJobDialogOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState<any>(null);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -35,12 +38,30 @@ const Careers = () => {
     phone: "",
     position: "",
     experience: "",
+    cover: "",
+    resumeLink: ""
+  });
+  const [jobFormData, setJobFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    resumeLink: "",
     cover: ""
   });
   const { toast } = useToast();
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleJobInputChange = (field: string, value: string) => {
+    setJobFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleApplyNow = (job: any) => {
+    setSelectedJob(job);
+    setIsJobDialogOpen(true);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -71,10 +92,56 @@ const Careers = () => {
         phone: "",
         position: "",
         experience: "",
-        cover: ""
+        cover: "",
+        resumeLink: ""
       });
     } catch (error) {
       console.error('Application submission error:', error);
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or email us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleJobSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('resend_key_id', {
+        body: {
+          type: 'career',
+          ...jobFormData,
+          fullName: `${jobFormData.firstName} ${jobFormData.lastName}`,
+          position: selectedJob?.title,
+          jobApplication: true
+        }
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Job application submitted successfully!",
+        description: "We'll review your application and get back to you soon.",
+      });
+
+      // Reset form and close dialog
+      setJobFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        resumeLink: "",
+        cover: ""
+      });
+      setIsJobDialogOpen(false);
+      setSelectedJob(null);
+    } catch (error) {
+      console.error('Job application submission error:', error);
       toast({
         title: "Something went wrong",
         description: "Please try again or email us directly.",
@@ -397,7 +464,7 @@ const Careers = () => {
                         {role.description}
                       </CardDescription>
                     </div>
-                    <Button variant="hero">
+                    <Button variant="hero" onClick={() => handleApplyNow(role)}>
                       Apply Now
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -464,7 +531,7 @@ const Careers = () => {
                         <Label htmlFor="firstName">First Name *</Label>
                         <Input 
                           id="firstName" 
-                          placeholder="John" 
+                          placeholder="Enter your first name" 
                           className="bg-card border-border" 
                           value={formData.firstName}
                           onChange={(e) => handleInputChange('firstName', e.target.value)}
@@ -475,7 +542,7 @@ const Careers = () => {
                         <Label htmlFor="lastName">Last Name *</Label>
                         <Input 
                           id="lastName" 
-                          placeholder="Doe" 
+                          placeholder="Enter your last name" 
                           className="bg-card border-border" 
                           value={formData.lastName}
                           onChange={(e) => handleInputChange('lastName', e.target.value)}
@@ -489,7 +556,7 @@ const Careers = () => {
                       <Input 
                         id="email" 
                         type="email" 
-                        placeholder="john@email.com" 
+                        placeholder="Enter your email address" 
                         className="bg-card border-border" 
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
@@ -501,7 +568,7 @@ const Careers = () => {
                       <Label htmlFor="phone">Phone Number</Label>
                       <Input 
                         id="phone" 
-                        placeholder="+1 (555) 123-4567" 
+                        placeholder="Enter your phone number" 
                         className="bg-card border-border" 
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -555,12 +622,19 @@ const Careers = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="resume">Resume/CV *</Label>
-                      <div className="border-2 border-dashed border-border rounded-lg p-8 text-center bg-card hover:bg-card/80 transition-smooth cursor-pointer">
-                        <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
-                        <p className="text-muted-foreground">Click to upload or drag and drop</p>
-                        <p className="text-sm text-muted-foreground mt-1">PDF, DOC, or DOCX (max 5MB)</p>
-                      </div>
+                      <Label htmlFor="resumeLink">Resume/CV Link *</Label>
+                      <Input 
+                        id="resumeLink" 
+                        type="url"
+                        placeholder="https://drive.google.com/your-resume or linkedin.com/in/yourprofile" 
+                        className="bg-card border-border" 
+                        value={formData.resumeLink}
+                        onChange={(e) => handleInputChange('resumeLink', e.target.value)}
+                        required
+                      />
+                      <p className="text-sm text-muted-foreground">
+                        Please provide a link to your resume (Google Drive, Dropbox, LinkedIn, personal website, etc.)
+                      </p>
                     </div>
 
                     <Button 
@@ -585,6 +659,116 @@ const Careers = () => {
           </div>
         </div>
       </section>
+
+      {/* Job Application Dialog */}
+      <Dialog open={isJobDialogOpen} onOpenChange={setIsJobDialogOpen}>
+        <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl">Apply for {selectedJob?.title}</DialogTitle>
+            <DialogDescription>
+              Fill out the form below to apply for this position. We'll review your application and get back to you soon.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <form onSubmit={handleJobSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="jobFirstName">First Name *</Label>
+                <Input 
+                  id="jobFirstName" 
+                  placeholder="Enter your first name" 
+                  className="bg-card border-border" 
+                  value={jobFormData.firstName}
+                  onChange={(e) => handleJobInputChange('firstName', e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="jobLastName">Last Name *</Label>
+                <Input 
+                  id="jobLastName" 
+                  placeholder="Enter your last name" 
+                  className="bg-card border-border" 
+                  value={jobFormData.lastName}
+                  onChange={(e) => handleJobInputChange('lastName', e.target.value)}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="jobEmail">Email Address *</Label>
+              <Input 
+                id="jobEmail" 
+                type="email" 
+                placeholder="Enter your email address" 
+                className="bg-card border-border" 
+                value={jobFormData.email}
+                onChange={(e) => handleJobInputChange('email', e.target.value)}
+                required
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="jobPhone">Phone Number</Label>
+              <Input 
+                id="jobPhone" 
+                placeholder="Enter your phone number" 
+                className="bg-card border-border" 
+                value={jobFormData.phone}
+                onChange={(e) => handleJobInputChange('phone', e.target.value)}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="jobResumeLink">Resume/CV Link *</Label>
+              <Input 
+                id="jobResumeLink" 
+                type="url"
+                placeholder="https://drive.google.com/your-resume or linkedin.com/in/yourprofile" 
+                className="bg-card border-border" 
+                value={jobFormData.resumeLink}
+                onChange={(e) => handleJobInputChange('resumeLink', e.target.value)}
+                required
+              />
+              <p className="text-sm text-muted-foreground">
+                Please provide a link to your resume (Google Drive, Dropbox, LinkedIn, personal website, etc.)
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="jobCover">Cover Letter</Label>
+              <Textarea 
+                id="jobCover"
+                placeholder="Tell us why you're interested in this position and how your experience aligns with our requirements..."
+                className="bg-card border-border min-h-[120px]"
+                value={jobFormData.cover}
+                onChange={(e) => handleJobInputChange('cover', e.target.value)}
+              />
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <Button 
+                variant="hero" 
+                type="submit"
+                disabled={isSubmitting}
+                className="flex-1"
+              >
+                <Send className="mr-2 w-4 h-4" />
+                {isSubmitting ? 'Submitting...' : 'Submit Application'}
+              </Button>
+              <Button 
+                variant="outline" 
+                type="button" 
+                onClick={() => setIsJobDialogOpen(false)}
+                className="flex-1"
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </Layout>
   );
 };

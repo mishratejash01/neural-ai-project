@@ -174,7 +174,7 @@ const Contact = () => {
                         <Input 
                           className="bg-card border-border" 
                           id="firstName" 
-                          placeholder="John" 
+                          placeholder="Enter your first name" 
                           value={formData.firstName}
                           onChange={(e) => handleInputChange('firstName', e.target.value)}
                           required
@@ -185,7 +185,7 @@ const Contact = () => {
                         <Input 
                           className="bg-card border-border" 
                           id="lastName" 
-                          placeholder="Doe" 
+                          placeholder="Enter your last name" 
                           value={formData.lastName}
                           onChange={(e) => handleInputChange('lastName', e.target.value)}
                           required
@@ -198,7 +198,7 @@ const Contact = () => {
                         className="bg-card border-border" 
                         id="email" 
                         type="email" 
-                        placeholder="john@company.com" 
+                        placeholder="Enter your email address" 
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
                         required
@@ -210,7 +210,7 @@ const Contact = () => {
                         <Input 
                           className="bg-card border-border" 
                           id="company" 
-                          placeholder="Your Company" 
+                          placeholder="Enter your company name" 
                           value={formData.company}
                           onChange={(e) => handleInputChange('company', e.target.value)}
                         />
@@ -220,7 +220,7 @@ const Contact = () => {
                         <Input 
                           className="bg-card border-border" 
                           id="phone" 
-                          placeholder="+1 (555) 123-4567" 
+                          placeholder="Enter your phone number" 
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
                         />

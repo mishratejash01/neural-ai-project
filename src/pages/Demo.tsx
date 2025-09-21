@@ -241,7 +241,7 @@ const Demo = () => {
                         <Label htmlFor="firstName">First Name *</Label>
                         <Input 
                           id="firstName" 
-                          placeholder="John" 
+                          placeholder="Enter your first name" 
                           className="bg-card border-border" 
                           value={formData.firstName}
                           onChange={(e) => handleInputChange('firstName', e.target.value)}
@@ -252,7 +252,7 @@ const Demo = () => {
                         <Label htmlFor="lastName">Last Name *</Label>
                         <Input 
                           id="lastName" 
-                          placeholder="Doe" 
+                          placeholder="Enter your last name" 
                           className="bg-card border-border" 
                           value={formData.lastName}
                           onChange={(e) => handleInputChange('lastName', e.target.value)}
@@ -267,7 +267,7 @@ const Demo = () => {
                         <Input 
                           id="email" 
                           type="email" 
-                          placeholder="john@company.com" 
+                          placeholder="Enter your email address" 
                           className="bg-card border-border" 
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
@@ -278,7 +278,7 @@ const Demo = () => {
                         <Label htmlFor="phone">Phone Number</Label>
                         <Input 
                           id="phone" 
-                          placeholder="+1 (555) 123-4567" 
+                          placeholder="Enter your phone number" 
                           className="bg-card border-border" 
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
@@ -291,7 +291,7 @@ const Demo = () => {
                         <Label htmlFor="company">Company Name *</Label>
                         <Input 
                           id="company" 
-                          placeholder="Your Company" 
+                          placeholder="Enter your company name" 
                           className="bg-card border-border" 
                           value={formData.company}
                           onChange={(e) => handleInputChange('company', e.target.value)}
