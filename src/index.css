@@ -2,66 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Tech-Forward Design System with Neon Green Accents
+/* Dark Tech-Forward Design System with Turquoise Accents
 All colors MUST be HSL format for consistency */
 
 @layer base {
   :root {
-    /* Dark Tech Theme with Neon Green (#00F1A0) */
-    --background: 210 10% 3%;        /* #070707 - Ultra dark */
-    --foreground: 150 100% 95%;      /* #E9FFF7 - Light green-tinted text */
+    /* Dark Tech Theme with Turquoise */
+    --background: 200 12% 5%;        /* Very dark, cool-toned background */
+    --foreground: 180 100% 96%;      /* Very light, almost white turquoise */
 
-    --card: 210 8% 7%;               /* #0F1113 - Card surface */
-    --card-foreground: 150 100% 95%; /* #E9FFF7 */
+    --card: 200 11% 8%;              /* Card surface */
+    --card-foreground: 180 100% 96%; /* Text color for cards */
 
-    --popover: 210 8% 7%;
-    --popover-foreground: 150 100% 95%;
+    --popover: 200 11% 8%;
+    --popover-foreground: 180 100% 96%;
 
-    --primary: 160 100% 47%;         /* #00F1A0 - Neon green */
-    --primary-foreground: 210 10% 3%;
+    --primary: 180 85% 45%;          /* Main vibrant turquoise */
+    --primary-foreground: 190 100% 5%;
 
-    --secondary: 160 81% 32%;        /* #00BFA6 - Darker green accent */
-    --secondary-foreground: 150 100% 95%;
+    --secondary: 180 75% 30%;        /* Darker shade of turquoise */
+    --secondary-foreground: 180 100% 96%;
 
-    --muted: 210 8% 7%;              /* Same as card for consistency */
-    --muted-foreground: 150 20% 65%; /* #A6B0A6 - Muted green */
+    --muted: 200 11% 8%;             /* Same as card for consistency */
+    --muted-foreground: 190 15% 65%; /* Desaturated, muted turquoise */
 
-    --accent: 160 100% 47%;          /* Same as primary */
-    --accent-foreground: 210 10% 3%;
+    --accent: 180 85% 45%;           /* Same as primary */
+    --accent-foreground: 190 100% 5%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 8% 12%;            /* Subtle borders */
-    --input: 210 8% 12%;
-    --ring: 160 100% 47%;            /* Neon focus ring */
+    --border: 190 10% 13%;           /* Subtle, cool-toned border */
+    --input: 190 10% 13%;
+    --ring: 180 85% 45%;             /* Focus ring, same as primary */
 
     --radius: 0.75rem;               /* Modern rounded corners */
 
     /* Neural AI Dark Brand Colors */
-    --neon-primary: 160 100% 47%;    /* #00F1A0 - Main neon */
-    --neon-secondary: 160 81% 32%;   /* #00BFA6 - Secondary accent */
-    --surface-dark: 210 8% 7%;       /* #0F1113 - Card surface */
-    --surface-darker: 210 10% 3%;    /* #070707 - Page background */
-    --text-light: 150 100% 95%;      /* #E9FFF7 - Primary text */
-    --text-muted: 150 20% 65%;       /* #A6B0A6 - Muted text */
+    --neon-primary: 180 85% 45%;     /* Main turquoise */
+    --neon-secondary: 180 75% 30%;   /* Secondary turquoise */
+    --surface-dark: 200 11% 8%;      /* Card surface */
+    --surface-darker: 200 12% 5%;    /* Page background */
+    --text-light: 180 100% 96%;      /* Primary text */
+    --text-muted: 190 15% 65%;       /* Muted text */
     
-    /* Neon Glow Effects */
-    --glow-primary: 0 4px 30px rgba(0, 241, 160, 0.14);
-    --glow-intense: 0 0 40px rgba(0, 241, 160, 0.25);
-    --glow-soft: 0 2px 20px rgba(0, 241, 160, 0.08);
+    /* Turquoise Glow Effects */
+    --glow-primary: 0 4px 30px rgba(0, 217, 204, 0.14);
+    --glow-intense: 0 0 40px rgba(0, 217, 204, 0.25);
+    --glow-soft: 0 2px 20px rgba(0, 217, 204, 0.08);
     
     /* Tech Gradients */
     --gradient-neon: linear-gradient(135deg, hsl(var(--neon-primary)), hsl(var(--neon-secondary)));
     --gradient-dark: linear-gradient(135deg, hsl(var(--surface-darker)), hsl(var(--surface-dark)));
-    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 241, 160, 0.15) 0%, transparent 70%);
-    --gradient-hero: linear-gradient(135deg, rgba(0, 241, 160, 0.05) 0%, rgba(7, 7, 7, 1) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 217, 204, 0.15) 0%, transparent 70%);
+    --gradient-hero: linear-gradient(135deg, rgba(0, 217, 204, 0.05) 0%, rgba(13, 16, 18, 1) 100%);
     
     /* Professional Shadows */
-    --shadow-neon: 0 4px 20px -4px rgba(0, 241, 160, 0.15);
+    --shadow-neon: 0 4px 20px -4px rgba(0, 217, 204, 0.15);
     --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
     --shadow-elevated: 0 16px 64px -16px rgba(0, 0, 0, 0.6);
-    --shadow-glow: 0 0 0 1px rgba(0, 241, 160, 0.1);
+    --shadow-glow: 0 0 0 1px rgba(0, 217, 204, 0.1);
     
     /* Smooth Tech Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -69,37 +69,37 @@ All colors MUST be HSL format for consistency */
     --transition-glow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 
     /* Sidebar (if needed) */
-    --sidebar-background: 210 8% 5%;
-    --sidebar-foreground: 150 100% 95%;
-    --sidebar-primary: 160 100% 47%;
-    --sidebar-primary-foreground: 210 10% 3%;
-    --sidebar-accent: 210 8% 7%;
-    --sidebar-accent-foreground: 150 100% 95%;
-    --sidebar-border: 210 8% 12%;
-    --sidebar-ring: 160 100% 47%;
+    --sidebar-background: 200 11% 8%;
+    --sidebar-foreground: 180 100% 96%;
+    --sidebar-primary: 180 85% 45%;
+    --sidebar-primary-foreground: 190 100% 5%;
+    --sidebar-accent: 200 11% 8%;
+    --sidebar-accent-foreground: 180 100% 96%;
+    --sidebar-border: 190 10% 13%;
+    --sidebar-ring: 180 85% 45%;
   }
 
   /* Keep dark theme as fallback but make it same as root */
   .dark {
-    --background: 210 10% 3%;
-    --foreground: 150 100% 95%;
-    --card: 210 8% 7%;
-    --card-foreground: 150 100% 95%;
-    --popover: 210 8% 7%;
-    --popover-foreground: 150 100% 95%;
-    --primary: 160 100% 47%;
-    --primary-foreground: 210 10% 3%;
-    --secondary: 160 81% 32%;
-    --secondary-foreground: 150 100% 95%;
-    --muted: 210 8% 7%;
-    --muted-foreground: 150 20% 65%;
-    --accent: 160 100% 47%;
-    --accent-foreground: 210 10% 3%;
+    --background: 200 12% 5%;
+    --foreground: 180 100% 96%;
+    --card: 200 11% 8%;
+    --card-foreground: 180 100% 96%;
+    --popover: 200 11% 8%;
+    --popover-foreground: 180 100% 96%;
+    --primary: 180 85% 45%;
+    --primary-foreground: 190 100% 5%;
+    --secondary: 180 75% 30%;
+    --secondary-foreground: 180 100% 96%;
+    --muted: 200 11% 8%;
+    --muted-foreground: 190 15% 65%;
+    --accent: 180 85% 45%;
+    --accent-foreground: 190 100% 5%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 8% 12%;
-    --input: 210 8% 12%;
-    --ring: 160 100% 47%;
+    --border: 190 10% 13%;
+    --input: 190 10% 13%;
+    --ring: 180 85% 45%;
   }
 }
 
@@ -115,8 +115,8 @@ All colors MUST be HSL format for consistency */
     background-attachment: fixed;
     /* Subtle tech texture */
     background-image: 
-      radial-gradient(circle at 25% 25%, rgba(0, 241, 160, 0.02) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(0, 241, 160, 0.01) 0%, transparent 50%);
+      radial-gradient(circle at 25% 25%, rgba(0, 217, 204, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0, 217, 204, 0.01) 0%, transparent 50%);
   }
 
   /* Smooth scrolling */
@@ -194,7 +194,7 @@ All colors MUST be HSL format for consistency */
   /* Text Effects */
   .text-neon {
     color: hsl(var(--neon-primary));
-    text-shadow: 0 0 10px rgba(0, 241, 160, 0.3);
+    text-shadow: 0 0 10px rgba(0, 217, 204, 0.3);
   }
   
   .text-gradient {
@@ -252,9 +252,9 @@ All colors MUST be HSL format for consistency */
     right: 0;
     bottom: 0;
     background-image: 
-      radial-gradient(circle at 20% 80%, rgba(0, 241, 160, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(0, 241, 160, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(0, 241, 160, 0.05) 0%, transparent 50%);
+      radial-gradient(circle at 20% 80%, rgba(0, 217, 204, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(0, 217, 204, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 217, 204, 0.05) 0%, transparent 50%);
     animation: particles 20s linear infinite;
     pointer-events: none;
   }
@@ -262,8 +262,8 @@ All colors MUST be HSL format for consistency */
   /* Tech Grid Pattern */
   .tech-grid {
     background-image: 
-      linear-gradient(rgba(0, 241, 160, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 241, 160, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0, 217, 204, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 217, 204, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
@@ -271,8 +271,8 @@ All colors MUST be HSL format for consistency */
   .backdrop-blur-neon {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(15, 17, 19, 0.8);
-    border: 1px solid rgba(0, 241, 160, 0.1);
+    background: rgba(20, 23, 26, 0.8);
+    border: 1px solid rgba(0, 217, 204, 0.1);
   }
 }
 
@@ -301,10 +301,10 @@ All colors MUST be HSL format for consistency */
 
 @keyframes glow-pulse {
   from {
-    box-shadow: 0 0 20px rgba(0, 241, 160, 0.2);
+    box-shadow: 0 0 20px rgba(0, 217, 204, 0.2);
   }
   to {
-    box-shadow: 0 0 40px rgba(0, 241, 160, 0.4);
+    box-shadow: 0 0 40px rgba(0, 217, 204, 0.4);
   }
 }
 
