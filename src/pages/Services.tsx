@@ -60,11 +60,14 @@ const Services = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <HeroGeometric
-        badge="Our Expertise"
-        title1="Our"
-        title2="AI Services"
-      />
+      <div className="relative">
+        <HeroGeometric
+          badge="Our Expertise"
+          title1="Our"
+          title2="AI Services"
+        />
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+      </div>
       <section className="py-24 gradient-hero">
         <div className="container mx-auto px-4">
           <motion.div
@@ -76,21 +79,21 @@ const Services = () => {
           >
             <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Clock className="w-10 h-10 text-white" />
+                <Clock className="w-10 h-10 text-primary-foreground" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Fast Deployment</h3>
               <p className="text-muted-foreground">Get your AI solutions up and running in weeks, not months, with our proven methodologies</p>
             </div>
             <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <TrendingUp className="w-10 h-10 text-white" />
+                <TrendingUp className="w-10 h-10 text-primary-foreground" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Proven ROI</h3>
               <p className="text-muted-foreground">Our clients see average 300% ROI within the first year through optimized operations</p>
             </div>
             <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Shield className="w-10 h-10 text-white" />
+                <Shield className="w-10 h-10 text-primary-foreground" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Enterprise Security</h3>
               <p className="text-muted-foreground">Bank-level security and compliance built into every solution we deliver</p>
@@ -128,7 +131,7 @@ const Services = () => {
               <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
                 <CardHeader className="p-8 text-center">
                   <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
-                    <service.icon className="w-8 h-8 text-white" />
+                    <service.icon className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <CardTitle className="text-2xl font-bold text-foreground mb-4">
                     {service.title}
@@ -139,7 +142,7 @@ const Services = () => {
                 </CardHeader>
                 <CardContent className="p-8 pt-0">
                   <Link to={`/services/${service.slug}`}>
-                    <Button className="w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-3 text-lg font-semibold shadow-accent group-hover:shadow-xl" size="lg">
+                    <Button className="w-full gradient-primary text-primary-foreground hover:opacity-90 transition-smooth rounded-xl py-3 text-lg font-semibold shadow-accent group-hover:shadow-xl" size="lg">
                       Learn More
                       <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-smooth" />
                     </Button>
@@ -182,7 +185,7 @@ const Services = () => {
             ].map((item, index) => (
               <div key={index} className="text-center space-y-4">
                 <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-white font-bold text-lg">{item.step}</span>
+                  <span className="text-primary-foreground font-bold text-lg">{item.step}</span>
                 </div>
                 <h3 className="text-xl font-semibold">{item.title}</h3>
                 <p className="text-muted-foreground">{item.description}</p>
@@ -211,13 +214,13 @@ const Services = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth">
+                <Button size="lg" className="gradient-primary text-primary-foreground hover:opacity-90 transition-smooth">
                   Get Free Consultation
                   <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </Link>
               <Link to="/demo">
-                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
+                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-accent-foreground">
                   Watch Our Demo
                 </Button>
               </Link>

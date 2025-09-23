@@ -7,34 +7,34 @@ All colors MUST be HSL format for consistency */
 
 @layer base {
   :root {
-    /* Light Turquoise Theme */
-    --background: 190 20% 98%;       /* Main page background. A very light, cool off-white */
-    --foreground: 190 24% 20%;       /* Primary text color. A dark, cyan-tinted slate for high readability */
+    /* High-Contrast Light Turquoise Theme */
+    --background: 200 25% 98%;       /* Main page background. A clean, very light cool gray */
+    --foreground: 210 20% 15%;       /* Primary text color. A much darker, near-black slate for high contrast */
 
-    --card: 180 50% 95%;             /* Background for cards, slightly saturated to stand out */
-    --card-foreground: 190 24% 20%;  /* Text color on cards */
+    --card: 200 20% 94%;             /* Card background. A slightly darker gray to separate from main background */
+    --card-foreground: 210 20% 15%;  /* Text on cards, matching main foreground */
 
-    --popover: 180 50% 95%;          /* Background for popovers and dialogs */
-    --popover-foreground: 190 24% 20%; /* Text color on popovers */
+    --popover: 200 20% 94%;          /* Background for popovers and dialogs */
+    --popover-foreground: 210 20% 15%; /* Text color on popovers */
 
-    --primary: 175 75% 45%;          /* Main interactive color. A vibrant turquoise for buttons, links, and CTAs */
-    --primary-foreground: 180 100% 98%; /* Text color for primary buttons */
+    --primary: 180 85% 35%;          /* Main interactive color. A strong, vibrant turquoise for primary actions */
+    --primary-foreground: 180 100% 98%; /* High-contrast text for primary buttons */
 
-    --secondary: 180 50% 60%;        /* A muted turquoise for secondary actions */
+    --secondary: 190 15% 55%;        /* A muted, gray-cyan for secondary text and less important elements */
     --secondary-foreground: 180 100% 98%; /* Text color on secondary buttons */
 
-    --muted: 180 25% 92%;            /* Same as input for consistency */
+    --muted: 200 20% 92%;            /* Input background, slightly off-white */
     --muted-foreground: 190 15% 55%; /* For placeholder text and supplementary information */
 
-    --accent: 175 75% 45%;           /* Accent color, consistent with primary turquoise */
+    --accent: 180 85% 45%;           /* Accent color for focus rings */
     --accent-foreground: 180 100% 98%; /* Text color on accented elements */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 180 25% 88%;           /* Subtle borders for cards, inputs, etc */
-    --input: 180 25% 92%;            /* Background for input fields */
-    --ring: 175 75% 45%;             /* Focus indicator color for accessibility */
+    --border: 200 20% 88%;           /* A subtle border for inputs and cards */
+    --input: 200 20% 92%;            /* Input background, slightly off-white */
+    --ring: 180 85% 45%;             /* Focus ring color for accessibility */
 
     --radius: 0.75rem;               /* Modern rounded corners */
 
