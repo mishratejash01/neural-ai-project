@@ -7,61 +7,61 @@ All colors MUST be HSL format for consistency */
 
 @layer base {
   :root {
-    /* Dark Tech Theme with Turquoise */
-    --background: 200 12% 5%;        /* Very dark, cool-toned background */
-    --foreground: 180 100% 96%;      /* Very light, almost white turquoise */
+    /* Light Turquoise Theme */
+    --background: 190 20% 98%;       /* Main page background. A very light, cool off-white */
+    --foreground: 190 24% 20%;       /* Primary text color. A dark, cyan-tinted slate for high readability */
 
-    --card: 200 11% 8%;              /* Card surface */
-    --card-foreground: 180 100% 96%; /* Text color for cards */
+    --card: 180 50% 95%;             /* Background for cards, slightly saturated to stand out */
+    --card-foreground: 190 24% 20%;  /* Text color on cards */
 
-    --popover: 200 11% 8%;
-    --popover-foreground: 180 100% 96%;
+    --popover: 180 50% 95%;          /* Background for popovers and dialogs */
+    --popover-foreground: 190 24% 20%; /* Text color on popovers */
 
-    --primary: 180 85% 45%;          /* Main vibrant turquoise */
-    --primary-foreground: 190 100% 5%;
+    --primary: 175 75% 45%;          /* Main interactive color. A vibrant turquoise for buttons, links, and CTAs */
+    --primary-foreground: 180 100% 98%; /* Text color for primary buttons */
 
-    --secondary: 180 75% 30%;        /* Darker shade of turquoise */
-    --secondary-foreground: 180 100% 96%;
+    --secondary: 180 50% 60%;        /* A muted turquoise for secondary actions */
+    --secondary-foreground: 180 100% 98%; /* Text color on secondary buttons */
 
-    --muted: 200 11% 8%;             /* Same as card for consistency */
-    --muted-foreground: 190 15% 65%; /* Desaturated, muted turquoise */
+    --muted: 180 25% 92%;            /* Same as input for consistency */
+    --muted-foreground: 190 15% 55%; /* For placeholder text and supplementary information */
 
-    --accent: 180 85% 45%;           /* Same as primary */
-    --accent-foreground: 190 100% 5%;
+    --accent: 175 75% 45%;           /* Accent color, consistent with primary turquoise */
+    --accent-foreground: 180 100% 98%; /* Text color on accented elements */
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 190 10% 13%;           /* Subtle, cool-toned border */
-    --input: 190 10% 13%;
-    --ring: 180 85% 45%;             /* Focus ring, same as primary */
+    --border: 180 25% 88%;           /* Subtle borders for cards, inputs, etc */
+    --input: 180 25% 92%;            /* Background for input fields */
+    --ring: 175 75% 45%;             /* Focus indicator color for accessibility */
 
     --radius: 0.75rem;               /* Modern rounded corners */
 
-    /* Neural AI Dark Brand Colors */
-    --neon-primary: 180 85% 45%;     /* Main turquoise */
-    --neon-secondary: 180 75% 30%;   /* Secondary turquoise */
-    --surface-dark: 200 11% 8%;      /* Card surface */
-    --surface-darker: 200 12% 5%;    /* Page background */
-    --text-light: 180 100% 96%;      /* Primary text */
-    --text-muted: 190 15% 65%;       /* Muted text */
+    /* Neural AI Light Brand Colors */
+    --neon-primary: 175 75% 45%;     /* Main turquoise */
+    --neon-secondary: 180 50% 60%;   /* Secondary turquoise */
+    --surface-dark: 180 50% 95%;     /* Card surface */
+    --surface-darker: 190 20% 98%;   /* Page background */
+    --text-light: 190 24% 20%;       /* Primary text */
+    --text-muted: 190 15% 55%;       /* Muted text */
     
-    /* Turquoise Glow Effects */
-    --glow-primary: 0 4px 30px rgba(0, 217, 204, 0.14);
-    --glow-intense: 0 0 40px rgba(0, 217, 204, 0.25);
-    --glow-soft: 0 2px 20px rgba(0, 217, 204, 0.08);
+    /* Turquoise Light Effects for Light Theme */
+    --glow-primary: 0 4px 30px rgba(0, 217, 204, 0.20);
+    --glow-intense: 0 0 40px rgba(0, 217, 204, 0.35);
+    --glow-soft: 0 2px 20px rgba(0, 217, 204, 0.15);
     
-    /* Tech Gradients */
+    /* Light Theme Gradients */
     --gradient-neon: linear-gradient(135deg, hsl(var(--neon-primary)), hsl(var(--neon-secondary)));
     --gradient-dark: linear-gradient(135deg, hsl(var(--surface-darker)), hsl(var(--surface-dark)));
-    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 217, 204, 0.15) 0%, transparent 70%);
-    --gradient-hero: linear-gradient(135deg, rgba(0, 217, 204, 0.05) 0%, rgba(13, 16, 18, 1) 100%);
+    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 217, 204, 0.08) 0%, transparent 70%);
+    --gradient-hero: linear-gradient(135deg, rgba(0, 217, 204, 0.03) 0%, hsl(var(--background)) 100%);
     
-    /* Professional Shadows */
-    --shadow-neon: 0 4px 20px -4px rgba(0, 217, 204, 0.15);
-    --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
-    --shadow-elevated: 0 16px 64px -16px rgba(0, 0, 0, 0.6);
-    --shadow-glow: 0 0 0 1px rgba(0, 217, 204, 0.1);
+    /* Light Theme Shadows */
+    --shadow-neon: 0 4px 20px -4px rgba(0, 217, 204, 0.25);
+    --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.10);
+    --shadow-elevated: 0 16px 64px -16px rgba(0, 0, 0, 0.15);
+    --shadow-glow: 0 0 0 1px rgba(0, 217, 204, 0.2);
     
     /* Smooth Tech Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -79,27 +79,27 @@ All colors MUST be HSL format for consistency */
     --sidebar-ring: 180 85% 45%;
   }
 
-  /* Keep dark theme as fallback but make it same as root */
+  /* Keep dark theme consistent with light theme */
   .dark {
-    --background: 200 12% 5%;
-    --foreground: 180 100% 96%;
-    --card: 200 11% 8%;
-    --card-foreground: 180 100% 96%;
-    --popover: 200 11% 8%;
-    --popover-foreground: 180 100% 96%;
-    --primary: 180 85% 45%;
-    --primary-foreground: 190 100% 5%;
-    --secondary: 180 75% 30%;
-    --secondary-foreground: 180 100% 96%;
-    --muted: 200 11% 8%;
-    --muted-foreground: 190 15% 65%;
-    --accent: 180 85% 45%;
-    --accent-foreground: 190 100% 5%;
+    --background: 190 20% 98%;
+    --foreground: 190 24% 20%;
+    --card: 180 50% 95%;
+    --card-foreground: 190 24% 20%;
+    --popover: 180 50% 95%;
+    --popover-foreground: 190 24% 20%;
+    --primary: 175 75% 45%;
+    --primary-foreground: 180 100% 98%;
+    --secondary: 180 50% 60%;
+    --secondary-foreground: 180 100% 98%;
+    --muted: 180 25% 92%;
+    --muted-foreground: 190 15% 55%;
+    --accent: 175 75% 45%;
+    --accent-foreground: 180 100% 98%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 190 10% 13%;
-    --input: 190 10% 13%;
-    --ring: 180 85% 45%;
+    --border: 180 25% 88%;
+    --input: 180 25% 92%;
+    --ring: 175 75% 45%;
   }
 }
 
@@ -113,7 +113,7 @@ All colors MUST be HSL format for consistency */
     font-family: 'Inter', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: hsl(var(--background));
     background-attachment: fixed;
-    /* Subtle tech texture */
+    /* Subtle light theme texture */
     background-image: 
       radial-gradient(circle at 25% 25%, rgba(0, 217, 204, 0.02) 0%, transparent 50%),
       radial-gradient(circle at 75% 75%, rgba(0, 217, 204, 0.01) 0%, transparent 50%);
@@ -271,8 +271,8 @@ All colors MUST be HSL format for consistency */
   .backdrop-blur-neon {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(20, 23, 26, 0.8);
-    border: 1px solid rgba(0, 217, 204, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 217, 204, 0.2);
   }
 }
 
