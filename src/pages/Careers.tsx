@@ -442,7 +442,7 @@ const Careers = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle className="text-2xl mb-2">{role.title}</CardTitle>
-                      <div className="flex items-center space-x-4 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center space-x-4 text-sm text-foreground/70 mb-4 font-medium">
                         <div className="flex items-center">
                           <Briefcase className="w-4 h-4 mr-1" />
                           {role.department}

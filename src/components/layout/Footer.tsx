@@ -4,108 +4,99 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="gradient-hero border-t border-border">
+    <footer className="bg-slate-900 border-t border-slate-800">
       <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Company Info */}
-          <div className="space-y-4">
+          <div className="space-y-6 md:col-span-2">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">N</span>
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-lg">N</span>
               </div>
-              <span className="text-xl font-bold text-gradient">Neural AI</span>
+              <span className="text-2xl font-bold text-white">Neural AI</span>
             </div>
-            <p className="text-muted-foreground">
-              Transforming businesses with intelligent AI solutions. 
-              Increase revenue and drive business growth with AI-powered ecosystems that learn, adapt, and deliver bespoke solutions.
+            <p className="text-slate-300 text-lg leading-relaxed">
+              Transforming businesses with intelligent AI solutions. We help companies 
+              increase revenue and drive growth with AI-powered ecosystems that learn, 
+              adapt, and deliver bespoke solutions tailored to your unique needs.
             </p>
+            <div className="flex space-x-4">
+              <div className="flex items-center text-slate-300">
+                <span className="text-primary mr-2">📧</span>
+                office@neuralai.in
+              </div>
+              <div className="flex items-center text-slate-300">
+                <span className="text-primary mr-2">📞</span>
+                +91 8160396630
+              </div>
+            </div>
           </div>
           
           {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Quick Links</h4>
-            <div className="space-y-2">
-              <Link
-                to="/"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                About
-              </Link>
-              <Link
-                to="/services"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Services
-              </Link>
-              <Link
-                to="/portfolio"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Portfolio
-              </Link>
+          <div className="space-y-6">
+            <h4 className="text-xl font-bold text-white">Quick Links</h4>
+            <div className="space-y-3">
+              {[
+                { to: "/", label: "Home" },
+                { to: "/about", label: "About" },
+                { to: "/services", label: "Services" },
+                { to: "/portfolio", label: "Case Studies" },
+                { to: "/demo", label: "Demo" },
+                { to: "/careers", label: "Careers" },
+                { to: "/contact", label: "Contact" }
+              ].map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className="block text-slate-300 hover:text-primary transition-colors duration-200 hover:translate-x-1 transform"
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
           
-          {/* Support */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Support</h4>
-            <div className="space-y-2">
-              <Link
-                to="/contact"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Contact
-              </Link>
-              <Link
-                to="/faq"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                FAQ
-              </Link>
-              <Link
-                to="/demo"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Demo
-              </Link>
-              <Link
-                to="/careers"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Careers
-              </Link>
-            </div>
-          </div>
-          
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Stay Updated</h4>
-            <p className="text-muted-foreground text-sm">
-              Get AI insights and updates delivered to your inbox.
+          {/* Newsletter & CTA */}
+          <div className="space-y-6">
+            <h4 className="text-xl font-bold text-white">Stay Connected</h4>
+            <p className="text-slate-300">
+              Get the latest AI insights and updates delivered to your inbox.
             </p>
-            <div className="space-y-2">
+            <div className="space-y-3">
               <Input 
                 type="email" 
-                placeholder="Enter your email" 
-                className="bg-card border-border"
+                placeholder="Your email address" 
+                className="bg-slate-800 border-slate-700 text-white placeholder:text-slate-400 focus:border-primary"
               />
-              <Button className="w-full" size="sm" variant="hero">
-                Subscribe
+              <Button className="w-full bg-primary hover:bg-primary/90 text-white font-semibold" size="sm">
+                Subscribe to Newsletter
               </Button>
+            </div>
+            <div className="pt-4">
+              <Link to="/demo">
+                <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white">
+                  Book Free Consultation
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
         
-        <div className="border-t border-border mt-12 pt-8 text-center">
-          <p className="text-muted-foreground text-sm">
-            © 2025 Neural AI. All rights reserved. Go Beyond Automation and Transform Your Business.
-          </p>
+        <div className="border-t border-slate-800 mt-16 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <p className="text-slate-400 text-sm">
+              © 2025 Neural AI. All rights reserved. Transforming businesses through intelligent automation.
+            </p>
+            <div className="flex space-x-6 text-sm">
+              <Link to="/privacy" className="text-slate-400 hover:text-primary transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/terms" className="text-slate-400 hover:text-primary transition-colors">
+                Terms of Service
+              </Link>
+              <span className="text-slate-400">Made in India 🇮🇳</span>
+            </div>
+          </div>
         </div>
       </div>
     </footer>
