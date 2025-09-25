@@ -4,34 +4,26 @@
 
 @layer base {
   :root {
-    --background: 190 20% 98%;
+    --background: 200 25% 98%;
     --foreground: 210 20% 15%;
-    --card: 180 50% 95%;
+    --card: 200 20% 94%;
     --card-foreground: 210 20% 15%;
-    --popover: 180 50% 95%;
+    --popover: 200 20% 94%;
     --popover-foreground: 210 20% 15%;
-    --primary: 175 75% 45%;
+    --primary: 180 85% 35%;
     --primary-foreground: 180 100% 98%;
-    --secondary: 180 50% 60%;
-    --secondary-foreground: 180 100% 98%;
-    --muted: 190 15% 88%;
+    --secondary: 190 15% 55%;
+    --secondary-foreground: 210 20% 15%;
+    --muted: 200 20% 88%;
     --muted-foreground: 190 15% 55%;
-    --accent: 175 75% 45%;
+    --accent: 180 85% 40%;
     --accent-foreground: 180 100% 98%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
-    --border: 180 25% 88%;
-    --input: 180 25% 92%;
-    --ring: 175 75% 45%;
+    --border: 200 20% 88%;
+    --input: 200 20% 92%;
+    --ring: 180 85% 45%;
     --radius: 0.5rem;
-    
-    /* Additional design system variables */
-    --neon-primary: 175 75% 45%;
-    --neon-secondary: 180 50% 60%;
-    --surface-dark: 220 20% 12%;
-    --surface-darker: 220 25% 8%;
-    --text-light: 180 100% 98%;
-    --text-muted: 190 15% 55%;
   }
 
   .dark {
@@ -63,69 +55,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
-  }
-  
-  .gradient-primary {
-    @apply bg-gradient-to-r from-primary to-accent;
-  }
-  
-  .gradient-hero {
-    @apply bg-gradient-to-br from-background via-card to-background;
-  }
-  
-  .gradient-card {
-    @apply bg-gradient-to-br from-card to-background;
-  }
-  
-  .gradient-neon {
-    @apply bg-gradient-to-br from-primary to-accent;
-  }
-  
-  .transition-smooth {
-    @apply transition-all duration-300 ease-in-out;
-  }
-  
-  .shadow-card {
-    @apply shadow-lg shadow-primary/5;
-  }
-  
-  .shadow-elevated {
-    @apply shadow-xl shadow-primary/10;
-  }
-  
-  .hover-lift {
-    @apply hover:scale-[1.02] hover:shadow-lg transition-all duration-300;
-  }
-  
-  .hover-glow {
-    @apply hover:shadow-primary/20;
-  }
-  
-  .tech-grid {
-    @apply opacity-30;
-    background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary)) 1px, transparent 0);
-    background-size: 20px 20px;
-  }
-  
-  .animate-glow {
-    animation: glow 2s ease-in-out infinite alternate;
-  }
-  
-  .animate-fade-in {
-    animation: fadeIn 0.6s ease-out forwards;
-  }
-  
-  .animate-slide-up {
-    animation: slideUp 0.8s ease-out forwards;
-  }
-  
-  .gradient-glow {
-    @apply bg-gradient-to-r from-primary/20 via-transparent to-transparent;
   }
 }

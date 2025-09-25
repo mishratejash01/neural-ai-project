@@ -107,8 +107,8 @@ const Home = () => {
             {services.map((service, index) => (
               <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500">
                 <CardHeader className="text-center">
-                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform border border-primary/20">
-                    <service.icon className="w-8 h-8 text-primary" />
+                  <div className="w-16 h-16 gradient-neon rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-neon">
+                    <service.icon className="w-8 h-8 text-primary-foreground" />
                   </div>
                   <CardTitle className="text-xl text-foreground group-hover:text-neon transition-colors">
                     {service.title}

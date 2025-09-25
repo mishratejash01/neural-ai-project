@@ -36,9 +36,9 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       <div
         className={cn(
-          'transition-all duration-300 ease-in-out mx-auto bg-slate-900/95 backdrop-blur-lg border-b border-slate-800',
+          'transition-all duration-300 ease-in-out mx-auto',
           isScrolled
-            ? 'mt-2 max-w-5xl rounded-2xl border border-slate-800/50 shadow-lg'
+            ? 'mt-2 max-w-5xl rounded-2xl border border-border/50 bg-background/80 backdrop-blur-lg'
             : 'mt-0 max-w-none'
         )}
       >
@@ -59,7 +59,7 @@ const Header = () => {
                       'transition-smooth',
                       location.pathname === item.href
                         ? 'text-primary'
-                        : 'text-slate-300 hover:text-primary'
+                        : 'text-muted-foreground hover:text-primary'
                     )}
                   >
                     {item.label}
@@ -79,7 +79,7 @@ const Header = () => {
             <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="inline-flex items-center justify-center rounded-md p-2 text-slate-300 hover:bg-slate-800 hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
                 aria-controls="mobile-menu"
                 aria-expanded={isMenuOpen}
               >
@@ -92,7 +92,7 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="lg:hidden" id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800/50">
+            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 bg-background/80 backdrop-blur-lg border-t border-border/50">
               {navItems.map((item) => (
                 <Link key={item.href} to={item.href}>
                   <Button
@@ -101,7 +101,7 @@ const Header = () => {
                       'block w-full justify-start pl-3', // Changed text-left to justify-start and added padding
                       location.pathname === item.href
                         ? 'text-primary bg-primary/10' // This is the updated, subtle highlight
-                        : 'text-slate-300 hover:text-primary hover:bg-slate-800'
+                        : 'text-muted-foreground hover:text-primary hover:bg-accent'
                     )}
                   >
                     {item.label}

@@ -292,8 +292,8 @@ const Contact = () => {
             {/* Contact Information */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-3xl font-bold mb-6 text-foreground">Get in Touch</h2>
-                <p className="text-foreground/80 text-lg mb-8">
+                <h2 className="text-3xl font-bold mb-6">Get in Touch</h2>
+                <p className="text-muted-foreground text-lg mb-8">
                   Choose the method that works best for you. Our team is ready to discuss 
                   your AI needs and help you get started on your transformation journey.
                 </p>
