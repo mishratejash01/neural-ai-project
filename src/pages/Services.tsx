@@ -59,16 +59,12 @@ const Services = () => {
 
   return (
     <Layout>
-      {/* Hero Section - FIX APPLIED HERE */}
-      <div className="bg-background text-foreground">
-        <HeroGeometric
-          badge="Our Expertise"
-          title1="Our"
-          title2="AI Services"
-        />
-      </div>
-
-      {/* Stats Section */}
+      {/* Hero Section */}
+      <HeroGeometric
+        badge="Our Expertise"
+        title1="Our"
+        title2="AI Services"
+      />
       <section className="py-24 gradient-hero">
         <div className="container mx-auto px-4">
           <motion.div
@@ -78,23 +74,23 @@ const Services = () => {
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
-            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
+            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Clock className="w-10 h-10 text-primary-foreground" />
+                <Clock className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Fast Deployment</h3>
               <p className="text-muted-foreground">Get your AI solutions up and running in weeks, not months, with our proven methodologies</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
+            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
                 <TrendingUp className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Proven ROI</h3>
               <p className="text-muted-foreground">Our clients see average 300% ROI within the first year through optimized operations</p>
             </div>
-            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
+            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
               <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Shield className="w-10 h-10 text-primary-foreground" />
+                <Shield className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-semibold text-foreground">Enterprise Security</h3>
               <p className="text-muted-foreground">Bank-level security and compliance built into every solution we deliver</p>
@@ -132,12 +128,12 @@ const Services = () => {
               <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
                 <CardHeader className="p-8 text-center">
                   <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
-                    <service.icon className="w-8 h-8 text-primary-foreground" />
+                    <service.icon className="w-8 h-8 text-white" />
                   </div>
                   <CardTitle className="text-2xl font-bold text-foreground mb-4">
                     {service.title}
                   </CardTitle>
-                  <CardDescription className="text-lg text-muted-foreground leading-relaxed mb-6">
+                  <CardDescription className="text-lg text-text-muted leading-relaxed mb-6">
                     {service.description}
                   </CardDescription>
                 </CardHeader>
@@ -186,7 +182,7 @@ const Services = () => {
             ].map((item, index) => (
               <div key={index} className="text-center space-y-4">
                 <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-primary-foreground font-bold text-lg">{item.step}</span>
+                  <span className="text-white font-bold text-lg">{item.step}</span>
                 </div>
                 <h3 className="text-xl font-semibold">{item.title}</h3>
                 <p className="text-muted-foreground">{item.description}</p>

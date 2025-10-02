@@ -50,7 +50,6 @@ const Portfolio = () => {
     <Layout>
       {/* Hero Section */}
       <LampContainer>
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
         <motion.div
           initial={{ opacity: 0.5, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -59,9 +58,9 @@ const Portfolio = () => {
             duration: 0.8,
             ease: "easeInOut",
           }}
-          className="text-center relative z-10"
+          className="text-center"
         >
-          <h1 className="text-6xl font-bold mb-8 text-foreground">
+          <h1 className="text-6xl font-bold mb-8 text-white">
             Success <span className="text-gradient">Stories</span> from India
           </h1>
           <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
@@ -96,7 +95,7 @@ const Portfolio = () => {
                 </CardHeader>
                 <CardContent className="p-8 pt-0">
                   <Link to={`/portfolio/${project.slug}`}>
-                    <Button className="gradient-primary text-primary-foreground hover:opacity-90 transition-smooth rounded-xl px-6 py-3 shadow-accent w-full">
+                    <Button className="gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl px-6 py-3 shadow-accent w-full">
                       <ExternalLink className="mr-2 w-5 h-5" />
                       View Case Study
                       <ArrowRight className="ml-2 w-5 h-5" />
