@@ -4,25 +4,25 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "relative inline-flex items-center justify-center py-[1px] overflow-hidden rounded-lg group transition-colors duration-300 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg text-sm font-medium transition-smooth focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default: "",
-        hero: "",
-        neural: "",
-        outline: "",
-        ghost: "",
-        secondary: "",
-        neon: "",
-        "neon-outline": "",
-        glow: "",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        hero: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg",
+        neural: "bg-secondary text-secondary-foreground hover:bg-secondary/90",
+        outline: "border border-border bg-background hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        neon: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-neon",
+        "neon-outline": "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
+        glow: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-glow",
       },
       size: {
-        default: "",
-        sm: "",
-        lg: "",
-        icon: "",
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-lg px-8",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
@@ -39,45 +39,14 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, children, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
     const Comp = asChild ? Slot : "button";
-    const color = "hsl(var(--primary))";
-
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size }), className)}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
-      >
-        <div
-          className={cn(
-            "absolute w-[300%] h-[50%] bottom-[-11px] right-[-250%] rounded-full animate-star-movement-bottom z-0",
-            "opacity-50"
-          )}
-          style={{
-            background: `radial-gradient(circle, ${color}, transparent 10%)`,
-            animationDuration: "6s",
-          }}
-        />
-        <div
-          className={cn(
-            "absolute w-[300%] h-[50%] top-[-10px] left-[-250%] rounded-full animate-star-movement-top z-0",
-            "opacity-50"
-          )}
-          style={{
-            background: `radial-gradient(circle, ${color}, transparent 10%)`,
-            animationDuration: "6s",
-          }}
-        />
-        <div className={cn(
-          "relative z-10 border text-foreground text-sm font-medium py-2 px-4 rounded-lg",
-          "inline-flex items-center justify-center gap-2 whitespace-nowrap",
-          "bg-gradient-to-b from-background/90 to-muted/90 border-border/40",
-          "group-hover:border-primary/60 transition-colors duration-300"
-        )}>
-          {children}
-        </div>
-      </Comp>
+      />
     );
   }
 );
