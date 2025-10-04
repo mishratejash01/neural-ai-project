@@ -1,8 +1,15 @@
+// tailwind.config.ts
+
 import type { Config } from "tailwindcss";
 
-export default {
+const config = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -47,43 +54,15 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        sidebar: {
-          DEFAULT: "hsl(var(--sidebar-background))",
-          foreground: "hsl(var(--sidebar-foreground))",
-          primary: "hsl(var(--sidebar-primary))",
-          "primary-foreground": "hsl(var(--sidebar-primary-foreground))",
-          accent: "hsl(var(--sidebar-accent))",
-          "accent-foreground": "hsl(var(--sidebar-accent-foreground))",
-          border: "hsl(var(--sidebar-border))",
-          ring: "hsl(var(--sidebar-ring))",
-        },
-        neon: {
-          primary: "hsl(var(--neon-primary))",
-          secondary: "hsl(var(--neon-secondary))",
-        },
-        surface: {
-          dark: "hsl(var(--surface-dark))",
-          darker: "hsl(var(--surface-darker))",
-        },
-        text: {
-          light: "hsl(var(--text-light))",
-          muted: "hsl(var(--text-muted))",
-        },
+        // Custom colors for Neural Ignite
+        "surface-dark": "hsl(var(--surface-dark))",
+        "surface-darker": "hsl(var(--surface-darker))",
+        neon: "hsl(var(--neon))",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-      },
-      boxShadow: {
-        'neon': '0 4px 30px rgba(0, 241, 160, 0.18)',
-        'neon-lg': '0 8px 60px rgba(0, 241, 160, 0.25)',
-        'glow': '0 0 40px rgba(0, 241, 160, 0.15)',
-        'glow-sm': '0 0 20px rgba(0, 241, 160, 0.1)',
-      },
-      fontFamily: {
-        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
-        sans: ['Inter', 'Poppins', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
@@ -94,7 +73,7 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "meteor": {
+        "meteor-effect": {
           "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
           "70%": { opacity: "1" },
           "100%": {
@@ -102,23 +81,31 @@ export default {
             opacity: "0",
           },
         },
-        'star-movement-bottom': {
-          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
-          '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+        // Added for marquee
+        marquee: {
+          to: { transform: "translateX(-50%)" },
         },
-        'star-movement-top': {
-          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
-          '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+        "marquee-reverse": {
+          from: { transform: "translateX(-50%)" },
+          to: { transform: "translateX(0%)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "meteor-effect": "meteor 5s linear infinite",
-        'star-movement-bottom': 'star-movement-bottom 6s linear infinite alternate',
-        'star-movement-top': 'star-movement-top 6s linear infinite alternate',
+        "meteor-effect": "meteor-effect 1.4s ease-in-out infinite",
+        // Added for marquee
+        marquee: "marquee var(--duration, 30s) linear infinite",
+        "marquee-reverse": "marquee-reverse var(--duration, 30s) linear infinite",
+      },
+      boxShadow: {
+        elevated: "0px 10px 30px rgba(0, 0, 0, 0.1)",
+        "neon": "0 0 10px hsl(var(--neon)), 0 0 20px hsl(var(--neon))",
+        "neon-lg": "0 0 15px hsl(var(--neon)), 0 0 30px hsl(var(--neon))",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 } satisfies Config;
+
+export default config;
