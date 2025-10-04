@@ -62,7 +62,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
 
     return (
       <motion.div
-        className="relative h-24 w-32 overflow-hidden md:h-32 md:w-52" // Increased container size
+        className="relative h-20 w-28 overflow-hidden md:h-24 md:w-48"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -103,8 +103,8 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
             <img
               src={currentLogo.src}
               alt={currentLogo.name}
-              // Increased logo size and removed color change effects
-              className="h-24 w-auto max-h-[80%] max-w-[80%] object-contain md:h-28"
+              // Re-added grayscale effect for a cohesive look, color appears on hover
+              className="h-20 w-auto max-h-[75%] max-w-[75%] object-contain grayscale transition-all duration-300 hover:grayscale-0 md:h-24"
             />
           </motion.div>
         </AnimatePresence>
@@ -119,7 +119,7 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({
-  columnCount = 3,
+  columnCount = 4, // Adjusted default for better fit
   logos,
 }: LogoCarouselProps) {
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
