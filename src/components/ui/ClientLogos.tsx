@@ -35,7 +35,8 @@ export function ClientLogos() {
               <img
                 src={logo.src}
                 alt={logo.alt}
-                className="h-12 w-auto object-contain grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-300"
+                // Changed h-12 to h-20 for a medium size
+                className="h-20 w-auto object-contain grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-300"
               />
             </div>
           ))}
