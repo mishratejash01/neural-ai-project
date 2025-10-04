@@ -194,7 +194,7 @@ All colors MUST be HSL format for consistency */
   /* Text Effects */
   .text-neon {
     color: hsl(var(--neon-primary));
-    text-shadow: 0 0 10px rgba(0, 241, 160, 0.3);
+    text-shadow: 0 0 5px rgba(0, 241, 160, 0.3);
   }
   
   .text-gradient {
