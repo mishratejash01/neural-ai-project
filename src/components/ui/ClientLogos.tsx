@@ -25,7 +25,8 @@ const allLogos = [
 
 export function ClientLogos() {
   return (
-    <section className="py-16 bg-background relative overflow-hidden">
+    // Made the section taller with py-24
+    <section className="py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
         <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
           <div className="text-center">
