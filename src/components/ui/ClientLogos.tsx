@@ -25,16 +25,22 @@ const allLogos = [
 
 export function ClientLogos() {
   return (
-    // Made the section taller with py-24
-    <section className="py-24 bg-background relative overflow-hidden">
+    // Changed background to surface-dark to match other sections
+    <section className="py-24 bg-surface-dark relative overflow-hidden">
+      {/* Added the tech-grid background for consistency */}
+      <div className="absolute inset-0 tech-grid opacity-20" />
       <div className="container mx-auto px-4 relative z-10">
-        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
+        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-12">
           <div className="text-center">
-            <GradientHeading size="lg" weight="bold">
-              Trusted by Innovative Companies
-            </GradientHeading>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              Trusted By <span className="text-gradient">Innovators</span>
+            </h2>
           </div>
-          <LogoCarousel columnCount={3} logos={allLogos} />
+
+          {/* New container to style the carousel like a card */}
+          <div className="w-full max-w-5xl p-4 md:p-8 bg-card/50 backdrop-blur-sm border border-border rounded-2xl">
+            <LogoCarousel columnCount={4} logos={allLogos} />
+          </div>
         </div>
       </div>
     </section>
