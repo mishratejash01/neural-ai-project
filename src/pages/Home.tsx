@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { SplineHero } from "@/components/layout/SplineHero";
-import { ClientLogos } from "@/components/ui/ClientLogos"; // Import the new component
+import { ClientLogos } from "@/components/ui/ClientLogos";
 import {
   Brain,
   BarChart,
@@ -86,17 +86,24 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center group hover-lift">
-                <div className="flex items-center justify-center mb-3">
-                  <stat.icon className="w-8 h-8 text-primary mr-3" />
-                  <div className="text-4xl md:text-5xl font-bold text-neon animate-glow">
-                    {stat.value}
+              <Card
+                key={index}
+                className="text-center group hover-lift bg-transparent border-none shadow-none"
+              >
+                <CardHeader>
+                  <div className="flex items-center justify-center mb-3">
+                    <stat.icon className="w-8 h-8 text-primary mr-3" />
+                    <div className="text-4xl md:text-5xl font-bold text-neon">
+                      {stat.value}
+                    </div>
                   </div>
-                </div>
-                <div className="text-muted-foreground font-medium">
-                  {stat.label}
-                </div>
-              </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-muted-foreground font-medium">
+                    {stat.label}
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
