@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 interface Logo {
   name: string;
   id: number;
-  src: string; // Modified to accept image source paths
+  src: string;
 }
 
 interface LogoColumnProps {
@@ -62,7 +62,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
 
     return (
       <motion.div
-        className="relative h-14 w-24 overflow-hidden md:h-24 md:w-48"
+        className="relative h-24 w-32 overflow-hidden md:h-32 md:w-52" // Increased container size
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -100,11 +100,11 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               },
             }}
           >
-            {/* Modified to use <img> tag for your logos */}
             <img
               src={currentLogo.src}
               alt={currentLogo.name}
-              className="h-20 w-auto max-h-[80%] max-w-[80%] object-contain md:h-24 grayscale invert"
+              // Increased logo size and removed color change effects
+              className="h-24 w-auto max-h-[80%] max-w-[80%] object-contain md:h-28"
             />
           </motion.div>
         </AnimatePresence>
