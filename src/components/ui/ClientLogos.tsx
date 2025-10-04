@@ -1,8 +1,11 @@
 // src/components/ui/ClientLogos.tsx
 
-import { Marquee } from "@/components/ui/marquee";
+"use client";
+import React from "react";
+import { GradientHeading } from "@/components/ui/gradient-heading";
+import { LogoCarousel } from "@/components/ui/logo-carousel";
 
-// Importing client logos
+// Importing your client logos
 import adsyntraLogo from "@/assets/clients/adsyntra.png";
 import anantyaLogo from "@/assets/clients/anantya.png";
 import jitsieLogo from "@/assets/clients/jitsie.png";
@@ -10,37 +13,28 @@ import karoStartupLogo from "@/assets/clients/karo_startup_logo.jpeg";
 import sitlovoLogo from "@/assets/clients/sitlovo.png";
 import uiLogo from "@/assets/clients/ui_logo_.png";
 
-const clientLogos = [
-  { src: adsyntraLogo, alt: "Adsyntra" },
-  { src: anantyaLogo, alt: "Anantya" },
-  { src: jitsieLogo, alt: "Jitsie" },
-  { src: karoStartupLogo, alt: "Karo Startup" },
-  { src: sitlovoLogo, alt: "Sitlovo" },
-  { src: uiLogo, alt: "UI Logo" },
+// Creating the logo array with the required structure
+const allLogos = [
+  { name: "Adsyntra", id: 1, src: adsyntraLogo },
+  { name: "Anantya", id: 2, src: anantyaLogo },
+  { name: "Jitsie", id: 3, src: jitsieLogo },
+  { name: "Karo Startup", id: 4, src: karoStartupLogo },
+  { name: "Sitlovo", id: 5, src: sitlovoLogo },
+  { name: "UI Logo", id: 6, src: uiLogo },
 ];
 
 export function ClientLogos() {
   return (
     <section className="py-16 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-          Our <span className="text-gradient">Clients</span>
-        </h2>
-        <Marquee pauseOnHover>
-          {clientLogos.map((logo, index) => (
-            <div
-              key={index}
-              className="relative h-full w-fit mx-[2.5rem] flex items-center justify-start"
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                // Changed h-12 to h-20 for a medium size
-                className="h-20 w-auto object-contain grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-300"
-              />
-            </div>
-          ))}
-        </Marquee>
+        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-8">
+          <div className="text-center">
+            <GradientHeading size="lg" weight="bold">
+              Trusted by Innovative Companies
+            </GradientHeading>
+          </div>
+          <LogoCarousel columnCount={3} logos={allLogos} />
+        </div>
       </div>
     </section>
   );
