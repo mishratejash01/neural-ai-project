@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Target, Eye, Users, Award, ArrowRight } from "lucide-react";
 import TeamSection from "@/components/ui/team";
-import nirmaanLogo from "@/assets/nirmaan.png"; // <-- ADD THIS LINE
+import nirmaanLogo from "@/assets/nirmaan.png";
+import iitmLogo from "@/assets/iitm.svg.png"; // <-- ADD THIS LINE
 
 const About = () => {
     const values = [
@@ -49,31 +50,45 @@ const About = () => {
                         {/* Left Column: Text Content */}
                         <div className="text-left">
                             <h2 className="text-4xl font-bold mb-4">
-                                Forged in a Hub of <span className="text-gradient">Innovation</span>
+                                Incubation <span className="text-gradient">Hub</span>
                             </h2>
                             <p className="text-lg text-muted-foreground">
-                                Neural AI is proud to be incubated by Nirmaan, the deep-tech startup hub at IIT Madras. 
-                                This partnership accelerates our mission, providing us with elite mentorship and a world-class
+                                Neural AI is proud to be incubated by Nirmaan at IIT Madras. 
+                                This provides us with elite mentorship and a world-class
                                 ecosystem to build the future of artificial intelligence.
                             </p>
                         </div>
 
-                        {/* Right Column: Logo with Visual Effect */}
+                        {/* Right Column: Logos with Visual Effect */}
                         <div className="flex items-center justify-center">
                              <div className="relative p-8 bg-card/50 rounded-2xl border border-border w-full max-w-sm">
                                 <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full"></div>
-                                <a 
-                                    href="https://www.nirmaan.iitm.ac.in/"
-                                    target="_blank" 
-                                    rel="noopener noreferrer"
-                                    className="relative flex justify-center"
+                                <div
+                                    className="relative flex justify-center items-center space-x-8"
                                 >
-                                    <img 
-                                        src={nirmaanLogo} 
-                                        alt="Nirmaan IIT Madras Logo" 
-                                        className="h-24 w-auto" 
-                                    />
-                                </a>
+                                    <a 
+                                        href="https://www.nirmaan.iitm.ac.in/"
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img 
+                                            src={nirmaanLogo} 
+                                            alt="Nirmaan IIT Madras Logo" 
+                                            className="h-24 w-auto" 
+                                        />
+                                    </a>
+                                    <a 
+                                        href="https://www.iitm.ac.in/"
+                                        target="_blank" 
+                                        rel="noopener noreferrer"
+                                    >
+                                        <img 
+                                            src={iitmLogo} 
+                                            alt="IIT Madras Logo" 
+                                            className="h-24 w-auto" 
+                                        />
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
