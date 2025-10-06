@@ -43,7 +43,8 @@ const BackgroundCellCore = () => {
       className="h-full w-full absolute inset-0"
     >
       <div className="absolute h-full w-full inset-0 overflow-hidden">
-        <div className="absolute h-full w-full pointer-events-none -bottom-2 z-40 bg-slate-950 [mask-image:linear-gradient(to_bottom,transparent_80%,black)]" />
+        {/* This mask creates the smooth fade-out effect at the bottom */}
+        <div className="absolute h-full w-full pointer-events-none -bottom-2 z-40 bg-background [mask-image:linear-gradient(to_bottom,transparent_70%,black)]" />
         <div
           className="absolute inset-0 z-20 bg-transparent"
           style={{
@@ -59,8 +60,10 @@ const BackgroundCellCore = () => {
             WebkitMaskRepeat: "no-repeat",
           }}
         >
+          {/* This uses your site's cyan color for the highlighted cells */}
           <Pattern cellClassName="border-cyan-600 relative z-[100]" />
         </div>
+        {/* This uses a standard neutral color for the base grid */}
         <Pattern className="opacity-[0.5]" cellClassName="border-neutral-700" />
       </div>
     </div>
@@ -71,7 +74,6 @@ interface PatternProps {
   className?: string;
   cellClassName?: string;
 }
-
 const Pattern = ({ className, cellClassName }: PatternProps) => {
   const x = new Array(47).fill(0);
   const y = new Array(30).fill(0);
@@ -122,6 +124,7 @@ const Pattern = ({ className, cellClassName }: PatternProps) => {
                     ease: "backOut",
                   }}
                   animate={controls}
+                  // This uses your site's cyan color for the ripple/hover effect
                   className="bg-cyan-500/30 h-12 w-12"
                 />
               </div>
