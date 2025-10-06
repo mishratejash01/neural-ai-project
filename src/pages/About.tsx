@@ -43,15 +43,19 @@ const About = () => {
                 </div>
             </section>
 
-            {/* --- NEW, UNIQUE INCUBATION SECTION --- */}
+            {/* --- NEW, REFINED INCUBATION SECTION --- */}
             <section className="py-24 bg-surface-dark">
                 <div className="container mx-auto px-4">
+                    {/* Centered Heading */}
+                    <div className="text-center mb-16">
+                        <h2 className="text-4xl font-bold">
+                            Backed by <span className="text-gradient">Visionaries</span>
+                        </h2>
+                    </div>
+
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                         {/* Left Column: Text Content */}
                         <div className="text-left">
-                            <h2 className="text-4xl font-bold mb-4">
-                                Incubation <span className="text-gradient">Hub</span>
-                            </h2>
                             <p className="text-lg text-muted-foreground">
                                 Neural AI is proud to be incubated by Nirmaan at IIT Madras. 
                                 This provides us with elite mentorship and a world-class
@@ -61,31 +65,31 @@ const About = () => {
 
                         {/* Right Column: Logos with Visual Effect */}
                         <div className="flex items-center justify-center">
-                             <div className="relative p-8 bg-card/50 rounded-2xl border border-border w-full max-w-sm">
+                             <div className="relative p-8 bg-card/50 rounded-2xl border border-border w-full max-w-md">
                                 <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full"></div>
-                                <div
-                                    className="relative flex justify-center items-center space-x-8"
-                                >
+                                <div className="relative flex justify-center items-center space-x-8">
                                     <a 
                                         href="https://www.nirmaan.iitm.ac.in/"
                                         target="_blank" 
                                         rel="noopener noreferrer"
+                                        aria-label="Nirmaan IIT Madras website"
                                     >
                                         <img 
                                             src={nirmaanLogo} 
                                             alt="Nirmaan IIT Madras Logo" 
-                                            className="h-24 w-auto" 
+                                            className="h-20 sm:h-24 w-auto transition-transform duration-300 hover:scale-105" 
                                         />
                                     </a>
                                     <a 
                                         href="https://www.iitm.ac.in/"
                                         target="_blank" 
                                         rel="noopener noreferrer"
+                                        aria-label="IIT Madras website"
                                     >
                                         <img 
                                             src={iitmLogo} 
                                             alt="IIT Madras Logo" 
-                                            className="h-24 w-auto" 
+                                            className="h-20 sm:h-24 w-auto transition-transform duration-300 hover:scale-105" 
                                         />
                                     </a>
                                 </div>
@@ -95,7 +99,6 @@ const About = () => {
                 </div>
             </section>
             {/* --- END OF NEW SECTION --- */}
-
 
             {/* Mission & Vision */}
             <section className="py-20">
