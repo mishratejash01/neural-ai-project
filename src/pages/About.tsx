@@ -42,7 +42,7 @@ const About = () => {
               </div>
             </BackgroundCells>
             
-            {/* "Backed by Visionaries" Section with restored text */}
+            {/* "Backed by Visionaries" Section with the full descriptive text restored */}
             <section className="py-24 bg-surface-dark">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
@@ -51,10 +51,12 @@ const About = () => {
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        {/* --- THIS IS THE RESTORED TEXT --- */}
-                        <div className="text-center lg:text-left">
-                            <p className="text-2xl text-muted-foreground font-semibold">
-                                Incubated by Nirmaan IIT Madras
+                        {/* --- THIS IS THE RESTORED DESCRIPTIVE TEXT --- */}
+                        <div className="text-left">
+                            <p className="text-lg text-muted-foreground">
+                                Neural AI is proud to be incubated by Nirmaan, the deep-tech startup hub at IIT Madras. 
+                                This provides us with elite mentorship and a world-class
+                                ecosystem to build the future of artificial intelligence.
                             </p>
                         </div>
                         {/* --- END OF RESTORED TEXT --- */}
