@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { Target, Eye, Users, Award, ArrowRight, Rocket } from "lucide-react"; // <-- Add Rocket icon
+import { Target, Eye, Users, Award, ArrowRight } from "lucide-react";
 import TeamSection from "@/components/ui/team";
 import nirmaanLogo from "@/assets/nirmaan.png"; // <-- ADD THIS LINE
 
@@ -41,12 +41,51 @@ const About = () => {
                     </div>
                 </div>
             </section>
-            
-            {/* --- MODIFIED Mission, Vision & Incubation Section --- */}
+
+            {/* --- NEW, UNIQUE INCUBATION SECTION --- */}
+            <section className="py-24 bg-surface-dark">
+                <div className="container mx-auto px-4">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        {/* Left Column: Text Content */}
+                        <div className="text-left">
+                            <h2 className="text-4xl font-bold mb-4">
+                                Forged in a Hub of <span className="text-gradient">Innovation</span>
+                            </h2>
+                            <p className="text-lg text-muted-foreground">
+                                Neural AI is proud to be incubated by Nirmaan, the deep-tech startup hub at IIT Madras. 
+                                This partnership accelerates our mission, providing us with elite mentorship and a world-class
+                                ecosystem to build the future of artificial intelligence.
+                            </p>
+                        </div>
+
+                        {/* Right Column: Logo with Visual Effect */}
+                        <div className="flex items-center justify-center">
+                             <div className="relative p-8 bg-card/50 rounded-2xl border border-border w-full max-w-sm">
+                                <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full"></div>
+                                <a 
+                                    href="https://www.nirmaan.iitm.ac.in/"
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="relative flex justify-center"
+                                >
+                                    <img 
+                                        src={nirmaanLogo} 
+                                        alt="Nirmaan IIT Madras Logo" 
+                                        className="h-24 w-auto" 
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            {/* --- END OF NEW SECTION --- */}
+
+
+            {/* Mission & Vision */}
             <section className="py-20">
                 <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {/* Mission Card */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         <Card className="gradient-card border-border shadow-card">
                             <CardHeader>
                                 <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
@@ -58,11 +97,11 @@ const About = () => {
                                 <p className="text-muted-foreground">
                                     To democratize artificial intelligence by creating intelligent, ethical, and
                                     accessible AI solutions that empower businesses to achieve breakthrough results.
+                                    We believe AI should enhance human potential, not replace it.
                                 </p>
                             </CardContent>
                         </Card>
 
-                        {/* Vision Card */}
                         <Card className="gradient-card border-border shadow-card">
                             <CardHeader>
                                 <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
@@ -73,37 +112,14 @@ const About = () => {
                             <CardContent>
                                 <p className="text-muted-foreground">
                                     To be the world's most trusted AI partner, leading the transformation of how
-                                    businesses operate in the digital age.
+                                    businesses operate in the digital age. We envision a future where AI seamlessly
+                                    integrates into every aspect of business operations, driving efficiency and innovation.
                                 </p>
-                            </CardContent>
-                        </Card>
-                        
-                        {/* NEW Incubation Card */}
-                        <Card className="gradient-card border-border shadow-card">
-                            <CardHeader>
-                                <div className="w-12 h-12 gradient-primary rounded-lg flex items-center justify-center mb-4">
-                                    <Rocket className="w-6 h-6 text-white" />
-                                </div>
-                                <CardTitle className="text-2xl">Our Incubation</CardTitle>
-                            </CardHeader>
-                            <CardContent className="flex flex-col items-start">
-                                <p className="text-muted-foreground mb-4">
-                                    Proudly supported and accelerated by Nirmaan, the deep-tech startup hub at IIT Madras.
-                                </p>
-                                <a 
-                                  href="https://www.nirmaan.iitm.ac.in/"
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="mt-auto"
-                                >
-                                  <img src={nirmaanLogo} alt="Nirmaan IIT Madras" className="h-14 w-auto" />
-                                </a>
                             </CardContent>
                         </Card>
                     </div>
                 </div>
             </section>
-            {/* --- END OF MODIFIED SECTION --- */}
 
             {/* Values */}
             <section className="py-20 gradient-hero">
