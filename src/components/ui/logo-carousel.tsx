@@ -1,5 +1,3 @@
-// src/components/ui/logo-carousel.tsx
-
 "use client";
 import React, {
   useCallback,
@@ -12,7 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 interface Logo {
   name: string;
   id: number;
-  src: string;
+  src: any; // Changed to any to support imported static images
 }
 
 interface LogoColumnProps {
@@ -30,23 +28,54 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled;
 };
 
+// --- NEW LOGIC TO PREVENT DUPLICATES ---
 const distributeLogos = (allLogos: Logo[], columnCount: number): Logo[][] => {
-  const shuffled = shuffleArray(allLogos);
+  if (allLogos.length < columnCount) {
+    console.error("LogoCarousel requires at least as many unique logos as columnCount to ensure uniqueness.");
+    // Fallback for safety, though it may have duplicates
+    const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
+    allLogos.forEach((logo, index) => {
+        columns[index % columnCount].push(logo);
+    });
+    return columns;
+  }
+
+  const logoPool = shuffleArray([...allLogos]);
   const columns: Logo[][] = Array.from({ length: columnCount }, () => []);
+  const numRows = allLogos.length;
 
-  shuffled.forEach((logo, index) => {
-    columns[index % columnCount].push(logo);
-  });
+  for (let i = 0; i < numRows; i++) {
+    const rowLogos = new Set<number>();
+    const row: Logo[] = [];
 
-  const maxLength = Math.max(...columns.map((col) => col.length));
-  columns.forEach((col) => {
-    while (col.length < maxLength) {
-      col.push(shuffled[Math.floor(Math.random() * shuffled.length)]);
+    for (let j = 0; j < columnCount; j++) {
+      let nextLogo;
+      let attempts = 0;
+      do {
+        if (logoPool.length === 0) {
+          logoPool.push(...shuffleArray([...allLogos]));
+        }
+        // Prevent infinite loops in unlikely scenarios
+        if (attempts > allLogos.length) {
+            logoPool.push(...shuffleArray([...allLogos]));
+        }
+        nextLogo = logoPool.shift()!;
+        attempts++;
+      } while (rowLogos.has(nextLogo.id));
+
+      row.push(nextLogo);
+      rowLogos.add(nextLogo.id);
     }
-  });
+
+    for (let k = 0; k < columnCount; k++) {
+      columns[k].push(row[k]);
+    }
+  }
 
   return columns;
 };
+// --- END OF NEW LOGIC ---
+
 
 const LogoColumn: React.FC<LogoColumnProps> = React.memo(
   ({ logos, index, currentTime }) => {
@@ -103,7 +132,6 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
             <img
               src={currentLogo.src}
               alt={currentLogo.name}
-              // Re-added grayscale effect for a cohesive look, color appears on hover
               className="h-20 w-auto max-h-[75%] max-w-[75%] object-contain grayscale transition-all duration-300 hover:grayscale-0 md:h-24"
             />
           </motion.div>
@@ -119,7 +147,7 @@ interface LogoCarouselProps {
 }
 
 export function LogoCarousel({
-  columnCount = 4, // Adjusted default for better fit
+  columnCount = 4,
   logos,
 }: LogoCarouselProps) {
   const [logoSets, setLogoSets] = useState<Logo[][]>([]);
@@ -135,16 +163,18 @@ export function LogoCarousel({
   }, [updateTime]);
 
   useEffect(() => {
-    const distributedLogos = distributeLogos(logos, columnCount);
-    setLogoSets(distributedLogos);
+    if (logos.length > 0) {
+      const distributedLogos = distributeLogos(logos, columnCount);
+      setLogoSets(distributedLogos);
+    }
   }, [logos, columnCount]);
 
   return (
     <div className="flex justify-center space-x-4">
-      {logoSets.map((logos, index) => (
+      {logoSets.map((columnLogos, index) => (
         <LogoColumn
           key={index}
-          logos={logos}
+          logos={columnLogos}
           index={index}
           currentTime={currentTime}
         />
