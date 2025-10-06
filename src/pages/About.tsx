@@ -6,7 +6,7 @@ import { Target, Eye, Users, Award, ArrowRight } from "lucide-react";
 import TeamSection from "@/components/ui/team";
 import nirmaanLogo from "@/assets/nirmaan.png";
 import iitmLogo from "@/assets/iitm.svg.png";
-import { BackgroundCells } from "@/components/ui/background-cells"; // <-- Re-import the component
+import { BackgroundCells } from "@/components/ui/background-cells";
 
 const About = () => {
     const values = [
@@ -29,7 +29,7 @@ const About = () => {
 
     return (
         <Layout>
-            {/* The fixed, full-screen animated hero section */}
+            {/* Animated Hero Section */}
             <BackgroundCells>
               <div className="text-center">
                 <h1 className="md:text-5xl lg:text-7xl font-bold text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-100 to-neutral-400">
@@ -42,7 +42,7 @@ const About = () => {
               </div>
             </BackgroundCells>
             
-            {/* The rest of the page content, with consistent styling */}
+            {/* "Backed by Visionaries" Section with restored text */}
             <section className="py-24 bg-surface-dark">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16">
@@ -51,11 +51,13 @@ const About = () => {
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        {/* --- THIS IS THE RESTORED TEXT --- */}
                         <div className="text-center lg:text-left">
                             <p className="text-2xl text-muted-foreground font-semibold">
                                 Incubated by Nirmaan IIT Madras
                             </p>
                         </div>
+                        {/* --- END OF RESTORED TEXT --- */}
                         <div className="flex items-center justify-center">
                              <div className="relative p-8 bg-card/50 rounded-2xl border border-border w-full max-w-md">
                                 <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full"></div>
@@ -73,6 +75,7 @@ const About = () => {
                 </div>
             </section>
 
+            {/* Mission & Vision */}
             <section className="py-20">
                 <div className="container mx-auto px-4">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -94,6 +97,7 @@ const About = () => {
                 </div>
             </section>
 
+            {/* Values */}
             <section className="py-20 gradient-hero">
                 <div className="container mx-auto px-4">
                     <div className="text-center mb-16"><h2 className="text-4xl font-bold mb-6">Our Values</h2></div>
@@ -111,8 +115,10 @@ const About = () => {
                 </div>
             </section>
 
+            {/* Team Section */}
             <TeamSection />
 
+            {/* Unique Value Section */}
             <section className="py-20 gradient-hero">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center">
