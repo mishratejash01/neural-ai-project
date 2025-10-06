@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { Target, Eye, Users, Award, ArrowRight } from "lucide-react";
 import TeamSection from "@/components/ui/team";
+import nirmaanLogo from "@/assets/nirmaan.png"; // <-- ADD THIS LINE
 
 const About = () => {
     const values = [
@@ -40,6 +41,25 @@ const About = () => {
                     </div>
                 </div>
             </section>
+            
+            {/* --- NEW INCUBATION SECTION --- */}
+            <section className="py-20 bg-slate-900">
+                <div className="container mx-auto px-4 text-center">
+                    <h2 className="text-4xl font-bold mb-6">Our Incubation</h2>
+                    <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
+                        We are proud to be incubated by Nirmaan IIT Madras, a leading deep-tech startup incubator.
+                    </p>
+                    <a 
+                      href="https://www.nirmaan.iitm.ac.in/"
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      aria-label="Nirmaan IIT Madras website"
+                    >
+                      <img src={nirmaanLogo} alt="Nirmaan IIT Madras" className="h-24 w-auto mx-auto" />
+                    </a>
+                </div>
+            </section>
+            {/* --- END OF NEW SECTION --- */}
 
             {/* Mission & Vision */}
             <section className="py-20">
