@@ -1,114 +1,79 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
-import neuralAILogo from "@/assets/download__1_-removebg-preview.png"; // 1. IMPORT YOUR LOGO
+import { Github, Twitter, Linkedin, Instagram } from "lucide-react";
+import nirmaanLogo from "@/assets/nirmaan.png";
+import iitmLogo from "@/assets/iitm.svg.png";
 
 const Footer = () => {
-  return (
-    <footer className="gradient-hero border-t border-border">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="space-y-4">
-            {/* 2. REPLACE THE OLD DIV WITH THIS LINK & IMAGE */}
-            <Link to="/" className="flex items-center">
-              <img src={neuralAILogo} alt="Neural AI Logo" className="h-10 w-auto" />
-            </Link>
-            <p className="text-muted-foreground">
-              Transforming businesses with intelligent AI solutions. 
-              Increase revenue and drive business growth with AI-powered ecosystems that learn, adapt, and deliver bespoke solutions.
-            </p>
-          </div>
-          
-          {/* Quick Links */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Quick Links</h4>
-            <div className="space-y-2">
-              <Link
-                to="/"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                About
-              </Link>
-              <Link
-                to="/services"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Services
-              </Link>
-              <Link
-                to="/portfolio"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Portfolio
-              </Link>
+    return (
+        <footer className="bg-background-dark text-foreground-dark py-12">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                    {/* About Section */}
+                    <div>
+                        <h3 className="font-bold text-lg mb-4">Neural AI</h3>
+                        <p className="text-muted-foreground">Transforming businesses with cutting-edge artificial intelligence solutions.</p>
+                    </div>
+
+                    {/* Quick Links */}
+                    <div>
+                        <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+                        <ul className="space-y-2">
+                            <li><Link to="/about" className="hover:text-primary transition-colors">About Us</Link></li>
+                            <li><Link to="/services" className="hover:text-primary transition-colors">Services</Link></li>
+                            <li><Link to="/portfolio" className="hover:text-primary transition-colors">Portfolio</Link></li>
+                            <li><Link to="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Legal Links */}
+                    <div>
+                        <h3 className="font-bold text-lg mb-4">Legal</h3>
+                        <ul className="space-y-2">
+                            <li><Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
+                            <li><Link to="/terms-of-service" className="hover:text-primary transition-colors">Terms of Service</Link></li>
+                        </ul>
+                    </div>
+
+                    {/* Newsletter */}
+                    <div>
+                        <h3 className="font-bold text-lg mb-4">Stay Updated</h3>
+                        <p className="text-muted-foreground mb-4">Join our newsletter for the latest in AI.</p>
+                        <form className="flex">
+                            <Input type="email" placeholder="Enter your email" className="bg-background border-border rounded-r-none" />
+                            <Button type="submit" variant="primary" className="rounded-l-none">Subscribe</Button>
+                        </form>
+                    </div>
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="border-t border-border pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+                    {/* Incubator Section */}
+                    <div className="flex items-center space-x-4">
+                         <p className="text-sm text-muted-foreground font-semibold">Incubated by</p>
+                         <a href="https://nirmaan.iitm.ac.in/" target="_blank" rel="noopener noreferrer">
+                            <img src={nirmaanLogo} alt="Nirmaan Logo" className="h-10 w-auto"/>
+                         </a>
+                         <a href="https://www.iitm.ac.in/" target="_blank" rel="noopener noreferrer">
+                            <img src={iitmLogo} alt="IIT Madras Logo" className="h-10 w-auto"/>
+                         </a>
+                    </div>
+                    
+                    {/* Copyright & Socials */}
+                    <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+                      <p className="text-sm text-muted-foreground">&copy; {new Date().getFullYear()} Neural AI. All Rights Reserved.</p>
+                      <div className="flex space-x-4">
+                          <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Twitter size={20} /></a>
+                          <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Linkedin size={20} /></a>
+                          <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Github size={20} /></a>
+                          <a href="#" className="text-muted-foreground hover:text-primary transition-colors"><Instagram size={20} /></a>
+                      </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          
-          {/* Support */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Support</h4>
-            <div className="space-y-2">
-              <Link
-                to="/contact"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Contact
-              </Link>
-              <Link
-                to="/faq"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                FAQ
-              </Link>
-              <Link
-                to="/demo"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Demo
-              </Link>
-              <Link
-                to="/careers"
-                className="block text-muted-foreground hover:text-primary transition-smooth"
-              >
-                Careers
-              </Link>
-            </div>
-          </div>
-          
-          {/* Newsletter */}
-          <div className="space-y-4">
-            <h4 className="text-lg font-semibold text-foreground">Stay Updated</h4>
-            <p className="text-muted-foreground text-sm">
-              Get AI insights and updates delivered to your inbox.
-            </p>
-            <div className="space-y-2">
-              <Input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="bg-card border-border"
-              />
-              <Button className="w-full" size="sm" variant="hero">
-                Subscribe
-              </Button>
-            </div>
-          </div>
-        </div>
-        
-        <div className="border-t border-border mt-12 pt-8 text-center">
-          <p className="text-muted-foreground text-sm">
-            © 2025 Neural AI. All rights reserved. Go Beyond Automation and Transform Your Business.
-          </p>
-        </div>
-      </div>
-    </footer>
-  );
+        </footer>
+    );
 };
 
 export default Footer;
