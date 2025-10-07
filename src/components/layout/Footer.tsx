@@ -54,7 +54,7 @@ const Footer = () => {
 
                 {/* Incubator Section */}
                 <div className="border-t border-border pt-8 text-center">
-                    <p className="text-sm text-muted-foreground font-semibold mb-4">Incubated by</p>
+                    <p className="text-sm text-muted-foreground font-semibold mb-4">Incubated by Nirmaan IIT Madras</p>
                     <div className="flex justify-center items-center space-x-6">
                          <a href="https://nirmaan.iitm.ac.in/" target="_blank" rel="noopener noreferrer" className="opacity-70 hover:opacity-100 transition-opacity">
                             <img src={nirmaanLogo} alt="Nirmaan Logo" className="h-12 w-auto"/>
