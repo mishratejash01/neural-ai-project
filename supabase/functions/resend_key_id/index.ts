@@ -24,6 +24,7 @@ interface FormSubmission {
   experience?: string;
   cover?: string;
   budget?: string;
+  resumeLink?: string;
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -82,6 +83,7 @@ const handler = async (req: Request): Promise<Response> => {
           <p><strong>Phone:</strong> ${submission.phone || 'Not provided'}</p>
           <p><strong>Position Interest:</strong> ${submission.position || 'Not specified'}</p>
           <p><strong>Experience:</strong> ${submission.experience || 'Not specified'}</p>
+          <p><strong>Resume Link:</strong> <a href="${submission.resumeLink}">${submission.resumeLink}</a></p>
           <h3>Cover Letter:</h3>
           <p>${submission.cover}</p>
         `;

@@ -47,7 +47,7 @@ const Footer = () => {
                         <p className="text-muted-foreground mb-4">Join our newsletter for the latest in AI.</p>
                         <form className="flex">
                             <Input type="email" placeholder="Enter your email" className="bg-background border-border rounded-r-none" />
-                            <Button type="submit" variant="primary" className="rounded-l-none">Subscribe</Button>
+                            <Button type="submit" variant="neon" className="rounded-l-none">Subscribe</Button>
                         </form>
                     </div>
                 </div>

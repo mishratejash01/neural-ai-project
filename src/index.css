@@ -79,6 +79,55 @@ All colors MUST be HSL format for consistency */
     --sidebar-ring: 160 100% 47%;
   }
 
+  /* Light Theme - Daylight Mode */
+  .light {
+    --background: 0 0% 100%;         /* White */
+    --foreground: 222.2 47.4% 11.2%; /* Dark Blue/Black */
+
+    --card: 0 0% 98%;                /* Light Gray */
+    --card-foreground: 222.2 47.4% 11.2%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 173 98% 39%;          /* Turquoise */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 173 70% 25%;        /* Darker Turquoise */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 96%;               /* Very Light Gray */
+    --muted-foreground: 222.2 47.4% 50%;
+
+    --accent: 173 98% 39%;           /* Same as primary */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 90%;              /* Light Border */
+    --input: 0 0% 90%;
+    --ring: 173 98% 39%;             /* Turquoise focus ring */
+
+    /* Light Theme Brand Colors */
+    --neon-primary: 173 98% 39%;     /* Turquoise */
+    --neon-secondary: 173 70% 25%;   /* Darker Turquoise */
+    --surface-dark: 0 0% 98%;        /* Light card surface */
+    --surface-darker: 0 0% 100%;     /* White background */
+    --text-light: 222.2 47.4% 11.2%; /* Dark text */
+    --text-muted: 222.2 47.4% 50%;   /* Muted text */
+
+    /* Sidebar (if needed) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 222.2 47.4% 11.2%;
+    --sidebar-primary: 173 98% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 0 0% 90%;
+    --sidebar-ring: 173 98% 39%;
+  }
+
   /* Keep dark theme as fallback but make it same as root */
   .dark {
     --background: 210 10% 3%;

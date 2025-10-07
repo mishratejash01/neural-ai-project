@@ -25,6 +25,8 @@ import ComputerVisionPortfolio from "./pages/ComputerVisionPortfolio";
 import MarketingAutomationPortfolio from "./pages/MarketingAutomationPortfolio";
 import NLPEdTech from "./pages/NLPEdTech";
 import LogisticsOptimization from "./pages/LogisticsOptimization";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import ScrollToTop from "@/components/ScrollToTop"; // <-- 1. Import the new component
 
 const queryClient = new QueryClient();
@@ -58,6 +60,8 @@ const App = () => (
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
