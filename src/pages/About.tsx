@@ -64,7 +64,7 @@ const About = () => {
                              <div className="relative p-8 bg-card/50 rounded-2xl border border-border w-full max-w-md">
                                 <div className="absolute inset-0 bg-cyan-500/10 blur-2xl rounded-full"></div>
                                 <div className="relative flex justify-center items-center space-x-8">
-                                    <a href="https://www.nirmaan.iitm.ac.in/" target="_blank" rel="noopener noreferrer">
+                                    <a href="https://nirmaan.iitm.ac.in/" target="_blank" rel="noopener noreferrer">
                                         <img src={nirmaanLogo} alt="Nirmaan IIT Madras Logo" className="h-20 sm:h-24 w-auto transition-transform duration-300 hover:scale-105" />
                                     </a>
                                     <a href="https://www.iitm.ac.in/" target="_blank" rel="noopener noreferrer">
