@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
@@ -8,23 +8,7 @@ import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
   const location = useLocation();
-
-  useEffect(() => {
-    // Initialize theme from localStorage or default to dark
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const initialTheme = savedTheme || 'dark';
-    setTheme(initialTheme);
-    document.documentElement.classList.toggle('light', initialTheme === 'light');
-  }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('light', newTheme === 'light');
-  };
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -84,18 +68,7 @@ const Header = () => {
               ))}
             </nav>
 
-            <div className="hidden lg:ml-6 lg:flex lg:items-center lg:space-x-3">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-accent transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="h-5 w-5 text-primary" />
-                ) : (
-                  <Moon className="h-5 w-5 text-primary" />
-                )}
-              </button>
+            <div className="hidden lg:ml-6 lg:flex lg:items-center">
               <Link to="/demo">
                 <Button variant="neon-outline" size="sm">
                   Book Demo
@@ -103,18 +76,7 @@ const Header = () => {
               </Link>
             </div>
 
-            <div className="flex items-center space-x-2 lg:hidden">
-              <button
-                onClick={toggleTheme}
-                className="p-2 rounded-lg hover:bg-accent transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun className="h-5 w-5 text-primary" />
-                ) : (
-                  <Moon className="h-5 w-5 text-primary" />
-                )}
-              </button>
+            <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
