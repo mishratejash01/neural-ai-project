@@ -1,6 +1,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Meteors } from "./meteors"; // Import the new Meteors component
+import TiltedCard from "./TiltedCard";
+import { Meteors } from "./meteors";
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -14,11 +15,14 @@ const Card = React.forwardRef<
     )}
     {...props}
   >
-    {children}
+    <TiltedCard>
+      {children}
+    </TiltedCard>
     <Meteors number={20} />
   </div>
 ));
 Card.displayName = "Card";
+
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
