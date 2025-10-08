@@ -4,7 +4,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import BlurText from "@/components/ui/BlurText"; // Import BlurText
+import BlurText from "@/components/ui/BlurText"; // Import the new component
 
 export function SplineHero() {
   return (
