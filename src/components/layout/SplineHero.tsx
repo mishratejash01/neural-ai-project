@@ -4,7 +4,8 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import BlurText from "@/components/ui/BlurText";
+// We are not importing BlurText for this test
+// import BlurText from "@/components/ui/BlurText";
 
 export function SplineHero() {
   return (
@@ -18,22 +19,14 @@ export function SplineHero() {
         {/* Left content */}
         <div className="w-full md:w-1/2 p-8 relative z-10 flex flex-col justify-center items-center md:items-start text-center md:text-left">
           
-          {/* Wrapper for Heading */}
-          <div className="text-4xl md:text-6xl font-bold bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-400">
-            <BlurText
-              text="Engineering the future of Automation"
-              className="text-transparent" // Text is transparent to show gradient
-              animateBy="words"
-              delay={100}
-            />
-          </div>
-
-          <BlurText
-            text="Building intelligent, ethical AI solutions that amplify human potential and help businesses achieve extraordinary results."
-            className="mt-4 text-neutral-300 max-w-lg"
-            animateBy="words"
-            delay={50}
-          />
+          {/* DEBUGGING STEP: Using a simple h1 tag */}
+          <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+            Engineering the future of Automation
+          </h1>
+          
+          <p className="mt-4 text-neutral-300 max-w-lg">
+            Building intelligent, ethical AI solutions that amplify human potential and help businesses achieve extraordinary results.
+          </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center mt-8">
               <Link to="/demo">
