@@ -4,7 +4,7 @@ import { Spotlight } from "@/components/ui/spotlight";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import BlurText from "@/components/ui/BlurText"; // Import the new component
+import BlurText from "@/components/ui/BlurText";
 
 export function SplineHero() {
   return (
@@ -18,12 +18,16 @@ export function SplineHero() {
         {/* Left content */}
         <div className="w-full md:w-1/2 p-8 relative z-10 flex flex-col justify-center items-center md:items-start text-center md:text-left">
           
-          <BlurText
-            text="Engineering the future of Automation"
-            className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400"
-            animateBy="words"
-            delay={100}
-          />
+          {/* Wrapper for Heading */}
+          <div className="text-4xl md:text-6xl font-bold bg-clip-text bg-gradient-to-b from-neutral-50 to-neutral-400">
+            <BlurText
+              text="Engineering the future of Automation"
+              className="text-transparent" // Text is transparent to show gradient
+              animateBy="words"
+              delay={100}
+            />
+          </div>
+
           <BlurText
             text="Building intelligent, ethical AI solutions that amplify human potential and help businesses achieve extraordinary results."
             className="mt-4 text-neutral-300 max-w-lg"
