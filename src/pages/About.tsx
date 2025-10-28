@@ -14,7 +14,7 @@ const About = () => {
             icon: Target,
             title: "Innovation First",
             description: "We push the boundaries of what's possible with AI, always staying ahead of the curve."
-        },ghjkl.,mn
+        },
         {
             icon: Users,
             title: "Client Success",
