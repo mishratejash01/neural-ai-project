@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
 
@@ -9,13 +10,14 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
+  // "Contact" and "Demo" removed from this list. 
+  // "Contact" is now a standalone button.
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
     { href: "/portfolio", label: "Case Studies" },
     { href: "/careers", label: "Careers" },
-    { href: "/contact", label: "Contact" },
   ];
 
   useEffect(() => {
@@ -31,23 +33,25 @@ const Header = () => {
   }, [location.pathname]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans">
       <div
         className={cn(
-          'transition-all duration-300 ease-in-out mx-auto bg-card/95 backdrop-blur-lg',
+          'transition-all duration-300 ease-in-out mx-auto bg-white/90 backdrop-blur-md',
           isScrolled
-            ? 'mt-2 max-w-5xl rounded-2xl border border-border/50'
-            : 'mt-0 max-w-none border-b border-border/50'
+            ? 'mt-2 max-w-5xl rounded-2xl border border-gray-200 shadow-sm'
+            : 'mt-0 max-w-none border-b border-gray-100'
         )}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
+            {/* Logo */}
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center">
                 <img src={neuralAILogo} alt="Neural AI" className="h-10 w-auto" />
               </Link>
             </div>
 
+            {/* Desktop Navigation - Clean Text Links (No Boxes) */}
             <nav className="hidden lg:flex lg:space-x-8">
               {navItems.map((item) => (
                 <Link 
@@ -56,8 +60,8 @@ const Header = () => {
                   className={cn(
                     'text-sm font-medium transition-colors duration-200',
                     location.pathname === item.href
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-black font-semibold'
+                      : 'text-gray-600 hover:text-black'
                   )}
                 >
                   {item.label}
@@ -65,10 +69,22 @@ const Header = () => {
               ))}
             </nav>
 
+            {/* Desktop Contact Button - Black Button */}
+            <div className="hidden lg:ml-6 lg:flex lg:items-center">
+              <Link to="/contact">
+                <Button 
+                  className="bg-black text-white hover:bg-gray-800 transition-colors rounded-lg px-6 font-medium"
+                >
+                  Contact Now
+                </Button>
+              </Link>
+            </div>
+
+            {/* Mobile Menu Button */}
             <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-black focus:outline-none"
                 aria-controls="mobile-menu"
                 aria-expanded={isMenuOpen}
               >
@@ -79,23 +95,31 @@ const Header = () => {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="lg:hidden" id="mobile-menu">
-            <div className="space-y-1 px-4 pb-3 pt-2 bg-background/80 backdrop-blur-lg border-t border-border/50">
+            <div className="space-y-1 px-4 pb-4 pt-2 bg-white border-t border-gray-100">
               {navItems.map((item) => (
                 <Link 
                   key={item.href} 
                   to={item.href}
                   className={cn(
-                    'block py-2 text-base font-medium transition-colors',
+                    'block py-3 text-base font-medium transition-colors border-b border-gray-50',
                     location.pathname === item.href
-                      ? 'text-primary'
-                      : 'text-muted-foreground hover:text-primary'
+                      ? 'text-black'
+                      : 'text-gray-600 hover:text-black'
                   )}
                 >
                   {item.label}
                 </Link>
               ))}
+              <div className="pt-4 pb-2">
+                <Link to="/contact">
+                    <Button className="w-full bg-black text-white hover:bg-gray-800 h-12 text-base">
+                      Contact Now
+                    </Button>
+                </Link>
+              </div>
             </div>
           </div>
         )}
