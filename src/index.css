@@ -2,105 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Dark Tech-Forward Design System with Neon Green Accents
-All colors MUST be HSL format for consistency */
+/* Light Tech-Forward Design System with Neon Green Accents
+   All colors MUST be HSL format for consistency */
 
 @layer base {
   :root {
-    /* Dark Tech Theme with Neon Green (#00F1A0) */
-    --background: 210 10% 3%;        /* #070707 - Ultra dark */
-    --foreground: 150 100% 95%;      /* #E9FFF7 - Light green-tinted text */
+    /* Light Tech Theme */
+    --background: 0 0% 100%;         /* #FFFFFF - White */
+    --foreground: 210 10% 10%;       /* #1A1D21 - Dark Gray text */
 
-    --card: 210 8% 7%;               /* #0F1113 - Card surface */
-    --card-foreground: 150 100% 95%; /* #E9FFF7 */
+    --card: 0 0% 98%;                /* #FAFAFA - Slightly off-white surface */
+    --card-foreground: 210 10% 10%;  /* #1A1D21 */
 
-    --popover: 210 8% 7%;
-    --popover-foreground: 150 100% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 10% 10%;
 
-    --primary: 160 100% 47%;         /* #00F1A0 - Neon green */
-    --primary-foreground: 210 10% 3%;
+    --primary: 160 100% 40%;         /* #00CC88 - Slightly darker neon green for contrast on white */
+    --primary-foreground: 0 0% 100%; /* White text on green buttons */
 
-    --secondary: 160 81% 32%;        /* #00BFA6 - Darker green accent */
-    --secondary-foreground: 150 100% 95%;
+    --secondary: 160 81% 90%;        /* Very light green for secondary backgrounds */
+    --secondary-foreground: 160 100% 35%; /* Darker green text */
 
-    --muted: 210 8% 7%;              /* Same as card for consistency */
-    --muted-foreground: 150 20% 65%; /* #A6B0A6 - Muted green */
+    --muted: 210 10% 96%;            /* #F3F4F6 - Light gray mute */
+    --muted-foreground: 210 5% 40%;  /* #646A73 - Muted gray text */
 
-    --accent: 160 100% 47%;          /* Same as primary */
-    --accent-foreground: 210 10% 3%;
+    --accent: 160 100% 40%;          
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 210 8% 12%;            /* Subtle borders */
-    --input: 210 8% 12%;
-    --ring: 160 100% 47%;            /* Neon focus ring */
+    --border: 210 10% 90%;           /* Light borders */
+    --input: 210 10% 90%;
+    --ring: 160 100% 40%;            /* Focus ring */
 
-    --radius: 0.75rem;               /* Modern rounded corners */
+    --radius: 0.75rem;
 
-    /* Neural AI Dark Brand Colors */
-    --neon-primary: 160 100% 47%;    /* #00F1A0 - Main neon */
-    --neon-secondary: 160 81% 32%;   /* #00BFA6 - Secondary accent */
-    --surface-dark: 210 8% 7%;       /* #0F1113 - Card surface */
-    --surface-darker: 210 10% 3%;    /* #070707 - Page background */
-    --text-light: 150 100% 95%;      /* #E9FFF7 - Primary text */
-    --text-muted: 150 20% 65%;       /* #A6B0A6 - Muted text */
+    /* Neural AI Brand Colors - Adapted for Light Mode */
+    --neon-primary: 160 100% 40%;    
+    --neon-secondary: 160 81% 35%;   
+    --surface-dark: 210 10% 96%;     /* Light gray for "dark" surfaces in light mode */
+    --surface-darker: 0 0% 100%;     /* White */
+    --text-light: 210 10% 10%;       /* Dark text */
+    --text-muted: 210 5% 40%;        
     
-    /* Neon Glow Effects */
-    --glow-primary: 0 4px 30px rgba(0, 241, 160, 0.14);
-    --glow-intense: 0 0 40px rgba(0, 241, 160, 0.25);
-    --glow-soft: 0 2px 20px rgba(0, 241, 160, 0.08);
+    /* Neon Glow Effects - Subtle for Light Mode */
+    --glow-primary: 0 4px 20px rgba(0, 204, 136, 0.2);
+    --glow-intense: 0 0 30px rgba(0, 204, 136, 0.3);
+    --glow-soft: 0 2px 10px rgba(0, 204, 136, 0.1);
     
     /* Tech Gradients */
-    --gradient-neon: linear-gradient(135deg, hsl(var(--neon-primary)), hsl(var(--neon-secondary)));
-    --gradient-dark: linear-gradient(135deg, hsl(var(--surface-darker)), hsl(var(--surface-dark)));
-    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 241, 160, 0.15) 0%, transparent 70%);
-    --gradient-hero: linear-gradient(135deg, rgba(0, 241, 160, 0.05) 0%, rgba(7, 7, 7, 1) 100%);
+    --gradient-neon: linear-gradient(135deg, hsl(160, 100%, 45%), hsl(160, 80%, 40%));
+    --gradient-dark: linear-gradient(135deg, #f3f4f6, #ffffff);
+    --gradient-glow: radial-gradient(ellipse at center, rgba(0, 204, 136, 0.1) 0%, transparent 70%);
+    --gradient-hero: linear-gradient(135deg, rgba(0, 204, 136, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
     
-    /* Professional Shadows */
-    --shadow-neon: 0 4px 20px -4px rgba(0, 241, 160, 0.15);
-    --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
-    --shadow-elevated: 0 16px 64px -16px rgba(0, 0, 0, 0.6);
-    --shadow-glow: 0 0 0 1px rgba(0, 241, 160, 0.1);
+    /* Professional Shadows - Stronger for Light Mode depth */
+    --shadow-neon: 0 4px 20px -4px rgba(0, 204, 136, 0.25);
+    --shadow-card: 0 4px 12px -2px rgba(0, 0, 0, 0.05);
+    --shadow-elevated: 0 10px 30px -4px rgba(0, 0, 0, 0.08);
+    --shadow-glow: 0 0 0 1px rgba(0, 204, 136, 0.2);
     
     /* Smooth Tech Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
     --transition-glow: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-
-    /* Sidebar (if needed) */
-    --sidebar-background: 210 8% 5%;
-    --sidebar-foreground: 150 100% 95%;
-    --sidebar-primary: 160 100% 47%;
-    --sidebar-primary-foreground: 210 10% 3%;
-    --sidebar-accent: 210 8% 7%;
-    --sidebar-accent-foreground: 150 100% 95%;
-    --sidebar-border: 210 8% 12%;
-    --sidebar-ring: 160 100% 47%;
   }
 
-
-  /* Keep dark theme as fallback but make it same as root */
+  /* Force "Dark Mode" classes to use Light variables to prevent switching */
   .dark {
-    --background: 210 10% 3%;
-    --foreground: 150 100% 95%;
-    --card: 210 8% 7%;
-    --card-foreground: 150 100% 95%;
-    --popover: 210 8% 7%;
-    --popover-foreground: 150 100% 95%;
-    --primary: 160 100% 47%;
-    --primary-foreground: 210 10% 3%;
-    --secondary: 160 81% 32%;
-    --secondary-foreground: 150 100% 95%;
-    --muted: 210 8% 7%;
-    --muted-foreground: 150 20% 65%;
-    --accent: 160 100% 47%;
-    --accent-foreground: 210 10% 3%;
+    --background: 0 0% 100%;
+    --foreground: 210 10% 10%;
+    --card: 0 0% 98%;
+    --card-foreground: 210 10% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 10% 10%;
+    --primary: 160 100% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 160 81% 90%;
+    --secondary-foreground: 160 100% 35%;
+    --muted: 210 10% 96%;
+    --muted-foreground: 210 5% 40%;
+    --accent: 160 100% 40%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 210 8% 12%;
-    --input: 210 8% 12%;
-    --ring: 160 100% 47%;
+    --border: 210 10% 90%;
+    --input: 210 10% 90%;
+    --ring: 160 100% 40%;
   }
 }
 
@@ -114,10 +103,10 @@ All colors MUST be HSL format for consistency */
     font-family: 'Inter', 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background: hsl(var(--background));
     background-attachment: fixed;
-    /* Subtle tech texture */
+    /* Subtle tech texture - Gray instead of Neon for Light Mode subtlety */
     background-image: 
-      radial-gradient(circle at 25% 25%, rgba(0, 241, 160, 0.02) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, rgba(0, 241, 160, 0.01) 0%, transparent 50%);
+      radial-gradient(circle at 25% 25%, rgba(0, 0, 0, 0.02) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.01) 0%, transparent 50%);
   }
 
   /* Smooth scrolling */
@@ -133,7 +122,8 @@ All colors MUST be HSL format for consistency */
 }
 
 @layer utilities {
-  /* Neon Gradients */
+  /* Utilities remain mostly the same, but rely on the new variables */
+  
   .gradient-neon {
     background: var(--gradient-neon);
   }
@@ -150,7 +140,6 @@ All colors MUST be HSL format for consistency */
     background: var(--gradient-glow);
   }
   
-  /* Neon Shadows & Glows */
   .shadow-neon {
     box-shadow: var(--shadow-neon);
   }
@@ -179,7 +168,6 @@ All colors MUST be HSL format for consistency */
     box-shadow: var(--glow-soft);
   }
   
-  /* Transitions */
   .transition-smooth {
     transition: var(--transition-smooth);
   }
@@ -192,10 +180,10 @@ All colors MUST be HSL format for consistency */
     transition: var(--transition-glow);
   }
   
-  /* Text Effects */
   .text-neon {
     color: hsl(var(--neon-primary));
-    text-shadow: 0 0 5px rgba(0, 241, 160, 0.3);
+    /* Reduced text shadow for better readability on light background */
+    text-shadow: 0 0 1px rgba(0, 204, 136, 0.2); 
   }
   
   .text-gradient {
@@ -205,7 +193,6 @@ All colors MUST be HSL format for consistency */
     background-clip: text;
   }
 
-  /* Hover Effects */
   .hover-lift {
     @apply transition-smooth hover:-translate-y-2 hover:shadow-elevated;
   }
@@ -252,104 +239,67 @@ All colors MUST be HSL format for consistency */
     left: 0;
     right: 0;
     bottom: 0;
+    /* Subtle grey/green particles for light mode */
     background-image: 
-      radial-gradient(circle at 20% 80%, rgba(0, 241, 160, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 20%, rgba(0, 241, 160, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 40% 40%, rgba(0, 241, 160, 0.05) 0%, transparent 50%);
+      radial-gradient(circle at 20% 80%, rgba(0, 204, 136, 0.08) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(0, 204, 136, 0.06) 0%, transparent 50%),
+      radial-gradient(circle at 40% 40%, rgba(0, 0, 0, 0.03) 0%, transparent 50%);
     animation: particles 20s linear infinite;
     pointer-events: none;
   }
 
-  /* Tech Grid Pattern */
+  /* Tech Grid Pattern - Darker lines for visibility on white */
   .tech-grid {
     background-image: 
-      linear-gradient(rgba(0, 241, 160, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 241, 160, 0.03) 1px, transparent 1px);
+      linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
     background-size: 60px 60px;
   }
 
-  /* Backdrop Blur */
+  /* Backdrop Blur - Light glass effect */
   .backdrop-blur-neon {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    background: rgba(15, 17, 19, 0.8);
-    border: 1px solid rgba(0, 241, 160, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 204, 136, 0.2);
   }
 }
 
-/* Enhanced Animations */
+/* Animations remain the same */
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes glow-pulse {
-  from {
-    box-shadow: 0 0 20px rgba(0, 241, 160, 0.2);
-  }
-  to {
-    box-shadow: 0 0 40px rgba(0, 241, 160, 0.4);
-  }
+  from { box-shadow: 0 0 20px rgba(0, 204, 136, 0.1); }
+  to { box-shadow: 0 0 30px rgba(0, 204, 136, 0.25); }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes particles {
-  0% {
-    opacity: 0.8;
-    transform: rotate(0deg);
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.8;
-    transform: rotate(360deg);
-  }
+  0% { opacity: 0.8; transform: rotate(0deg); }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; transform: rotate(360deg); }
 }
 
-/* Neural Network Lines Animation */
 @keyframes neural-pulse {
-  0%, 100% {
-    opacity: 0.3;
-  }
-  50% {
-    opacity: 1;
-  }
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }
 
-/* Typing Effect */
 @keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
 .loader {
@@ -364,10 +314,6 @@ All colors MUST be HSL format for consistency */
 }
 
 @keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
