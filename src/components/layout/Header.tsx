@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
 
@@ -14,7 +13,6 @@ const Header = () => {
     { href: "/", label: "Home" },
     { href: "/about", label: "About" },
     { href: "/services", label: "Services" },
-    { href: "/demo", label: "Demo" },
     { href: "/portfolio", label: "Case Studies" },
     { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
@@ -50,31 +48,22 @@ const Header = () => {
               </Link>
             </div>
 
-            <nav className="hidden lg:flex lg:space-x-2">
+            <nav className="hidden lg:flex lg:space-x-8">
               {navItems.map((item) => (
-                <Link key={item.href} to={item.href}>
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      'transition-smooth',
-                      location.pathname === item.href
-                        ? 'text-primary'
-                        : 'text-muted-foreground hover:text-primary'
-                    )}
-                  >
-                    {item.label}
-                  </Button>
+                <Link 
+                  key={item.href} 
+                  to={item.href}
+                  className={cn(
+                    'text-sm font-medium transition-colors duration-200',
+                    location.pathname === item.href
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
+                  )}
+                >
+                  {item.label}
                 </Link>
               ))}
             </nav>
-
-            <div className="hidden lg:ml-6 lg:flex lg:items-center">
-              <Link to="/demo">
-                <Button variant="neon-outline" size="sm">
-                  Book Demo
-                </Button>
-              </Link>
-            </div>
 
             <div className="flex items-center lg:hidden">
               <button
@@ -92,27 +81,21 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="lg:hidden" id="mobile-menu">
-            <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3 bg-background/80 backdrop-blur-lg border-t border-border/50">
+            <div className="space-y-1 px-4 pb-3 pt-2 bg-background/80 backdrop-blur-lg border-t border-border/50">
               {navItems.map((item) => (
-                <Link key={item.href} to={item.href}>
-                  <Button
-                    variant="ghost"
-                    className={cn(
-                      'block w-full justify-start pl-3', // Changed text-left to justify-start and added padding
-                      location.pathname === item.href
-                        ? 'text-primary bg-primary/10' // This is the updated, subtle highlight
-                        : 'text-muted-foreground hover:text-primary hover:bg-accent'
-                    )}
-                  >
-                    {item.label}
-                  </Button>
+                <Link 
+                  key={item.href} 
+                  to={item.href}
+                  className={cn(
+                    'block py-2 text-base font-medium transition-colors',
+                    location.pathname === item.href
+                      ? 'text-primary'
+                      : 'text-muted-foreground hover:text-primary'
+                  )}
+                >
+                  {item.label}
                 </Link>
               ))}
-              <div className="border-t border-border/50 pt-4 mt-4">
-                <Link to="/demo">
-                    <Button variant="neon-outline" className="w-full">Book Demo</Button>
-                </Link>
-              </div>
             </div>
           </div>
         )}
