@@ -30,24 +30,24 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none font-sans">
       <div 
         className={cn(
-          "pointer-events-auto mt-6 w-[95%] max-w-7xl", // Increased max-width slightly for better proportion
+          "pointer-events-auto mt-6 w-[95%] max-w-7xl",
           "bg-white/95 backdrop-blur-sm border border-gray-100",
-          "rounded-lg transition-all duration-300" // Reduced rounding (Sharper corners)
+          "rounded-lg transition-all duration-300" 
         )}
       >
-        <div className="px-6 md:px-8 h-20 flex items-center justify-between"> {/* Increased Header Height to h-20 */}
+        <div className="px-4 md:px-6 h-16 flex items-center justify-between"> {/* Reduced height to h-16 */}
           
           {/* 1. LOGO */}
           <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
             <img 
               src={neuralAILogo} 
               alt="Neural AI" 
-              className="h-9 w-auto object-contain" // Slightly larger logo to match bigger header
+              className="h-8 w-auto object-contain" 
             />
           </Link>
 
-          {/* 2. NAVIGATION - Premium Semi-Bold Inter */}
-          <nav className="hidden md:flex items-center gap-10">
+          {/* 2. NAVIGATION */}
+          <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -64,23 +64,23 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Bigger Block, Sharper Corners */}
+          {/* 3. CONTACT BUTTON - Increased Width & Presence */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
               className={cn(
-                "group relative h-12 px-8", // Bigger Size (Height & Width)
+                "group relative h-12 px-10", // Increased width (px-10) to make the block bigger
                 "bg-black text-white",
-                "rounded-md", // Reduced Rounding (Boxier)
+                "rounded-md", 
                 "overflow-hidden flex items-center justify-center transition-colors hover:bg-gray-900"
               )}
             >
               <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
-                <span className="font-semibold text-base tracking-wide">Contact Us</span> {/* Increased Font Size */}
+                <span className="font-semibold text-base tracking-wide">Contact Us</span>
               </div>
               
               {/* Sliding Arrow */}
-              <div className="absolute right-4 opacity-0 translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+              <div className="absolute right-5 opacity-0 translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
                 <ChevronRight className="w-5 h-5 text-white" />
               </div>
             </button>
@@ -92,7 +92,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-black hover:bg-gray-100 rounded-md transition-colors"
             >
-              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
