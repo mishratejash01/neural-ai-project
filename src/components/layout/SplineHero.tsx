@@ -1,19 +1,16 @@
-import { SplineScene } from "@/components/ui/spline";
+import Spline from '@splinetool/react-spline';
 import { Card } from "@/components/ui/card";
-import { Spotlight } from "@/components/ui/spotlight";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Siren, ScanEye, Activity, Fingerprint, Crosshair, Lock } from "lucide-react";
+import { ArrowRight, Crosshair, Fingerprint } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 export function SplineHero() {
   return (
     <Card className="w-full h-screen md:-mt-16 bg-black/[0.96] relative overflow-hidden border-none rounded-none">
-      <Spotlight
-        className="-top-40 left-0 md:left-60 md:-top-20"
-        fill="hsl(var(--primary))"
-      />
+      
+      {/* Removed Spotlight (Star Shot) */}
       
       <div className="flex flex-col md:flex-row h-full">
         {/* Left content - Text & CTA */}
@@ -24,8 +21,9 @@ export function SplineHero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400">
-                Predict & Prevent Crime with <span className="text-primary">Neural AI</span>
+              {/* NEW HEADLINE */}
+              <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-400 capitalize">
+                We don’t wait for thefts to happen.
               </h1>
             </motion.div>
             
@@ -33,9 +31,10 @@ export function SplineHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="mt-4 text-neutral-300 text-lg max-w-lg"
+              className="mt-4 text-neutral-300 text-lg max-w-lg capitalize"
             >
-              Real-time theft detection and behavioral analytics. Our smart models identify suspicious activity before the crime happens.
+              {/* NEW SUBTEXT */}
+              Our AI reads behavior and flags trouble before it begins.
             </motion.p>
             
             <motion.div 
@@ -44,13 +43,16 @@ export function SplineHero() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-6 justify-center md:justify-start mt-8"
             >
-              <Link to="/demo">
+              {/* BUTTON 1: Services */}
+              <Link to="/services">
                 <Button variant="default" size="lg" className="bg-primary hover:bg-primary/90 text-black font-bold group">
-                  Deploy Security Model
+                  Services
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link to="/services">
+              
+              {/* BUTTON 2: View Case Studies */}
+              <Link to="/portfolio">
                 <Button variant="outline" size="lg" className="border-primary/20 text-primary hover:bg-primary/10">
                   View Case Studies
                 </Button>
@@ -65,13 +67,13 @@ export function SplineHero() {
           {/* HOLOGRAPHIC INTERFACE LAYER */}
           <div className="absolute inset-0 z-20 pointer-events-none">
              
-             {/* HAND NODE CONTAINER - Centers the entire holographic array */}
+             {/* HAND NODE CONTAINER */}
              <motion.div 
                className="absolute top-[50%] left-[50%] w-0 h-0"
                animate={{ y: [-15, 15, -15] }}
                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
              >
-                {/* 1. SVG CONNECTING LINES (600x600 canvas centered on node) */}
+                {/* 1. SVG CONNECTING LINES */}
                 <svg className="absolute overflow-visible" width="600" height="600" viewBox="0 0 600 600" style={{ top: -300, left: -300 }}>
                    <defs>
                      <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -92,10 +94,9 @@ export function SplineHero() {
                    <circle cx="300" cy="300" r="4" fill="hsl(var(--primary))" filter="url(#glow)" />
                    <circle cx="300" cy="300" r="20" stroke="hsl(var(--primary))" strokeWidth="1" fill="none" opacity="0.5" />
 
-                   {/* Line to Top-Right Widget (Target: X+180, Y-120) */}
-                   {/* Line goes from Center (300,300) -> Knee (400, 300) -> End (480, 180) for angular look */}
+                   {/* Line to Top-Right Widget */}
                    <motion.polyline 
-                     points="300,300 420,300 480,240" 
+                     points="300,300 360,300 380,220" 
                      fill="none"
                      stroke="url(#techGradient)"
                      strokeWidth="2"
@@ -105,7 +106,7 @@ export function SplineHero() {
                      transition={{ duration: 1, delay: 0.5 }}
                    />
                    
-                   {/* Line to Bottom-Left Widget (Target: X-200, Y+100) */}
+                   {/* Line to Bottom-Left Widget */}
                    <motion.polyline 
                      points="300,300 200,300 120,380" 
                      fill="none"
@@ -118,17 +119,17 @@ export function SplineHero() {
                    />
                 </svg>
 
-                {/* 2. TECH WIDGETS (Positioned exactly at SVG endpoints) */}
+                {/* 2. TECH WIDGETS */}
                 
-                {/* WIDGET A: Threat Metrics (Top Right) */}
+                {/* WIDGET A: Threat Metrics */}
                 <motion.div
                   className="absolute"
-                  style={{ top: -60, left: 180 }} // X: +180 from center
+                  style={{ top: -80, left: 80 }}
                   initial={{ x: 20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 1 }}
                 >
-                  <TechBlock className="w-64">
+                  <TechBlock className="w-56 md:w-64">
                     <div className="flex justify-between items-center mb-3 border-b border-primary/20 pb-2">
                         <div className="flex items-center gap-2 text-primary">
                             <Crosshair className="w-4 h-4 animate-spin-slow" />
@@ -157,15 +158,15 @@ export function SplineHero() {
                   </TechBlock>
                 </motion.div>
 
-                {/* WIDGET B: Identity Match (Bottom Left) */}
+                {/* WIDGET B: Identity Match */}
                 <motion.div
                   className="absolute"
-                  style={{ top: 80, left: -340 }} // X: -180 (end point) - width (approx 160)
+                  style={{ top: 80, left: -300 }} 
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 1.2 }}
                 >
-                   <TechBlock className="w-56" color="cyan">
+                   <TechBlock className="w-48 md:w-56" color="cyan">
                       <div className="flex items-start gap-3">
                         <div className="w-10 h-10 bg-cyan-500/10 border border-cyan-500/50 flex items-center justify-center">
                             <Fingerprint className="w-6 h-6 text-cyan-500" />
@@ -185,30 +186,28 @@ export function SplineHero() {
              </motion.div>
           </div>
 
-          <SplineScene 
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-            className="w-full h-full"
-          />
+          <div className="w-full h-full">
+            <Spline 
+                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                className="w-full h-full"
+            />
+          </div>
         </div>
       </div>
     </Card>
   )
 }
 
-// Reusable Tech Block Component
 const TechBlock = ({ children, className, color = "primary" }: { children: React.ReactNode, className?: string, color?: "primary" | "cyan" }) => {
     const borderColor = color === "primary" ? "border-primary/40" : "border-cyan-500/40";
     const bgColor = "bg-black/90";
 
     return (
         <div className={cn("relative p-4 backdrop-blur-sm border", borderColor, bgColor, className)}>
-            {/* Corner Brackets */}
             <div className={cn("absolute -top-[1px] -left-[1px] w-2 h-2 border-t-2 border-l-2", borderColor)} />
             <div className={cn("absolute -top-[1px] -right-[1px] w-2 h-2 border-t-2 border-r-2", borderColor)} />
             <div className={cn("absolute -bottom-[1px] -left-[1px] w-2 h-2 border-b-2 border-l-2", borderColor)} />
             <div className={cn("absolute -bottom-[1px] -right-[1px] w-2 h-2 border-b-2 border-r-2", borderColor)} />
-            
-            {/* Content */}
             {children}
         </div>
     );
