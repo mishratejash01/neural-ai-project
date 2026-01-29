@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -9,6 +9,7 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { href: "/", label: "Home" },
@@ -29,6 +30,11 @@ const Header = () => {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
+
+  const handleContactClick = () => {
+    navigate('/contact');
+    setIsMenuOpen(false);
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans">
@@ -67,15 +73,13 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Desktop Contact Button - Fixed Nesting */}
+            {/* Desktop Contact Button - Fixed: Removed asChild */}
             <div className="hidden lg:ml-6 lg:flex lg:items-center">
               <Button 
-                asChild
+                onClick={handleContactClick}
                 className="bg-black text-white hover:bg-gray-800 transition-colors rounded-lg px-6 font-medium"
               >
-                <Link to="/contact">
-                  Contact Now
-                </Link>
+                Contact Now
               </Button>
             </div>
 
@@ -113,13 +117,12 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-4 pb-2">
+                {/* Fixed: Removed Link wrapper and used onClick handler instead */}
                 <Button 
-                  asChild
+                  onClick={handleContactClick}
                   className="w-full bg-black text-white hover:bg-gray-800 h-12 text-base"
                 >
-                  <Link to="/contact">
-                    Contact Now
-                  </Link>
+                  Contact Now
                 </Button>
               </div>
             </div>
