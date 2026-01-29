@@ -30,24 +30,24 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none font-sans">
       <div 
         className={cn(
-          "pointer-events-auto mt-4 w-[95%] max-w-6xl",
-          "bg-white/95 backdrop-blur-sm border border-gray-100", // Clean border, no shadow
-          "rounded-xl transition-all duration-300" // Slight rounded corners (Rectangular feel)
+          "pointer-events-auto mt-6 w-[95%] max-w-7xl", // Increased max-width slightly for better proportion
+          "bg-white/95 backdrop-blur-sm border border-gray-100",
+          "rounded-lg transition-all duration-300" // Reduced rounding (Sharper corners)
         )}
       >
-        <div className="px-6 md:px-8 h-16 flex items-center justify-between">
+        <div className="px-6 md:px-8 h-20 flex items-center justify-between"> {/* Increased Header Height to h-20 */}
           
           {/* 1. LOGO */}
           <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
             <img 
               src={neuralAILogo} 
               alt="Neural AI" 
-              className="h-8 w-auto object-contain"
+              className="h-9 w-auto object-contain" // Slightly larger logo to match bigger header
             />
           </Link>
 
           {/* 2. NAVIGATION - Premium Semi-Bold Inter */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -64,19 +64,24 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Rectangular, No Shadow, Arrow Reveal */}
+          {/* 3. CONTACT BUTTON - Bigger Block, Sharper Corners */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
-              className="group relative h-10 px-6 bg-black text-white rounded-lg overflow-hidden flex items-center justify-center transition-colors hover:bg-gray-900"
+              className={cn(
+                "group relative h-12 px-8", // Bigger Size (Height & Width)
+                "bg-black text-white",
+                "rounded-md", // Reduced Rounding (Boxier)
+                "overflow-hidden flex items-center justify-center transition-colors hover:bg-gray-900"
+              )}
             >
               <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
-                <span className="font-semibold text-sm tracking-wide">Contact Us</span>
+                <span className="font-semibold text-base tracking-wide">Contact Us</span> {/* Increased Font Size */}
               </div>
               
               {/* Sliding Arrow */}
-              <div className="absolute right-3 opacity-0 translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                <ChevronRight className="w-4 h-4 text-white" />
+              <div className="absolute right-4 opacity-0 translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                <ChevronRight className="w-5 h-5 text-white" />
               </div>
             </button>
           </div>
@@ -87,20 +92,20 @@ const Header = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-black hover:bg-gray-100 rounded-md transition-colors"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-xl border border-gray-100 md:hidden flex flex-col gap-2 mx-0 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-lg border border-gray-100 md:hidden flex flex-col gap-2 mx-0 animate-in fade-in slide-in-from-top-2 duration-200">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "p-3 rounded-lg text-left font-semibold tracking-tight transition-colors",
+                  "p-4 rounded-md text-left font-semibold tracking-tight transition-colors",
                   location.pathname === item.href
                     ? "bg-gray-50 text-black"
                     : "text-gray-500 hover:bg-gray-50 hover:text-black"
@@ -111,9 +116,9 @@ const Header = () => {
             ))}
             <button
               onClick={handleContactClick}
-              className="mt-2 w-full h-12 bg-black text-white rounded-lg font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-lg"
             >
-              Contact Us <ChevronRight size={16} />
+              Contact Us <ChevronRight size={20} />
             </button>
           </div>
         )}
