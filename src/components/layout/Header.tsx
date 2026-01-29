@@ -30,14 +30,14 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none font-sans">
       <div 
         className={cn(
-          "pointer-events-auto mt-4 w-[95%] max-w-5xl",
-          "bg-white/80 backdrop-blur-md border border-white/20 shadow-lg",
-          "rounded-full transition-all duration-300"
+          "pointer-events-auto mt-4 w-[95%] max-w-6xl",
+          "bg-white/95 backdrop-blur-sm border border-gray-100", // Clean border, no shadow
+          "rounded-xl transition-all duration-300" // Slight rounded corners (Rectangular feel)
         )}
       >
         <div className="px-6 md:px-8 h-16 flex items-center justify-between">
           
-          {/* 1. LOGO - Clean, no boxing */}
+          {/* 1. LOGO */}
           <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
             <img 
               src={neuralAILogo} 
@@ -46,36 +46,32 @@ const Header = () => {
             />
           </Link>
 
-          {/* 2. NAVIGATION (Tabs) - Inter Font */}
+          {/* 2. NAVIGATION - Premium Semi-Bold Inter */}
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "text-sm font-medium transition-colors duration-200 relative",
+                  "text-sm font-semibold tracking-tight transition-colors duration-200",
                   location.pathname === item.href
-                    ? "text-black font-semibold"
+                    ? "text-black"
                     : "text-gray-500 hover:text-black"
                 )}
               >
                 {item.label}
-                {/* Active Indicator Dot */}
-                {location.pathname === item.href && (
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-black rounded-full" />
-                )}
               </Link>
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Black Block with Arrow Reveal */}
+          {/* 3. CONTACT BUTTON - Rectangular, No Shadow, Arrow Reveal */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
-              className="group relative h-10 px-6 bg-black text-white rounded-full overflow-hidden flex items-center justify-center transition-all hover:bg-gray-900 shadow-md hover:shadow-lg"
+              className="group relative h-10 px-6 bg-black text-white rounded-lg overflow-hidden flex items-center justify-center transition-colors hover:bg-gray-900"
             >
               <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
-                <span className="font-medium text-sm">Contact Us</span>
+                <span className="font-semibold text-sm tracking-wide">Contact Us</span>
               </div>
               
               {/* Sliding Arrow */}
@@ -89,7 +85,7 @@ const Header = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-gray-600 hover:text-black transition-colors"
+              className="p-2 text-black hover:bg-gray-100 rounded-md transition-colors"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -98,15 +94,15 @@ const Header = () => {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-3xl border border-gray-100 shadow-xl md:hidden flex flex-col gap-2 mx-2 animate-in fade-in slide-in-from-top-4 duration-200">
+          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-xl border border-gray-100 md:hidden flex flex-col gap-2 mx-0 animate-in fade-in slide-in-from-top-2 duration-200">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "p-3 rounded-xl text-center font-medium transition-colors",
+                  "p-3 rounded-lg text-left font-semibold tracking-tight transition-colors",
                   location.pathname === item.href
-                    ? "bg-gray-100 text-black"
+                    ? "bg-gray-50 text-black"
                     : "text-gray-500 hover:bg-gray-50 hover:text-black"
                 )}
               >
@@ -115,7 +111,7 @@ const Header = () => {
             ))}
             <button
               onClick={handleContactClick}
-              className="mt-2 w-full h-12 bg-black text-white rounded-xl font-medium flex items-center justify-center gap-2 active:scale-95 transition-transform"
+              className="mt-2 w-full h-12 bg-black text-white rounded-lg font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform"
             >
               Contact Us <ChevronRight size={16} />
             </button>
