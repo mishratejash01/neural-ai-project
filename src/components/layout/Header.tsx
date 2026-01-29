@@ -27,24 +27,23 @@ const Header = () => {
   };
 
   return (
-    // Updated z-index to z-[1000] to ensure it is above absolutely everything
     <header className="fixed top-0 left-0 right-0 z-[1000] flex justify-center pointer-events-none font-sans">
       <div 
         className={cn(
           "pointer-events-auto mt-6 w-[95%] max-w-7xl",
-          "bg-white border border-gray-100", // Solid White, No Transparency
-          "rounded-lg transition-all duration-300 shadow-sm" // Added subtle shadow-sm for depth separation
+          "bg-white border border-gray-100", 
+          "rounded-lg transition-all duration-300 shadow-sm"
         )}
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
           
-          {/* 1. LOGO IN BLACK CARD */}
+          {/* 1. LOGO IN BLACK CARD - Increased Size */}
           <Link to="/" className="flex-shrink-0 group hover:opacity-90 transition-opacity">
             <div className="bg-black rounded-md p-2 flex items-center justify-center">
               <img 
                 src={neuralAILogo} 
                 alt="Neural AI" 
-                className="h-6 w-auto object-contain" 
+                className="h-8 w-auto object-contain" // Increased from h-6 to h-8
               />
             </div>
           </Link>
