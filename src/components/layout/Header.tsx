@@ -31,7 +31,8 @@ const Header = () => {
       <div 
         className={cn(
           "pointer-events-auto mt-6 w-[95%] max-w-7xl",
-          "bg-white/95 backdrop-blur-sm border border-gray-100",
+          // Changed to solid white, removed transparency and blur
+          "bg-white border border-gray-100", 
           "rounded-lg transition-all duration-300"
         )}
       >
@@ -43,19 +44,19 @@ const Header = () => {
               <img 
                 src={neuralAILogo} 
                 alt="Neural AI" 
-                className="h-6 w-auto object-contain" // Adjusted height to fit inside the card padding
+                className="h-6 w-auto object-contain" 
               />
             </div>
           </Link>
 
-          {/* 2. NAVIGATION */}
+          {/* 2. NAVIGATION - Inter Font Enforced */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "text-base font-semibold tracking-tight transition-colors duration-200",
+                  "text-base font-sans font-semibold tracking-tight transition-colors duration-200",
                   location.pathname === item.href
                     ? "text-black"
                     : "text-gray-500 hover:text-black"
@@ -66,7 +67,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON */}
+          {/* 3. CONTACT BUTTON - Big Block */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
@@ -78,7 +79,7 @@ const Header = () => {
               )}
             >
               <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
-                <span className="font-semibold text-lg tracking-wide">Contact Us</span>
+                <span className="font-semibold text-lg tracking-wide font-sans">Contact Us</span>
               </div>
               
               {/* Sliding Arrow */}
@@ -101,13 +102,13 @@ const Header = () => {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-lg border border-gray-100 md:hidden flex flex-col gap-2 mx-0 animate-in fade-in slide-in-from-top-2 duration-200">
+          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-lg border border-gray-100 md:hidden flex flex-col gap-2 mx-0 animate-in fade-in slide-in-from-top-2 duration-200 shadow-xl">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "p-4 rounded-md text-left font-semibold tracking-tight transition-colors text-lg",
+                  "p-4 rounded-md text-left font-sans font-semibold tracking-tight transition-colors text-lg",
                   location.pathname === item.href
                     ? "bg-gray-50 text-black"
                     : "text-gray-500 hover:bg-gray-50 hover:text-black"
@@ -118,7 +119,7 @@ const Header = () => {
             ))}
             <button
               onClick={handleContactClick}
-              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-xl"
+              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-xl font-sans"
             >
               Contact Us <ChevronRight size={22} />
             </button>
