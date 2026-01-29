@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,14 +18,7 @@ const Header = () => {
     { href: "/careers", label: "Careers" },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
+  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -37,21 +29,24 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans">
+    <header className="fixed top-0 left-0 right-0 z-50 font-sans pointer-events-none">
       <div
         className={cn(
-          'transition-all duration-300 ease-in-out mx-auto bg-white/90 backdrop-blur-md',
-          isScrolled
-            ? 'mt-2 max-w-5xl rounded-2xl border border-gray-200 shadow-sm'
-            : 'mt-0 max-w-none border-b border-gray-100'
+          'pointer-events-auto mx-auto bg-white/90 backdrop-blur-md transition-all duration-300 ease-in-out',
+          // Always Floating Style
+          'mt-4 max-w-5xl rounded-2xl border border-gray-200 shadow-sm'
         )}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
-            {/* Logo */}
+            {/* Logo - No Outline/Boxing */}
             <div className="flex-shrink-0">
               <Link to="/" className="flex items-center">
-                <img src={neuralAILogo} alt="Neural AI" className="h-10 w-auto" />
+                <img 
+                  src={neuralAILogo} 
+                  alt="Neural AI" 
+                  className="h-10 w-auto object-contain" 
+                />
               </Link>
             </div>
 
@@ -73,13 +68,22 @@ const Header = () => {
               ))}
             </nav>
 
-            {/* Desktop Contact Button - Fixed: Removed asChild */}
+            {/* Desktop Contact Button */}
             <div className="hidden lg:ml-6 lg:flex lg:items-center">
               <Button 
                 onClick={handleContactClick}
-                className="bg-black text-white hover:bg-gray-800 transition-colors rounded-lg px-6 font-medium"
+                className={cn(
+                  "group relative overflow-hidden rounded-lg px-6 font-medium transition-all duration-300",
+                  "bg-black text-white hover:bg-gray-900 shadow-md hover:shadow-lg"
+                )}
               >
-                Contact Now
+                <span className="flex items-center gap-2">
+                  Contact Us
+                  {/* Arrow Reveal Animation */}
+                  <ChevronRight 
+                    className="h-4 w-4 transition-all duration-300 ease-in-out opacity-0 -translate-x-2 w-0 group-hover:w-4 group-hover:translate-x-0 group-hover:opacity-100" 
+                  />
+                </span>
               </Button>
             </div>
 
@@ -101,7 +105,7 @@ const Header = () => {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="lg:hidden" id="mobile-menu">
-            <div className="space-y-1 px-4 pb-4 pt-2 bg-white border-t border-gray-100">
+            <div className="space-y-1 px-4 pb-4 pt-2 bg-white rounded-b-2xl border-t border-gray-100">
               {navItems.map((item) => (
                 <Link 
                   key={item.href} 
@@ -117,12 +121,12 @@ const Header = () => {
                 </Link>
               ))}
               <div className="pt-4 pb-2">
-                {/* Fixed: Removed Link wrapper and used onClick handler instead */}
                 <Button 
                   onClick={handleContactClick}
-                  className="w-full bg-black text-white hover:bg-gray-800 h-12 text-base"
+                  className="w-full bg-black text-white hover:bg-gray-900 h-12 text-base group flex items-center justify-center gap-2"
                 >
-                  Contact Now
+                  Contact Us
+                  <ChevronRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
                 </Button>
               </div>
             </div>
