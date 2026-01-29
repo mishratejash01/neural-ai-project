@@ -32,10 +32,10 @@ const Header = () => {
         className={cn(
           "pointer-events-auto mt-6 w-[95%] max-w-7xl",
           "bg-white/95 backdrop-blur-sm border border-gray-100",
-          "rounded-lg transition-all duration-300" 
+          "rounded-lg transition-all duration-300"
         )}
       >
-        <div className="px-4 md:px-6 h-16 flex items-center justify-between"> {/* Reduced height to h-16 */}
+        <div className="px-5 md:px-8 h-16 flex items-center justify-between">
           
           {/* 1. LOGO */}
           <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
@@ -46,14 +46,14 @@ const Header = () => {
             />
           </Link>
 
-          {/* 2. NAVIGATION */}
-          <nav className="hidden md:flex items-center gap-8">
+          {/* 2. NAVIGATION - Font Size Increased to text-base */}
+          <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "text-sm font-semibold tracking-tight transition-colors duration-200",
+                  "text-base font-semibold tracking-tight transition-colors duration-200", // Increased to text-base
                   location.pathname === item.href
                     ? "text-black"
                     : "text-gray-500 hover:text-black"
@@ -64,19 +64,19 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Increased Width & Presence */}
+          {/* 3. CONTACT BUTTON - Font Size Increased to text-lg */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
               className={cn(
-                "group relative h-12 px-10", // Increased width (px-10) to make the block bigger
+                "group relative h-12 px-10",
                 "bg-black text-white",
-                "rounded-md", 
+                "rounded-md",
                 "overflow-hidden flex items-center justify-center transition-colors hover:bg-gray-900"
               )}
             >
               <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
-                <span className="font-semibold text-base tracking-wide">Contact Us</span>
+                <span className="font-semibold text-lg tracking-wide">Contact Us</span> {/* Increased to text-lg */}
               </div>
               
               {/* Sliding Arrow */}
@@ -92,7 +92,7 @@ const Header = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-black hover:bg-gray-100 rounded-md transition-colors"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
@@ -105,7 +105,7 @@ const Header = () => {
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "p-4 rounded-md text-left font-semibold tracking-tight transition-colors",
+                  "p-4 rounded-md text-left font-semibold tracking-tight transition-colors text-lg", // Increased mobile font too
                   location.pathname === item.href
                     ? "bg-gray-50 text-black"
                     : "text-gray-500 hover:bg-gray-50 hover:text-black"
@@ -116,9 +116,9 @@ const Header = () => {
             ))}
             <button
               onClick={handleContactClick}
-              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-lg"
+              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-xl" // Increased mobile button text
             >
-              Contact Us <ChevronRight size={20} />
+              Contact Us <ChevronRight size={22} />
             </button>
           </div>
         )}
