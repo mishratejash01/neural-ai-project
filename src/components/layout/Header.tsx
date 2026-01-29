@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import neuralAILogo from '@/assets/download__1_-removebg-preview.png';
 
@@ -18,7 +17,6 @@ const Header = () => {
     { href: "/careers", label: "Careers" },
   ];
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -29,107 +27,98 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 font-sans pointer-events-none">
-      <div
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none font-sans">
+      <div 
         className={cn(
-          'pointer-events-auto mx-auto bg-white/90 backdrop-blur-md transition-all duration-300 ease-in-out',
-          // Always Floating Style
-          'mt-4 max-w-5xl rounded-2xl border border-gray-200 shadow-sm'
+          "pointer-events-auto mt-4 w-[95%] max-w-5xl",
+          "bg-white/80 backdrop-blur-md border border-white/20 shadow-lg",
+          "rounded-full transition-all duration-300"
         )}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            {/* Logo - No Outline/Boxing */}
-            <div className="flex-shrink-0">
-              <Link to="/" className="flex items-center">
-                <img 
-                  src={neuralAILogo} 
-                  alt="Neural AI" 
-                  className="h-10 w-auto object-contain" 
-                />
-              </Link>
-            </div>
+        <div className="px-6 md:px-8 h-16 flex items-center justify-between">
+          
+          {/* 1. LOGO - Clean, no boxing */}
+          <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
+            <img 
+              src={neuralAILogo} 
+              alt="Neural AI" 
+              className="h-8 w-auto object-contain"
+            />
+          </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex lg:space-x-8">
-              {navItems.map((item) => (
-                <Link 
-                  key={item.href} 
-                  to={item.href}
-                  className={cn(
-                    'text-sm font-medium transition-colors duration-200',
-                    location.pathname === item.href
-                      ? 'text-black font-semibold'
-                      : 'text-gray-600 hover:text-black'
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-
-            {/* Desktop Contact Button */}
-            <div className="hidden lg:ml-6 lg:flex lg:items-center">
-              <Button 
-                onClick={handleContactClick}
+          {/* 2. NAVIGATION (Tabs) - Inter Font */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
                 className={cn(
-                  "group relative overflow-hidden rounded-lg px-6 font-medium transition-all duration-300",
-                  "bg-black text-white hover:bg-gray-900 shadow-md hover:shadow-lg"
+                  "text-sm font-medium transition-colors duration-200 relative",
+                  location.pathname === item.href
+                    ? "text-black font-semibold"
+                    : "text-gray-500 hover:text-black"
                 )}
               >
-                <span className="flex items-center gap-2">
-                  Contact Us
-                  {/* Arrow Reveal Animation */}
-                  <ChevronRight 
-                    className="h-4 w-4 transition-all duration-300 ease-in-out opacity-0 -translate-x-2 w-0 group-hover:w-4 group-hover:translate-x-0 group-hover:opacity-100" 
-                  />
-                </span>
-              </Button>
-            </div>
+                {item.label}
+                {/* Active Indicator Dot */}
+                {location.pathname === item.href && (
+                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-black rounded-full" />
+                )}
+              </Link>
+            ))}
+          </nav>
 
-            {/* Mobile Menu Button */}
-            <div className="flex items-center lg:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-700 hover:bg-gray-100 hover:text-black focus:outline-none"
-                aria-controls="mobile-menu"
-                aria-expanded={isMenuOpen}
-              >
-                <span className="sr-only">Open main menu</span>
-                {isMenuOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
-              </button>
-            </div>
+          {/* 3. CONTACT BUTTON - Black Block with Arrow Reveal */}
+          <div className="hidden md:block">
+            <button
+              onClick={handleContactClick}
+              className="group relative h-10 px-6 bg-black text-white rounded-full overflow-hidden flex items-center justify-center transition-all hover:bg-gray-900 shadow-md hover:shadow-lg"
+            >
+              <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
+                <span className="font-medium text-sm">Contact Us</span>
+              </div>
+              
+              {/* Sliding Arrow */}
+              <div className="absolute right-3 opacity-0 translate-x-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                <ChevronRight className="w-4 h-4 text-white" />
+              </div>
+            </button>
+          </div>
+
+          {/* Mobile Menu Toggle */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="p-2 text-gray-600 hover:text-black transition-colors"
+            >
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="lg:hidden" id="mobile-menu">
-            <div className="space-y-1 px-4 pb-4 pt-2 bg-white rounded-b-2xl border-t border-gray-100">
-              {navItems.map((item) => (
-                <Link 
-                  key={item.href} 
-                  to={item.href}
-                  className={cn(
-                    'block py-3 text-base font-medium transition-colors border-b border-gray-50',
-                    location.pathname === item.href
-                      ? 'text-black'
-                      : 'text-gray-600 hover:text-black'
-                  )}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="pt-4 pb-2">
-                <Button 
-                  onClick={handleContactClick}
-                  className="w-full bg-black text-white hover:bg-gray-900 h-12 text-base group flex items-center justify-center gap-2"
-                >
-                  Contact Us
-                  <ChevronRight className="h-4 w-4 opacity-0 -translate-x-2 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300" />
-                </Button>
-              </div>
-            </div>
+          <div className="absolute top-full left-0 right-0 mt-2 p-4 bg-white rounded-3xl border border-gray-100 shadow-xl md:hidden flex flex-col gap-2 mx-2 animate-in fade-in slide-in-from-top-4 duration-200">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                to={item.href}
+                className={cn(
+                  "p-3 rounded-xl text-center font-medium transition-colors",
+                  location.pathname === item.href
+                    ? "bg-gray-100 text-black"
+                    : "text-gray-500 hover:bg-gray-50 hover:text-black"
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <button
+              onClick={handleContactClick}
+              className="mt-2 w-full h-12 bg-black text-white rounded-xl font-medium flex items-center justify-center gap-2 active:scale-95 transition-transform"
+            >
+              Contact Us <ChevronRight size={16} />
+            </button>
           </div>
         )}
       </div>
