@@ -27,13 +27,13 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none font-sans">
+    // Updated z-index to z-[1000] to ensure it is above absolutely everything
+    <header className="fixed top-0 left-0 right-0 z-[1000] flex justify-center pointer-events-none font-sans">
       <div 
         className={cn(
           "pointer-events-auto mt-6 w-[95%] max-w-7xl",
-          // Changed to solid white, removed transparency and blur
-          "bg-white border border-gray-100", 
-          "rounded-lg transition-all duration-300"
+          "bg-white border border-gray-100", // Solid White, No Transparency
+          "rounded-lg transition-all duration-300 shadow-sm" // Added subtle shadow-sm for depth separation
         )}
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
@@ -49,7 +49,7 @@ const Header = () => {
             </div>
           </Link>
 
-          {/* 2. NAVIGATION - Inter Font Enforced */}
+          {/* 2. NAVIGATION */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {navItems.map((item) => (
               <Link
@@ -67,7 +67,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Big Block */}
+          {/* 3. CONTACT BUTTON */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
