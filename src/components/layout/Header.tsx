@@ -37,23 +37,25 @@ const Header = () => {
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
           
-          {/* 1. LOGO */}
-          <Link to="/" className="flex-shrink-0 flex items-center hover:opacity-80 transition-opacity">
-            <img 
-              src={neuralAILogo} 
-              alt="Neural AI" 
-              className="h-8 w-auto object-contain" 
-            />
+          {/* 1. LOGO IN BLACK CARD */}
+          <Link to="/" className="flex-shrink-0 group hover:opacity-90 transition-opacity">
+            <div className="bg-black rounded-md p-2 flex items-center justify-center">
+              <img 
+                src={neuralAILogo} 
+                alt="Neural AI" 
+                className="h-6 w-auto object-contain" // Adjusted height to fit inside the card padding
+              />
+            </div>
           </Link>
 
-          {/* 2. NAVIGATION - Font Size Increased to text-base */}
+          {/* 2. NAVIGATION */}
           <nav className="hidden md:flex items-center gap-8 lg:gap-10">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "text-base font-semibold tracking-tight transition-colors duration-200", // Increased to text-base
+                  "text-base font-semibold tracking-tight transition-colors duration-200",
                   location.pathname === item.href
                     ? "text-black"
                     : "text-gray-500 hover:text-black"
@@ -64,7 +66,7 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Font Size Increased to text-lg */}
+          {/* 3. CONTACT BUTTON */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
@@ -76,7 +78,7 @@ const Header = () => {
               )}
             >
               <div className="relative flex items-center gap-1 transition-transform duration-300 group-hover:-translate-x-1">
-                <span className="font-semibold text-lg tracking-wide">Contact Us</span> {/* Increased to text-lg */}
+                <span className="font-semibold text-lg tracking-wide">Contact Us</span>
               </div>
               
               {/* Sliding Arrow */}
@@ -105,7 +107,7 @@ const Header = () => {
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "p-4 rounded-md text-left font-semibold tracking-tight transition-colors text-lg", // Increased mobile font too
+                  "p-4 rounded-md text-left font-semibold tracking-tight transition-colors text-lg",
                   location.pathname === item.href
                     ? "bg-gray-50 text-black"
                     : "text-gray-500 hover:bg-gray-50 hover:text-black"
@@ -116,7 +118,7 @@ const Header = () => {
             ))}
             <button
               onClick={handleContactClick}
-              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-xl" // Increased mobile button text
+              className="mt-2 w-full h-14 bg-black text-white rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-xl"
             >
               Contact Us <ChevronRight size={22} />
             </button>
