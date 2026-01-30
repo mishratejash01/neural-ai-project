@@ -67,7 +67,7 @@ const ComputerVisionPortfolio = () => {
 
             <div className="text-center mt-12">
               <Link to="/services">
-                <Button variant="hero" size="lg">Explore Services <ArrowRight className="ml-2" /></Button>
+                <Button size="lg">Explore Services <ArrowRight className="ml-2" /></Button>
               </Link>
             </div>
           </div>

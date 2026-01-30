@@ -227,7 +227,7 @@ const Testimonials = () => {
 
           <div className="text-center mt-12">
             <Link to="/portfolio">
-              <Button variant="hero" size="lg">
+              <Button size="lg">
                 View All Case Studies
                 <ArrowRight className="ml-2" />
               </Button>
@@ -249,13 +249,13 @@ const Testimonials = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="hero" size="lg">
+                <Button size="lg">
                   Get Started Today
                   <ArrowRight className="ml-2" />
                 </Button>
               </Link>
               <Link to="/demo">
-                <Button variant="neural" size="lg">
+                <Button variant="outline" size="lg">
                   Watch Demo First
                 </Button>
               </Link>

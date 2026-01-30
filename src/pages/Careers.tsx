@@ -464,7 +464,7 @@ const Careers = () => {
                         {role.description}
                       </CardDescription>
                     </div>
-                    <Button variant="hero" onClick={() => handleApplyNow(role)}>
+                    <Button onClick={() => handleApplyNow(role)}>
                       Apply Now
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
@@ -638,7 +638,6 @@ const Careers = () => {
                     </div>
 
                     <Button 
-                      variant="hero" 
                       size="lg" 
                       className="w-full" 
                       type="submit"
@@ -749,7 +748,6 @@ const Careers = () => {
 
             <div className="flex gap-4 pt-4">
               <Button 
-                variant="hero" 
                 type="submit"
                 disabled={isSubmitting}
                 className="flex-1"

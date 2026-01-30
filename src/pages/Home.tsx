@@ -144,7 +144,7 @@ const Home = () => {
                   <p className="text-muted-foreground mb-4">
                     {service.description}
                   </p>
-                  <Button variant="glow" size="sm" className="w-full">
+                  <Button variant="ghost" size="sm" className="w-full">
                     Learn More
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -155,7 +155,7 @@ const Home = () => {
 
           <div className="text-center">
             <Link to="/services">
-              <Button variant="neon" size="lg" className="group">
+              <Button size="lg" className="group">
                 View All Services
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -196,14 +196,14 @@ const Home = () => {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/demo">
-                <Button variant="neon" size="lg" className="group">
+                <Button size="lg" className="group">
                   <Play className="mr-2 w-5 h-5" />
                   Request Live Demo
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link to="/portfolio">
-                <Button variant="neon-outline" size="lg">
+                <Button variant="outline" size="lg">
                   View Case Studies
                 </Button>
               </Link>
@@ -229,7 +229,7 @@ const Home = () => {
                 placeholder="Enter your email"
                 className="flex-1 px-4 py-3 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
               />
-              <Button variant="neon" size="lg">
+              <Button size="lg">
                 Subscribe
               </Button>
             </div>

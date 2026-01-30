@@ -67,7 +67,7 @@ const NLPEdTech = () => {
 
             <div className="text-center mt-12">
               <Link to="/contact">
-                <Button variant="hero" size="lg">Talk to Us <ArrowRight className="ml-2" /></Button>
+                <Button size="lg">Talk to Us <ArrowRight className="ml-2" /></Button>
               </Link>
             </div>
           </div>
