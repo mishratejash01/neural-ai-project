@@ -1,15 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button"; // Keeping for utility if needed, though custom styled below
 import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Calendar, Clock, ArrowRight, Search, User, Tag } from "lucide-react";
-import { motion } from "framer-motion";
 
-// Sample Data (In a real app, fetch this from Supabase)
+// Sample Data
 const articles = [
   {
     id: 1,
@@ -18,7 +13,7 @@ const articles = [
     category: "Retail & E-commerce",
     author: "Tejash Mishra",
     date: "Oct 12, 2024",
-    readTime: "8 min read",
+    readTime: "8 Min Read",
     slug: "retail-chatbot-lifestyle-store",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?auto=format&fit=crop&q=80&w=800",
     featured: true
@@ -30,7 +25,7 @@ const articles = [
     category: "Healthcare",
     author: "Saurabh Shanu",
     date: "Sep 28, 2024",
-    readTime: "12 min read",
+    readTime: "12 Min Read",
     slug: "predictive-analytics-healthcare",
     image: "https://images.unsplash.com/photo-1516549655169-df83a0674c6c?auto=format&fit=crop&q=80&w=800",
     featured: false
@@ -42,7 +37,7 @@ const articles = [
     category: "Manufacturing",
     author: "Harshil Handoo",
     date: "Sep 15, 2024",
-    readTime: "10 min read",
+    readTime: "10 Min Read",
     slug: "computer-vision-manufacturing",
     image: "https://images.unsplash.com/photo-1565514020176-6c2235c8e899?auto=format&fit=crop&q=80&w=800",
     featured: false
@@ -54,7 +49,7 @@ const articles = [
     category: "FinTech",
     author: "Jaydev Paul",
     date: "Aug 30, 2024",
-    readTime: "6 min read",
+    readTime: "6 Min Read",
     slug: "ai-marketing-automation-fintech",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
     featured: false
@@ -66,7 +61,7 @@ const articles = [
     category: "Education",
     author: "Roshan Singh",
     date: "Aug 12, 2024",
-    readTime: "7 min read",
+    readTime: "7 Min Read",
     slug: "nlp-edtech",
     image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=800",
     featured: false
@@ -78,7 +73,7 @@ const articles = [
     category: "Logistics",
     author: "Srijan Anand",
     date: "Jul 22, 2024",
-    readTime: "9 min read",
+    readTime: "9 Min Read",
     slug: "logistics-optimization",
     image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800",
     featured: false
@@ -87,144 +82,178 @@ const articles = [
 
 const Portfolio = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  
-  // Filter articles based on search
-  const filteredArticles = articles.filter(article => 
-    article.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    article.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const [industryFilter, setIndustryFilter] = useState("");
 
-  const featuredArticle = articles.find(a => a.featured);
+  // Filter articles based on search
+  const filteredArticles = articles.filter(article => {
+    const matchesSearch = article.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          article.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesIndustry = industryFilter === "" || article.category.toLowerCase().includes(industryFilter.toLowerCase());
+    
+    return matchesSearch && matchesIndustry;
+  });
+
+  // Separate articles for the "Top Feed" (first 4) and "Further Readings" (rest)
+  const topFeedArticles = filteredArticles.slice(0, 4);
+  const furtherReadingArticles = filteredArticles.slice(4);
 
   return (
     <Layout>
-      <div className="bg-background min-h-screen">
-        {/* Header Section */}
-        <section className="pt-32 pb-16 px-4 border-b border-border/40 bg-surface-dark/30">
-          <div className="container mx-auto max-w-6xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
-              Neural <span className="text-gradient">Insights</span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
-              Deep dives into Artificial Intelligence, case studies from Indian markets, and engineering breakthroughs from our team.
-            </p>
-            
-            <div className="relative max-w-md mx-auto">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input 
-                placeholder="Search articles, topics, or industries..." 
-                className="pl-10 h-12 rounded-full border-border bg-background/50 backdrop-blur-sm focus:ring-primary/20"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-            </div>
-          </div>
-        </section>
-
-        <div className="container mx-auto max-w-7xl px-4 py-16">
-          {/* Featured Article - Newspaper Headline Style */}
-          {!searchTerm && featuredArticle && (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-20"
-            >
-              <Link to={`/portfolio/${featuredArticle.slug}`} className="group block">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                  <div className="lg:col-span-8 overflow-hidden rounded-3xl border border-border/50 shadow-2xl">
-                    <div className="aspect-[16/9] lg:aspect-[2/1] overflow-hidden">
-                      <img 
-                        src={featuredArticle.image} 
-                        alt={featuredArticle.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-                  </div>
-                  <div className="lg:col-span-4 flex flex-col justify-center space-y-6">
-                    <Badge variant="outline" className="w-fit px-3 py-1 border-primary/50 text-primary uppercase tracking-wider text-xs font-semibold">
-                      Featured Story
-                    </Badge>
-                    <h2 className="text-3xl md:text-4xl font-bold leading-tight group-hover:text-primary transition-colors">
-                      {featuredArticle.title}
-                    </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed line-clamp-3">
-                      {featuredArticle.excerpt}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground/80 pt-4 border-t border-border/50">
-                      <div className="flex items-center gap-2">
-                        <User className="w-4 h-4" />
-                        {featuredArticle.author}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        {featuredArticle.date}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          )}
-
-          <Separator className="mb-16 opacity-50" />
-
-          {/* Article Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
-            {filteredArticles.map((article, idx) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <Link to={`/portfolio/${article.slug}`} className="group flex flex-col h-full">
-                  <div className="mb-6 overflow-hidden rounded-2xl border border-border/50 shadow-card aspect-[3/2]">
-                    <img 
-                      src={article.image} 
-                      alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-                  
-                  <div className="flex flex-col flex-grow">
-                    <div className="flex justify-between items-center mb-4">
-                      <Badge variant="secondary" className="bg-secondary/30 text-secondary-foreground hover:bg-secondary/50">
-                        {article.category}
-                      </Badge>
-                      <span className="flex items-center text-xs text-muted-foreground">
-                        <Clock className="w-3 h-3 mr-1" /> {article.readTime}
-                      </span>
-                    </div>
-                    
-                    <h3 className="text-xl font-bold mb-3 leading-snug group-hover:text-primary transition-colors">
-                      {article.title}
-                    </h3>
-                    
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-3 flex-grow">
-                      {article.excerpt}
-                    </p>
-                    
-                    <div className="flex items-center justify-between pt-4 border-t border-border/30 mt-auto">
-                      <span className="text-sm font-medium text-foreground/80">
-                        {article.author}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        {article.date}
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+      <div className="bg-background min-h-screen font-sans text-foreground">
+        
+        <div className="container mx-auto max-w-7xl px-4 md:px-6">
           
-          {filteredArticles.length === 0 && (
-             <div className="text-center py-20">
-               <p className="text-xl text-muted-foreground">No articles found matching your search.</p>
-               <Button variant="link" onClick={() => setSearchTerm("")}>Clear Search</Button>
-             </div>
-          )}
+          {/* HEADER LOGO SECTION */}
+          <header className="pt-24 pb-5 border-b-4 border-foreground mb-8 flex flex-col md:flex-row justify-between items-end gap-4">
+            <h1 className="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">
+              Neural <span className="text-primary">Archive</span>
+            </h1>
+            <div className="text-[11px] font-bold uppercase text-muted-foreground tracking-widest mb-1">
+              Viewing Latest Reports
+            </div>
+          </header>
+
+          {/* MAIN GRID LAYOUT */}
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 pb-20">
+            
+            {/* LEFT COLUMN: ARTICLE FEED */}
+            <main>
+              {/* Top Feed: Large Row Layout */}
+              <section className="flex flex-col gap-0 divide-y divide-border">
+                {topFeedArticles.length > 0 ? (
+                  topFeedArticles.map((article) => (
+                    <Link 
+                      key={article.id} 
+                      to={`/portfolio/${article.slug}`} 
+                      className="group grid grid-cols-1 md:grid-cols-[300px_1fr] gap-6 py-8 hover:bg-muted/30 transition-colors"
+                    >
+                      <div className="overflow-hidden bg-muted">
+                        <img 
+                          src={article.image} 
+                          alt={article.title}
+                          className="w-full h-56 md:h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="flex flex-col justify-start">
+                        <span className="text-primary text-[11px] font-black uppercase tracking-wider mb-3">
+                          {article.category}
+                        </span>
+                        <h2 className="text-2xl md:text-3xl font-extrabold leading-tight mb-3 group-hover:underline decoration-primary decoration-2 underline-offset-4">
+                          {article.title}
+                        </h2>
+                        <p className="text-muted-foreground text-base leading-relaxed mb-4 line-clamp-3">
+                          {article.excerpt}
+                        </p>
+                        <div className="text-[11px] font-bold uppercase text-muted-foreground/70 mt-auto">
+                          {article.author} • {article.readTime}
+                        </div>
+                      </div>
+                    </Link>
+                  ))
+                ) : (
+                  <div className="py-12 text-center text-muted-foreground">
+                    No articles match your criteria.
+                  </div>
+                )}
+              </section>
+
+              {/* Further Readings: Mini List Section */}
+              {furtherReadingArticles.length > 0 && (
+                <section className="mt-12">
+                  <h2 className="text-xs font-black uppercase border-t-2 border-foreground pt-4 mb-6 tracking-widest">
+                    Further Readings
+                  </h2>
+                  <div className="flex flex-col divide-y divide-border">
+                    {furtherReadingArticles.map((article) => (
+                      <Link 
+                        key={article.id}
+                        to={`/portfolio/${article.slug}`}
+                        className="group grid grid-cols-[120px_1fr] gap-5 py-6 hover:bg-muted/30 transition-colors"
+                      >
+                         <div className="overflow-hidden bg-muted h-20 w-full">
+                          <img 
+                            src={article.image} 
+                            alt={article.title}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
+                        </div>
+                        <div className="flex flex-col justify-center">
+                          <span className="text-primary text-[10px] font-black uppercase mb-1">
+                            {article.category}
+                          </span>
+                          <h3 className="text-lg font-bold leading-tight group-hover:text-primary transition-colors">
+                            {article.title}
+                          </h3>
+                          <div className="text-[10px] font-bold uppercase text-muted-foreground mt-2">
+                            {article.date}
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </main>
+
+            {/* RIGHT COLUMN: SIDEBAR */}
+            <aside className="space-y-12 lg:sticky lg:top-24 h-fit">
+              
+              {/* Filter Panel - Dark Theme Block */}
+              <div className="bg-[#111111] text-white p-6 md:p-8 shadow-xl">
+                <h3 className="text-primary text-xs font-black uppercase tracking-widest mb-6">
+                  Refine Search
+                </h3>
+                <div className="space-y-4">
+                  <input
+                    type="text"
+                    placeholder="Keyword Search..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full bg-[#222] border border-[#333] p-3 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-primary transition-colors"
+                  />
+                   <input
+                    type="text"
+                    placeholder="Industry (e.g. Retail)"
+                    value={industryFilter}
+                    onChange={(e) => setIndustryFilter(e.target.value)}
+                    className="w-full bg-[#222] border border-[#333] p-3 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-primary transition-colors"
+                  />
+                  <button 
+                    onClick={() => { setSearchTerm(""); setIndustryFilter(""); }}
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-black text-xs uppercase tracking-widest py-3 mt-2 transition-colors"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              </div>
+
+              {/* Horizontal Scroller (Featured Briefs) */}
+              <div>
+                <h2 className="text-xs font-black uppercase border-t-2 border-foreground pt-4 mb-5 tracking-widest">
+                  Featured Briefs
+                </h2>
+                <div className="flex overflow-x-auto gap-4 pb-4 scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                  {/* Reuse some articles as "Briefs" for display purposes */}
+                  {[articles[2], articles[4], articles[1]].map((item, idx) => (
+                    <Link to={`/portfolio/${item.slug}`} key={idx} className="min-w-[160px] group">
+                      <div className="aspect-[4/3] overflow-hidden mb-3 bg-muted">
+                        <img 
+                          src={item.image} 
+                          alt={item.title}
+                          className="w-full h-full object-cover group-hover:opacity-80 transition-opacity"
+                        />
+                      </div>
+                      <h4 className="text-xs font-bold leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+                        {item.title}
+                      </h4>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
+            </aside>
+          </div>
+
         </div>
       </div>
     </Layout>
