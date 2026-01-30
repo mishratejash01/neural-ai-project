@@ -198,8 +198,8 @@ const Portfolio = () => {
             {/* RIGHT COLUMN: SIDEBAR */}
             <aside className="space-y-12 lg:sticky lg:top-24 h-fit">
               
-              {/* Filter Panel - Dark Theme Block */}
-              <div className="bg-[#111111] text-white p-6 shadow-xl rounded-lg">
+              {/* Filter Panel - Dark Theme Block with Slight Rounding */}
+              <div className="bg-[#111111] text-white p-6 shadow-xl rounded">
                 <h3 className="text-primary text-xs font-semibold uppercase tracking-widest mb-6">
                   Refine Search
                 </h3>
@@ -209,18 +209,19 @@ const Portfolio = () => {
                     placeholder="Keyword Search..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-[#222] border border-[#333] p-3 text-sm rounded-md text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
+                    className="w-full bg-[#222] border border-[#333] p-3 text-sm rounded text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
                   />
                    <input
                     type="text"
                     placeholder="Industry (e.g. Retail)"
                     value={industryFilter}
                     onChange={(e) => setIndustryFilter(e.target.value)}
-                    className="w-full bg-[#222] border border-[#333] p-3 text-sm rounded-md text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
+                    className="w-full bg-[#222] border border-[#333] p-3 text-sm rounded text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
                   />
+                  {/* Reset Button: Grey, normal case, slight rounding */}
                   <button 
                     onClick={() => { setSearchTerm(""); setIndustryFilter(""); }}
-                    className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold text-xs uppercase tracking-widest py-3 mt-2 rounded-md transition-colors"
+                    className="w-full bg-[#333] hover:bg-[#444] text-white font-medium text-sm py-3 mt-2 rounded transition-colors"
                   >
                     Reset Filters
                   </button>
