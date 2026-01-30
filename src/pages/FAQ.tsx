@@ -311,7 +311,7 @@ const FAQ = () => {
               <p className="text-muted-foreground mb-6">
                 We couldn't find any FAQs matching "{searchTerm}". Try a different search term or contact us directly.
               </p>
-              <Button variant="hero" onClick={() => setSearchTerm("")}>
+              <Button onClick={() => setSearchTerm("")}>
                 Clear Search
               </Button>
             </div>
@@ -367,13 +367,13 @@ const FAQ = () => {
           <div className="text-center">
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact">
-                <Button variant="hero" size="lg">
+                <Button size="lg">
                   <MessageSquare className="mr-2" />
                   Contact Our Experts
                 </Button>
               </Link>
               <Link to="/demo">
-                <Button variant="neural" size="lg">
+                <Button variant="outline" size="lg">
                   <ArrowRight className="mr-2" />
                   Schedule Demo
                 </Button>

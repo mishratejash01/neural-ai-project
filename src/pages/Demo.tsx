@@ -346,7 +346,6 @@ const Demo = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4">
                       <Button 
-                        variant="hero" 
                         size="lg" 
                         className="flex-1" 
                         type="submit"
@@ -355,7 +354,7 @@ const Demo = () => {
                         <Calendar className="mr-2" />
                         {isSubmitting ? 'Booking...' : 'Book My Demo'}
                       </Button>
-                      <Button variant="neural" size="lg" className="flex-1" type="button">
+                      <Button variant="outline" size="lg" className="flex-1" type="button">
                         <Clock className="mr-2" />
                         Call Me Instead
                       </Button>
@@ -385,11 +384,11 @@ const Demo = () => {
               Get answers to your questions in minutes, not days.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button variant="hero" size="lg">
+              <Button size="lg">
                 <Users className="mr-2" />
                 Talk to an Expert Now
               </Button>
-              <Button variant="neural" size="lg">
+              <Button variant="outline" size="lg">
                 <ArrowRight className="mr-2" />
                 View Our Services
               </Button>

@@ -273,7 +273,6 @@ const Contact = () => {
                     <Button 
                       className="w-full" 
                       size="lg" 
-                      variant="hero" 
                       type="submit"
                       disabled={isSubmitting}
                     >
@@ -331,11 +330,11 @@ const Contact = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button className="w-full" variant="hero">
+                  <Button className="w-full">
                     <Phone className="mr-2" />
                     Call Now: +91 8160396630
                   </Button>
-                  <Button className="w-full" variant="neural">
+                  <Button className="w-full" variant="outline">
                     <MessageSquare className="mr-2" />
                     Start Live Chat
                   </Button>
@@ -387,7 +386,7 @@ const Contact = () => {
           <div className="text-center mt-12">
             <p className="text-muted-foreground mb-6">Have more questions?</p>
             <Link to="/faq">
-              <Button variant="hero" size="lg">
+              <Button size="lg">
                 View Full FAQ
                 <ArrowRight className="ml-2" />
               </Button>

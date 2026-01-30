@@ -67,7 +67,7 @@ const PredictiveAnalytics = () => {
 
             <div className="text-center mt-12">
               <Link to="/contact">
-                <Button variant="hero" size="lg">Get Consultation <ArrowRight className="ml-2" /></Button>
+                <Button size="lg">Get Consultation <ArrowRight className="ml-2" /></Button>
               </Link>
             </div>
           </div>

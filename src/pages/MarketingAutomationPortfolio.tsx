@@ -67,7 +67,7 @@ const MarketingAutomationPortfolio = () => {
 
             <div className="text-center mt-12">
               <Link to="/contact">
-                <Button variant="hero" size="lg">Boost My Marketing <ArrowRight className="ml-2" /></Button>
+                <Button size="lg">Boost My Marketing <ArrowRight className="ml-2" /></Button>
               </Link>
             </div>
           </div>

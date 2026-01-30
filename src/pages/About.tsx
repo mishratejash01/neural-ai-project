@@ -130,7 +130,7 @@ const About = () => {
                             <div className="space-y-4"><div className="text-3xl font-bold text-gradient">Business-Focused</div><p className="text-muted-foreground">AI is only valuable if it drives real business outcomes.</p></div>
                             <div className="space-y-4"><div className="text-3xl font-bold text-gradient">Human-Centric</div><p className="text-muted-foreground">We design AI that enhances human capabilities, not replace them.</p></div>
                         </div>
-                        <Link to="/services"><Button variant="hero" size="lg">Discover Our Approach <ArrowRight className="ml-2" /></Button></Link>
+                        <Link to="/services"><Button size="lg">Discover Our Approach <ArrowRight className="ml-2" /></Button></Link>
                     </div>
                 </div>
             </section>
