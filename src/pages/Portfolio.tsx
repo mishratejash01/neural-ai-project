@@ -198,8 +198,8 @@ const Portfolio = () => {
             {/* RIGHT COLUMN: SIDEBAR */}
             <aside className="space-y-12 lg:sticky lg:top-24 h-fit">
               
-              {/* Filter Panel */}
-              <div className="bg-card border border-border p-6 shadow-sm rounded-lg">
+              {/* Filter Panel - Dark Theme Block */}
+              <div className="bg-[#111111] text-white p-6 shadow-xl rounded-lg">
                 <h3 className="text-primary text-xs font-semibold uppercase tracking-widest mb-6">
                   Refine Search
                 </h3>
@@ -209,14 +209,14 @@ const Portfolio = () => {
                     placeholder="Keyword Search..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-background border border-input p-3 text-sm rounded-md placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
+                    className="w-full bg-[#222] border border-[#333] p-3 text-sm rounded-md text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
                   />
                    <input
                     type="text"
                     placeholder="Industry (e.g. Retail)"
                     value={industryFilter}
                     onChange={(e) => setIndustryFilter(e.target.value)}
-                    className="w-full bg-background border border-input p-3 text-sm rounded-md placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
+                    className="w-full bg-[#222] border border-[#333] p-3 text-sm rounded-md text-white placeholder:text-gray-500 focus:outline-none focus:ring-1 focus:ring-primary transition-all font-sans"
                   />
                   <button 
                     onClick={() => { setSearchTerm(""); setIndustryFilter(""); }}
