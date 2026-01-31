@@ -1,34 +1,40 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Link } from "react-router-dom";
+import React from "react";
 import Layout from "@/components/layout/Layout";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Link } from "react-router-dom";
 import { 
-  MessageSquare, 
-  CheckCircle2,
-  ArrowRight,
-  ArrowLeft,
-  Clock,
+  Calendar, 
+  Clock, 
+  Share2, 
+  Bookmark, 
+  ArrowRight, 
+  CheckCircle2, 
+  MessageSquare,
   TrendingUp,
   Shield
 } from "lucide-react";
-import { LampContainer } from "@/components/ui/lamp";
-import { motion } from "framer-motion";
+import heroImage from "@/assets/neural-ai-hero.jpg";
 
 const ChatbotsService = () => {
-  const service = {
-    icon: MessageSquare,
-    title: "AI-Powered Chatbots",
-    description: "Our AI-powered chatbots are designed to streamline customer support, lead generation, and sales engagement. Unlike traditional bots, these systems understand natural language, learn from past interactions, and adapt to customer needs.",
-    benefits: [
-      "24/7 customer support availability",
-      "Reduces response time by 90%",
-      "Natural language understanding",
-      "Seamless integration with existing platforms",
-      "Learns and improves from interactions",
-      "Multi-channel deployment (web, mobile, social)"
-    ],
+  const articleData = {
+    title: "The Future of Customer Engagement: AI-Powered Chatbots",
+    subtitle: "How intelligent automation is transforming customer support, lead generation, and sales engagement for modern businesses.",
+    author: {
+      name: "Neural AI Team",
+      image: "/placeholder.svg",
+      role: "AI Specialists"
+    },
+    date: "October 24, 2024",
+    readTime: "5 min read",
+    tags: ["Artificial Intelligence", "Customer Service", "Automation"],
+    
+    // Original Service Data adapted for Article
+    intro: "Our AI-powered chatbots are designed to streamline customer support, lead generation, and sales engagement. Unlike traditional bots, these systems understand natural language, learn from past interactions, and adapt to customer needs.",
     details: "With 24/7 availability, they reduce response time, improve customer satisfaction, and free up human agents for complex queries. Businesses can integrate these bots on websites, apps, and social platforms to create seamless customer experiences.",
-    example: "An e-commerce chatbot that helps customers find products, track orders, process returns, and even provides personalized recommendations based on browsing history.",
     features: [
       {
         title: "Natural Language Processing",
@@ -47,187 +53,203 @@ const ChatbotsService = () => {
         description: "Seamless transition to human agents when complex issues require personal attention."
       }
     ],
-    useCases: [
-      {
-        industry: "E-commerce",
-        description: "Product recommendations, order tracking, customer support, and sales assistance."
-      },
-      {
-        industry: "Healthcare",
-        description: "Appointment scheduling, symptom checking, medication reminders, and patient support."
-      },
-      {
-        industry: "Financial Services",
-        description: "Account inquiries, transaction support, loan applications, and financial advice."
-      },
-      {
-        industry: "Education",
-        description: "Student support, course information, enrollment assistance, and learning guidance."
-      }
+    benefits: [
+      "24/7 customer support availability",
+      "Reduces response time by 90%",
+      "Natural language understanding",
+      "Seamless integration with existing platforms",
+      "Learns and improves from interactions",
+      "Multi-channel deployment"
+    ],
+    example: "An e-commerce chatbot that helps customers find products, track orders, process returns, and even provides personalized recommendations based on browsing history.",
+    stats: [
+      { value: "90%", label: "Faster Response Time", icon: Clock },
+      { value: "40%", label: "Increase in CSAT", icon: TrendingUp },
+      { value: "60%", label: "Cost Reduction", icon: Shield },
     ]
   };
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <LampContainer>
-        <motion.div
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="text-center"
-        >
-          <h1 className="text-5xl font-bold mb-6 text-white">
-            {service.title}
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            {service.description}
-          </p>
-        </motion.div>
-      </LampContainer>
-
-      {/* Features Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">Key Features</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our chatbot solutions come with advanced features designed to deliver exceptional customer experiences
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {service.features.map((feature, index) => (
-              <Card key={index} className="shadow-card hover-lift border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold mb-6">Why Choose Our Chatbots?</h2>
-              <p className="text-xl text-muted-foreground">
-                Transform your customer service with intelligent automation
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {service.benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start space-x-4 group">
-                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-smooth" />
-                  <span className="text-muted-foreground text-lg leading-relaxed">{benefit}</span>
-                </div>
+      <article className="min-h-screen bg-background pt-24 pb-20">
+        {/* Article Header */}
+        <div className="container mx-auto px-4 mb-12">
+          <div className="max-w-4xl mx-auto text-center md:text-left">
+            <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
+              {articleData.tags.map((tag, index) => (
+                <Badge key={index} variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+                  {tag}
+                </Badge>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Use Cases Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-6">Industry Applications</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Our chatbot solutions are tailored for various industries and use cases
+            
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-foreground leading-tight">
+              {articleData.title}
+            </h1>
+            
+            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl">
+              {articleData.subtitle}
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {service.useCases.map((useCase, index) => (
-              <Card key={index} className="shadow-card hover-lift border-border bg-card">
-                <CardHeader>
-                  <CardTitle className="text-xl font-semibold text-primary">{useCase.industry}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{useCase.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-y border-border py-6">
+              <div className="flex items-center gap-4">
+                <Avatar className="h-12 w-12 border-2 border-background shadow-sm">
+                  <AvatarImage src={articleData.author.image} />
+                  <AvatarFallback>AI</AvatarFallback>
+                </Avatar>
+                <div className="text-left">
+                  <div className="font-semibold text-foreground">{articleData.author.name}</div>
+                  <div className="text-sm text-muted-foreground">{articleData.author.role}</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Calendar className="h-4 w-4" />
+                  <span>{articleData.date}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-4 w-4" />
+                  <span>{articleData.readTime}</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Real World Example */}
-      <section className="py-20 gradient-hero">
+        {/* Hero Image */}
+        <div className="container mx-auto px-4 mb-16">
+          <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-border/50">
+            <img 
+              src={heroImage} 
+              alt="AI Chatbot Technology" 
+              className="w-full h-auto object-cover max-h-[600px] transform hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+        </div>
+
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold mb-6">Real-World Application</h2>
-            <div className="bg-card p-8 rounded-2xl border border-border shadow-soft">
-              <h4 className="font-semibold mb-4 text-primary text-xl">Success Story:</h4>
-              <p className="text-muted-foreground text-lg italic leading-relaxed">{service.example}</p>
-            </div>
-          </div>
-        </div>
-      </section>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
+            
+            {/* Main Content Column */}
+            <div className="lg:col-span-8">
+              <div className="prose prose-lg dark:prose-invert max-w-none">
+                <p className="lead text-xl text-foreground/80 mb-8 font-medium">
+                  {articleData.intro}
+                </p>
+                <p className="text-muted-foreground mb-12 leading-relaxed">
+                  {articleData.details}
+                </p>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
-              <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Clock className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">90% Faster</h3>
-              <p className="text-muted-foreground">Response time improvement with automated customer support</p>
-            </div>
-            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
-              <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <TrendingUp className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">40% Increase</h3>
-              <p className="text-muted-foreground">Customer satisfaction scores with 24/7 availability</p>
-            </div>
-            <div className="text-center space-y-6 hover-lift bg-card p-8 rounded-2xl border border-border">
-              <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Shield className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">60% Cost</h3>
-              <p className="text-muted-foreground">Reduction in customer support operational costs</p>
-            </div>
-          </div>
-        </div>
-      </section>
+                <h2 className="text-3xl font-bold mb-8 text-foreground">Key Capabilities</h2>
+                <div className="grid md:grid-cols-2 gap-6 mb-12 not-prose">
+                  {articleData.features.map((feature, index) => (
+                    <Card key={index} className="bg-card border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
+                      <CardContent className="p-6">
+                        <h3 className="text-lg font-bold mb-3 text-primary">{feature.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
 
-      {/* CTA Section */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl font-bold mb-6">
-              Ready to Transform Your Customer Service?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Let our AI experts help you design and deploy the perfect chatbot solution for your business.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth">
-                  Start Your Project
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <Link to="/services">
-                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
-                  Explore Other Services
-                </Button>
-              </Link>
+                <h2 className="text-3xl font-bold mb-6 text-foreground">Why Businesses Are Switching</h2>
+                <p className="mb-6 text-muted-foreground">
+                  The shift towards automated customer service isn't just a trend; it's a necessity for scaling operations efficiently. Here is why our solution stands out:
+                </p>
+                <ul className="space-y-4 mb-12 list-none pl-0 not-prose">
+                  {articleData.benefits.map((benefit, index) => (
+                    <li key={index} className="flex items-start gap-3 p-3 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                      <span className="text-foreground/80">{benefit}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <h2 className="text-3xl font-bold mb-8 text-foreground">Real-World Impact</h2>
+                <div className="bg-card border border-border rounded-2xl p-8 mb-12 shadow-sm not-prose">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="p-3 bg-primary/10 rounded-xl">
+                      <MessageSquare className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="text-xl font-semibold mb-2">Success Story: E-Commerce</h4>
+                      <p className="text-muted-foreground italic text-lg leading-relaxed">
+                        "{articleData.example}"
+                      </p>
+                    </div>
+                  </div>
+                  <Separator className="my-6" />
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {articleData.stats.map((stat, index) => (
+                      <div key={index} className="text-center">
+                        <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
+                        <div className="text-sm text-muted-foreground">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent rounded-2xl p-8 border border-primary/10 my-12 not-prose">
+                  <h3 className="text-2xl font-bold mb-4">Ready to implement this technology?</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Join forward-thinking companies that are revolutionizing their customer support with our AI solutions.
+                  </p>
+                  <Link to="/contact">
+                    <Button size="lg" className="gradient-primary text-white shadow-lg hover:shadow-xl transition-all">
+                      Start Your Transformation <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </div>
+              </div>
             </div>
+
+            {/* Sidebar Column */}
+            <aside className="lg:col-span-4 space-y-8">
+              {/* Table of Contents / Actions */}
+              <div className="sticky top-24 space-y-6">
+                <Card className="border-border shadow-sm">
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between mb-6">
+                      <h3 className="font-semibold text-foreground">Actions</h3>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3">
+                      <Button variant="outline" className="w-full justify-start" size="sm">
+                        <Share2 className="mr-2 h-4 w-4" /> Share
+                      </Button>
+                      <Button variant="outline" className="w-full justify-start" size="sm">
+                        <Bookmark className="mr-2 h-4 w-4" /> Save
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-card border-border shadow-sm overflow-hidden">
+                  <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500" />
+                  <CardContent className="p-6">
+                    <h3 className="font-bold text-lg mb-2">Neural AI Solutions</h3>
+                    <p className="text-sm text-muted-foreground mb-6">
+                      We build custom AI solutions that solve real business problems.
+                    </p>
+                    <div className="space-y-3">
+                      <Link to="/services/custom-ai-solutions" className="block p-3 rounded-lg hover:bg-accent/50 transition-colors text-sm font-medium">
+                        Custom AI Development →
+                      </Link>
+                      <Link to="/services/nlp" className="block p-3 rounded-lg hover:bg-accent/50 transition-colors text-sm font-medium">
+                        Natural Language Processing →
+                      </Link>
+                      <Link to="/services/computer-vision" className="block p-3 rounded-lg hover:bg-accent/50 transition-colors text-sm font-medium">
+                        Computer Vision →
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </aside>
+
           </div>
         </div>
-      </section>
+      </article>
     </Layout>
   );
 };
