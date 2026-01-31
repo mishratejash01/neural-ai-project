@@ -1,255 +1,160 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { Card, CardContent } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
-import { 
-  Calendar, 
-  Clock, 
-  Share2, 
-  Bookmark, 
-  ArrowRight, 
-  CheckCircle2, 
-  MessageSquare,
-  TrendingUp,
-  Shield
-} from "lucide-react";
-import heroImage from "@/assets/neural-ai-hero.jpg";
 
 const ChatbotsService = () => {
-  const articleData = {
-    title: "The Future of Customer Engagement: AI-Powered Chatbots",
-    subtitle: "How intelligent automation is transforming customer support, lead generation, and sales engagement for modern businesses.",
-    author: {
-      name: "Neural AI Team",
-      image: "/placeholder.svg",
-      role: "AI Specialists"
-    },
-    date: "October 24, 2024",
-    readTime: "5 min read",
-    tags: ["Artificial Intelligence", "Customer Service", "Automation"],
-    
-    // Original Service Data adapted for Article
-    intro: "Our AI-powered chatbots are designed to streamline customer support, lead generation, and sales engagement. Unlike traditional bots, these systems understand natural language, learn from past interactions, and adapt to customer needs.",
-    details: "With 24/7 availability, they reduce response time, improve customer satisfaction, and free up human agents for complex queries. Businesses can integrate these bots on websites, apps, and social platforms to create seamless customer experiences.",
-    features: [
-      {
-        title: "Natural Language Processing",
-        description: "Advanced NLP capabilities that understand context, sentiment, and intent from customer messages."
-      },
-      {
-        title: "Multi-Platform Integration",
-        description: "Deploy across websites, mobile apps, Facebook Messenger, WhatsApp, and other platforms."
-      },
-      {
-        title: "Learning & Analytics",
-        description: "Continuous learning from interactions with detailed analytics and performance insights."
-      },
-      {
-        title: "Human Handoff",
-        description: "Seamless transition to human agents when complex issues require personal attention."
-      }
-    ],
-    benefits: [
-      "24/7 customer support availability",
-      "Reduces response time by 90%",
-      "Natural language understanding",
-      "Seamless integration with existing platforms",
-      "Learns and improves from interactions",
-      "Multi-channel deployment"
-    ],
-    example: "An e-commerce chatbot that helps customers find products, track orders, process returns, and even provides personalized recommendations based on browsing history.",
-    stats: [
-      { value: "90%", label: "Faster Response Time", icon: Clock },
-      { value: "40%", label: "Increase in CSAT", icon: TrendingUp },
-      { value: "60%", label: "Cost Reduction", icon: Shield },
-    ]
-  };
-
   return (
     <Layout>
-      <article className="min-h-screen bg-background pt-24 pb-20">
-        {/* Article Header */}
-        <div className="container mx-auto px-4 mb-12">
-          <div className="max-w-4xl mx-auto text-center md:text-left">
-            <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-6">
-              {articleData.tags.map((tag, index) => (
-                <Badge key={index} variant="secondary" className="bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight text-foreground leading-tight">
-              {articleData.title}
+      {/* Injecting specific fonts and styles for this page design */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap');
+        
+        :root {
+          --text-main: #1a1a1a;
+          --text-muted: #555555;
+          --border-color: #eeeeee;
+        }
+
+        .font-lora { font-family: 'Lora', serif; }
+        .font-inter { font-family: 'Inter', sans-serif; }
+        
+        .article-content p {
+          margin-bottom: 1.8rem;
+          font-size: 1.2rem;
+          line-height: 1.7;
+        }
+        
+        .article-content h2 {
+          font-family: 'Inter', sans-serif;
+          font-size: 1.6rem;
+          font-weight: 700;
+          margin: 3rem 0 1.2rem;
+          color: #000;
+        }
+
+        .article-content ul {
+          margin: 2rem 0;
+          padding-left: 1.5rem;
+          font-size: 1.2rem;
+        }
+
+        .article-content li {
+          margin-bottom: 1.2rem;
+        }
+      `}</style>
+
+      <div className="bg-white min-h-screen text-[#1a1a1a] font-lora">
+        <div className="max-w-[1080px] mx-auto px-6 pt-16 pb-20">
+          
+          {/* Article Header */}
+          <header className="mb-10 border-b border-[#eeeeee] pb-10">
+            <h1 className="text-4xl md:text-[3.4rem] leading-[1.1] font-bold mb-5 tracking-tight text-black">
+              The Future of Customer Engagement: AI-Powered Chatbots
             </h1>
-            
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl">
-              {articleData.subtitle}
+            <p className="text-[1.35rem] text-[#555555] leading-[1.4] max-w-[850px]">
+              How intelligent automation is transforming customer support, lead generation, and sales engagement for modern enterprise.
             </p>
-
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 border-y border-border py-6">
-              <div className="flex items-center gap-4">
-                <Avatar className="h-12 w-12 border-2 border-background shadow-sm">
-                  <AvatarImage src={articleData.author.image} />
-                  <AvatarFallback>AI</AvatarFallback>
-                </Avatar>
-                <div className="text-left">
-                  <div className="font-semibold text-foreground">{articleData.author.name}</div>
-                  <div className="text-sm text-muted-foreground">{articleData.author.role}</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>{articleData.date}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  <span>{articleData.readTime}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Hero Image */}
-        <div className="container mx-auto px-4 mb-16">
-          <div className="max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-border/50">
-            <img 
-              src={heroImage} 
-              alt="AI Chatbot Technology" 
-              className="w-full h-auto object-cover max-h-[600px] transform hover:scale-105 transition-transform duration-700"
-            />
-          </div>
-        </div>
-
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-7xl mx-auto">
             
-            {/* Main Content Column */}
-            <div className="lg:col-span-8">
-              <div className="prose prose-lg dark:prose-invert max-w-none">
-                <p className="lead text-xl text-foreground/80 mb-8 font-medium">
-                  {articleData.intro}
-                </p>
-                <p className="text-muted-foreground mb-12 leading-relaxed">
-                  {articleData.details}
-                </p>
-
-                <h2 className="text-3xl font-bold mb-8 text-foreground">Key Capabilities</h2>
-                <div className="grid md:grid-cols-2 gap-6 mb-12 not-prose">
-                  {articleData.features.map((feature, index) => (
-                    <Card key={index} className="bg-card border-border/50 shadow-sm hover:shadow-md transition-all duration-300">
-                      <CardContent className="p-6">
-                        <h3 className="text-lg font-bold mb-3 text-primary">{feature.title}</h3>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                <h2 className="text-3xl font-bold mb-6 text-foreground">Why Businesses Are Switching</h2>
-                <p className="mb-6 text-muted-foreground">
-                  The shift towards automated customer service isn't just a trend; it's a necessity for scaling operations efficiently. Here is why our solution stands out:
-                </p>
-                <ul className="space-y-4 mb-12 list-none pl-0 not-prose">
-                  {articleData.benefits.map((benefit, index) => (
-                    <li key={index} className="flex items-start gap-3 p-3 rounded-lg bg-accent/5 hover:bg-accent/10 transition-colors">
-                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 shrink-0" />
-                      <span className="text-foreground/80">{benefit}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <h2 className="text-3xl font-bold mb-8 text-foreground">Real-World Impact</h2>
-                <div className="bg-card border border-border rounded-2xl p-8 mb-12 shadow-sm not-prose">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="p-3 bg-primary/10 rounded-xl">
-                      <MessageSquare className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold mb-2">Success Story: E-Commerce</h4>
-                      <p className="text-muted-foreground italic text-lg leading-relaxed">
-                        "{articleData.example}"
-                      </p>
-                    </div>
-                  </div>
-                  <Separator className="my-6" />
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {articleData.stats.map((stat, index) => (
-                      <div key={index} className="text-center">
-                        <div className="text-3xl font-bold text-foreground mb-1">{stat.value}</div>
-                        <div className="text-sm text-muted-foreground">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent rounded-2xl p-8 border border-primary/10 my-12 not-prose">
-                  <h3 className="text-2xl font-bold mb-4">Ready to implement this technology?</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Join forward-thinking companies that are revolutionizing their customer support with our AI solutions.
-                  </p>
-                  <Link to="/contact">
-                    <Button size="lg" className="gradient-primary text-white shadow-lg hover:shadow-xl transition-all">
-                      Start Your Transformation <ArrowRight className="ml-2 h-4 w-4" />
-                    </Button>
-                  </Link>
-                </div>
-              </div>
+            <div className="flex items-center mt-8 font-inter text-[0.9rem] text-[#555555]">
+              <span className="font-bold text-[#1a1a1a] mr-4">Neural AI Staff</span>
+              <span>October 24, 2024 &nbsp; | &nbsp; 5 Minute Read</span>
             </div>
+          </header>
 
-            {/* Sidebar Column */}
-            <aside className="lg:col-span-4 space-y-8">
-              {/* Table of Contents / Actions */}
-              <div className="sticky top-24 space-y-6">
-                <Card className="border-border shadow-sm">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-6">
-                      <h3 className="font-semibold text-foreground">Actions</h3>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <Button variant="outline" className="w-full justify-start" size="sm">
-                        <Share2 className="mr-2 h-4 w-4" /> Share
-                      </Button>
-                      <Button variant="outline" className="w-full justify-start" size="sm">
-                        <Bookmark className="mr-2 h-4 w-4" /> Save
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+          <main className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16">
+            
+            {/* Main Article Content */}
+            <article className="article-content">
+              <p>
+                Our AI-powered chatbots are designed to streamline customer support, lead generation, and sales engagement. Unlike traditional bots, these systems understand natural language, learn from past interactions, and adapt to customer needs. With 24/7 availability, they reduce response time, improve customer satisfaction, and free up human agents for complex queries.
+              </p>
 
-                <Card className="bg-card border-border shadow-sm overflow-hidden">
-                  <div className="h-2 bg-gradient-to-r from-blue-500 to-purple-500" />
-                  <CardContent className="p-6">
-                    <h3 className="font-bold text-lg mb-2">Neural AI Solutions</h3>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      We build custom AI solutions that solve real business problems.
-                    </p>
-                    <div className="space-y-3">
-                      <Link to="/services/custom-ai-solutions" className="block p-3 rounded-lg hover:bg-accent/50 transition-colors text-sm font-medium">
-                        Custom AI Development →
-                      </Link>
-                      <Link to="/services/nlp" className="block p-3 rounded-lg hover:bg-accent/50 transition-colors text-sm font-medium">
-                        Natural Language Processing →
-                      </Link>
-                      <Link to="/services/computer-vision" className="block p-3 rounded-lg hover:bg-accent/50 transition-colors text-sm font-medium">
-                        Computer Vision →
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
+              <p>
+                The transition from scripted responses to generative intelligence represents a paradigm shift in how corporations manage high-volume communication. Where early systems relied on rigid logic, modern neural networks interpret nuance and intent. The primary benefit of this shift is the drastic reduction in operational friction. Customers no longer need to navigate complex menus or wait hours for an email response.
+              </p>
+
+              <h2>Strategic Implementation</h2>
+              <p>
+                Successful implementation requires more than just deploying a model; it requires a deep understanding of the customer journey. Businesses can integrate these bots on websites, apps, and social platforms to create seamless experiences. Our solutions focus on pillars of engagement that allow businesses to scale without losing the human touch.
+              </p>
+
+              <ul>
+                <li>
+                  <strong>Seamless transition</strong> protocols between AI and human agents for high-stakes inquiries that require emotional intelligence.
+                </li>
+                <li>
+                  <strong>Contextual memory</strong> that spans across multiple sessions, ensuring customer continuity and reducing repetition.
+                </li>
+                <li>
+                  <strong>Predictive assistance</strong> based on real-time browsing behavior and historical interaction data.
+                </li>
+                <li>
+                  <strong>Multi-language support</strong> that provides immediate global localization for expanding international markets.
+                </li>
+              </ul>
+
+              <p>
+                By offloading repetitive tasks to AI, human representatives can focus their energy on high-value interactions and complex problem-solving. The shift towards automated customer service is no longer optional; it is a necessity for scaling operations efficiently in a 24/7 global economy.
+              </p>
+              
+              <p>
+                As these technologies continue to evolve, the distinction between human and automated support will become increasingly fluid, resulting in a more responsive and intelligent ecosystem for consumer engagement.
+              </p>
+            </article>
+
+            {/* Sidebar */}
+            <aside className="mt-10 lg:mt-0 font-inter">
+              <span className="block text-xs font-bold uppercase tracking-widest border-b-2 border-black pb-2 mb-6">
+                Related Sources
+              </span>
+              
+              <div className="space-y-8">
+                <Link to="#" className="block group border-b border-[#eeeeee] pb-5">
+                  <span className="block text-[0.7rem] font-bold uppercase text-[#555555] mb-1.5">
+                    Case Study
+                  </span>
+                  <div className="text-[1.1rem] font-bold leading-[1.3] group-hover:underline text-[#1a1a1a]">
+                    How E-commerce Leaders are Scaling Support with Generative AI
+                  </div>
+                </Link>
+
+                <Link to="#" className="block group border-b border-[#eeeeee] pb-5">
+                  <span className="block text-[0.7rem] font-bold uppercase text-[#555555] mb-1.5">
+                    Analysis
+                  </span>
+                  <div className="text-[1.1rem] font-bold leading-[1.3] group-hover:underline text-[#1a1a1a]">
+                    The Security Implications of LLMs in the Modern Enterprise
+                  </div>
+                </Link>
+
+                <Link to="#" className="block group border-b border-[#eeeeee] pb-5">
+                  <span className="block text-[0.7rem] font-bold uppercase text-[#555555] mb-1.5">
+                    Whitepaper
+                  </span>
+                  <div className="text-[1.1rem] font-bold leading-[1.3] group-hover:underline text-[#1a1a1a]">
+                    Human-in-the-Loop: Maintaining the Competitive Edge of Empathy
+                  </div>
+                </Link>
+
+                <Link to="#" className="block group border-b border-[#eeeeee] pb-5">
+                  <span className="block text-[0.7rem] font-bold uppercase text-[#555555] mb-1.5">
+                    Insights
+                  </span>
+                  <div className="text-[1.1rem] font-bold leading-[1.3] group-hover:underline text-[#1a1a1a]">
+                    The 2025 Customer Experience Roadmap
+                  </div>
+                </Link>
               </div>
             </aside>
 
-          </div>
+          </main>
+
+          <footer className="mt-20 pt-10 border-t border-[#eeeeee] text-center font-inter text-[0.8rem] text-[#555555]">
+            &copy; 2024 Neural AI Solutions Group. All rights reserved.
+          </footer>
+
         </div>
-      </article>
+      </div>
     </Layout>
   );
 };
