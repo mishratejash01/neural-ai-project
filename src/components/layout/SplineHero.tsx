@@ -144,7 +144,7 @@ export function SplineHero() {
                           <motion.div 
                               className="h-full bg-red-500"
                               animate={{ width: ["10%", "90%", "60%"] }}
-                              transition={{ duration: 2, repeat: Infinity, ease: "steps(4)" }}
+                              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                           />
                       </div>
                       <div className="grid grid-cols-2 gap-2 text-[10px] font-mono text-neutral-500">
