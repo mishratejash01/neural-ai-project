@@ -6,236 +6,255 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-export interface Database {
+export type Database = {
+  // Allows to automatically instantiate createClient with right options
+  // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
+  __InternalSupabase: {
+    PostgrestVersion: "14.1"
+  }
   public: {
     Tables: {
-      team_members: {
+      careers: {
         Row: {
+          created_at: string | null
+          department: string | null
+          description: string | null
+          experience_required: string | null
           id: string
-          name: string
-          role: string
-          category: 'Founders' | 'Engineering' | 'Mentors'
-          university: string | null
-          image_url: string | null
-          linkedin_url: string | null
-          display_order: number
-          created_at: string
+          is_active: boolean | null
+          location: string | null
+          requirements: string[] | null
+          responsibilities: string[] | null
+          salary_range: string | null
+          title: string
+          type: string | null
         }
         Insert: {
+          created_at?: string | null
+          department?: string | null
+          description?: string | null
+          experience_required?: string | null
           id?: string
-          name: string
-          role: string
-          category: 'Founders' | 'Engineering' | 'Mentors'
-          university?: string | null
-          image_url?: string | null
-          linkedin_url?: string | null
-          display_order?: number
-          created_at?: string
+          is_active?: boolean | null
+          location?: string | null
+          requirements?: string[] | null
+          responsibilities?: string[] | null
+          salary_range?: string | null
+          title: string
+          type?: string | null
         }
         Update: {
+          created_at?: string | null
+          department?: string | null
+          description?: string | null
+          experience_required?: string | null
           id?: string
-          name?: string
-          role?: string
-          category?: 'Founders' | 'Engineering' | 'Mentors'
-          university?: string | null
-          image_url?: string | null
-          linkedin_url?: string | null
-          display_order?: number
-          created_at?: string
+          is_active?: boolean | null
+          location?: string | null
+          requirements?: string[] | null
+          responsibilities?: string[] | null
+          salary_range?: string | null
+          title?: string
+          type?: string | null
         }
-      }
-      clients: {
-        Row: {
-          id: string
-          name: string
-          logo_url: string
-          display_order: number
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          name: string
-          logo_url: string
-          display_order?: number
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          logo_url?: string
-          display_order?: number
-          created_at?: string
-        }
+        Relationships: []
       }
       case_studies: {
         Row: {
-          id: string
-          title: string
-          slug: string
-          excerpt: string | null
-          category: string | null
           author: string | null
-          date_published: string | null
-          read_time: string | null
-          image_url: string | null
-          featured: boolean | null
+          category: string | null
           content: string | null
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          title: string
+          created_at: string | null
+          date_published: string | null
+          excerpt: string | null
+          featured: boolean | null
+          id: string
+          image_url: string | null
+          read_time: string | null
           slug: string
-          excerpt?: string | null
-          category?: string | null
+          title: string
+        }
+        Insert: {
           author?: string | null
-          date_published?: string | null
-          read_time?: string | null
-          image_url?: string | null
-          featured?: boolean | null
+          category?: string | null
           content?: string | null
-          created_at?: string
+          created_at?: string | null
+          date_published?: string | null
+          excerpt?: string | null
+          featured?: boolean | null
+          id?: string
+          image_url?: string | null
+          read_time?: string | null
+          slug: string
+          title: string
         }
         Update: {
+          author?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string | null
+          date_published?: string | null
+          excerpt?: string | null
+          featured?: boolean | null
           id?: string
-          title?: string
+          image_url?: string | null
+          read_time?: string | null
           slug?: string
-          excerpt?: string | null
-          category?: string | null
-          author?: string | null
-          date_published?: string | null
-          read_time?: string | null
-          image_url?: string | null
-          featured?: boolean | null
-          content?: string | null
-          created_at?: string
-        }
-      }
-      careers: {
-        Row: {
-          id: string
-          title: string
-          department: string | null
-          location: string | null
-          type: string | null
-          salary_range: string | null
-          experience_required: string | null
-          description: string | null
-          requirements: string[] | null
-          responsibilities: string[] | null
-          is_active: boolean | null
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          title: string
-          department?: string | null
-          location?: string | null
-          type?: string | null
-          salary_range?: string | null
-          experience_required?: string | null
-          description?: string | null
-          requirements?: string[] | null
-          responsibilities?: string[] | null
-          is_active?: boolean | null
-          created_at?: string
-        }
-        Update: {
-          id?: string
           title?: string
-          department?: string | null
-          location?: string | null
-          type?: string | null
-          salary_range?: string | null
-          experience_required?: string | null
-          description?: string | null
-          requirements?: string[] | null
-          responsibilities?: string[] | null
-          is_active?: boolean | null
-          created_at?: string
         }
+        Relationships: []
       }
-      job_applications: {
+      clients: {
         Row: {
+          created_at: string | null
+          display_order: number
           id: string
-          career_id: string | null
-          first_name: string
-          last_name: string
-          email: string
-          phone: string | null
-          resume_link: string
-          cover_letter: string | null
-          position_interest: string | null
-          experience_level: string | null
-          created_at: string
+          logo_url: string
+          name: string
         }
         Insert: {
+          created_at?: string | null
+          display_order?: number
           id?: string
-          career_id?: string | null
-          first_name: string
-          last_name: string
-          email: string
-          phone?: string | null
-          resume_link: string
-          cover_letter?: string | null
-          position_interest?: string | null
-          experience_level?: string | null
-          created_at?: string
+          logo_url: string
+          name: string
         }
         Update: {
+          created_at?: string | null
+          display_order?: number
           id?: string
-          career_id?: string | null
-          first_name?: string
-          last_name?: string
-          email?: string
-          phone?: string | null
-          resume_link?: string
-          cover_letter?: string | null
-          position_interest?: string | null
-          experience_level?: string | null
-          created_at?: string
+          logo_url?: string
+          name?: string
         }
+        Relationships: []
       }
       contact_submissions: {
         Row: {
-          id: string
-          first_name: string
-          last_name: string
-          email: string
-          company: string | null
-          phone: string | null
-          subject: string | null
-          message: string | null
           budget_range: string | null
+          company: string | null
+          created_at: string | null
+          email: string
+          first_name: string
+          id: string
+          last_name: string
+          message: string | null
+          phone: string | null
           status: string | null
-          created_at: string
+          subject: string | null
         }
         Insert: {
-          id?: string
-          first_name: string
-          last_name: string
-          email: string
-          company?: string | null
-          phone?: string | null
-          subject?: string | null
-          message?: string | null
           budget_range?: string | null
+          company?: string | null
+          created_at?: string | null
+          email: string
+          first_name: string
+          id?: string
+          last_name: string
+          message?: string | null
+          phone?: string | null
           status?: string | null
-          created_at?: string
+          subject?: string | null
         }
         Update: {
-          id?: string
-          first_name?: string
-          last_name?: string
-          email?: string
-          company?: string | null
-          phone?: string | null
-          subject?: string | null
-          message?: string | null
           budget_range?: string | null
+          company?: string | null
+          created_at?: string | null
+          email?: string
+          first_name?: string
+          id?: string
+          last_name?: string
+          message?: string | null
+          phone?: string | null
           status?: string | null
-          created_at?: string
+          subject?: string | null
         }
+        Relationships: []
+      }
+      job_applications: {
+        Row: {
+          career_id: string | null
+          cover_letter: string | null
+          created_at: string | null
+          email: string
+          experience_level: string | null
+          first_name: string
+          id: string
+          last_name: string
+          phone: string | null
+          position_interest: string | null
+          resume_link: string
+        }
+        Insert: {
+          career_id?: string | null
+          cover_letter?: string | null
+          created_at?: string | null
+          email: string
+          experience_level?: string | null
+          first_name: string
+          id?: string
+          last_name: string
+          phone?: string | null
+          position_interest?: string | null
+          resume_link: string
+        }
+        Update: {
+          career_id?: string | null
+          cover_letter?: string | null
+          created_at?: string | null
+          email?: string
+          experience_level?: string | null
+          first_name?: string
+          id?: string
+          last_name?: string
+          phone?: string | null
+          position_interest?: string | null
+          resume_link?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "job_applications_career_id_fkey"
+            columns: ["career_id"]
+            isOneToOne: false
+            referencedRelation: "careers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      team_members: {
+        Row: {
+          category: string
+          created_at: string | null
+          display_order: number
+          id: string
+          image_url: string | null
+          linkedin_url: string | null
+          name: string
+          role: string
+          university: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string | null
+          display_order?: number
+          id?: string
+          image_url?: string | null
+          linkedin_url?: string | null
+          name: string
+          role: string
+          university?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string | null
+          display_order?: number
+          id?: string
+          image_url?: string | null
+          linkedin_url?: string | null
+          name?: string
+          role?: string
+          university?: string | null
+        }
+        Relationships: []
       }
     }
     Views: {
@@ -252,3 +271,126 @@ export interface Database {
     }
   }
 }
+
+type DatabaseWithoutInternals = Omit<Database, "__InternalSupabase">
+
+type DefaultSchema = DatabaseWithoutInternals[Extract<keyof Database, "public">]
+
+export type Tables<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof (DefaultSchema["Tables"] & DefaultSchema["Views"])
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+        DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? (DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"] &
+      DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Row: infer R
+    }
+    ? R
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])
+    ? (DefaultSchema["Tables"] &
+        DefaultSchema["Views"])[DefaultSchemaTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
+
+export type TablesInsert<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Insert: infer I
+    }
+    ? I
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
+
+export type TablesUpdate<
+  DefaultSchemaTableNameOrOptions extends
+    | keyof DefaultSchema["Tables"]
+    | { schema: keyof DatabaseWithoutInternals },
+  TableName extends DefaultSchemaTableNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
+> = DefaultSchemaTableNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaTableNameOrOptions["schema"]]["Tables"][TableName] extends {
+      Update: infer U
+    }
+    ? U
+    : never
+  : DefaultSchemaTableNameOrOptions extends keyof DefaultSchema["Tables"]
+    ? DefaultSchema["Tables"][DefaultSchemaTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
+
+export type Enums<
+  DefaultSchemaEnumNameOrOptions extends
+    | keyof DefaultSchema["Enums"]
+    | { schema: keyof DatabaseWithoutInternals },
+  EnumName extends DefaultSchemaEnumNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
+> = DefaultSchemaEnumNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[DefaultSchemaEnumNameOrOptions["schema"]]["Enums"][EnumName]
+  : DefaultSchemaEnumNameOrOptions extends keyof DefaultSchema["Enums"]
+    ? DefaultSchema["Enums"][DefaultSchemaEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof DefaultSchema["CompositeTypes"]
+    | { schema: keyof DatabaseWithoutInternals },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof DatabaseWithoutInternals
+  }
+    ? keyof DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends {
+  schema: keyof DatabaseWithoutInternals
+}
+  ? DatabaseWithoutInternals[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
+    ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
+    : never
+
+export const Constants = {
+  public: {
+    Enums: {},
+  },
+} as const
