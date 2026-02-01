@@ -56,11 +56,12 @@ const CaseStudyDetail = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div className="pt-32 pb-20 px-6 max-w-[680px] mx-auto">
+        {/* Adjusted width to match 75% target */}
+        <div className="pt-32 pb-20 px-6 w-full lg:w-[75%] mx-auto">
           <Skeleton className="h-4 w-32 mb-8" />
           <Skeleton className="h-16 w-full mb-6" />
           <Skeleton className="h-6 w-3/4 mb-12" />
-          <Skeleton className="h-[400px] w-full rounded-sm" />
+          <Skeleton className="h-[500px] w-full rounded-sm" />
         </div>
       </Layout>
     );
@@ -69,7 +70,7 @@ const CaseStudyDetail = () => {
   if (error || !caseStudy) {
     return (
       <Layout>
-        <div className="pt-40 pb-20 px-6 max-w-[680px] mx-auto text-center">
+        <div className="pt-40 pb-20 px-6 w-full lg:w-[75%] mx-auto text-center">
           <AlertCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold mb-4 font-sans">Unavailable</h1>
           <p className="text-gray-500 mb-8 font-serif">
@@ -96,8 +97,11 @@ const CaseStudyDetail = () => {
           --font-sans: 'Inter', sans-serif;
         }
 
+        /* Container width extended to 75% as requested.
+           Using 90% on mobile to prevent it from being too narrow.
+        */
         .cs-container {
-          max-width: 680px;
+          width: 90%;
           margin: 0 auto;
           background-color: #ffffff;
           color: var(--ink);
@@ -106,9 +110,15 @@ const CaseStudyDetail = () => {
           -webkit-font-smoothing: antialiased;
         }
 
+        @media (min-width: 1024px) {
+          .cs-container {
+            width: 75%; /* 3/4 of the page */
+          }
+        }
+
         /* --- HEADER STYLES --- */
         .cs-h1 {
-          font-size: 3.2rem;
+          font-size: 3.5rem; /* Slightly larger for wider layout */
           line-height: 1.1;
           font-weight: 700;
           letter-spacing: -0.02em;
@@ -118,32 +128,32 @@ const CaseStudyDetail = () => {
         }
 
         .cs-subtitle {
-          font-size: 1.4rem;
+          font-size: 1.6rem; /* Scaled up for wider layout */
           line-height: 1.5;
           color: var(--muted);
           margin-bottom: 40px;
           font-weight: 400;
+          max-width: 90%; /* Keep subtitle slightly narrower for readability */
         }
 
         .cs-meta {
           font-family: var(--font-sans);
-          font-size: 0.75rem;
+          font-size: 0.8rem;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           font-weight: 600;
           display: flex;
           flex-wrap: wrap;
-          gap: 20px;
-          padding-bottom: 20px;
+          gap: 30px;
+          padding-bottom: 24px;
           border-bottom: 1px solid var(--hairline);
-          margin-bottom: 50px;
+          margin-bottom: 60px;
         }
         
         .cs-meta div { display: flex; align-items: center; }
-        .cs-meta-label { color: var(--muted); margin-right: 4px; }
+        .cs-meta-label { color: var(--muted); margin-right: 6px; }
 
-        /* --- DEEP CONTENT STYLES --- */
-        /* Targets the container and all direct children for consistent wrapping */
+        /* --- CONTENT STYLES --- */
         .cs-content {
           width: 100%;
           overflow-wrap: break-word;
@@ -151,41 +161,59 @@ const CaseStudyDetail = () => {
           word-break: break-word;
         }
 
-        /* Universal Text Styles within Content */
         .cs-content p, 
         .cs-content li, 
         .cs-content span,
         .cs-content div {
           font-family: var(--font-serif);
-          font-size: 1.25rem;
+          font-size: 1.35rem; /* Increased font size for wider measure readability */
           line-height: 1.8;
           color: #1a1a1a;
-          margin-bottom: 28px;
+          margin-bottom: 32px;
           max-width: 100%;
         }
 
         /* Headers within Content */
         .cs-content h2, 
-        .cs-content h3, 
-        .cs-content h4 {
+        .cs-content h3 {
           font-family: var(--font-sans);
           font-weight: 600;
           color: #000;
-          margin-top: 56px;
+          margin-top: 64px;
           margin-bottom: 24px;
           line-height: 1.3;
           letter-spacing: -0.01em;
         }
 
         .cs-content h2 { 
-          font-size: 1.1rem; 
+          font-size: 1.25rem; 
           text-transform: uppercase; 
           letter-spacing: 0.1em;
           border-top: 1px solid var(--hairline);
-          padding-top: 24px;
+          padding-top: 32px;
         }
         
-        .cs-content h3 { font-size: 1.5rem; }
+        .cs-content h3 { font-size: 1.8rem; }
+
+        /* Images - Full width of the 75% container */
+        .cs-content img, .cs-content figure {
+          width: 100%;
+          height: auto;
+          display: block;
+          margin: 50px 0;
+          border-radius: 2px;
+        }
+
+        /* Blockquotes */
+        .cs-content blockquote {
+          border-left: 4px solid #000;
+          padding-left: 32px;
+          margin: 50px 0;
+          font-style: italic;
+          color: #444;
+          font-size: 1.6rem;
+          line-height: 1.5;
+        }
 
         /* Links */
         .cs-content a {
@@ -199,48 +227,29 @@ const CaseStudyDetail = () => {
 
         /* Lists */
         .cs-content ul, .cs-content ol {
-          margin-bottom: 28px;
-          padding-left: 1.5em;
+          margin-bottom: 32px;
+          padding-left: 2em;
         }
-        .cs-content li { margin-bottom: 12px; }
+        .cs-content li { margin-bottom: 16px; }
 
-        /* Images */
-        .cs-content img, .cs-content figure {
-          max-width: 100%;
-          height: auto;
-          display: block;
-          margin: 40px auto;
-          border-radius: 2px;
-        }
-
-        /* Blockquotes */
-        .cs-content blockquote {
-          border-left: 3px solid #000;
-          padding-left: 24px;
-          margin: 40px 0;
-          font-style: italic;
-          color: #444;
-          font-size: 1.35rem;
-          line-height: 1.6;
-        }
-
-        /* Drop Cap (Only for the very first paragraph) */
+        /* Drop Cap */
         .cs-content > p:first-of-type::first-letter {
           float: left;
-          font-size: 4.8rem;
+          font-size: 5.5rem;
           line-height: 0.8;
-          padding-right: 12px;
+          padding-right: 16px;
           font-weight: 700;
           color: #000;
         }
 
         /* Responsive Adjustments */
-        @media (max-width: 700px) {
-          .cs-h1 { font-size: 2.2rem; }
-          .cs-subtitle { font-size: 1.2rem; }
-          .cs-meta { flex-direction: column; gap: 8px; align-items: flex-start; }
-          .cs-content > p:first-of-type::first-letter { font-size: 3.5rem; }
-          .cs-content blockquote { font-size: 1.2rem; padding-left: 16px; }
+        @media (max-width: 768px) {
+          .cs-h1 { font-size: 2.5rem; }
+          .cs-subtitle { font-size: 1.25rem; }
+          .cs-content p { font-size: 1.2rem; }
+          .cs-meta { flex-direction: column; gap: 12px; align-items: flex-start; }
+          .cs-content > p:first-of-type::first-letter { font-size: 4rem; }
+          .cs-content blockquote { font-size: 1.3rem; padding-left: 20px; }
         }
       `}</style>
 
@@ -278,7 +287,7 @@ const CaseStudyDetail = () => {
           </header>
 
           {caseStudy.image_url && (
-            <figure className="mb-14">
+            <figure className="mb-16">
               <img 
                 src={caseStudy.image_url} 
                 alt={caseStudy.title} 
