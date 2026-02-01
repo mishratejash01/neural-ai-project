@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
+import { Skeleton } from "@/components/ui/skeleton";
 import { 
   Calendar, 
   Clock, 
@@ -12,274 +13,309 @@ import {
   Bookmark, 
   ArrowRight,
   TrendingUp,
-  Users,
   MessageCircle,
-  BarChart3
+  Printer,
+  ChevronRight
 } from "lucide-react";
 import heroImage from "@/assets/neural-ai-hero.jpg";
 
-const ChatbotsService = () => {
-  // Case Study Data
-  const caseStudy = {
-    client: "StyleHub Mumbai",
-    industry: "Fashion Retail",
-    title: "How AI Saved a Mumbai Fashion Retailer 27% in Lost Sales",
-    subtitle: "A deep dive into how automating Instagram DMs and website queries turned customer service into a revenue engine.",
-    author: {
-      name: "Tejash Mishra",
-      image: "/placeholder.svg",
-      role: "Lead AI Engineer"
-    },
-    date: "October 24, 2024",
-    readTime: "7 min read",
-    tags: ["Case Study", "Retail", "Conversational AI"],
-    stats: [
-      { label: "Sales Increase", value: "+27%", icon: TrendingUp },
-      { label: "Response Time", value: "-90%", icon: Clock },
-      { label: "Auto-Resolved", value: "85%", icon: MessageCircle },
-    ]
+// --- Types representing Backend Data Schema ---
+interface ArticleStats {
+  label: string;
+  value: string;
+  icon: string; // stored as string in DB, mapped to component
+}
+
+interface ArticleData {
+  id: string;
+  headline: string;
+  subheadline: string;
+  category: string;
+  author: {
+    name: string;
+    role: string;
+    image: string;
   };
+  published_at: string;
+  read_time: string;
+  hero_image: string;
+  content_html: string; // Simulating rich text from backend
+  stats: ArticleStats[];
+}
+
+interface RelatedLink {
+  id: string;
+  category: string;
+  title: string;
+  url: string;
+}
+
+const ChatbotsService = () => {
+  const [article, setArticle] = useState<ArticleData | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // --- Simulate Backend Fetch (e.g., Supabase .select()) ---
+  useEffect(() => {
+    const fetchArticle = async () => {
+      setLoading(true);
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 800));
+
+      // Mock Data Response
+      setArticle({
+        id: "cs-retail-001",
+        category: "Retail Intelligence",
+        headline: "How AI Saved a Mumbai Fashion Retailer 27% in Lost Sales",
+        subheadline: "A deep dive into how automating Instagram DMs and website queries turned customer service into a revenue engine.",
+        author: {
+          name: "Tejash Mishra",
+          role: "Lead AI Engineer",
+          image: "/placeholder.svg"
+        },
+        published_at: "October 24, 2024",
+        read_time: "7 min read",
+        hero_image: heroImage,
+        // In a real app, this would be sanitized HTML from a CMS
+        content_html: "", 
+        stats: [
+          { label: "Sales Increase", value: "+27%", icon: "trending" },
+          { label: "Response Time", value: "-90%", icon: "clock" },
+          { label: "Auto-Resolved", value: "85%", icon: "message" },
+        ]
+      });
+      setLoading(false);
+    };
+
+    fetchArticle();
+  }, []);
+
+  // --- Icon Mapper ---
+  const getIcon = (iconName: string) => {
+    switch(iconName) {
+      case "trending": return <TrendingUp className="w-6 h-6 text-gray-400 mx-auto mb-2" />;
+      case "clock": return <Clock className="w-6 h-6 text-gray-400 mx-auto mb-2" />;
+      case "message": return <MessageCircle className="w-6 h-6 text-gray-400 mx-auto mb-2" />;
+      default: return null;
+    }
+  };
+
+  // --- Related Links Data (Hardcoded to point to current page as requested) ---
+  const relatedLinks: RelatedLink[] = [
+    { id: "1", category: "Logistics", title: "Optimizing Last-Mile Delivery for a Delhi Courier Giant", url: "/retail-chatbot" },
+    { id: "2", category: "EdTech", title: "Personalized Learning Paths for IIT Aspirants", url: "/retail-chatbot" },
+    { id: "3", category: "Market Analysis", title: "The State of AI in Indian E-Commerce 2025", url: "/retail-chatbot" }
+  ];
 
   return (
     <Layout>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
         
         :root {
-          --text-main: #1a1a1a;
-          --text-muted: #555555;
-          --border-color: #eeeeee;
+          --font-serif: 'Lora', serif;
+          --font-sans: 'Inter', sans-serif;
         }
-
-        /* Custom scrollbar for code blocks if needed */
-        .prose pre::-webkit-scrollbar {
-          height: 8px;
-        }
-        .prose pre::-webkit-scrollbar-thumb {
-          background-color: #4a4a4a;
-          border-radius: 4px;
+        
+        .drop-cap::first-letter {
+          font-size: 3.5rem;
+          font-weight: 700;
+          float: left;
+          line-height: 0.8;
+          margin-right: 0.5rem;
+          margin-top: 0.2rem;
         }
       `}</style>
 
-      <article className="min-h-screen bg-white pt-24 pb-20 font-['Lora',serif] text-[#1a1a1a]">
+      <main className="min-h-screen bg-[#fcfcfc] text-gray-900 pt-24 pb-20 font-[var(--font-serif)]">
         
-        {/* --- Header Section --- */}
-        <div className="container mx-auto px-4 mb-12 max-w-[1080px]">
-          <div className="text-center md:text-left border-b border-[#eeeeee] pb-10">
-            {/* Tags */}
-            <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-6 font-['Inter',sans-serif]">
-              {caseStudy.tags.map((tag, index) => (
-                <Badge key={index} variant="secondary" className="bg-black/5 text-black hover:bg-black/10 transition-colors rounded-sm px-3 py-1 uppercase tracking-wider text-xs font-bold">
-                  {tag}
-                </Badge>
-              ))}
-            </div>
-            
-            {/* Title */}
-            <h1 className="text-4xl md:text-[3.2rem] leading-[1.1] font-bold mb-6 tracking-tight text-black">
-              {caseStudy.title}
-            </h1>
-            
-            {/* Subtitle */}
-            <p className="text-[1.35rem] text-[#555555] mb-8 leading-[1.4] max-w-3xl italic">
-              {caseStudy.subtitle}
-            </p>
-
-            {/* Author & Meta */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-6 font-['Inter',sans-serif] border-t border-[#eeeeee] mt-8">
-              <div className="flex items-center gap-4">
-                <Avatar className="h-12 w-12 border border-gray-200">
-                  <AvatarImage src={caseStudy.author.image} />
-                  <AvatarFallback>TM</AvatarFallback>
-                </Avatar>
-                <div className="text-left">
-                  <div className="font-bold text-black text-sm uppercase tracking-wide">{caseStudy.author.name}</div>
-                  <div className="text-gray-500 text-xs">{caseStudy.author.role}</div>
-                </div>
-              </div>
-              
-              <div className="flex items-center gap-8 text-xs text-gray-500 font-semibold uppercase tracking-widest">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  <span>{caseStudy.date}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  <span>{caseStudy.readTime}</span>
-                </div>
-              </div>
-            </div>
+        {loading ? (
+          // --- Loading Skeleton ---
+          <div className="container mx-auto px-4 max-w-[1080px]">
+             <Skeleton className="h-8 w-32 mb-4" />
+             <Skeleton className="h-16 w-3/4 mb-4" />
+             <Skeleton className="h-6 w-1/2 mb-8" />
+             <Skeleton className="h-[400px] w-full rounded-sm" />
           </div>
-        </div>
-
-        {/* --- Hero Image --- */}
-        <div className="container mx-auto px-4 mb-16 max-w-[1080px]">
-          <div className="rounded-sm overflow-hidden shadow-sm border border-gray-100">
-            <img 
-              src={heroImage} 
-              alt="Retail Analytics Dashboard" 
-              className="w-full h-auto object-cover max-h-[600px] grayscale hover:grayscale-0 transition-all duration-1000 ease-in-out"
-            />
-            <div className="bg-gray-50 p-4 text-center font-['Inter',sans-serif] text-xs text-gray-500 border-t border-gray-100">
-              Figure 1.1: The AI Dashboard monitoring real-time customer sentiment and order flow.
-            </div>
-          </div>
-        </div>
-
-        {/* --- Main Content Grid --- */}
-        <div className="container mx-auto px-4 max-w-[1080px]">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-16">
-            
-            {/* Article Body */}
-            <div className="prose prose-lg prose-slate max-w-none font-['Lora',serif]">
-              
-              {/* Executive Summary Block */}
-              <div className="bg-slate-50 border-l-4 border-black p-8 mb-12 not-prose">
-                <h3 className="font-['Inter',sans-serif] font-bold text-lg mb-4 uppercase tracking-wide">Executive Summary</h3>
-                <p className="text-lg leading-relaxed text-gray-700">
-                  <strong>Client:</strong> {caseStudy.client}<br/>
-                  <strong>Problem:</strong> Overwhelmed support team and 60% cart abandonment on mobile.<br/>
-                  <strong>Solution:</strong> A custom GPT-4 integrated chatbot with inventory sync.<br/>
-                  <strong>Result:</strong> 27% revenue uplift in Q3 2024.
-                </p>
+        ) : article ? (
+          <>
+            {/* --- Article Header --- */}
+            <header className="container mx-auto px-4 mb-10 max-w-[1080px] border-b border-gray-200 pb-10">
+              <div className="flex items-center gap-2 mb-6 font-[var(--font-sans)] text-xs font-bold uppercase tracking-widest text-red-700">
+                <span className="w-2 h-2 bg-red-700 rounded-full inline-block"></span>
+                {article.category}
               </div>
 
-              <p className="text-[1.2rem] leading-[1.8] text-[#1a1a1a] mb-8 first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:mt-[-4px]">
-                The fashion retail landscape in Mumbai is notoriously competitive. For <strong>{caseStudy.client}</strong>, a rising D2C brand, the primary bottleneck wasn't traffic—it was engagement. With over 50,000 Instagram followers, their support team was drowning in DMs asking for "price," "size," and "availability," leading to response delays of up to 6 hours.
+              <h1 className="text-4xl md:text-[3.5rem] leading-[1.1] font-bold mb-6 tracking-tight text-black">
+                {article.headline}
+              </h1>
+
+              <p className="text-xl md:text-2xl text-gray-600 leading-relaxed max-w-3xl font-normal mb-8">
+                {article.subheadline}
               </p>
 
-              <p className="text-[1.2rem] leading-[1.8] text-[#1a1a1a] mb-12">
-                By the time a human agent responded, the customer had often moved on. We identified this <strong>"Response Gap"</strong> as the single largest leak in their sales funnel.
-              </p>
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-4 font-[var(--font-sans)]">
+                <div className="flex items-center gap-4">
+                  <Avatar className="h-12 w-12 border border-gray-200">
+                    <AvatarImage src={article.author.image} />
+                    <AvatarFallback className="bg-gray-100 text-gray-900 font-bold">TM</AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <div className="font-bold text-gray-900 text-sm uppercase tracking-wide">By {article.author.name}</div>
+                    <div className="text-gray-500 text-xs">{article.author.role}</div>
+                  </div>
+                </div>
 
-              <h2 className="text-3xl font-bold mb-6 text-black font-['Inter',sans-serif] mt-16">The Challenge: Scaling Personal Touch</h2>
-              <p className="text-[1.2rem] leading-[1.8] text-[#1a1a1a] mb-6">
-                The client wanted to automate responses but refused to use "dumb bots" that offer rigid menu options. Their brand voice was chic, personal, and helpful. They needed a solution that could:
-              </p>
-              <ul className="list-disc pl-6 mb-12 space-y-4 text-lg">
-                <li>Handle Hinglish (Hindi + English) queries naturally.</li>
-                <li>Check real-time inventory from their Shopify backend.</li>
-                <li>Suggest matching accessories (Cross-selling).</li>
-              </ul>
-
-              <h2 className="text-3xl font-bold mb-6 text-black font-['Inter',sans-serif] mt-16">The Solution: Neural Context Engine</h2>
-              <p className="text-[1.2rem] leading-[1.8] text-[#1a1a1a] mb-8">
-                We deployed our proprietary <strong>Retail-RAG (Retrieval Augmented Generation)</strong> architecture. Unlike standard chatbots, this system was fed the client's entire style guide and past 6 months of customer service logs.
-              </p>
-              
-              <div className="my-12 p-6 border border-gray-200 rounded-lg bg-white not-prose shadow-sm">
-                <h4 className="font-['Inter',sans-serif] font-bold text-sm text-gray-400 uppercase mb-4">Architecture Diagram</h4>
-                <div className="flex flex-col md:flex-row gap-4 items-center justify-center text-sm font-['Inter',sans-serif] font-medium text-center">
-                  <div className="p-4 bg-gray-100 rounded">Instagram API</div>
-                  <ArrowRight className="text-gray-400" />
-                  <div className="p-4 bg-blue-50 text-blue-700 border border-blue-100 rounded">Neural Middleware</div>
-                  <ArrowRight className="text-gray-400" />
-                  <div className="p-4 bg-gray-100 rounded">Shopify Inventory</div>
+                <div className="flex items-center gap-6 text-xs text-gray-500 font-semibold uppercase tracking-widest">
+                  <span>{article.published_at}</span>
+                  <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                  <span>{article.read_time}</span>
+                  <div className="flex gap-2 ml-4">
+                     <Button variant="ghost" size="icon" className="h-8 w-8"><Share2 className="w-4 h-4" /></Button>
+                     <Button variant="ghost" size="icon" className="h-8 w-8"><Printer className="w-4 h-4" /></Button>
+                  </div>
                 </div>
               </div>
+            </header>
 
-              <h2 className="text-3xl font-bold mb-6 text-black font-['Inter',sans-serif] mt-16">The Impact</h2>
-              <p className="text-[1.2rem] leading-[1.8] text-[#1a1a1a] mb-8">
-                The results were immediate. Within the first week of deployment, the "Response Gap" dropped from 6 hours to <strong>12 seconds</strong>.
-              </p>
-
-              {/* Stats Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 not-prose">
-                {caseStudy.stats.map((stat, index) => (
-                  <div key={index} className="bg-black text-white p-6 rounded-lg text-center">
-                    <stat.icon className="w-8 h-8 mx-auto mb-4 text-gray-400" />
-                    <div className="text-4xl font-bold mb-2 font-['Inter',sans-serif]">{stat.value}</div>
-                    <div className="text-xs uppercase tracking-widest text-gray-400">{stat.label}</div>
+            {/* --- Hero Image --- */}
+            <div className="container mx-auto px-4 mb-14 max-w-[1080px]">
+              <figure>
+                <div className="rounded-sm overflow-hidden shadow-sm border border-gray-100 relative">
+                  <img 
+                    src={article.hero_image} 
+                    alt="Dashboard" 
+                    className="w-full h-auto object-cover max-h-[600px] grayscale hover:grayscale-0 transition-all duration-700 ease-in-out"
+                  />
+                  <div className="absolute bottom-0 left-0 bg-black/70 text-white px-4 py-2 font-[var(--font-sans)] text-xs uppercase tracking-wider backdrop-blur-sm">
+                    Figure 1.0: Real-time Analytics
                   </div>
-                ))}
-              </div>
-
-              <p className="text-[1.2rem] leading-[1.8] text-[#1a1a1a] mb-12">
-                Most importantly, the AI didn't just answer questions—it sold. By proactively suggesting, <em>"This scarf looks great with the Kurti you're viewing,"</em> the bot increased Average Order Value (AOV) by 15%.
-              </p>
-
-              <div className="bg-gray-100 p-8 rounded-xl my-12 not-prose">
-                <h3 className="text-2xl font-bold mb-4 font-['Inter',sans-serif]">Ready to replicate these results?</h3>
-                <p className="text-gray-600 mb-6 font-['Lora',serif] italic">
-                  We are currently accepting two new retail partners for Q4 2024.
-                </p>
-                <Link to="/contact">
-                  <Button className="w-full md:w-auto bg-black text-white hover:bg-gray-800 font-bold px-8 py-4 rounded-none text-sm uppercase tracking-widest">
-                    Request a Strategy Session
-                  </Button>
-                </Link>
-              </div>
+                </div>
+                <figcaption className="mt-3 text-sm text-gray-500 font-[var(--font-sans)] text-center italic">
+                  The Neural AI dashboard monitoring live customer interactions in Mumbai.
+                </figcaption>
+              </figure>
             </div>
 
-            {/* Sidebar Column */}
-            <aside className="space-y-12 font-['Inter',sans-serif]">
-              
-              {/* Project Details Card */}
-              <div className="bg-white border border-black/10 p-6 shadow-sm">
-                <span className="block text-xs font-bold uppercase tracking-widest border-b-2 border-black pb-2 mb-6">
-                  Project Data
-                </span>
-                <dl className="space-y-4 text-sm">
-                  <div>
-                    <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Client</dt>
-                    <dd className="font-bold text-black text-lg">StyleHub Mumbai</dd>
-                  </div>
-                  <Separator />
-                  <div>
-                    <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Services</dt>
-                    <dd className="font-medium text-black">NLP, Shopify API, Automation</dd>
-                  </div>
-                  <Separator />
-                  <div>
-                    <dt className="text-gray-500 text-xs uppercase tracking-wide mb-1">Duration</dt>
-                    <dd className="font-medium text-black">4 Weeks (Dev + Deploy)</dd>
-                  </div>
-                </dl>
-              </div>
-
-              {/* More Case Studies */}
-              <div>
-                <span className="block text-xs font-bold uppercase tracking-widest border-b-2 border-black pb-2 mb-6">
-                  More Case Studies
-                </span>
-                <div className="space-y-6">
-                  <Link to="#" className="block group border-b border-gray-100 pb-5">
-                    <span className="block text-[0.7rem] font-bold uppercase text-gray-500 mb-2">
-                      Logistics
-                    </span>
-                    <h4 className="text-md font-bold leading-tight group-hover:underline decoration-2 underline-offset-2">
-                      Optimizing Last-Mile Delivery for a Delhi Courier Giant
-                    </h4>
-                  </Link>
+            {/* --- Main Content Grid --- */}
+            <div className="container mx-auto px-4 max-w-[1080px]">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-12 lg:gap-20">
+                
+                {/* --- Article Body --- */}
+                <article className="prose prose-lg prose-slate max-w-none font-[var(--font-serif)] text-gray-800">
                   
-                  <Link to="#" className="block group border-b border-gray-100 pb-5">
-                    <span className="block text-[0.7rem] font-bold uppercase text-gray-500 mb-2">
-                      EdTech
-                    </span>
-                    <h4 className="text-md font-bold leading-tight group-hover:underline decoration-2 underline-offset-2">
-                      Personalized Learning Paths for IIT Aspirants
-                    </h4>
-                  </Link>
-                </div>
-              </div>
+                  {/* Executive Summary Card */}
+                  <div className="bg-gray-50 border-y border-gray-200 p-6 mb-10 not-prose font-[var(--font-sans)]">
+                    <h3 className="font-bold text-xs uppercase tracking-widest text-gray-400 mb-3">Project Brief</h3>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div><span className="font-bold text-gray-900">Client:</span> StyleHub Mumbai</div>
+                      <div><span className="font-bold text-gray-900">Duration:</span> 4 Weeks</div>
+                      <div className="col-span-2"><span className="font-bold text-gray-900">Core Tech:</span> RAG, GPT-4o, Shopify API</div>
+                    </div>
+                  </div>
 
-              {/* Actions */}
-              <div className="bg-gray-50 p-6 border border-gray-100">
-                <h3 className="font-bold text-sm uppercase tracking-wide text-gray-500 mb-4">Share</h3>
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm" className="flex-1 bg-white hover:bg-gray-100 border-gray-200">
-                    <Share2 className="mr-2 h-3 w-3" /> Share
-                  </Button>
-                  <Button variant="outline" size="sm" className="flex-1 bg-white hover:bg-gray-100 border-gray-200">
-                    <Bookmark className="mr-2 h-3 w-3" /> Save
-                  </Button>
-                </div>
-              </div>
-            </aside>
+                  <div className="drop-cap text-xl leading-8 mb-8">
+                    The fashion retail landscape in Mumbai is notoriously competitive. For <span className="font-semibold text-black">StyleHub</span>, a rising D2C brand, the primary bottleneck wasn't traffic—it was engagement. With over 50,000 Instagram followers, their support team was drowning in DMs asking for "price," "size," and "availability," leading to response delays of up to 6 hours.
+                  </div>
 
-          </div>
-        </div>
-      </article>
+                  <p className="text-xl leading-8 mb-10">
+                    By the time a human agent responded, the customer had often moved on. We identified this <strong>"Response Gap"</strong> as the single largest leak in their sales funnel. The objective was clear: automate the conversation without losing the "Mumbai chic" voice that defined their brand.
+                  </p>
+
+                  <h2 className="text-2xl font-bold mt-12 mb-6 font-[var(--font-sans)] text-black border-l-4 border-red-700 pl-4">
+                    The Challenge: Scaling the Personal Touch
+                  </h2>
+                  <p className="text-xl leading-8 mb-6">
+                    The client wanted to automate responses but refused to use "dumb bots" that offer rigid menu options. Their brand voice was personal and helpful. They needed a solution that could:
+                  </p>
+                  <ul className="list-disc pl-5 space-y-2 mb-10 font-[var(--font-sans)] text-base text-gray-700">
+                    <li>Handle <strong>Hinglish</strong> (Hindi + English) queries naturally.</li>
+                    <li>Check real-time inventory from their Shopify backend.</li>
+                    <li>Suggest matching accessories (Cross-selling).</li>
+                  </ul>
+
+                  {/* Stats Breakout */}
+                  <div className="my-12 grid grid-cols-3 gap-4 border-y border-black py-8 not-prose">
+                    {article.stats.map((stat, idx) => (
+                      <div key={idx} className="text-center">
+                        {getIcon(stat.icon)}
+                        <div className="text-3xl font-bold font-[var(--font-sans)] text-black">{stat.value}</div>
+                        <div className="text-[10px] uppercase tracking-widest text-gray-500 font-[var(--font-sans)] mt-1">{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <h2 className="text-2xl font-bold mt-12 mb-6 font-[var(--font-sans)] text-black border-l-4 border-red-700 pl-4">
+                    The Solution: Neural Context Engine
+                  </h2>
+                  <p className="text-xl leading-8 mb-8">
+                    We deployed our proprietary <strong>Retail-RAG</strong> architecture. Unlike standard chatbots, this system was fed the client's entire style guide and past 6 months of customer service logs. It allows the AI to "remember" context across platforms—if a user asks about a dress on Instagram and follows up on the website, the bot knows.
+                  </p>
+                  
+                  <div className="bg-black text-white p-8 rounded-sm my-12 not-prose">
+                    <h3 className="text-2xl font-[var(--font-sans)] font-bold mb-4">Ready to replicate these results?</h3>
+                    <p className="text-gray-300 mb-6 font-[var(--font-serif)] italic text-lg">
+                      We are currently accepting two new retail partners for Q4 2024 strategies.
+                    </p>
+                    <Link to="/contact">
+                      <Button className="bg-white text-black hover:bg-gray-200 font-bold px-8 py-6 text-sm uppercase tracking-widest w-full md:w-auto">
+                        Schedule Consultation <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </Link>
+                  </div>
+                </article>
+
+                {/* --- Sidebar --- */}
+                <aside className="border-t lg:border-t-0 lg:border-l border-gray-200 lg:pl-10 mt-12 lg:mt-0 font-[var(--font-sans)]">
+                  <div className="sticky top-24">
+                    
+                    {/* Newsletter Widget */}
+                    <div className="bg-gray-100 p-6 mb-10 text-center">
+                       <h4 className="font-bold text-lg mb-2">Neural Intelligence</h4>
+                       <p className="text-xs text-gray-500 mb-4">Weekly analysis of AI in enterprise.</p>
+                       <Button className="w-full bg-black text-white h-8 text-xs uppercase tracking-widest">Subscribe</Button>
+                    </div>
+
+                    <div className="mb-2 flex items-center justify-between">
+                      <span className="text-xs font-bold uppercase tracking-widest text-red-700">Read Next</span>
+                    </div>
+                    <Separator className="mb-6 bg-black h-[2px]" />
+
+                    <div className="space-y-8">
+                      {relatedLinks.map((link) => (
+                        <Link key={link.id} to={link.url} className="group block">
+                          <div className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1 group-hover:text-red-700 transition-colors">
+                            {link.category}
+                          </div>
+                          <h4 className="text-base font-bold text-gray-900 leading-tight group-hover:underline decoration-1 underline-offset-4">
+                            {link.title}
+                          </h4>
+                          <div className="mt-2 text-xs text-gray-400 flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            Read Case Study <ChevronRight className="w-3 h-3 ml-1" />
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+
+                    <Separator className="my-8" />
+                    
+                    <div className="text-center">
+                       <h5 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-4">Share this story</h5>
+                       <div className="flex justify-center gap-2">
+                          <Button variant="outline" size="icon" className="rounded-full border-gray-300"><Share2 className="w-4 h-4" /></Button>
+                          <Button variant="outline" size="icon" className="rounded-full border-gray-300"><Bookmark className="w-4 h-4" /></Button>
+                          <Button variant="outline" size="icon" className="rounded-full border-gray-300"><Printer className="w-4 h-4" /></Button>
+                       </div>
+                    </div>
+                  </div>
+                </aside>
+
+              </div>
+            </div>
+          </>
+        ) : (
+          <div className="text-center py-20 text-red-600">Failed to load content.</div>
+        )}
+      </main>
     </Layout>
   );
 };
