@@ -56,7 +56,7 @@ const CaseStudyDetail = () => {
   if (isLoading) {
     return (
       <Layout>
-        {/* Adjusted width to match 75% target */}
+        {/* Loading Skeleton matching the 75% width layout */}
         <div className="pt-32 pb-20 px-6 w-full lg:w-[75%] mx-auto">
           <Skeleton className="h-4 w-32 mb-8" />
           <Skeleton className="h-16 w-full mb-6" />
@@ -97,9 +97,7 @@ const CaseStudyDetail = () => {
           --font-sans: 'Inter', sans-serif;
         }
 
-        /* Container width extended to 75% as requested.
-           Using 90% on mobile to prevent it from being too narrow.
-        */
+        /* --- CONTAINER LAYOUT (75% Width) --- */
         .cs-container {
           width: 90%;
           margin: 0 auto;
@@ -112,13 +110,14 @@ const CaseStudyDetail = () => {
 
         @media (min-width: 1024px) {
           .cs-container {
-            width: 75%; /* 3/4 of the page */
+            width: 75%; /* 3/4 of the page width */
+            max-width: 1400px; /* Optional cap for very large screens */
           }
         }
 
-        /* --- HEADER STYLES --- */
+        /* --- HEADER TYPOGRAPHY --- */
         .cs-h1 {
-          font-size: 3.5rem; /* Slightly larger for wider layout */
+          font-size: clamp(2.5rem, 5vw, 4rem); /* Responsive headline */
           line-height: 1.1;
           font-weight: 700;
           letter-spacing: -0.02em;
@@ -128,32 +127,42 @@ const CaseStudyDetail = () => {
         }
 
         .cs-subtitle {
-          font-size: 1.6rem; /* Scaled up for wider layout */
+          font-size: clamp(1.2rem, 2vw, 1.6rem);
           line-height: 1.5;
           color: var(--muted);
-          margin-bottom: 40px;
+          margin-bottom: 32px;
           font-weight: 400;
-          max-width: 90%; /* Keep subtitle slightly narrower for readability */
+          max-width: 90%;
         }
 
         .cs-meta {
           font-family: var(--font-sans);
-          font-size: 0.8rem;
+          font-size: 0.85rem;
           text-transform: uppercase;
           letter-spacing: 0.1em;
           font-weight: 600;
           display: flex;
           flex-wrap: wrap;
-          gap: 30px;
+          gap: 32px;
           padding-bottom: 24px;
           border-bottom: 1px solid var(--hairline);
-          margin-bottom: 60px;
+          margin-bottom: 48px;
         }
         
         .cs-meta div { display: flex; align-items: center; }
-        .cs-meta-label { color: var(--muted); margin-right: 6px; }
+        .cs-meta-label { color: var(--muted); margin-right: 8px; }
 
-        /* --- CONTENT STYLES --- */
+        /* --- IMAGE STYLES --- */
+        .cs-hero-image {
+          width: 100%;
+          height: auto;
+          display: block;
+          margin-bottom: 64px;
+          border-radius: 2px;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- CONTENT BODY STYLES --- */
         .cs-content {
           width: 100%;
           overflow-wrap: break-word;
@@ -163,39 +172,39 @@ const CaseStudyDetail = () => {
 
         .cs-content p, 
         .cs-content li, 
-        .cs-content span,
         .cs-content div {
           font-family: var(--font-serif);
-          font-size: 1.35rem; /* Increased font size for wider measure readability */
+          font-size: 1.35rem; /* Large readable text */
           line-height: 1.8;
           color: #1a1a1a;
           margin-bottom: 32px;
           max-width: 100%;
         }
 
-        /* Headers within Content */
-        .cs-content h2, 
-        .cs-content h3 {
+        /* Section Headings */
+        .cs-content h2 { 
           font-family: var(--font-sans);
           font-weight: 600;
           color: #000;
-          margin-top: 64px;
-          margin-bottom: 24px;
-          line-height: 1.3;
-          letter-spacing: -0.01em;
-        }
-
-        .cs-content h2 { 
           font-size: 1.25rem; 
           text-transform: uppercase; 
           letter-spacing: 0.1em;
+          margin-top: 64px;
+          margin-bottom: 24px;
           border-top: 1px solid var(--hairline);
           padding-top: 32px;
         }
         
-        .cs-content h3 { font-size: 1.8rem; }
+        .cs-content h3 { 
+          font-family: var(--font-sans);
+          font-weight: 600;
+          color: #000;
+          font-size: 1.8rem;
+          margin-top: 48px;
+          margin-bottom: 20px;
+        }
 
-        /* Images - Full width of the 75% container */
+        /* Content Images */
         .cs-content img, .cs-content figure {
           width: 100%;
           height: auto;
@@ -215,22 +224,20 @@ const CaseStudyDetail = () => {
           line-height: 1.5;
         }
 
-        /* Links */
-        .cs-content a {
-          color: #1a1a1a;
-          text-decoration: underline;
-          text-decoration-thickness: 1px;
-          text-underline-offset: 4px;
-          transition: color 0.2s;
-        }
-        .cs-content a:hover { color: #666; }
-
         /* Lists */
         .cs-content ul, .cs-content ol {
           margin-bottom: 32px;
           padding-left: 2em;
         }
         .cs-content li { margin-bottom: 16px; }
+
+        /* Links */
+        .cs-content a {
+          color: #000;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+          font-weight: 600;
+        }
 
         /* Drop Cap */
         .cs-content > p:first-of-type::first-letter {
@@ -242,20 +249,20 @@ const CaseStudyDetail = () => {
           color: #000;
         }
 
-        /* Responsive Adjustments */
+        /* Responsive */
         @media (max-width: 768px) {
           .cs-h1 { font-size: 2.5rem; }
           .cs-subtitle { font-size: 1.25rem; }
           .cs-content p { font-size: 1.2rem; }
           .cs-meta { flex-direction: column; gap: 12px; align-items: flex-start; }
           .cs-content > p:first-of-type::first-letter { font-size: 4rem; }
-          .cs-content blockquote { font-size: 1.3rem; padding-left: 20px; }
         }
       `}</style>
 
       <div className="min-h-screen bg-white pt-32 pb-24 px-6">
         <article className="cs-container">
           
+          {/* 1. Back Navigation */}
           <Link 
             to="/portfolio" 
             className="inline-flex items-center text-gray-400 hover:text-black transition-colors mb-12 font-sans text-xs font-bold uppercase tracking-widest"
@@ -263,6 +270,7 @@ const CaseStudyDetail = () => {
             <ArrowLeft className="mr-2 h-3 w-3" /> Back to Portfolio
           </Link>
 
+          {/* 2. Header Section */}
           <header>
             <h1 className="cs-h1">{caseStudy.title}</h1>
             
@@ -286,16 +294,16 @@ const CaseStudyDetail = () => {
             </div>
           </header>
 
+          {/* 3. Hero Image (Strictly below title/header) */}
           {caseStudy.image_url && (
-            <figure className="mb-16">
-              <img 
-                src={caseStudy.image_url} 
-                alt={caseStudy.title} 
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-gray-100"
-              />
-            </figure>
+            <img 
+              src={caseStudy.image_url} 
+              alt={caseStudy.title} 
+              className="cs-hero-image"
+            />
           )}
 
+          {/* 4. Content Body */}
           {caseStudy.content && (
             <section 
               className="cs-content"
