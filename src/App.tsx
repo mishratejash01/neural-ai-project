@@ -9,6 +9,7 @@ import Services from "./pages/Services";
 import Demo from "./pages/Demo";
 import Testimonials from "./pages/Testimonials";
 import Portfolio from "./pages/Portfolio";
+import CaseStudyDetail from "./pages/CaseStudyDetail";
 import Careers from "./pages/Careers";
 import Contact from "./pages/Contact";
 import FAQ from "./pages/FAQ";
@@ -51,12 +52,7 @@ const App = () => (
           <Route path="/demo" element={<Demo />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/portfolio/retail-chatbot-lifestyle-store" element={<RetailChatbot />} />
-          <Route path="/portfolio/predictive-analytics-healthcare" element={<PredictiveAnalytics />} />
-          <Route path="/portfolio/computer-vision-manufacturing" element={<ComputerVisionPortfolio />} />
-          <Route path="/portfolio/ai-marketing-automation-fintech" element={<MarketingAutomationPortfolio />} />
-          <Route path="/portfolio/nlp-edtech" element={<NLPEdTech />} />
-          <Route path="/portfolio/logistics-optimization" element={<LogisticsOptimization />} />
+          <Route path="/portfolio/:slug" element={<CaseStudyDetail />} />
           <Route path="/careers" element={<Careers />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<FAQ />} />
