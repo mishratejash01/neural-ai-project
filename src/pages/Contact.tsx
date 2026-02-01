@@ -44,13 +44,22 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const { error } = await supabase.functions.invoke('resend_key_id', {
-        body: {
-          type: 'contact',
-          ...formData,
-          fullName: `${formData.firstName} ${formData.lastName}`
-        }
-      });
+      // Insert directly into the Supabase table 'contact_submissions'
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            company: formData.company,
+            phone: formData.phone,
+            subject: formData.subject,
+            message: formData.message,
+            budget_range: formData.budget,
+            status: 'new' // Default status
+          }
+        ]);
 
       if (error) throw error;
 
@@ -81,6 +90,7 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
+
   const contactMethods = [
     {
       icon: Phone,
