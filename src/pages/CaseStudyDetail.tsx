@@ -85,9 +85,6 @@ const CaseStudyDetail = () => {
 
   return (
     <Layout>
-      {/* Injecting the exact CSS from your provided HTML template.
-        Scoped to this component to prevent global overrides.
-      */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;600&display=swap');
 
@@ -117,6 +114,9 @@ const CaseStudyDetail = () => {
           letter-spacing: -0.02em;
           margin-bottom: 24px;
           color: #000;
+          /* Ensure long words break on mobile */
+          overflow-wrap: break-word;
+          hyphens: auto;
         }
 
         /* Subtitle */
@@ -153,11 +153,29 @@ const CaseStudyDetail = () => {
           margin-right: 4px;
         }
 
-        /* Content Body Typography */
+        /* Content Body Typography & Layout */
+        .cs-content {
+          width: 100%;
+          max-width: 100%;
+        }
+
         .cs-content p {
           font-size: 1.25rem;
           margin-bottom: 28px;
           color: #1a1a1a;
+          /* Critical for text wrapping */
+          overflow-wrap: break-word;
+          word-wrap: break-word;
+          line-height: 1.8;
+        }
+
+        /* Ensure images inside content don't overflow */
+        .cs-content img {
+          max-width: 100%;
+          height: auto;
+          border-radius: 2px;
+          margin: 40px 0;
+          display: block;
         }
 
         /* Drop Cap for first paragraph */
@@ -183,6 +201,18 @@ const CaseStudyDetail = () => {
           color: #000;
         }
 
+        /* Lists styling */
+        .cs-content ul, .cs-content ol {
+          margin-bottom: 28px;
+          padding-left: 20px;
+        }
+        
+        .cs-content li {
+          font-size: 1.25rem;
+          margin-bottom: 12px;
+          color: #1a1a1a;
+        }
+
         /* Author Note (Last paragraph style) */
         .cs-content .author-note {
           margin-top: 80px;
@@ -204,13 +234,14 @@ const CaseStudyDetail = () => {
           .cs-h1 { font-size: 2.2rem; }
           .cs-subtitle { font-size: 1.2rem; }
           .cs-meta { flex-direction: column; gap: 8px; align-items: flex-start; }
+          .cs-content > p:first-of-type::first-letter { font-size: 3.5rem; }
         }
       `}</style>
 
       <div className="min-h-screen bg-white pt-32 pb-24 px-6">
         <article className="cs-container">
           
-          {/* Back Navigation - Kept minimal */}
+          {/* Back Navigation */}
           <Link 
             to="/portfolio" 
             className="inline-flex items-center text-gray-400 hover:text-black transition-colors mb-12 font-sans text-xs font-bold uppercase tracking-widest"
@@ -241,13 +272,13 @@ const CaseStudyDetail = () => {
             </div>
           </header>
 
-          {/* Hero Image - Optional based on availability */}
+          {/* Hero Image */}
           {caseStudy.image_url && (
             <figure className="mb-14">
               <img 
                 src={caseStudy.image_url} 
                 alt={caseStudy.title} 
-                className="w-full h-auto grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-gray-100"
+                className="w-full h-auto max-w-full grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-gray-100"
               />
               <figcaption className="mt-3 text-xs font-sans text-gray-400 text-center uppercase tracking-wider">
                 Figure 1: {caseStudy.title}
