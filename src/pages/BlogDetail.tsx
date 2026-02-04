@@ -101,8 +101,8 @@ const BlogDetail = () => {
 
       <div className="bg-white min-h-screen pb-32 pt-24 font-['Inter']">
         
-        {/* Main Container - max-w-4xl for Header/Image */}
-        <main className="max-w-4xl mx-auto px-6">
+        {/* Main Container - Adjusted to capture 75% of the page */}
+        <main className="w-[75%] mx-auto">
           
           {/* --- TOP NAV --- */}
           <nav className="mb-12">
@@ -148,13 +148,10 @@ const BlogDetail = () => {
             )}
           </div>
 
-          {/* --- ARTICLE BODY (Narrower Column) --- */}
-          <div className="max-w-2xl mx-auto">
+          {/* --- ARTICLE BODY --- */}
+          {/* Increased max-width to max-w-4xl to better utilize the 75% width container while maintaining readability */}
+          <div className="max-w-4xl mx-auto">
             
-            {/* Content Renderer:
-              Uses Tailwind Typography ('prose') to style backend HTML/Markdown automatically.
-              'whitespace-pre-wrap' preserves line breaks if it's plain text.
-            */}
             <div className="prose prose-lg prose-slate max-w-none text-lg leading-relaxed text-gray-700 whitespace-pre-wrap">
                {blog.content}
             </div>
