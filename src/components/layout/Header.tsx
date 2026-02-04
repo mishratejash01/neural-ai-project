@@ -18,6 +18,9 @@ const Header = () => {
     { href: "/careers", label: "Careers" },
   ];
 
+  // Helper to check if we are on the Home Page
+  const isHomePage = location.pathname === "/";
+
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location.pathname]);
@@ -36,18 +39,20 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  // LOGIC: Use "Floating/Compact" state if we are Scrolled OR NOT on the Home Page
+  // If we are on Home Page AND at the top, use "Full Width"
+  const isCompact = isScrolled || !isHomePage;
+
   return (
     <header className="fixed top-0 left-0 right-0 z-[1000] flex justify-center pointer-events-none font-sans">
       <div 
         className={cn(
           "pointer-events-auto transition-all duration-500 ease-in-out",
-          // FIXED DIMENSIONS: Always Floating Pill Shape (w-[95%]), never Full Width
-          "w-[95%] max-w-7xl rounded-xl border",
           
-          // DYNAMIC STYLES (Based on Scroll):
-          isScrolled 
-            ? "mt-8 bg-black/80 border-white/10 backdrop-blur-md shadow-lg" // Scrolled: Blurry & Lower
-            : "mt-5 bg-black border-transparent shadow-none" // Initial: Solid Black, No Blur, Slightly Higher
+          // CONDITIONAL STYLES
+          isCompact 
+            ? "mt-8 w-[95%] max-w-7xl rounded-xl bg-black/80 border border-white/10 backdrop-blur-md shadow-lg" // Floating State (Scrolled or Other Pages)
+            : "mt-5 w-full max-w-full rounded-none bg-black border-transparent shadow-none" // Initial Home State (Full Width, Solid Black)
         )}
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
@@ -91,7 +96,7 @@ const Header = () => {
               onClick={handleContactClick}
               className={cn(
                 "group relative h-10 px-8",
-                "rounded-md", 
+                "rounded-md", // Rectangular with slight rounded corners
                 "bg-white text-black",
                 "overflow-hidden flex items-center justify-center transition-all duration-300 hover:bg-gray-200"
               )}
