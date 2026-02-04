@@ -89,18 +89,18 @@ const BlogDetail = () => {
 
   return (
     <Layout>
-      {/* --- SCROLL PROGRESS BAR (Blue from new design) --- */}
+      {/* --- SCROLL PROGRESS BAR --- */}
       <div 
         className="fixed top-0 left-0 h-[3px] bg-[#2563eb] z-[100] transition-all duration-100 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      <div className="bg-white min-h-screen pb-40 pt-20 font-['Inter'] selection:bg-gray-100 selection:text-black">
+      {/* ADDED: pt-28 to push content below the fixed navbar 
+         KEPT: selection colors and Inter font
+      */}
+      <div className="bg-white min-h-screen pb-40 pt-28 font-['Inter'] selection:bg-gray-100 selection:text-black">
         
-        {/* MAIN CONTAINER: 
-           Restored w-[75%] to capture 75% of the page as requested.
-           Removed max-w-3xl constraint.
-        */}
+        {/* MAIN CONTAINER: W-75% */}
         <main className="w-[75%] mx-auto">
           
           {/* --- TOP METADATA --- */}
@@ -117,7 +117,7 @@ const BlogDetail = () => {
             </Link>
           </div>
 
-          {/* --- HERO IMAGE (Full Width of the 75% container) --- */}
+          {/* --- HERO IMAGE --- */}
           <div className="w-full aspect-[21/9] rounded-2xl overflow-hidden mb-16 border border-gray-100 shadow-sm relative group">
             {blog.image_url ? (
                <img 
@@ -133,28 +133,20 @@ const BlogDetail = () => {
           </div>
 
           {/* --- MAIN HEADING --- */}
-          {/* Using the 3.5rem+ scale from the design */}
           <h1 className="text-5xl md:text-[4rem] leading-[1.1] font-extrabold tracking-[-0.04em] text-black mb-16 max-w-none">
              {blog.title}
           </h1>
 
           {/* --- CONTENT BODY --- */}
-          {/* typography styles: 
-             text-xl (1.25rem) for better readability on wide screens.
-             leading-relaxed (1.8).
-             gray-800 for high contrast.
-          */}
           <div className="w-full">
             <div className="prose prose-xl max-w-none text-[1.25rem] leading-[1.8] text-gray-800 font-normal whitespace-pre-wrap">
                {blog.content}
             </div>
           </div>
 
-          {/* --- MINIMAL TECHNICAL FOOTER --- */}
-          <div className="mt-32 pt-10 border-t border-gray-100 flex justify-between items-center">
-            <div className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase">
-               Doc ID: AI-PRT-{new Date(blog.created_at).getFullYear()}-{blog.id.slice(0, 4).toUpperCase()}
-            </div>
+          {/* --- FOOTER (Doc ID Removed) --- */}
+          <div className="mt-32 pt-10 border-t border-gray-100 flex justify-end items-center">
+            {/* Removed Doc ID Section */}
             <div className="flex items-center space-x-3">
                <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
