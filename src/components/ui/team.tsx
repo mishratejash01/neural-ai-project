@@ -43,16 +43,15 @@ const TeamSection = () => {
         fetchTeam();
     }, []);
 
-    // Helper to render the EXACT card design from the HTML provided
     const renderCategorySection = (title: string, members: TeamMember[], description: string) => {
         if (members.length === 0) return null;
 
         return (
-            <div className="mb-24 last:mb-0">
-                {/* Section Header */}
-                <div className="mb-10 border-b border-slate-100 pb-4">
-                    <h3 className="text-3xl font-extrabold tracking-tight text-gray-900">{title}</h3>
-                    <p className="text-gray-500 mt-2 text-lg">{description}</p>
+            <div className="mb-32 last:mb-0">
+                {/* Header: Aligned with the card grid via padding */}
+                <div className="mb-12 border-b border-gray-100 pb-6">
+                    <h3 className="text-4xl font-extrabold tracking-tight text-gray-900">{title}</h3>
+                    <p className="text-gray-500 mt-3 text-lg max-w-2xl">{description}</p>
                 </div>
                 
                 <Carousel
@@ -66,57 +65,52 @@ const TeamSection = () => {
                     <CarouselContent className="-ml-8 pb-10">
                         {members.map((member) => (
                             <CarouselItem key={member.id} className="pl-8 md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                                {/* CUSTOM CARD STRUCTURE MATCHING REFERENCE HTML 
-                                   - rounded-[32px]
-                                   - Two-tone background (#cbd7e3 top, #f1f3f6 bottom)
-                                   - Grayscale image
-                                */}
-                                <div className="group relative flex flex-col h-full rounded-[32px] overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl bg-[#f1f3f6]">
+                                {/* CARD DESIGN: Exact replica of the requested HTML */}
+                                <div className="group relative flex flex-col h-full rounded-[32px] overflow-hidden bg-[#f1f3f6] transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl">
                                     
-                                    {/* Top: Image Background (#cbd7e3) */}
-                                    <div className="h-[280px] bg-[#cbd7e3] flex items-end justify-center overflow-hidden">
+                                    {/* 1. Image Container (Top) */}
+                                    <div className="h-[340px] bg-[#cbd7e3] flex items-end justify-center overflow-hidden relative">
                                         {member.image_url ? (
                                             <img
                                                 src={member.image_url}
                                                 alt={member.name}
-                                                className="w-full h-full object-cover object-top filter grayscale contrast-105 transition-all duration-300 group-hover:grayscale-0 group-hover:contrast-100"
+                                                className="w-full h-full object-cover object-top filter grayscale contrast-[1.05] transition-all duration-500 group-hover:grayscale-0 group-hover:contrast-100"
                                                 loading="lazy"
                                             />
                                         ) : (
                                             <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                                <User size={64} className="opacity-20" />
+                                                <User size={80} className="opacity-20" />
                                             </div>
                                         )}
                                     </div>
 
-                                    {/* Bottom: Content Background (#f1f3f6) */}
-                                    <div className="p-8 flex-grow flex flex-col justify-between">
-                                        <div>
-                                            <h3 className="text-xl font-bold text-gray-900 mb-1 leading-tight">
+                                    {/* 2. Content Container (Bottom) */}
+                                    <div className="p-8 flex-grow flex flex-col">
+                                        <div className="mb-auto">
+                                            <h3 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">
                                                 {member.name}
                                             </h3>
-                                            <p className="text-gray-500 text-sm font-medium">
+                                            <p className="text-gray-500 text-base font-medium">
                                                 {member.role}
                                             </p>
-                                            {/* University Badge if exists */}
                                             {member.university && (
-                                                <p className="text-[10px] text-blue-600 font-bold uppercase tracking-widest mt-3">
+                                                <p className="text-[11px] text-blue-600 font-bold uppercase tracking-widest mt-4">
                                                     {member.university}
                                                 </p>
                                             )}
                                         </div>
 
-                                        {/* Arrow Link Structure */}
+                                        {/* 3. Arrow Link */}
                                         {member.linkedin_url && (
                                             <a 
                                                 href={member.linkedin_url} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="flex items-center mt-6 text-gray-500 transition-all hover:text-black hover:gap-2"
+                                                className="flex items-center mt-10 text-gray-400 group-hover:text-gray-900 transition-colors duration-300"
                                             >
-                                                <span className="text-xl leading-none mr-2">—</span>
-                                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M9 5l7 7-7 7"/>
+                                                <span className="text-xl leading-none mr-3 font-light">—</span>
+                                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                                 </svg>
                                             </a>
                                         )}
@@ -126,10 +120,10 @@ const TeamSection = () => {
                         ))}
                     </CarouselContent>
                     
-                    {/* Minimal Navigation Buttons */}
-                    <div className="flex justify-end gap-3 mt-2 pr-4">
-                        <CarouselPrevious className="static translate-y-0 border-gray-300 hover:bg-black hover:text-white transition-colors w-10 h-10 rounded-full" />
-                        <CarouselNext className="static translate-y-0 border-gray-300 hover:bg-black hover:text-white transition-colors w-10 h-10 rounded-full" />
+                    {/* Navigation Buttons */}
+                    <div className="flex justify-end gap-4 mt-4">
+                        <CarouselPrevious className="static translate-y-0 border-gray-200 bg-transparent hover:bg-black hover:border-black hover:text-white transition-all w-12 h-12 rounded-full" />
+                        <CarouselNext className="static translate-y-0 border-gray-200 bg-transparent hover:bg-black hover:border-black hover:text-white transition-all w-12 h-12 rounded-full" />
                     </div>
                 </Carousel>
             </div>
@@ -142,18 +136,19 @@ const TeamSection = () => {
 
     if (loading) {
         return (
-            <div className="w-full py-32 flex justify-center">
-                <div className="animate-pulse flex space-x-8">
-                    <div className="h-[450px] w-[350px] bg-gray-100 rounded-[32px]"></div>
-                    <div className="h-[450px] w-[350px] bg-gray-100 rounded-[32px] hidden md:block"></div>
-                    <div className="h-[450px] w-[350px] bg-gray-100 rounded-[32px] hidden lg:block"></div>
+            <div className="w-full py-32 flex justify-center px-8 md:px-16">
+                <div className="animate-pulse flex space-x-8 w-full overflow-hidden">
+                    <div className="h-[500px] w-1/3 bg-gray-100 rounded-[32px]"></div>
+                    <div className="h-[500px] w-1/3 bg-gray-100 rounded-[32px] hidden md:block"></div>
+                    <div className="h-[500px] w-1/3 bg-gray-100 rounded-[32px] hidden lg:block"></div>
                 </div>
             </div>
         );
     }
 
     return (
-        <div className="w-full">
+        // ALIGNMENT FIX: Added px-8 md:px-16 to match the exact padding of the parent sections in About.tsx
+        <div className="w-full px-8 md:px-16">
             {renderCategorySection(
                 "Leadership", 
                 founders, 
