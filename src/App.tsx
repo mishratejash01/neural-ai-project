@@ -28,7 +28,8 @@ import NLPEdTech from "./pages/NLPEdTech";
 import LogisticsOptimization from "./pages/LogisticsOptimization";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
-import ScrollToTop from "@/components/ScrollToTop"; // <-- 1. Import the new component
+import ScrollToTop from "@/components/ScrollToTop";
+import BlogDetail from "./pages/BlogDetail"; // <-- 1. Import BlogDetail
 
 const queryClient = new QueryClient();
 
@@ -38,10 +39,14 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop /> {/* <-- 2. Add it here */}
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          
+          {/* 2. Add the dynamic route for blog details */}
+          <Route path="/blog/:id" element={<BlogDetail />} />
+
           <Route path="/services" element={<Services />} />
           <Route path="/services/chatbots" element={<ChatbotsService />} />
           <Route path="/services/custom-ai" element={<CustomAIService />} />
