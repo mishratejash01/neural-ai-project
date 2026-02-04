@@ -8,7 +8,8 @@ import { HeroWave } from "../ui/HeroWave";
 
 export function SplineHero() {
   return (
-    <div className="w-full min-h-screen bg-black relative overflow-hidden pt-24 flex flex-col md:flex-row">
+    // Changed min-h-screen to h-screen so it takes exactly the full initial view
+    <div className="w-full h-screen bg-black relative overflow-hidden pt-24 flex flex-col md:flex-row">
       
       {/* Left content - Text & CTA */}
       <div className="w-full md:w-1/2 p-6 md:p-12 relative z-20 flex flex-col justify-center items-center md:items-start text-center md:text-left">
@@ -65,7 +66,7 @@ export function SplineHero() {
       </div>
 
       {/* Right content - Spline Robot + Tech Interface */}
-      <div className="w-full md:w-1/2 h-[500px] md:h-auto relative z-10 flex items-center justify-center bg-black">
+      <div className="w-full md:w-1/2 h-full relative z-10 flex items-center justify-center bg-black">
         
         {/* HOLOGRAPHIC INTERFACE LAYER */}
         <div className="absolute inset-0 z-20 pointer-events-none hidden md:block">
@@ -181,7 +182,7 @@ export function SplineHero() {
         </div>
       </div>
 
-      {/* Floating Wave Effect at the Bottom */}
+      {/* Floating Wave Effect at the Bottom (Static & Fixed) */}
       <HeroWave />
       
     </div>
