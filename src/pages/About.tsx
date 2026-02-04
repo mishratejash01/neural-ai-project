@@ -15,7 +15,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 interface Blog {
@@ -36,7 +35,7 @@ const About = () => {
         offset: ["start start", "end start"]
     });
     
-    // Parallax effect for the hero image (moves slower than scroll)
+    // Parallax effect for the hero image
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
@@ -72,16 +71,16 @@ const About = () => {
 
     return (
         <Layout>
-            {/* ZOOMED OUT WRAPPER 
-                scale-90 reduces size to 90%.
-                w-[111.11%] compensates for the width loss (100/0.9 = 111.11).
-                -ml-[5.55%] centers the scaled content ((111.11 - 100) / 2 = 5.55).
+            {/* UPDATED WRAPPER:
+                Removed 'transform scale-90' to fix the bottom whitespace gap.
+                Used 'zoom: 0.9' which correctly reflows the layout height while giving the zoomed-out look.
             */}
-            <div className="relative w-full overflow-hidden">
-                 <div className="transform-gpu scale-90 w-[111.11%] -ml-[5.55%] origin-top will-change-transform">
+            <div className="relative w-full overflow-hidden" style={{ zoom: 0.9 }}>
+                 <div className="w-full">
                     
                     {/* 1. HERO - With Parallax Smoothness */}
-                    <div ref={containerRef} className="relative w-full h-[111vh] bg-gray-100 overflow-hidden">
+                    {/* Reset height to standard h-screen since zoom handles the sizing */}
+                    <div ref={containerRef} className="relative w-full h-screen bg-gray-100 overflow-hidden">
                         <motion.div 
                             style={{ y, opacity }} 
                             className="absolute inset-0 w-full h-full"
@@ -93,8 +92,7 @@ const About = () => {
                                 loading="eager"
                             />
                         </motion.div>
-                        {/* Optional Gradient Overlay for text readability if needed later */}
-                        <div className="absolute inset-0 bg-black/10" />
+                        {/* Removed the hidden gradient overlay component here */}
                     </div>
 
                     {/* 2. THE NEURAL AI EDGE */}
