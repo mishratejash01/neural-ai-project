@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { supabase } from "@/integrations/supabase/client";
 
-// --- Import Founder Images ---
-import tejashAvatar from '@/assets/images/tejash-mishra.jpeg';
-import roshanAvatar from '@/assets/images/roshan-singh.jpeg';
-
-// --- Import Engineering Team Images ---
-import srijanAvatar from '@/assets/images/srijan-anand.jpeg';
-import harshilAvatar from '@/assets/images/harshil-handoo.jpeg';
-import jaydevAvatar from '@/assets/images/jaydev-paul.jpeg';
-import phalgunAvatar from '@/assets/images/phalgun-praveen.jpeg';
-
-// --- Import Mentor Images ---
-import saurabhAvatar from '@/assets/images/dr-saurabh-shanu.jpeg';
+// Matches your DB Schema exactly
+interface TeamMember {
+    id: string;
+    name: string;
+    role: string;
+    category: 'Founders' | 'Engineering' | 'Mentors'; // Capitalized to match your SQL check constraint
+    image_url: string;
+    linkedin_url?: string;
+    university?: string;
+    display_order: number;
+}
 
 const LinkedinIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
@@ -19,114 +19,120 @@ const LinkedinIcon = () => (
     </svg>
 );
 
-const leadership = [
-    {
-        name: 'Tejash Mishra',
-        role: 'Co-Founder',
-        avatar: tejashAvatar,
-        linkedin: 'https://www.linkedin.com/in/tejashmishra',
-    },
-    {
-        name: 'Roshan Singh',
-        role: 'Co-Founder',
-        avatar: roshanAvatar,
-        linkedin: 'https://www.linkedin.com/in/roshansingh-',
-    },
-];
-
-const engineering = [
-    {
-        name: 'Srijan Anand',
-        role: 'Technical Head',
-        university: 'IIT KANPUR',
-        avatar: srijanAvatar,
-    },
-    {
-        name: 'Harshil Handoo',
-        role: 'AI ML Engineer',
-        university: 'IIIT DELHI',
-        avatar: harshilAvatar,
-    },
-    {
-        name: 'Jaydev Paul',
-        role: 'AI ML Engineer',
-        university: 'NIT PODUCHERRY',
-        avatar: jaydevAvatar,
-    },
-    {
-        name: 'Phalgun Praveen',
-        role: 'AI ML Engineer',
-        university: 'NIT ROURKELA',
-        avatar: phalgunAvatar,
-    },
-];
-
-const mentors = [
-    {
-        name: 'Dr. Saurabh Shanu',
-        role: 'Mentor',
-        avatar: saurabhAvatar,
-    },
-];
-
 const TeamSection = () => {
+    const [team, setTeam] = useState<TeamMember[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchTeam = async () => {
+            // Order by 'display_order' as per your schema
+            const { data, error } = await supabase
+                .from('team_members')
+                .select('*')
+                .order('display_order', { ascending: true });
+
+            if (error) {
+                console.error("Error fetching team:", error);
+            } else if (data) {
+                setTeam(data as TeamMember[]);
+            }
+            setLoading(false);
+        };
+
+        fetchTeam();
+    }, []);
+
+    // Filter using the Capitalized categories from your DB Check constraint
+    const founders = team.filter(m => m.category === 'Founders');
+    const engineering = team.filter(m => m.category === 'Engineering');
+    const mentors = team.filter(m => m.category === 'Mentors');
+
+    if (loading) {
+        return <div className="text-center py-20 text-gray-400 animate-pulse">Loading expert team...</div>;
+    }
+
     return (
-        // FIXED: Reduced padding from 'py-12 md:py-32' to just 'py-8' to eliminate the huge scroll gap
-        <div className="py-8">
-            <div className="mx-auto max-w-3xl px-8 lg:px-0">
-                <h2 className="mb-8 text-4xl font-bold md:mb-16 lg:text-5xl text-center">
-                    Meet Our <span className="text-gradient">Expert Team</span>
-                </h2>
-
-                <div>
-                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">Founders</h3>
-                    <div className="grid grid-cols-2 gap-8 border-t py-6 md:grid-cols-2">
-                        {leadership.map((member, index) => (
-                            <div key={index} className="text-center">
-                                <div className="bg-background size-32 rounded-full border p-1 shadow shadow-zinc-950/5 mx-auto">
-                                    <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
+        <div className="w-full">
+            <div className="mx-auto max-w-5xl px-4 lg:px-0">
+                
+                {/* 1. Founders Section */}
+                {founders.length > 0 && (
+                    <div className="mb-20">
+                        <h3 className="mb-10 text-2xl font-bold text-center text-gray-900 tracking-tight">The Founders</h3>
+                        <div className="flex flex-wrap justify-center gap-12 md:gap-20">
+                            {founders.map((member) => (
+                                <div key={member.id} className="text-center group">
+                                    <div className="relative mb-6 mx-auto w-40 h-40">
+                                        <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
+                                        <img 
+                                            className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-500" 
+                                            src={member.image_url} 
+                                            alt={member.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
+                                    <p className="text-blue-600 font-medium text-sm mt-1">{member.role}</p>
+                                    <p className="text-gray-400 text-[10px] font-bold tracking-widest mt-1 uppercase">IIT MADRAS</p>
+                                    {member.linkedin_url && (
+                                        <a href={member.linkedin_url} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-gray-400 hover:text-blue-600 transition-colors">
+                                            <LinkedinIcon />
+                                        </a>
+                                    )}
                                 </div>
-                                <span className="mt-4 block text-lg font-semibold">{member.name}</span>
-                                <span className="text-muted-foreground block text-sm">{member.role}</span>
-                                <span className="text-muted-foreground block text-xs">IIT MADRAS</span>
-                                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors mt-2 inline-block">
-                                    <LinkedinIcon />
-                                </a>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="mt-12">
-                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">The Team</h3>
-                    <div className="grid grid-cols-2 gap-8 border-t py-6 md:grid-cols-4">
-                        {engineering.map((member, index) => (
-                            <div key={index} className="text-center">
-                                <div className="bg-background size-24 rounded-full border p-1 shadow shadow-zinc-950/5 mx-auto">
-                                    <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
+                {/* 2. Engineering Section */}
+                {engineering.length > 0 && (
+                    <div className="mb-20 border-t border-gray-100 pt-20">
+                        <h3 className="mb-10 text-2xl font-bold text-center text-gray-900 tracking-tight">Engineering Core</h3>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-16">
+                            {engineering.map((member) => (
+                                <div key={member.id} className="text-center group">
+                                    <div className="w-28 h-28 mx-auto mb-5 rounded-full p-1 border border-gray-100 bg-white shadow-sm group-hover:shadow-md transition-all duration-300">
+                                        <img 
+                                            className="w-full h-full rounded-full object-cover" 
+                                            src={member.image_url} 
+                                            alt={member.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <h4 className="text-lg font-bold text-gray-900">{member.name}</h4>
+                                    <p className="text-gray-500 text-sm mb-1">{member.role}</p>
+                                    {member.university && (
+                                        <p className="text-[10px] text-blue-600 font-bold uppercase tracking-wider">{member.university}</p>
+                                    )}
                                 </div>
-                                <span className="mt-3 block text-md font-medium">{member.name}</span>
-                                <span className="text-muted-foreground block text-xs">{member.role}</span>
-                                <span className="text-muted-foreground block text-xs">{member.university}</span>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
 
-                <div className="mt-12">
-                    <h3 className="mb-6 text-2xl font-semibold text-center text-primary">Mentors</h3>
-                    <div className="grid grid-cols-1 gap-8 border-t py-6 md:grid-cols-1 justify-items-center">
-                        {mentors.map((member, index) => (
-                            <div key={index} className="text-center">
-                                <div className="bg-background size-32 rounded-full border p-1 shadow shadow-zinc-950/5 mx-auto">
-                                    <img className="aspect-square rounded-full object-cover" src={member.avatar} alt={member.name} height="460" width="460" loading="lazy" />
+                {/* 3. Mentors Section */}
+                {mentors.length > 0 && (
+                    <div className="border-t border-gray-100 pt-20">
+                        <h3 className="mb-10 text-2xl font-bold text-center text-gray-900 tracking-tight">Mentorship</h3>
+                        <div className="flex justify-center flex-wrap gap-16">
+                            {mentors.map((member) => (
+                                <div key={member.id} className="text-center group">
+                                    <div className="w-32 h-32 mx-auto mb-6 rounded-full p-1 border-2 border-blue-50 bg-white shadow-sm group-hover:border-blue-200 transition-colors">
+                                        <img 
+                                            className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
+                                            src={member.image_url} 
+                                            alt={member.name}
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
+                                    <p className="text-blue-600 font-medium">{member.role}</p>
                                 </div>
-                                <span className="mt-4 block text-lg font-semibold">{member.name}</span>
-                                <span className="text-muted-foreground block text-sm">{member.role}</span>
-                            </div>
-                        ))}
+                            ))}
+                        </div>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     );
