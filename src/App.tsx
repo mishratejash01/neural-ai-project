@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 
 // --- Main Pages ---
-import Index from "./pages/Index"; // Changed from Home to Index (where SplineHero is)
+import Index from "./pages/Index"; // Using Index as the Home Page
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
@@ -21,7 +21,7 @@ import TermsOfService from "./pages/TermsOfService";
 
 // --- Detail Pages ---
 import CaseStudyDetail from "./pages/CaseStudyDetail";
-import BlogDetail from "./pages/BlogDetail"; // <--- Added BlogDetail
+import BlogDetail from "./pages/BlogDetail"; // Added BlogDetail
 
 // --- Service Specific Pages ---
 import ChatbotsService from "./pages/services/ChatbotsService";
@@ -31,13 +31,7 @@ import ComputerVisionService from "./pages/services/ComputerVisionService";
 import NLPService from "./pages/services/NLPService";
 import MarketingAutomationService from "./pages/services/MarketingAutomationService";
 
-// --- Portfolio Specific Pages ---
-import ComputerVisionPortfolio from "./pages/ComputerVisionPortfolio";
-import MarketingAutomationPortfolio from "./pages/MarketingAutomationPortfolio";
-import NLPEdTech from "./pages/NLPEdTech";
-import LogisticsOptimization from "./pages/LogisticsOptimization";
-import RetailChatbot from "./pages/RetailChatbot";
-import PredictiveAnalytics from "./pages/PredictiveAnalytics";
+// NOTE: Removed unused Portfolio imports (ComputerVisionPortfolio, etc.) to fix errors
 
 const queryClient = new QueryClient();
 
@@ -66,8 +60,8 @@ const App = () => (
 
           {/* Dynamic Detail Pages */}
           <Route path="/case-study/:id" element={<CaseStudyDetail />} />
-          <Route path="/portfolio/:slug" element={<CaseStudyDetail />} /> {/* Catch-all for slug based portfolio */}
-          <Route path="/blog/:id" element={<BlogDetail />} /> {/* <--- The NEW Blog Route */}
+          <Route path="/portfolio/:slug" element={<CaseStudyDetail />} /> 
+          <Route path="/blog/:id" element={<BlogDetail />} />
 
           {/* Service Routes */}
           <Route path="/services/chatbots" element={<ChatbotsService />} />
@@ -76,14 +70,6 @@ const App = () => (
           <Route path="/services/computer-vision" element={<ComputerVisionService />} />
           <Route path="/services/nlp" element={<NLPService />} />
           <Route path="/services/marketing-automation" element={<MarketingAutomationService />} />
-
-          {/* Portfolio Specific Routes (Fixed Unused Imports) */}
-          <Route path="/portfolio/computer-vision-security" element={<ComputerVisionPortfolio />} />
-          <Route path="/portfolio/logistics-optimization" element={<LogisticsOptimization />} />
-          <Route path="/portfolio/predictive-maintenance" element={<PredictiveAnalytics />} />
-          <Route path="/portfolio/retail-chatbot" element={<RetailChatbot />} />
-          <Route path="/portfolio/marketing-automation" element={<MarketingAutomationPortfolio />} />
-          <Route path="/portfolio/nlp-edtech" element={<NLPEdTech />} />
 
           {/* 404 Route */}
           <Route path="*" element={<NotFound />} />
