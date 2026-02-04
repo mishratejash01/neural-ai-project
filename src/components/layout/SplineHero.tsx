@@ -1,15 +1,13 @@
 import Spline from '@splinetool/react-spline';
-import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Crosshair, Fingerprint } from "lucide-react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { HeroWave } from "../ui/HeroWave";
 
 export function SplineHero() {
   return (
-    // Changed h-screen to min-h-screen for better mobile support
-    // Added pt-24 to push content down below the fixed header ("Start from above")
     <div className="w-full min-h-screen bg-black relative overflow-hidden pt-24 flex flex-col md:flex-row">
       
       {/* Left content - Text & CTA */}
@@ -20,7 +18,6 @@ export function SplineHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            {/* Headline - Responsive Text Sizes */}
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white leading-tight capitalize">
               We don’t wait for <br className="hidden md:block" /> thefts to happen.
             </h1>
@@ -41,7 +38,7 @@ export function SplineHero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start mt-8 w-full sm:w-auto"
           >
-            {/* BUTTON 1: Services - "Proper" Standard Style */}
+            {/* BUTTON 1: Services */}
             <Link to="/services" className="w-full sm:w-auto">
               <Button 
                 variant="default" 
@@ -53,7 +50,7 @@ export function SplineHero() {
               </Button>
             </Link>
             
-            {/* BUTTON 2: View Case Studies - Standard Outline */}
+            {/* BUTTON 2: View Case Studies */}
             <Link to="/portfolio" className="w-full sm:w-auto">
               <Button 
                 variant="outline" 
@@ -68,18 +65,16 @@ export function SplineHero() {
       </div>
 
       {/* Right content - Spline Robot + Tech Interface */}
-      {/* Set specific height for mobile (500px) and auto for desktop */}
       <div className="w-full md:w-1/2 h-[500px] md:h-auto relative z-10 flex items-center justify-center bg-black">
         
         {/* HOLOGRAPHIC INTERFACE LAYER */}
         <div className="absolute inset-0 z-20 pointer-events-none hidden md:block">
-           {/* HAND NODE CONTAINER */}
            <motion.div 
              className="absolute top-[50%] left-[50%] w-0 h-0"
              animate={{ y: [-15, 15, -15] }}
              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
            >
-              {/* 1. SVG CONNECTING LINES */}
+              {/* SVG CONNECTING LINES */}
               <svg className="absolute overflow-visible" width="600" height="600" viewBox="0 0 600 600" style={{ top: -300, left: -300 }}>
                  <defs>
                    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -89,11 +84,9 @@ export function SplineHero() {
                    </linearGradient>
                  </defs>
                  
-                 {/* Center Reticle */}
                  <circle cx="300" cy="300" r="4" fill="hsl(var(--primary))" />
                  <circle cx="300" cy="300" r="20" stroke="hsl(var(--primary))" strokeWidth="1" fill="none" opacity="0.5" />
 
-                 {/* Line to Top-Right Widget */}
                  <motion.polyline 
                    points="300,300 360,300 380,220" 
                    fill="none"
@@ -104,7 +97,6 @@ export function SplineHero() {
                    transition={{ duration: 1, delay: 0.5 }}
                  />
                  
-                 {/* Line to Bottom-Left Widget */}
                  <motion.polyline 
                    points="300,300 200,300 120,380" 
                    fill="none"
@@ -116,8 +108,6 @@ export function SplineHero() {
                  />
               </svg>
 
-              {/* 2. TECH WIDGETS */}
-              
               {/* WIDGET A: Threat Metrics */}
               <motion.div
                 className="absolute"
@@ -190,6 +180,10 @@ export function SplineHero() {
           />
         </div>
       </div>
+
+      {/* Floating Wave Effect at the Bottom */}
+      <HeroWave />
+      
     </div>
   )
 }
