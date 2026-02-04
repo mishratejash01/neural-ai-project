@@ -43,19 +43,26 @@ const Header = () => {
           "pointer-events-auto transition-all duration-500 ease-in-out",
           // Conditional Styles based on Scroll
           isScrolled 
-            ? "mt-8 w-[95%] max-w-7xl rounded-xl bg-black/80 border border-white/10 backdrop-blur-md shadow-lg" // Scrolled: Floating, Blurry, Premium Border, slightly lower
-            : "mt-5 w-full max-w-full rounded-none bg-black border-transparent" // Initial: Solid Black, No Blur, Full Width, but moved down (mt-5)
+            ? "mt-8 w-[95%] max-w-7xl rounded-xl bg-black/80 border border-white/10 backdrop-blur-md shadow-lg" // Scrolled
+            : "mt-5 w-full max-w-full rounded-none bg-black border-transparent" // Initial
         )}
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
           
-          {/* 1. LOGO */}
-          <Link to="/" className="flex-shrink-0 group hover:opacity-80 transition-opacity">
+          {/* 1. LOGO & TEXT */}
+          <Link 
+            to="/" 
+            className="flex-shrink-0 group hover:opacity-80 transition-opacity flex items-center gap-3"
+          >
             <img 
               src={neuralAILogo} 
               alt="Neural AI" 
               className="h-10 w-auto object-contain" 
             />
+            {/* Added Text: neural AI */}
+            <span className="font-sans font-bold text-xl text-white tracking-tight">
+              neural AI
+            </span>
           </Link>
 
           {/* 2. NAVIGATION */}
@@ -76,13 +83,13 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Rectangular with slight round */}
+          {/* 3. CONTACT BUTTON */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
               className={cn(
                 "group relative h-10 px-8",
-                "rounded-md", // Rectangular with slight corners
+                "rounded-md", 
                 "bg-white text-black",
                 "overflow-hidden flex items-center justify-center transition-all duration-300 hover:bg-gray-200"
               )}
