@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from "@/integrations/supabase/client";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+import { Linkedin, User } from "lucide-react";
 
-// Matches your DB Schema exactly
+// Matches your DB Schema
 interface TeamMember {
     id: string;
     name: string;
     role: string;
-    category: 'Founders' | 'Engineering' | 'Mentors'; // Capitalized to match your SQL check constraint
+    category: 'Founders' | 'Engineering' | 'Mentors';
     image_url: string;
     linkedin_url?: string;
     university?: string;
     display_order: number;
 }
-
-const LinkedinIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-linkedin" viewBox="0 0 16 16">
-        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"/>
-    </svg>
-);
 
 const TeamSection = () => {
     const [team, setTeam] = useState<TeamMember[]>([]);
@@ -25,7 +28,6 @@ const TeamSection = () => {
 
     useEffect(() => {
         const fetchTeam = async () => {
-            // Order by 'display_order' as per your schema
             const { data, error } = await supabase
                 .from('team_members')
                 .select('*')
@@ -42,98 +44,110 @@ const TeamSection = () => {
         fetchTeam();
     }, []);
 
-    // Filter using the Capitalized categories from your DB Check constraint
+    // Helper to render a carousel section for a specific category
+    const renderCategorySection = (title: string, members: TeamMember[]) => {
+        if (members.length === 0) return null;
+
+        return (
+            <div className="mb-20 last:mb-0">
+                <div className="flex items-end justify-between mb-8 px-2">
+                    <h3 className="text-2xl font-bold text-gray-900 tracking-tight">{title}</h3>
+                    {/* Optional: Add a 'view all' link or count here if needed */}
+                </div>
+                
+                <Carousel
+                    opts={{
+                        align: "start",
+                        loop: true,
+                        dragFree: true,
+                    }}
+                    className="w-full"
+                >
+                    <CarouselContent className="-ml-4 pb-4">
+                        {members.map((member) => (
+                            <CarouselItem key={member.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                                <div className="h-full">
+                                    <Card className="h-full border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group bg-white overflow-hidden rounded-3xl">
+                                        {/* Image Container */}
+                                        <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-50">
+                                            {member.image_url ? (
+                                                <img
+                                                    src={member.image_url}
+                                                    alt={member.name}
+                                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                                    loading="lazy"
+                                                />
+                                            ) : (
+                                                <div className="h-full w-full flex items-center justify-center text-gray-300">
+                                                    <User size={48} />
+                                                </div>
+                                            )}
+                                            
+                                            {/* Hover Overlay with Socials */}
+                                            {member.linkedin_url && (
+                                                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+                                                    <a
+                                                        href={member.linkedin_url}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="p-3 bg-white rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-lg"
+                                                    >
+                                                        <Linkedin size={20} strokeWidth={2.5} />
+                                                    </a>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        {/* Card Content */}
+                                        <CardContent className="p-6 text-center">
+                                            <h4 className="text-lg font-extrabold text-gray-900 mb-1">{member.name}</h4>
+                                            <p className="text-sm font-medium text-blue-600 mb-3">{member.role}</p>
+                                            
+                                            {member.university && (
+                                                <div className="inline-block px-2 py-1 bg-gray-50 rounded-md border border-gray-100">
+                                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                                                        {member.university}
+                                                    </p>
+                                                </div>
+                                            )}
+                                        </CardContent>
+                                    </Card>
+                                </div>
+                            </CarouselItem>
+                        ))}
+                    </CarouselContent>
+                    
+                    {/* Navigation Buttons */}
+                    <div className="flex justify-end gap-3 mt-4 pr-2">
+                        <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:border-blue-200 hover:text-blue-600" />
+                        <CarouselNext className="static translate-y-0 border-gray-200 hover:bg-white hover:border-blue-200 hover:text-blue-600" />
+                    </div>
+                </Carousel>
+            </div>
+        );
+    };
+
     const founders = team.filter(m => m.category === 'Founders');
     const engineering = team.filter(m => m.category === 'Engineering');
     const mentors = team.filter(m => m.category === 'Mentors');
 
     if (loading) {
-        return <div className="text-center py-20 text-gray-400 animate-pulse">Loading expert team...</div>;
+        return (
+            <div className="w-full py-20 flex justify-center">
+                <div className="animate-pulse flex space-x-4">
+                    <div className="h-64 w-48 bg-gray-100 rounded-2xl"></div>
+                    <div className="h-64 w-48 bg-gray-100 rounded-2xl hidden md:block"></div>
+                    <div className="h-64 w-48 bg-gray-100 rounded-2xl hidden lg:block"></div>
+                </div>
+            </div>
+        );
     }
 
     return (
         <div className="w-full">
-            <div className="mx-auto max-w-5xl px-4 lg:px-0">
-                
-                {/* 1. Founders Section */}
-                {founders.length > 0 && (
-                    <div className="mb-20">
-                        <h3 className="mb-10 text-2xl font-bold text-center text-gray-900 tracking-tight">The Founders</h3>
-                        <div className="flex flex-wrap justify-center gap-12 md:gap-20">
-                            {founders.map((member) => (
-                                <div key={member.id} className="text-center group">
-                                    <div className="relative mb-6 mx-auto w-40 h-40">
-                                        <div className="absolute inset-0 bg-blue-100 rounded-full blur-xl opacity-0 group-hover:opacity-50 transition-opacity duration-500"></div>
-                                        <img 
-                                            className="relative w-full h-full rounded-full object-cover border-4 border-white shadow-lg group-hover:scale-105 transition-transform duration-500" 
-                                            src={member.image_url} 
-                                            alt={member.name}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
-                                    <p className="text-blue-600 font-medium text-sm mt-1">{member.role}</p>
-                                    <p className="text-gray-400 text-[10px] font-bold tracking-widest mt-1 uppercase">IIT MADRAS</p>
-                                    {member.linkedin_url && (
-                                        <a href={member.linkedin_url} target="_blank" rel="noopener noreferrer" className="inline-block mt-3 text-gray-400 hover:text-blue-600 transition-colors">
-                                            <LinkedinIcon />
-                                        </a>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* 2. Engineering Section */}
-                {engineering.length > 0 && (
-                    <div className="mb-20 border-t border-gray-100 pt-20">
-                        <h3 className="mb-10 text-2xl font-bold text-center text-gray-900 tracking-tight">Engineering Core</h3>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-16">
-                            {engineering.map((member) => (
-                                <div key={member.id} className="text-center group">
-                                    <div className="w-28 h-28 mx-auto mb-5 rounded-full p-1 border border-gray-100 bg-white shadow-sm group-hover:shadow-md transition-all duration-300">
-                                        <img 
-                                            className="w-full h-full rounded-full object-cover" 
-                                            src={member.image_url} 
-                                            alt={member.name}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <h4 className="text-lg font-bold text-gray-900">{member.name}</h4>
-                                    <p className="text-gray-500 text-sm mb-1">{member.role}</p>
-                                    {member.university && (
-                                        <p className="text-[10px] text-blue-600 font-bold uppercase tracking-wider">{member.university}</p>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* 3. Mentors Section */}
-                {mentors.length > 0 && (
-                    <div className="border-t border-gray-100 pt-20">
-                        <h3 className="mb-10 text-2xl font-bold text-center text-gray-900 tracking-tight">Mentorship</h3>
-                        <div className="flex justify-center flex-wrap gap-16">
-                            {mentors.map((member) => (
-                                <div key={member.id} className="text-center group">
-                                    <div className="w-32 h-32 mx-auto mb-6 rounded-full p-1 border-2 border-blue-50 bg-white shadow-sm group-hover:border-blue-200 transition-colors">
-                                        <img 
-                                            className="w-full h-full rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" 
-                                            src={member.image_url} 
-                                            alt={member.name}
-                                            loading="lazy"
-                                        />
-                                    </div>
-                                    <h4 className="text-xl font-bold text-gray-900">{member.name}</h4>
-                                    <p className="text-blue-600 font-medium">{member.role}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-            </div>
+            {renderCategorySection("The Founders", founders)}
+            {renderCategorySection("Engineering Core", engineering)}
+            {renderCategorySection("Mentorship", mentors)}
         </div>
     );
 };
