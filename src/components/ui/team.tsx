@@ -51,7 +51,7 @@ const TeamSection = () => {
                 {/* Header: Aligned with the card grid via padding */}
                 <div className="mb-12 border-b border-gray-100 pb-6">
                     <h3 className="text-4xl font-extrabold tracking-tight text-gray-900">{title}</h3>
-                    <p className="text-gray-500 mt-3 text-lg max-w-2xl">{description}</p>
+                    <p className="text-gray-500 mt-3 text-lg max-w-2xl font-normal">{description}</p>
                 </div>
                 
                 <Carousel
@@ -65,7 +65,7 @@ const TeamSection = () => {
                     <CarouselContent className="-ml-8 pb-10">
                         {members.map((member) => (
                             <CarouselItem key={member.id} className="pl-8 md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                                {/* CARD DESIGN: Exact replica of the requested HTML */}
+                                {/* CARD DESIGN: Rounded 32px, Two-Tone Background */}
                                 <div className="group relative flex flex-col h-full rounded-[32px] overflow-hidden bg-[#f1f3f6] transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl">
                                     
                                     {/* 1. Image Container (Top) */}
@@ -87,14 +87,19 @@ const TeamSection = () => {
                                     {/* 2. Content Container (Bottom) */}
                                     <div className="p-8 flex-grow flex flex-col">
                                         <div className="mb-auto">
-                                            <h3 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">
+                                            {/* NAME: Big & Semi-Bold */}
+                                            <h3 className="text-2xl font-semibold text-gray-900 mb-2 leading-tight">
                                                 {member.name}
                                             </h3>
-                                            <p className="text-gray-500 text-base font-medium">
+                                            
+                                            {/* ROLE: Non-Bold (Normal), Gray, Smaller than Name */}
+                                            <p className="text-gray-500 text-base font-normal">
                                                 {member.role}
                                             </p>
+                                            
+                                            {/* UNIVERSITY: Small, clean */}
                                             {member.university && (
-                                                <p className="text-[11px] text-blue-600 font-bold uppercase tracking-widest mt-4">
+                                                <p className="text-[11px] text-blue-600 font-medium uppercase tracking-widest mt-4">
                                                     {member.university}
                                                 </p>
                                             )}
@@ -147,8 +152,8 @@ const TeamSection = () => {
     }
 
     return (
-        // ALIGNMENT FIX: Added px-8 md:px-16 to match the exact padding of the parent sections in About.tsx
-        <div className="w-full px-8 md:px-16">
+        // Added font-['Inter'] here to enforce the font family for the entire section
+        <div className="w-full px-8 md:px-16 font-['Inter']">
             {renderCategorySection(
                 "Leadership", 
                 founders, 
