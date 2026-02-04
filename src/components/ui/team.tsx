@@ -7,8 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-import { Linkedin, User } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
 
 // Matches your DB Schema
 interface TeamMember {
@@ -44,83 +43,90 @@ const TeamSection = () => {
         fetchTeam();
     }, []);
 
-    // Helper to render a carousel section for a specific category
+    // Helper to render the new "Two-Tone" card design
     const renderCategorySection = (title: string, members: TeamMember[]) => {
         if (members.length === 0) return null;
 
         return (
-            <div className="mb-20 last:mb-0">
-                <div className="flex items-end justify-between mb-8 px-2">
-                    <h3 className="text-2xl font-bold text-gray-900 tracking-tight">{title}</h3>
-                    {/* Optional: Add a 'view all' link or count here if needed */}
+            <div className="mb-24 last:mb-0">
+                <div className="flex items-end justify-between mb-10 px-4 md:px-0">
+                    <h3 className="text-3xl font-bold text-gray-900 tracking-tight">{title}</h3>
                 </div>
                 
                 <Carousel
                     opts={{
                         align: "start",
-                        loop: true,
+                        loop: false,
                         dragFree: true,
                     }}
                     className="w-full"
                 >
-                    <CarouselContent className="-ml-4 pb-4">
+                    <CarouselContent className="-ml-6 pb-10">
                         {members.map((member) => (
-                            <CarouselItem key={member.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
-                                <div className="h-full">
-                                    <Card className="h-full border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 group bg-white overflow-hidden rounded-3xl">
-                                        {/* Image Container */}
-                                        <div className="relative aspect-[4/5] w-full overflow-hidden bg-gray-50">
-                                            {member.image_url ? (
-                                                <img
-                                                    src={member.image_url}
-                                                    alt={member.name}
-                                                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                                    loading="lazy"
-                                                />
-                                            ) : (
-                                                <div className="h-full w-full flex items-center justify-center text-gray-300">
-                                                    <User size={48} />
-                                                </div>
-                                            )}
-                                            
-                                            {/* Hover Overlay with Socials */}
-                                            {member.linkedin_url && (
-                                                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                                                    <a
-                                                        href={member.linkedin_url}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="p-3 bg-white rounded-full text-blue-600 hover:bg-blue-600 hover:text-white transition-all transform translate-y-4 group-hover:translate-y-0 duration-300 shadow-lg"
-                                                    >
-                                                        <Linkedin size={20} strokeWidth={2.5} />
-                                                    </a>
-                                                </div>
+                            <CarouselItem key={member.id} className="pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                                {/* CUSTOM CARD DESIGN 
+                                    Matches the provided HTML structure: rounded-32px, two-tone backgrounds
+                                */}
+                                <div className="group relative flex flex-col h-full rounded-[32px] overflow-hidden transition-transform duration-300 hover:-translate-y-2 cursor-default shadow-sm hover:shadow-md">
+                                    
+                                    {/* 1. Top Colored Section (Image Background) */}
+                                    {/* Using #cbd7e3 (Light Steel Blue) as per design */}
+                                    <div className="h-[280px] bg-[#cbd7e3] flex items-end justify-center overflow-hidden relative">
+                                        {member.image_url ? (
+                                            <img
+                                                src={member.image_url}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
+                                                loading="lazy"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center text-gray-500">
+                                                <User size={64} className="opacity-20" />
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* 2. Bottom Content Section */}
+                                    {/* Using #f1f3f6 (Light Gray) as per design */}
+                                    <div className="bg-[#f1f3f6] p-8 flex-grow flex flex-col justify-between">
+                                        <div>
+                                            <h3 className="text-[20px] font-semibold text-gray-800 mb-1 leading-tight">
+                                                {member.name}
+                                            </h3>
+                                            <p className="text-gray-500 text-[15px] font-medium">
+                                                {member.role}
+                                            </p>
+                                            {member.university && (
+                                                <p className="text-xs text-gray-400 font-bold uppercase tracking-widest mt-2">
+                                                    {member.university}
+                                                </p>
                                             )}
                                         </div>
 
-                                        {/* Card Content */}
-                                        <CardContent className="p-6 text-center">
-                                            <h4 className="text-lg font-extrabold text-gray-900 mb-1">{member.name}</h4>
-                                            <p className="text-sm font-medium text-blue-600 mb-3">{member.role}</p>
-                                            
-                                            {member.university && (
-                                                <div className="inline-block px-2 py-1 bg-gray-50 rounded-md border border-gray-100">
-                                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
-                                                        {member.university}
-                                                    </p>
+                                        {/* 3. Arrow Link */}
+                                        {member.linkedin_url && (
+                                            <a 
+                                                href={member.linkedin_url} 
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="flex items-center mt-6 text-gray-600 hover:text-black transition-all group/link"
+                                            >
+                                                <span className="text-xl leading-none mr-3">—</span>
+                                                <div className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center group-hover/link:bg-white group-hover/link:border-black transition-all">
+                                                    <ArrowRight className="w-4 h-4 transform group-hover/link:-rotate-45 transition-transform duration-300" />
                                                 </div>
-                                            )}
-                                        </CardContent>
-                                    </Card>
+                                            </a>
+                                        )}
+                                    </div>
                                 </div>
                             </CarouselItem>
                         ))}
                     </CarouselContent>
                     
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-end gap-3 mt-4 pr-2">
-                        <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:border-blue-200 hover:text-blue-600" />
-                        <CarouselNext className="static translate-y-0 border-gray-200 hover:bg-white hover:border-blue-200 hover:text-blue-600" />
+                    {/* Navigation Buttons aligned to the right */}
+                    <div className="flex justify-end gap-3 mt-4 pr-4">
+                        <CarouselPrevious className="static translate-y-0 border-gray-300 hover:bg-black hover:text-white transition-colors w-12 h-12 rounded-full" />
+                        <CarouselNext className="static translate-y-0 border-gray-300 hover:bg-black hover:text-white transition-colors w-12 h-12 rounded-full" />
                     </div>
                 </Carousel>
             </div>
@@ -133,11 +139,11 @@ const TeamSection = () => {
 
     if (loading) {
         return (
-            <div className="w-full py-20 flex justify-center">
-                <div className="animate-pulse flex space-x-4">
-                    <div className="h-64 w-48 bg-gray-100 rounded-2xl"></div>
-                    <div className="h-64 w-48 bg-gray-100 rounded-2xl hidden md:block"></div>
-                    <div className="h-64 w-48 bg-gray-100 rounded-2xl hidden lg:block"></div>
+            <div className="w-full py-32 flex justify-center">
+                <div className="animate-pulse flex space-x-6">
+                    <div className="h-[400px] w-[300px] bg-gray-100 rounded-[32px]"></div>
+                    <div className="h-[400px] w-[300px] bg-gray-100 rounded-[32px] hidden md:block"></div>
+                    <div className="h-[400px] w-[300px] bg-gray-100 rounded-[32px] hidden lg:block"></div>
                 </div>
             </div>
         );
