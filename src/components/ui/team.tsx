@@ -65,8 +65,8 @@ const TeamSection = () => {
                     <CarouselContent className="-ml-8 pb-10">
                         {members.map((member) => (
                             <CarouselItem key={member.id} className="pl-8 md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                                {/* CARD DESIGN: Rounded 32px, Two-Tone Background */}
-                                <div className="group relative flex flex-col h-full rounded-[32px] overflow-hidden bg-[#f1f3f6] transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl">
+                                {/* CARD DESIGN: Static (No Hover Effects) */}
+                                <div className="flex flex-col h-full rounded-[32px] overflow-hidden bg-[#f1f3f6]">
                                     
                                     {/* 1. Image Container (Top) */}
                                     <div className="h-[340px] bg-[#cbd7e3] flex items-end justify-center overflow-hidden relative">
@@ -74,7 +74,8 @@ const TeamSection = () => {
                                             <img
                                                 src={member.image_url}
                                                 alt={member.name}
-                                                className="w-full h-full object-cover object-top filter grayscale contrast-[1.05] transition-all duration-500 group-hover:grayscale-0 group-hover:contrast-100"
+                                                // Static Grayscale + Contrast to match the reference HTML styling
+                                                className="w-full h-full object-cover object-top filter grayscale contrast-[1.05]"
                                                 loading="lazy"
                                             />
                                         ) : (
@@ -105,16 +106,16 @@ const TeamSection = () => {
                                             )}
                                         </div>
 
-                                        {/* 3. Arrow Link */}
+                                        {/* 3. Arrow Link (Static) */}
                                         {member.linkedin_url && (
                                             <a 
                                                 href={member.linkedin_url} 
                                                 target="_blank" 
                                                 rel="noopener noreferrer"
-                                                className="flex items-center mt-10 text-gray-400 group-hover:text-gray-900 transition-colors duration-300"
+                                                className="flex items-center mt-10 text-gray-400 hover:text-gray-900 transition-colors"
                                             >
                                                 <span className="text-xl leading-none mr-3 font-light">—</span>
-                                                <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                                 </svg>
                                             </a>
@@ -152,7 +153,7 @@ const TeamSection = () => {
     }
 
     return (
-        // Added font-['Inter'] here to enforce the font family for the entire section
+        // Enforce Inter font + Global Padding Alignment
         <div className="w-full px-8 md:px-16 font-['Inter']">
             {renderCategorySection(
                 "Leadership", 
