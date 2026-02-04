@@ -41,16 +41,15 @@ const Header = () => {
       <div 
         className={cn(
           "pointer-events-auto transition-all duration-500 ease-in-out",
-          "border border-white/10 backdrop-blur-md shadow-lg", // Premium Blur & Outline
-          // Shape & Position Transition
+          // Conditional Styles based on Scroll
           isScrolled 
-            ? "mt-6 w-[95%] max-w-7xl rounded-xl bg-black/80" // Floating State
-            : "mt-0 w-full max-w-full rounded-none bg-black/80" // Initial State (Full Width)
+            ? "mt-6 w-[95%] max-w-7xl rounded-xl bg-black/80 border border-white/10 backdrop-blur-md shadow-lg" // Scrolled: Floating, Blurry, Premium Border
+            : "mt-0 w-full max-w-full rounded-none bg-black border-transparent" // Initial: Solid Black, No Blur, Full Width
         )}
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
           
-          {/* 1. LOGO - Block Removed */}
+          {/* 1. LOGO */}
           <Link to="/" className="flex-shrink-0 group hover:opacity-80 transition-opacity">
             <img 
               src={neuralAILogo} 
@@ -77,12 +76,13 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* 3. CONTACT BUTTON - Premium White/Glass Style */}
+          {/* 3. CONTACT BUTTON - Rectangular with slight round */}
           <div className="hidden md:block">
             <button
               onClick={handleContactClick}
               className={cn(
-                "group relative h-10 px-8 rounded-full", // Pill shape for premium feel
+                "group relative h-10 px-8",
+                "rounded-md", // Changed to rounded-md for rectangular look with slight corners
                 "bg-white text-black",
                 "overflow-hidden flex items-center justify-center transition-all duration-300 hover:bg-gray-200"
               )}
@@ -111,7 +111,7 @@ const Header = () => {
 
         {/* Mobile Menu Dropdown */}
         {isMenuOpen && (
-          <div className="absolute top-full left-0 right-0 mt-2 mx-2 p-4 rounded-xl bg-black/90 border border-white/10 backdrop-blur-xl md:hidden flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200 shadow-2xl">
+          <div className="absolute top-full left-0 right-0 mt-2 mx-2 p-4 rounded-xl bg-black/95 border border-white/10 md:hidden flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-200 shadow-2xl">
             {navItems.map((item) => (
               <Link
                 key={item.href}
@@ -128,7 +128,7 @@ const Header = () => {
             ))}
             <button
               onClick={handleContactClick}
-              className="mt-2 w-full h-12 bg-white text-black rounded-lg font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-lg font-sans"
+              className="mt-2 w-full h-12 bg-white text-black rounded-md font-semibold flex items-center justify-center gap-2 active:scale-95 transition-transform text-lg font-sans"
             >
               Contact Us <ChevronRight size={20} />
             </button>
