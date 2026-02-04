@@ -95,12 +95,13 @@ const BlogDetail = () => {
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      {/* ADDED: pt-28 to push content below the fixed navbar 
-         KEPT: selection colors and Inter font
+      {/* Container: 
+         - pt-40: Added extra spacing below navbar to prevent overlap.
+         - font-['Inter']: Enforces the requested font family.
       */}
-      <div className="bg-white min-h-screen pb-40 pt-28 font-['Inter'] selection:bg-gray-100 selection:text-black">
+      <div className="bg-white min-h-screen pb-40 pt-40 font-['Inter'] selection:bg-gray-100 selection:text-black">
         
-        {/* MAIN CONTAINER: W-75% */}
+        {/* MAIN CONTAINER: W-[75%] */}
         <main className="w-[75%] mx-auto">
           
           {/* --- TOP METADATA --- */}
@@ -117,13 +118,13 @@ const BlogDetail = () => {
             </Link>
           </div>
 
-          {/* --- HERO IMAGE --- */}
-          <div className="w-full aspect-[21/9] rounded-2xl overflow-hidden mb-16 border border-gray-100 shadow-sm relative group">
+          {/* --- HERO IMAGE (Static, No Hover Effect) --- */}
+          <div className="w-full aspect-[21/9] rounded-2xl overflow-hidden mb-16 border border-gray-100 shadow-sm relative">
             {blog.image_url ? (
                <img 
                  src={blog.image_url} 
                  alt={blog.title} 
-                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                 className="w-full h-full object-cover"
                />
             ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-300 bg-gray-50">
@@ -133,11 +134,13 @@ const BlogDetail = () => {
           </div>
 
           {/* --- MAIN HEADING --- */}
-          <h1 className="text-5xl md:text-[4rem] leading-[1.1] font-extrabold tracking-[-0.04em] text-black mb-16 max-w-none">
+          {/* Font Weight: 800 (Extrabold), Tracking: -0.05em to match design */}
+          <h1 className="text-5xl md:text-[4rem] leading-[1.1] font-extrabold tracking-[-0.05em] text-black mb-16 max-w-none">
              {blog.title}
           </h1>
 
           {/* --- CONTENT BODY --- */}
+          {/* Font Weight: 400 (Normal), Text Color: Gray-800 */}
           <div className="w-full">
             <div className="prose prose-xl max-w-none text-[1.25rem] leading-[1.8] text-gray-800 font-normal whitespace-pre-wrap">
                {blog.content}
@@ -146,7 +149,6 @@ const BlogDetail = () => {
 
           {/* --- FOOTER (Doc ID Removed) --- */}
           <div className="mt-32 pt-10 border-t border-gray-100 flex justify-end items-center">
-            {/* Removed Doc ID Section */}
             <div className="flex items-center space-x-3">
                <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
