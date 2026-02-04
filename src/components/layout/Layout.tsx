@@ -10,7 +10,8 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 pt-16">
+      {/* Removed pt-16 so content starts at the very top (0px) */}
+      <main className="flex-1">
         {children}
       </main>
       <Footer />
