@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import Layout from "@/components/layout/Layout";
-import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface Blog {
   id: string;
@@ -19,7 +19,7 @@ const BlogDetail = () => {
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // 1. Fetch Blog Data from Supabase
+  // 1. Fetch Blog Data
   useEffect(() => {
     const fetchBlog = async () => {
       if (!id) return;
@@ -61,7 +61,7 @@ const BlogDetail = () => {
     return (
       <Layout>
         <div className="min-h-screen flex items-center justify-center bg-white">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
       </Layout>
     );
@@ -80,66 +80,50 @@ const BlogDetail = () => {
     );
   }
 
-  // Helper: Format date to "October 24, 2024" style
+  // Helper: Date Formatting
   const date = new Date(blog.created_at).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
     year: 'numeric'
   });
 
-  // Helper: Calculate approx read time
-  const wordCount = blog.content.split(/\s+/).length;
-  const readTime = Math.ceil(wordCount / 200);
-
   return (
     <Layout>
-      {/* --- SCROLL INDICATOR --- */}
+      {/* --- SCROLL PROGRESS BAR (Blue from new design) --- */}
       <div 
-        className="fixed top-0 left-0 h-[3px] bg-black z-[100] transition-all duration-100 ease-out"
+        className="fixed top-0 left-0 h-[3px] bg-[#2563eb] z-[100] transition-all duration-100 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      <div className="bg-white min-h-screen pb-32 pt-24 font-['Inter']">
+      <div className="bg-white min-h-screen pb-40 pt-20 font-['Inter'] selection:bg-gray-100 selection:text-black">
         
-        {/* Main Container - Adjusted to capture 75% of the page */}
+        {/* MAIN CONTAINER: 
+           Restored w-[75%] to capture 75% of the page as requested.
+           Removed max-w-3xl constraint.
+        */}
         <main className="w-[75%] mx-auto">
           
-          {/* --- TOP NAV --- */}
-          <nav className="mb-12">
-            <Link to="/about" className="inline-flex items-center text-sm font-medium text-gray-400 hover:text-black transition-colors group">
-              <span className="mr-2 transform group-hover:-translate-x-1 transition-transform">←</span>
-              Insights
+          {/* --- TOP METADATA --- */}
+          <div className="flex items-center justify-between mb-12 border-b border-gray-100 pb-8">
+            <div className="flex flex-col">
+               <Link to="/about" className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-blue-600 transition-colors">
+                  Engineering Insights
+               </Link>
+               <span className="text-sm font-medium text-gray-900 mt-2">{date}</span>
+            </div>
+            <Link to="/about" className="group flex items-center text-gray-400 hover:text-black transition-colors">
+                <span className="text-xs font-medium mr-2 opacity-0 group-hover:opacity-100 transition-opacity">Back</span>
+                <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
             </Link>
-          </nav>
+          </div>
 
-          {/* --- HEADER --- */}
-          <header className="mb-16">
-            <div className="flex items-center space-x-3 mb-8">
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase px-2 py-1 bg-gray-50 border border-gray-200 text-gray-500 rounded">
-                Engineering
-              </span>
-              <span className="text-gray-300">/</span>
-              <span className="text-gray-500 text-sm">{date}</span>
-            </div>
-
-            <h1 className="text-4xl md:text-6xl lg:text-7xl mb-10 tracking-tight leading-[1.05] font-extrabold text-gray-900">
-              {blog.title}
-            </h1>
-
-            <div className="flex items-center text-sm font-medium text-gray-400 space-x-4 border-b border-gray-100 pb-10">
-              <span>By The Neural AI Team</span>
-              <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
-              <span>{readTime} min read</span>
-            </div>
-          </header>
-
-          {/* --- CINEMATIC HERO IMAGE --- */}
-          <div className="w-full aspect-[21/9] bg-gray-100 rounded-3xl overflow-hidden mb-20 shadow-sm border border-gray-100">
+          {/* --- HERO IMAGE (Full Width of the 75% container) --- */}
+          <div className="w-full aspect-[21/9] rounded-2xl overflow-hidden mb-16 border border-gray-100 shadow-sm relative group">
             {blog.image_url ? (
                <img 
                  src={blog.image_url} 
                  alt={blog.title} 
-                 className="w-full h-full object-cover opacity-95 hover:scale-105 transition-transform duration-700"
+                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                />
             ) : (
                 <div className="w-full h-full flex items-center justify-center text-gray-300 bg-gray-50">
@@ -148,30 +132,36 @@ const BlogDetail = () => {
             )}
           </div>
 
-          {/* --- ARTICLE BODY --- */}
-          {/* Increased max-width to max-w-4xl to better utilize the 75% width container while maintaining readability */}
-          <div className="max-w-4xl mx-auto">
-            
-            <div className="prose prose-lg prose-slate max-w-none text-lg leading-relaxed text-gray-700 whitespace-pre-wrap">
+          {/* --- MAIN HEADING --- */}
+          {/* Using the 3.5rem+ scale from the design */}
+          <h1 className="text-5xl md:text-[4rem] leading-[1.1] font-extrabold tracking-[-0.04em] text-black mb-16 max-w-none">
+             {blog.title}
+          </h1>
+
+          {/* --- CONTENT BODY --- */}
+          {/* typography styles: 
+             text-xl (1.25rem) for better readability on wide screens.
+             leading-relaxed (1.8).
+             gray-800 for high contrast.
+          */}
+          <div className="w-full">
+            <div className="prose prose-xl max-w-none text-[1.25rem] leading-[1.8] text-gray-800 font-normal whitespace-pre-wrap">
                {blog.content}
             </div>
+          </div>
 
-            {/* --- FOOTER DETAIL --- */}
-            <div className="mt-24 pt-12 border-t border-gray-100 flex items-center justify-between">
-              <div className="text-[10px] font-bold tracking-widest text-gray-400 uppercase">
-                Ref: Insight-{new Date(blog.created_at).getFullYear()}-{blog.id.slice(0, 4)}
-              </div>
-              <div className="flex space-x-4">
-                <button 
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="w-10 h-10 rounded-full bg-gray-50 border border-gray-200 flex items-center justify-center cursor-pointer hover:bg-gray-100 transition-colors text-gray-600"
-                  aria-label="Scroll to top"
-                >
-                  ↑
-                </button>
-              </div>
+          {/* --- MINIMAL TECHNICAL FOOTER --- */}
+          <div className="mt-32 pt-10 border-t border-gray-100 flex justify-between items-center">
+            <div className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase">
+               Doc ID: AI-PRT-{new Date(blog.created_at).getFullYear()}-{blog.id.slice(0, 4).toUpperCase()}
             </div>
-
+            <div className="flex items-center space-x-3">
+               <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+               </span>
+               <span className="text-[10px] font-bold tracking-[0.2em] text-gray-400 uppercase">System Active</span>
+            </div>
           </div>
 
         </main>
