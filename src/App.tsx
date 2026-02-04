@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ScrollToTop from "@/components/ScrollToTop";
 
 // --- Main Pages ---
-import Index from "./pages/Index"; // Using Index as the Home Page
+import Index from "./pages/Index"; // Landing Page
 import About from "./pages/About";
 import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
@@ -21,17 +21,9 @@ import TermsOfService from "./pages/TermsOfService";
 
 // --- Detail Pages ---
 import CaseStudyDetail from "./pages/CaseStudyDetail";
-import BlogDetail from "./pages/BlogDetail"; // Added BlogDetail
+import BlogDetail from "./pages/BlogDetail";
 
-// --- Service Specific Pages ---
-import ChatbotsService from "./pages/services/ChatbotsService";
-import CustomAIService from "./pages/services/CustomAIService";
-import DataAnalyticsService from "./pages/services/DataAnalyticsService";
-import ComputerVisionService from "./pages/services/ComputerVisionService";
-import NLPService from "./pages/services/NLPService";
-import MarketingAutomationService from "./pages/services/MarketingAutomationService";
-
-// NOTE: Removed unused Portfolio imports (ComputerVisionPortfolio, etc.) to fix errors
+// NOTE: Removed all Service-Specific and Portfolio-Specific imports to keep it clean.
 
 const queryClient = new QueryClient();
 
@@ -62,14 +54,6 @@ const App = () => (
           <Route path="/case-study/:id" element={<CaseStudyDetail />} />
           <Route path="/portfolio/:slug" element={<CaseStudyDetail />} /> 
           <Route path="/blog/:id" element={<BlogDetail />} />
-
-          {/* Service Routes */}
-          <Route path="/services/chatbots" element={<ChatbotsService />} />
-          <Route path="/services/custom-ai" element={<CustomAIService />} />
-          <Route path="/services/data-analytics" element={<DataAnalyticsService />} />
-          <Route path="/services/computer-vision" element={<ComputerVisionService />} />
-          <Route path="/services/nlp" element={<NLPService />} />
-          <Route path="/services/marketing-automation" element={<MarketingAutomationService />} />
 
           {/* 404 Route */}
           <Route path="*" element={<NotFound />} />
