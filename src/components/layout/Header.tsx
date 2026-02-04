@@ -41,10 +41,13 @@ const Header = () => {
       <div 
         className={cn(
           "pointer-events-auto transition-all duration-500 ease-in-out",
-          // Conditional Styles based on Scroll
+          // FIXED DIMENSIONS: Always Floating Pill Shape (w-[95%]), never Full Width
+          "w-[95%] max-w-7xl rounded-xl border",
+          
+          // DYNAMIC STYLES (Based on Scroll):
           isScrolled 
-            ? "mt-8 w-[95%] max-w-7xl rounded-xl bg-black/80 border border-white/10 backdrop-blur-md shadow-lg" // Scrolled
-            : "mt-5 w-full max-w-full rounded-none bg-black border-transparent" // Initial
+            ? "mt-8 bg-black/80 border-white/10 backdrop-blur-md shadow-lg" // Scrolled: Blurry & Lower
+            : "mt-5 bg-black border-transparent shadow-none" // Initial: Solid Black, No Blur, Slightly Higher
         )}
       >
         <div className="px-5 md:px-8 h-16 flex items-center justify-between">
@@ -59,7 +62,6 @@ const Header = () => {
               alt="Neural AI" 
               className="h-10 w-auto object-contain" 
             />
-            {/* Added Text: neural AI */}
             <span className="font-sans font-bold text-xl text-white tracking-tight">
               neural AI
             </span>
