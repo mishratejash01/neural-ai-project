@@ -71,7 +71,8 @@ const mentors = [
 
 const TeamSection = () => {
     return (
-        <section className="py-12 md:py-32">
+        // FIXED: Reduced padding from 'py-12 md:py-32' to just 'py-8' to eliminate the huge scroll gap
+        <div className="py-8">
             <div className="mx-auto max-w-3xl px-8 lg:px-0">
                 <h2 className="mb-8 text-4xl font-bold md:mb-16 lg:text-5xl text-center">
                     Meet Our <span className="text-gradient">Expert Team</span>
@@ -127,7 +128,7 @@ const TeamSection = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
     );
 };
 
