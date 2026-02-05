@@ -56,8 +56,6 @@ const About = () => {
             api.scrollNext();
         }, 4000);
 
-        // Pause on interaction could be added here if needed, 
-        // but for now it keeps sliding as requested.
         return () => clearInterval(intervalId);
     }, [api]);
 
@@ -98,7 +96,7 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - Adjusted padding to align with navbar */}
+                {/* 1. HERO SECTION */}
                 <div className="px-4 pt-6 pb-12 md:px-6 md:pt-8 md:pb-16 bg-white">
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-gray-100 overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
@@ -251,7 +249,9 @@ const About = () => {
                                 <CarouselItem key={blog.id} className="pl-6 basis-[85%] md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
                                     <Link to={`/blog/${blog.id}`} className="block h-full"> 
                                         <div className="group h-full cursor-pointer">
-                                            <Card className="h-full border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-3xl">
+                                            {/* Reduced rounding from rounded-3xl to rounded-xl */}
+                                            {/* Added font-['Inter'] specifically to the Card */}
+                                            <Card className="h-full border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-xl font-['Inter']">
                                                 <div className="relative h-48 md:h-56 w-full overflow-hidden bg-gray-100">
                                                     {blog.image_url ? (
                                                         <img 
@@ -268,20 +268,23 @@ const About = () => {
 
                                                 <CardContent className="p-6 md:p-8 flex flex-col h-[calc(100%-12rem)] md:h-[calc(100%-14rem)]">
                                                     <div className="mb-6">
-                                                        <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">
+                                                        <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider font-['Inter']">
                                                             Article
                                                         </span>
-                                                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mt-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                                                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mt-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300 font-['Inter']">
                                                             {blog.title}
                                                         </h3>
                                                     </div>
                                                     
-                                                    <p className="text-gray-500 mb-8 line-clamp-3 flex-grow text-sm leading-relaxed">
+                                                    <p className="text-gray-500 mb-8 line-clamp-3 flex-grow text-sm leading-relaxed font-['Inter']">
                                                         {blog.excerpt}
                                                     </p>
                                                     
-                                                    <div className="inline-flex items-center text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors mt-auto">
-                                                        Read More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                                    {/* Full width button as per card */}
+                                                    <div className="mt-auto w-full pt-2">
+                                                        <div className="w-full py-3 bg-gray-50 rounded-lg flex items-center justify-center text-sm font-bold text-gray-900 group-hover:text-blue-600 group-hover:bg-blue-50 transition-all duration-300 font-['Inter']">
+                                                            Read More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                                                        </div>
                                                     </div>
                                                 </CardContent>
                                             </Card>
