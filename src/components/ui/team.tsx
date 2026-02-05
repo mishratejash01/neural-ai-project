@@ -45,15 +45,14 @@ const TeamSection = () => {
         fetchTeam();
     }, []);
 
-    // Removed 'description' parameter
     const renderCategorySection = (title: string, members: TeamMember[]) => {
         if (members.length === 0) return null;
 
         return (
             <div className="mb-32 last:mb-0">
-                {/* Header: Description removed, Font changed to Inter Semi-Bold */}
+                {/* Header: Updated to Semi-Bold and smaller text (text-2xl) */}
                 <div className="mb-12 border-b border-gray-100 pb-6">
-                    <h3 className="text-4xl font-semibold tracking-tight text-gray-900 font-['Inter']">
+                    <h3 className="text-2xl font-semibold tracking-tight text-gray-900 font-['Inter']">
                         {title}
                     </h3>
                 </div>
@@ -66,9 +65,15 @@ const TeamSection = () => {
                     }}
                     className="w-full"
                 >
-                    <CarouselContent className="-ml-8 pb-10">
+                    {/* Mobile spacing adjusted (-ml-4 for tighter mobile gap) */}
+                    <CarouselContent className="-ml-4 md:-ml-8 pb-10">
                         {members.map((member) => (
-                            <CarouselItem key={member.id} className="pl-8 md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
+                            <CarouselItem 
+                                key={member.id} 
+                                // Mobile: basis-[85%] shows the main card + a bit of the next one ("bits in frame")
+                                // Desktop: basis-1/2 or 1/3 as before
+                                className="pl-4 md:pl-8 basis-[85%] md:basis-1/2 lg:basis-1/3 xl:basis-1/3"
+                            >
                                 {/* CARD DESIGN */}
                                 <div className="flex flex-col h-full rounded-[32px] overflow-hidden bg-[#f1f3f6]">
                                     
