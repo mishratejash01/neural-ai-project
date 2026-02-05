@@ -19,7 +19,7 @@ interface TeamMember {
     image_url: string;
     linkedin_url?: string;
     university?: string;
-    description?: string; // Added description field
+    description?: string;
     display_order: number;
 }
 
@@ -45,15 +45,17 @@ const TeamSection = () => {
         fetchTeam();
     }, []);
 
-    const renderCategorySection = (title: string, members: TeamMember[], description: string) => {
+    // Removed 'description' parameter
+    const renderCategorySection = (title: string, members: TeamMember[]) => {
         if (members.length === 0) return null;
 
         return (
             <div className="mb-32 last:mb-0">
-                {/* Header: Aligned with the card grid via padding */}
+                {/* Header: Description removed, Font changed to Inter Semi-Bold */}
                 <div className="mb-12 border-b border-gray-100 pb-6">
-                    <h3 className="text-4xl font-extrabold tracking-tight text-gray-900">{title}</h3>
-                    <p className="text-gray-500 mt-3 text-lg max-w-2xl font-normal">{description}</p>
+                    <h3 className="text-4xl font-semibold tracking-tight text-gray-900 font-['Inter']">
+                        {title}
+                    </h3>
                 </div>
                 
                 <Carousel
@@ -67,7 +69,7 @@ const TeamSection = () => {
                     <CarouselContent className="-ml-8 pb-10">
                         {members.map((member) => (
                             <CarouselItem key={member.id} className="pl-8 md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
-                                {/* CARD DESIGN: Static (No Hover Effects) */}
+                                {/* CARD DESIGN */}
                                 <div className="flex flex-col h-full rounded-[32px] overflow-hidden bg-[#f1f3f6]">
                                     
                                     {/* 1. Image Container (Top) */}
@@ -76,7 +78,6 @@ const TeamSection = () => {
                                             <img
                                                 src={member.image_url}
                                                 alt={member.name}
-                                                // Static Grayscale + Contrast to match the reference HTML styling
                                                 className="w-full h-full object-cover object-top filter grayscale contrast-[1.05]"
                                                 loading="lazy"
                                             />
@@ -90,25 +91,25 @@ const TeamSection = () => {
                                     {/* 2. Content Container (Bottom) */}
                                     <div className="p-8 flex-grow flex flex-col">
                                         <div className="mb-auto">
-                                            {/* NAME: Big & Semi-Bold */}
-                                            <h3 className="text-2xl font-semibold text-gray-900 mb-2 leading-tight">
+                                            {/* NAME */}
+                                            <h3 className="text-2xl font-semibold text-gray-900 mb-2 leading-tight font-['Inter']">
                                                 {member.name}
                                             </h3>
                                             
-                                            {/* ROLE: Non-Bold (Normal), Gray, Smaller than Name */}
-                                            <p className="text-gray-500 text-base font-normal">
+                                            {/* ROLE */}
+                                            <p className="text-gray-500 text-base font-normal font-['Inter']">
                                                 {member.role}
                                             </p>
                                             
-                                            {/* UNIVERSITY: Small, clean */}
+                                            {/* UNIVERSITY */}
                                             {member.university && (
-                                                <p className="text-[11px] text-blue-600 font-medium uppercase tracking-widest mt-4">
+                                                <p className="text-[11px] text-blue-600 font-medium uppercase tracking-widest mt-4 font-['Inter']">
                                                     {member.university}
                                                 </p>
                                             )}
                                         </div>
 
-                                        {/* 3. Arrow Link (To Profile Detail) - Only visible if description exists */}
+                                        {/* 3. Arrow Link (To Profile Detail) */}
                                         {member.description && (
                                             <Link 
                                                 to={`/team/${member.id}`}
@@ -155,23 +156,10 @@ const TeamSection = () => {
     }
 
     return (
-        // Enforce Inter font + Global Padding Alignment
         <div className="w-full px-8 md:px-16 font-['Inter']">
-            {renderCategorySection(
-                "Leadership", 
-                founders, 
-                "The visionaries guiding our mission."
-            )}
-            {renderCategorySection(
-                "Research & Engineering", 
-                engineering, 
-                "Specializing in LLMs and Neural Optimization."
-            )}
-            {renderCategorySection(
-                "Mentorship", 
-                mentors, 
-                "Academic and Industry experts shaping our path."
-            )}
+            {renderCategorySection("Leadership", founders)}
+            {renderCategorySection("Research & Engineering", engineering)}
+            {renderCategorySection("Mentorship", mentors)}
         </div>
     );
 };
