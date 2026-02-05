@@ -234,7 +234,7 @@ const About = () => {
                             ))}
                         </CarouselContent>
                         
-                        {/* Conditionally Render Arrows if more than 3 blogs */}
+                        {/* Conditionally Render Arrows only if more than 3 blogs */}
                         {blogs.length > 3 && (
                             <div className="flex justify-end gap-3 mt-10">
                                 <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
