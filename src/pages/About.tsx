@@ -81,9 +81,9 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - Added White Space (padding-top) */}
-                {/* pt-24 (mobile) and md:pt-32 (desktop) adds the requested white space below navbar */}
-                <div className="px-4 pt-24 pb-0 md:px-6 md:pt-32 bg-white">
+                {/* 1. HERO SECTION - Frame Preserved & Initial Position */}
+                {/* White space via top padding */}
+                <div className="px-4 pt-24 pb-12 md:px-6 md:pt-32 md:pb-16 bg-white">
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-gray-100 overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
@@ -101,19 +101,19 @@ const About = () => {
                 </div>
 
                 {/* 2. NEW DESIGN SECTION */}
-                <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen">
+                {/* Added rounded-t-[3rem] and overflow-hidden to match the frame style above */}
+                <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen rounded-t-3xl md:rounded-t-[3rem] overflow-hidden">
                     
-                    {/* LOGO MARQUEE - Backend Only, Fading via Mask */}
+                    {/* LOGO MARQUEE */}
                     <div 
                         className="w-[95%] max-w-[1100px] py-[40px] overflow-hidden relative"
                         style={{ 
-                            // CSS Mask for true transparency fade
                             maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
                             WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
                         }}
                     >
                         <div className="flex w-full">
-                            {/* Loop 1: Backend Data Only */}
+                            {/* Loop 1 */}
                             <div className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
                                 {visionaries.length > 0 ? (
                                     visionaries.map((logo) => (
@@ -129,7 +129,7 @@ const About = () => {
                                 )}
                             </div>
                             
-                            {/* Loop 2: Duplicate for seamless scroll */}
+                            {/* Loop 2 */}
                             {visionaries.length > 0 && (
                                 <div aria-hidden="true" className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
                                     {visionaries.map((logo) => (
