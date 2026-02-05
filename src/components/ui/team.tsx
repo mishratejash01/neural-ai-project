@@ -57,51 +57,59 @@ const TeamSection = () => {
                     </h3>
                 </div>
                 
-                {/* --- MOBILE VIEW: Static Grid (Puzzle Frame), No Sliding, Reduced Dimensions --- */}
+                {/* --- MOBILE VIEW: Static Grid (Puzzle Frame) --- */}
                 <div className="grid grid-cols-2 gap-3 md:hidden">
-                    {members.map((member) => (
-                        <div key={member.id} className="flex flex-col rounded-[20px] overflow-hidden bg-[#f1f3f6]">
-                            {/* Mobile Image: Reduced Height */}
-                            <div className="h-[160px] bg-[#cbd7e3] flex items-end justify-center overflow-hidden relative">
-                                {member.image_url ? (
-                                    <img
-                                        src={member.image_url}
-                                        alt={member.name}
-                                        className="w-full h-full object-cover object-top filter grayscale contrast-[1.05]"
-                                        loading="lazy"
-                                    />
-                                ) : (
-                                    <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                        <User size={40} className="opacity-20" />
-                                    </div>
-                                )}
-                            </div>
+                    {members.map((member, index) => {
+                        // Logic: If this is the last item AND the total count is odd, make it full width
+                        const isLastAndOdd = index === members.length - 1 && members.length % 2 !== 0;
 
-                            {/* Mobile Content: Compact Padding & Text */}
-                            <div className="p-4 flex-grow flex flex-col justify-between">
-                                <div>
-                                    <h3 className="text-sm font-semibold text-gray-900 mb-1 leading-tight font-['Inter']">
-                                        {member.name}
-                                    </h3>
-                                    <p className="text-[10px] text-gray-500 font-normal font-['Inter'] leading-snug">
-                                        {member.role}
-                                    </p>
+                        return (
+                            <div 
+                                key={member.id} 
+                                className={`flex flex-col rounded-[20px] overflow-hidden bg-[#f1f3f6] ${isLastAndOdd ? 'col-span-2' : ''}`}
+                            >
+                                {/* Mobile Image: Reduced Height */}
+                                <div className="h-[160px] bg-[#cbd7e3] flex items-end justify-center overflow-hidden relative">
+                                    {member.image_url ? (
+                                        <img
+                                            src={member.image_url}
+                                            alt={member.name}
+                                            className="w-full h-full object-cover object-top filter grayscale contrast-[1.05]"
+                                            loading="lazy"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                            <User size={40} className="opacity-20" />
+                                        </div>
+                                    )}
                                 </div>
 
-                                {/* Mobile Arrow Link */}
-                                {member.description && (
-                                    <Link 
-                                        to={`/team/${member.id}`}
-                                        className="flex items-center mt-4 text-gray-400"
-                                    >
-                                        <div className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center bg-white">
-                                            <ArrowUpRight className="w-3 h-3 text-gray-600" />
-                                        </div>
-                                    </Link>
-                                )}
+                                {/* Mobile Content: Compact Padding & Text */}
+                                <div className="p-4 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <h3 className="text-sm font-semibold text-gray-900 mb-1 leading-tight font-['Inter']">
+                                            {member.name}
+                                        </h3>
+                                        <p className="text-[10px] text-gray-500 font-normal font-['Inter'] leading-snug">
+                                            {member.role}
+                                        </p>
+                                    </div>
+
+                                    {/* Mobile Arrow Link */}
+                                    {member.description && (
+                                        <Link 
+                                            to={`/team/${member.id}`}
+                                            className="flex items-center mt-4 text-gray-400"
+                                        >
+                                            <div className="w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center bg-white">
+                                                <ArrowUpRight className="w-3 h-3 text-gray-600" />
+                                            </div>
+                                        </Link>
+                                    )}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
 
                 {/* --- DESKTOP VIEW: Carousel (Original Slide Layout) --- */}
