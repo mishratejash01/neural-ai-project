@@ -67,8 +67,10 @@ const Services = () => {
     <Layout>
       <div style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} className="min-h-screen flex flex-col font-sans">
         
-        {/* HERO SECTION - Strictly matching provided HTML */}
-        <section className="flex-1 flex flex-col justify-center items-center px-4 py-20 text-center">
+        {/* HERO SECTION */}
+        {/* Changed to h-screen to ensure it takes up the full initial viewport */}
+        {/* Added pt-32 md:pt-40 to create significant space between navbar and content */}
+        <section className="h-screen flex flex-col justify-center items-center px-4 pt-32 md:pt-40 pb-10 text-center">
           <div className="max-w-[900px] mx-auto">
             
             {/* Decorative Dots */}
@@ -131,8 +133,8 @@ const Services = () => {
           </div>
         </section>
 
-        {/* SERVICES GRID - Adapted to Light Theme */}
-        <section className="py-24 px-4 relative z-10">
+        {/* SERVICES GRID */}
+        <section className="py-24 px-4 relative z-10 bg-[#f8faf8]">
           <div className="container mx-auto max-w-6xl">
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                {services.map((service, index) => (
