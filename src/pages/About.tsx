@@ -11,6 +11,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -33,6 +34,7 @@ const About = () => {
     const [heroImage, setHeroImage] = useState<string>(placeholderHero);
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [visionaries, setVisionaries] = useState<Visionary[]>([]);
+    const [api, setApi] = useState<CarouselApi>();
     
     // Smooth Scroll Refs
     const containerRef = useRef(null);
@@ -43,6 +45,21 @@ const About = () => {
     
     // Parallax Effect
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+    // Auto-slide effect for blogs
+    useEffect(() => {
+        if (!api) {
+            return;
+        }
+
+        const intervalId = setInterval(() => {
+            api.scrollNext();
+        }, 4000);
+
+        // Pause on interaction could be added here if needed, 
+        // but for now it keeps sliding as requested.
+        return () => clearInterval(intervalId);
+    }, [api]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -81,9 +98,8 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - Frame Preserved & Initial Position */}
-                {/* White space via top padding */}
-                <div className="px-4 pt-24 pb-12 md:px-6 md:pt-32 md:pb-16 bg-white">
+                {/* 1. HERO SECTION - Adjusted padding to align with navbar */}
+                <div className="px-4 pt-6 pb-12 md:px-6 md:pt-8 md:pb-16 bg-white">
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-gray-100 overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
@@ -101,7 +117,6 @@ const About = () => {
                 </div>
 
                 {/* 2. NEW DESIGN SECTION */}
-                {/* Added rounded-t-[3rem] and overflow-hidden to match the frame style above */}
                 <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen rounded-t-3xl md:rounded-t-[3rem] overflow-hidden">
                     
                     {/* LOGO MARQUEE */}
@@ -212,9 +227,9 @@ const About = () => {
                 </section>
 
                 {/* 4. LATEST INSIGHTS (SLIDING BLOGS) */}
-                <section className="py-24 px-8 md:px-16 bg-gray-50/50 rounded-b-[2.5rem]">
+                <section className="py-24 px-4 md:px-16 bg-gray-50/50 rounded-b-[2.5rem]">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16">
-                        <div className="max-w-2xl">
+                        <div className="max-w-2xl px-4 md:px-0">
                             <h2 className="text-4xl font-bold text-gray-900 mb-6">Latest <span className="text-blue-600">Insights</span></h2>
                             <p className="text-lg text-gray-600">
                                 Explore our latest thoughts on AI, technology, and the future of business.
@@ -223,6 +238,7 @@ const About = () => {
                     </div>
 
                     <Carousel
+                        setApi={setApi}
                         opts={{
                             align: "start",
                             loop: true,
@@ -232,16 +248,16 @@ const About = () => {
                     >
                         <CarouselContent className="-ml-6">
                             {blogs.map((blog) => (
-                                <CarouselItem key={blog.id} className="pl-6 md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
+                                <CarouselItem key={blog.id} className="pl-6 basis-[85%] md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
                                     <Link to={`/blog/${blog.id}`} className="block h-full"> 
                                         <div className="group h-full cursor-pointer">
                                             <Card className="h-full border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-3xl">
-                                                <div className="relative h-56 w-full overflow-hidden bg-gray-100">
+                                                <div className="relative h-48 md:h-56 w-full overflow-hidden bg-gray-100">
                                                     {blog.image_url ? (
                                                         <img 
                                                             src={blog.image_url} 
                                                             alt={blog.title}
-                                                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                            className="h-full w-full object-cover transition-transform duration-700"
                                                         />
                                                     ) : (
                                                         <div className="flex items-center justify-center h-full text-gray-300">
@@ -250,12 +266,12 @@ const About = () => {
                                                     )}
                                                 </div>
 
-                                                <CardContent className="p-8 flex flex-col h-[calc(100%-14rem)]">
+                                                <CardContent className="p-6 md:p-8 flex flex-col h-[calc(100%-12rem)] md:h-[calc(100%-14rem)]">
                                                     <div className="mb-6">
                                                         <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">
                                                             Article
                                                         </span>
-                                                        <h3 className="text-xl font-bold text-gray-900 mt-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                                                        <h3 className="text-lg md:text-xl font-bold text-gray-900 mt-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
                                                             {blog.title}
                                                         </h3>
                                                     </div>
@@ -275,7 +291,7 @@ const About = () => {
                             ))}
                         </CarouselContent>
                         {blogs.length > 3 && (
-                            <div className="flex justify-end gap-3 mt-10">
+                            <div className="hidden md:flex justify-end gap-3 mt-10">
                                 <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
                                 <CarouselNext className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
                             </div>
