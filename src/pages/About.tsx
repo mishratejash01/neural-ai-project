@@ -81,9 +81,10 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - Frame Preserved */}
-                <div className="p-4 md:p-6 bg-white">
-                    <div ref={containerRef} className="relative w-full h-[85vh] md:h-[80vh] bg-gray-100 overflow-hidden rounded-2xl shadow-sm border border-gray-100">
+                {/* 1. HERO SECTION - Frame Preserved & Initial Position */}
+                {/* Wrapper with padding creates the 'frame' around the image */}
+                <div className="px-4 pt-4 pb-0 md:px-6 md:pt-6 bg-white">
+                    <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-gray-100 overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
                             className="absolute inset-0 w-full h-full"
@@ -102,34 +103,46 @@ const About = () => {
                 {/* 2. NEW DESIGN SECTION */}
                 <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen">
                     
-                    {/* LOGO MARQUEE - Aligned to Card, No White Fade, Backend Data Only */}
-                    <div className="w-[95%] max-w-[1100px] py-[40px] opacity-70 overflow-hidden relative">
-                        {/* No absolute gradient masks here */}
-                        
+                    {/* LOGO MARQUEE */}
+                    {/* Aligned to Card Width (max-w-[1100px]) */}
+                    {/* Mask Image applied for transparency fade (No white blocks) */}
+                    <div 
+                        className="w-[95%] max-w-[1100px] py-[40px] overflow-hidden relative"
+                        style={{ 
+                            maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+                            WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
+                        }}
+                    >
                         <div className="flex w-full">
-                            {/* Primary Loop */}
+                            {/* Loop 1: Backend Data Only */}
                             <div className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
-                                {visionaries.map((logo) => (
-                                    <img 
-                                        key={`l1-${logo.id}`} 
-                                        src={logo.logo_url} 
-                                        alt={logo.name} 
-                                        // "fading in it and out" maintained via opacity transition on hover
-                                        className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
-                                    />
-                                ))}
+                                {visionaries.length > 0 ? (
+                                    visionaries.map((logo) => (
+                                        <img 
+                                            key={`l1-${logo.id}`} 
+                                            src={logo.logo_url} 
+                                            alt={logo.name} 
+                                            className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
+                                        />
+                                    ))
+                                ) : (
+                                    <div className="text-white/50 text-sm">Loading Partners...</div>
+                                )}
                             </div>
-                            {/* Duplicate Loop for Seamless Scrolling */}
-                            <div aria-hidden="true" className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
-                                {visionaries.map((logo) => (
-                                    <img 
-                                        key={`l2-${logo.id}`} 
-                                        src={logo.logo_url} 
-                                        alt={logo.name} 
-                                        className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
-                                    />
-                                ))}
-                            </div>
+                            
+                            {/* Loop 2: Duplicate for seamless scroll (Only if data exists) */}
+                            {visionaries.length > 0 && (
+                                <div aria-hidden="true" className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
+                                    {visionaries.map((logo) => (
+                                        <img 
+                                            key={`l2-${logo.id}`} 
+                                            src={logo.logo_url} 
+                                            alt={logo.name} 
+                                            className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
+                                        />
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
 
