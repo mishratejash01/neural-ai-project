@@ -9,8 +9,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
@@ -249,9 +247,8 @@ const About = () => {
                                 <CarouselItem key={blog.id} className="pl-6 basis-[85%] md:basis-1/2 lg:basis-1/3 xl:basis-1/3">
                                     <Link to={`/blog/${blog.id}`} className="block h-full"> 
                                         <div className="group h-full cursor-pointer">
-                                            {/* Reduced rounding from rounded-3xl to rounded-xl */}
-                                            {/* Added font-['Inter'] specifically to the Card */}
-                                            <Card className="h-full border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden bg-white rounded-xl font-['Inter']">
+                                            {/* Removed hover effects: no shadow hover, no transition for card container */}
+                                            <Card className="h-full border-gray-100 shadow-sm overflow-hidden bg-white rounded-xl font-['Inter']">
                                                 <div className="relative h-48 md:h-56 w-full overflow-hidden bg-gray-100">
                                                     {blog.image_url ? (
                                                         <img 
@@ -293,12 +290,7 @@ const About = () => {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        {blogs.length > 3 && (
-                            <div className="hidden md:flex justify-end gap-3 mt-10">
-                                <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
-                                <CarouselNext className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
-                            </div>
-                        )}
+                        {/* Removed Manual Arrow Buttons */}
                     </Carousel>
                 </section>
             </div>
