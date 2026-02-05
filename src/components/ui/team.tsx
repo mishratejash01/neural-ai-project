@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from "@/integrations/supabase/client";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselContent,
@@ -7,7 +8,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { User } from "lucide-react";
+import { User, ArrowUpRight } from "lucide-react";
 
 // Matches your DB Schema
 interface TeamMember {
@@ -18,6 +19,7 @@ interface TeamMember {
     image_url: string;
     linkedin_url?: string;
     university?: string;
+    description?: string; // Added description field
     display_order: number;
 }
 
@@ -106,19 +108,17 @@ const TeamSection = () => {
                                             )}
                                         </div>
 
-                                        {/* 3. Arrow Link (Static) */}
-                                        {member.linkedin_url && (
-                                            <a 
-                                                href={member.linkedin_url} 
-                                                target="_blank" 
-                                                rel="noopener noreferrer"
-                                                className="flex items-center mt-10 text-gray-400 hover:text-gray-900 transition-colors"
+                                        {/* 3. Arrow Link (To Profile Detail) - Only visible if description exists */}
+                                        {member.description && (
+                                            <Link 
+                                                to={`/team/${member.id}`}
+                                                className="flex items-center mt-10 text-gray-400 hover:text-gray-900 transition-colors group/link"
                                             >
                                                 <span className="text-xl leading-none mr-3 font-light">—</span>
-                                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                                                </svg>
-                                            </a>
+                                                <div className="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center group-hover/link:border-gray-900 group-hover/link:bg-gray-900 group-hover/link:text-white transition-all">
+                                                    <ArrowUpRight className="w-4 h-4" />
+                                                </div>
+                                            </Link>
                                         )}
                                     </div>
                                 </div>
@@ -126,11 +126,13 @@ const TeamSection = () => {
                         ))}
                     </CarouselContent>
                     
-                    {/* Navigation Buttons */}
-                    <div className="flex justify-end gap-4 mt-4">
-                        <CarouselPrevious className="static translate-y-0 border-gray-200 bg-transparent hover:bg-black hover:border-black hover:text-white transition-all w-12 h-12 rounded-full" />
-                        <CarouselNext className="static translate-y-0 border-gray-200 bg-transparent hover:bg-black hover:border-black hover:text-white transition-all w-12 h-12 rounded-full" />
-                    </div>
+                    {/* Navigation Buttons - ONLY SHOW IF MORE THAN 3 MEMBERS */}
+                    {members.length > 3 && (
+                        <div className="flex justify-end gap-4 mt-4">
+                            <CarouselPrevious className="static translate-y-0 border-gray-200 bg-transparent hover:bg-black hover:border-black hover:text-white transition-all w-12 h-12 rounded-full" />
+                            <CarouselNext className="static translate-y-0 border-gray-200 bg-transparent hover:bg-black hover:border-black hover:text-white transition-all w-12 h-12 rounded-full" />
+                        </div>
+                    )}
                 </Carousel>
             </div>
         );
