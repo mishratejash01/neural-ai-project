@@ -86,45 +86,6 @@ const About = () => {
 
     return (
         <Layout>
-            {/* INJECTED STYLES FOR MARQUEE */}
-            <style>{`
-                @keyframes scrollRight {
-                    0% { transform: translateX(-50%); }
-                    100% { transform: translateX(0); }
-                }
-                .marquee-track {
-                    display: flex;
-                    width: max-content;
-                    animation: scrollRight 40s linear infinite;
-                }
-                .marquee-container:hover .marquee-track {
-                    animation-play-state: paused;
-                }
-                .logo-img {
-                    filter: grayscale(100%);
-                    opacity: 0.5;
-                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-                }
-                .logo-wrapper:hover .logo-img {
-                    filter: grayscale(0%);
-                    opacity: 1;
-                    transform: scale(1.1);
-                }
-                .edge-mask {
-                    pointer-events: none;
-                    position: absolute;
-                    inset: 0;
-                    z-index: 10;
-                    background: linear-gradient(90deg, #fff 0%, transparent 15%, transparent 85%, #fff 100%);
-                }
-                .backed-by-text {
-                    font-family: 'Inter', sans-serif;
-                    font-style: italic;
-                    color: #94a3b8;
-                    letter-spacing: -0.01em;
-                }
-            `}</style>
-
             <div className="w-full bg-white font-['Inter']">
                 
                 {/* 1. HERO SECTION */}
@@ -169,42 +130,32 @@ const About = () => {
                         </div>
                     </section>
 
-                    {/* 3. BACKED BY VISIONARIES (UPDATED TO MARQUEE) */}
-                    <section className="py-20 border-y border-gray-100 bg-white">
+                    {/* 3. VISIONARIES (STATIC LOGOS) */}
+                    <section className="py-24 px-8 md:px-16 bg-gray-50/30 border-y border-gray-100">
                         <div className="container mx-auto">
-                            
-                            {/* Marquee Container */}
-                            <div className="marquee-container relative w-full overflow-hidden h-32 flex items-center">
-                                
-                                {/* Gradient Overlay */}
-                                <div className="edge-mask"></div>
-
-                                {/* Moving Track */}
-                                <div className="marquee-track">
-                                    {/* Render Visionaries Twice for Loop */}
-                                    {[...visionaries, ...visionaries].map((v, index) => (
-                                        <div key={`${v.id}-${index}`} className="logo-wrapper px-12 md:px-20 py-4 cursor-pointer">
+                            {/* Static Flex Container for Logos */}
+                            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24">
+                                {visionaries.length > 0 ? (
+                                    visionaries.map((v) => (
+                                        <div key={v.id} className="group">
                                             <img 
                                                 src={v.logo_url} 
                                                 alt={v.name} 
-                                                title={v.name}
-                                                className="h-12 md:h-16 w-auto object-contain logo-img"
+                                                className="h-16 md:h-20 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
                                             />
                                         </div>
-                                    ))}
-                                    
-                                    {/* Fallback if no data */}
-                                    {visionaries.length === 0 && (
-                                        <div className="px-10 text-gray-300 italic">Loading Partners...</div>
-                                    )}
-                                </div>
+                                    ))
+                                ) : (
+                                    <div className="text-gray-400 text-sm italic">Loading Partners...</div>
+                                )}
                             </div>
 
-                            {/* Footer Text */}
-                            <div className="text-center mt-8">
-                                <p className="backed-by-text text-lg">Backing from</p>
+                            {/* TEXT BELOW LOGOS (As Requested) */}
+                            <div className="text-center mt-12">
+                                <p className="text-gray-400 italic text-lg font-['Inter']">
+                                    Backing from
+                                </p>
                             </div>
-
                         </div>
                     </section>
 
