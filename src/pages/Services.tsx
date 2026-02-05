@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import {
@@ -10,127 +9,161 @@ import {
   Cog,
   Zap,
   ArrowRight,
-  CheckCircle2
+  FileText
 } from "lucide-react";
-import { LampContainer } from "@/components/ui/lamp";
-import { motion } from "framer-motion";
 
 const Services = () => {
+  // Define the custom colors from your design to use in the grid
+  const themeColors = {
+    bg: "#f8faf8",
+    textDark: "#1a2e1a",
+    textMuted: "#556b55",
+    primary: "#142b14",
+    cardBg: "#ffffff",
+    border: "#cfdccf",
+    iconColor: "#2d6a4f"
+  };
+
   const services = [
     {
       icon: MessageSquare,
       title: "AI-Powered Chatbots",
-      description: "Streamline customer support with intelligent chatbots that understand natural language and learn from interactions.",
-      slug: "chatbots",
-      features: ["24/7 Availability", "Multi-language Support", "Sentiment Analysis"]
+      description: "Streamline customer support with intelligent chatbots that understand natural language.",
+      slug: "chatbots"
     },
     {
       icon: Cog,
       title: "Custom AI Solutions",
-      description: "Tailored AI systems that solve unique business challenges with scalable, secure architecture.",
-      slug: "custom-ai",
-      features: ["Predictive Modeling", "Process Automation", "Legacy Integration"]
+      description: "Tailored AI systems that solve unique business challenges with scalable architecture.",
+      slug: "custom-ai"
     },
     {
       icon: BarChart,
-      title: "Data Analytics & Insights",
+      title: "Data Analytics",
       description: "Transform raw data into actionable intelligence with advanced machine learning models.",
-      slug: "data-analytics",
-      features: ["Real-time Dashboards", "Trend Forecasting", "Behavioral Analysis"]
+      slug: "data-analytics"
     },
     {
       icon: Eye,
       title: "Computer Vision",
-      description: "Harness visual intelligence for object detection, quality control, and automated monitoring.",
-      slug: "computer-vision",
-      features: ["Object Detection", "Facial Recognition", "Quality Inspection"]
+      description: "Harness visual intelligence for object detection, quality control, and monitoring.",
+      slug: "computer-vision"
     },
     {
       icon: Brain,
       title: "NLP & LLMs",
       description: "Create AI models that understand, interpret, and generate human language at scale.",
-      slug: "nlp",
-      features: ["Document Summarization", "Semantic Search", "Content Generation"]
+      slug: "nlp"
     },
     {
       icon: Zap,
       title: "Marketing Automation",
       description: "Boost marketing with AI-driven personalization and automated campaign optimization.",
-      slug: "marketing-automation",
-      features: ["Customer Segmentation", "Dynamic Content", "A/B Testing"]
+      slug: "marketing-automation"
     }
   ];
 
   return (
     <Layout>
-      {/* LAMP HERO SECTION */}
-      <LampContainer>
-        <motion.h1
-          initial={{ opacity: 0.5, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{
-            delay: 0.3,
-            duration: 0.8,
-            ease: "easeInOut",
-          }}
-          className="mt-8 bg-gradient-to-br from-slate-100 to-slate-400 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
-        >
-          Intelligence, <br /> Scaled for Enterprise.
-        </motion.h1>
-        <motion.p
-           initial={{ opacity: 0, y: 20 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           transition={{ delay: 0.6, duration: 0.8 }}
-           className="mt-4 text-center text-slate-300 max-w-2xl mx-auto text-lg md:text-xl font-light"
-        >
-          Comprehensive AI solutions designed to transform your data into decision-making power.
-        </motion.p>
-      </LampContainer>
+      <div style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} className="min-h-screen flex flex-col font-sans">
+        
+        {/* HERO SECTION - Strictly matching provided HTML */}
+        <section className="flex-1 flex flex-col justify-center items-center px-4 py-20 text-center">
+          <div className="max-w-[900px] mx-auto">
+            
+            {/* Decorative Dots */}
+            <div className="flex justify-center gap-[15px] mb-[30px] opacity-80">
+              {/* Group 1 - Soft Sage */}
+              <div className="flex gap-[3px]">
+                {[...Array(5)].map((_, i) => (
+                  <div key={`g1-${i}`} className="w-[4px] h-[4px] rounded-[1px] bg-[#7fb07f]" />
+                ))}
+              </div>
+              {/* Group 2 - Emerald Green */}
+              <div className="flex gap-[3px]">
+                {[...Array(5)].map((_, i) => (
+                  <div key={`g2-${i}`} className="w-[4px] h-[4px] rounded-[1px] bg-[#2d6a4f]" />
+                ))}
+              </div>
+              {/* Group 3 - Deep Forest */}
+              <div className="flex gap-[3px]">
+                {[...Array(5)].map((_, i) => (
+                  <div key={`g3-${i}`} className="w-[4px] h-[4px] rounded-[1px] bg-[#1b4332]" />
+                ))}
+              </div>
+            </div>
 
-      {/* MAIN SERVICES GRID */}
-      <section className="py-20 bg-background relative z-10 -mt-20">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Card className="h-full bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.3)] group overflow-hidden">
-                  <CardHeader>
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <service.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl font-bold">{service.title}</CardTitle>
-                    <CardDescription className="text-muted-foreground pt-2">
-                      {service.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2 mb-6">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-center text-sm text-muted-foreground">
-                          <CheckCircle2 className="w-4 h-4 text-primary mr-2" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link to={`/services/${service.slug}`}>
-                      <Button variant="ghost" className="w-full group/btn hover:bg-primary hover:text-primary-foreground transition-all duration-300">
-                        Explore Solution
-                        <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            {/* Typography */}
+            <h1 className="text-[3.5rem] md:text-[5.2rem] font-[800] m-0 leading-[1.05] tracking-[-0.04em] text-[#1a2e1a]">
+              Intelligence,
+            </h1>
+            <h1 className="text-[3.5rem] md:text-[5.2rem] font-[800] m-0 leading-[1.05] tracking-[-0.04em] bg-clip-text text-transparent bg-gradient-to-br from-[#2d6a4f] via-[#1b4332] to-[#40916c]">
+              Scaled for Enterprise.
+            </h1>
+
+            {/* Subtitle */}
+            <p className="mt-[35px] text-[1.1rem] md:text-[1.25rem] text-[#556b55] max-w-[600px] mx-auto leading-[1.6] font-normal">
+              A suite architected to transform your raw data into security, user behaviour, and decision-making power.
+            </p>
+
+            {/* Buttons */}
+            <div className="mt-[50px] flex flex-col sm:flex-row justify-center gap-[16px] items-center">
+              <Link to="/contact">
+                <button 
+                  className="px-[32px] py-[14px] text-[0.9rem] font-[600] rounded-[8px] cursor-pointer transition-all duration-300 flex items-center gap-[10px] text-white shadow-[0_4px_14px_rgba(20,43,20,0.15)] hover:-translate-y-[1px] hover:shadow-[0_6px_20px_rgba(20,43,20,0.25)]"
+                  style={{ backgroundColor: "#142b14", border: "1px solid #142b14" }}
+                >
+                  Get Started
+                </button>
+              </Link>
+              
+              <Link to="/docs">
+                <button 
+                  className="px-[32px] py-[14px] text-[0.9rem] font-[600] rounded-[8px] cursor-pointer transition-all duration-300 flex items-center gap-[10px] bg-transparent hover:bg-[#2d6a4f]/5"
+                  style={{ color: "#1a2e1a", border: "1.5px solid #cfdccf" }}
+                >
+                  <FileText className="w-4 h-4" />
+                  Product Doc
+                </button>
+              </Link>
+            </div>
+
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* SERVICES GRID - Adapted to Light Theme */}
+        <section className="py-24 px-4 relative z-10">
+          <div className="container mx-auto max-w-6xl">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {services.map((service, index) => (
+                 <div 
+                   key={index}
+                   className="group p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                   style={{ 
+                     backgroundColor: themeColors.cardBg, 
+                     border: `1px solid ${themeColors.border}`,
+                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)"
+                   }}
+                 >
+                   <div className="mb-6 inline-flex p-3 rounded-xl bg-[#7fb07f]/10 group-hover:bg-[#7fb07f]/20 transition-colors">
+                     <service.icon className="w-8 h-8" style={{ color: themeColors.iconColor }} />
+                   </div>
+                   <h3 className="text-xl font-bold mb-3" style={{ color: themeColors.textDark }}>
+                     {service.title}
+                   </h3>
+                   <p className="mb-6 leading-relaxed" style={{ color: themeColors.textMuted }}>
+                     {service.description}
+                   </p>
+                   <Link to={`/services/${service.slug}`} className="inline-flex items-center text-sm font-semibold transition-colors hover:opacity-80" style={{ color: themeColors.primary }}>
+                     Learn more <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                   </Link>
+                 </div>
+               ))}
+             </div>
+          </div>
+        </section>
+
+      </div>
     </Layout>
   );
 };
