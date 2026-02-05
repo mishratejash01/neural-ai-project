@@ -101,7 +101,7 @@ const About = () => {
                 {/* Wrapper with exact radial gradient */}
                 <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen">
                     
-                    {/* LOGO BAR - Matches .logo-bar styles exactly */}
+                    {/* LOGO BAR - Font: Inter SemiBold (600) */}
                     <div className="w-full flex justify-center items-center flex-wrap gap-[40px] py-[40px] opacity-60">
                         {visionaries.length > 0 ? (
                             visionaries.map((v) => (
@@ -109,15 +109,13 @@ const About = () => {
                                     <img 
                                         src={v.logo_url} 
                                         alt={v.name} 
-                                        // Using brightness-0 invert to mimic white text logo style if they are black logos, 
-                                        // or remove filters if they are colored. Assuming white text style based on HTML "color: #ffffff"
                                         className="h-[12px] md:h-[16px] w-auto object-contain brightness-0 invert" 
                                     />
                                 </div>
                             ))
                         ) : (
-                            // Static fallback matching the HTML's span styles
-                            <div className="flex flex-wrap justify-center gap-[40px] text-white font-[600] text-[12px] tracking-[0.8px] uppercase">
+                            // Static fallback - Font: SemiBold (600)
+                            <div className="flex flex-wrap justify-center gap-[40px] text-white font-semibold text-[12px] tracking-[0.8px] uppercase">
                                 <span>NITI Aayog</span>
                                 <span>neowise</span>
                                 <span>Godrej</span>
@@ -129,9 +127,10 @@ const About = () => {
                         )}
                     </div>
 
-                    {/* MAIN CONTAINER CARD - Matches .container styles exactly */}
+                    {/* MAIN CONTAINER CARD */}
                     <div className="bg-[#ffffff] rounded-[6px] shadow-[0_20px_50px_rgba(0,40,35,0.2)] max-w-[1100px] w-[95%] py-[70px] px-[40px] mb-[25px] text-center">
-                        <h2 className="text-[28px] font-[500] text-[#1a2e2b] mb-[60px]">
+                        {/* Title - Font: Medium (500) */}
+                        <h2 className="text-[28px] font-medium text-[#1a2e2b] mb-[60px]">
                             Foundational AI that businesses can rely on
                         </h2>
 
@@ -142,7 +141,8 @@ const About = () => {
                                 <div className="w-[68px] h-[68px] bg-[#f0fdfc] rounded-full flex items-center justify-center mb-[25px] text-[#00695c] border-[2px] border-[#12f7d6] shadow-[0_0_15px_rgba(18,247,214,0.25)]">
                                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                                 </div>
-                                <h3 className="text-[19px] font-[600] text-[#1a2e2b] mb-[15px]">Business First ROI</h3>
+                                {/* Header - Font: SemiBold (600) */}
+                                <h3 className="text-[19px] font-semibold text-[#1a2e2b] mb-[15px]">Business First ROI</h3>
                                 <p className="text-[14px] leading-[1.6] text-[#506663] max-w-[260px]">
                                     Designed for efficiency and scale. Our AI solutions focus on measurable productivity gains and rapid return on investment for enterprise needs.
                                 </p>
@@ -153,7 +153,8 @@ const About = () => {
                                 <div className="w-[68px] h-[68px] bg-[#f0fdfc] rounded-full flex items-center justify-center mb-[25px] text-[#00695c] border-[2px] border-[#12f7d6] shadow-[0_0_15px_rgba(18,247,214,0.25)]">
                                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
                                 </div>
-                                <h3 className="text-[19px] font-[600] text-[#1a2e2b] mb-[15px]">Secure & Safe</h3>
+                                {/* Header - Font: SemiBold (600) */}
+                                <h3 className="text-[19px] font-semibold text-[#1a2e2b] mb-[15px]">Secure & Safe</h3>
                                 <p className="text-[14px] leading-[1.6] text-[#506663] max-w-[260px]">
                                     AI that works on-prem, in the cloud, or at the edge. Available wherever you need it with enterprise-grade security.
                                 </p>
@@ -164,7 +165,8 @@ const About = () => {
                                 <div className="w-[68px] h-[68px] bg-[#f0fdfc] rounded-full flex items-center justify-center mb-[25px] text-[#00695c] border-[2px] border-[#12f7d6] shadow-[0_0_15px_rgba(18,247,214,0.25)]">
                                     <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                                 </div>
-                                <h3 className="text-[19px] font-[600] text-[#1a2e2b] mb-[15px]">State-of-the-art AI</h3>
+                                {/* Header - Font: SemiBold (600) */}
+                                <h3 className="text-[19px] font-semibold text-[#1a2e2b] mb-[15px]">State-of-the-art AI</h3>
                                 <p className="text-[14px] leading-[1.6] text-[#506663] max-w-[260px]">
                                     Advanced and affordable AI models and tools built so your business can innovate with absolute confidence.
                                 </p>
@@ -173,12 +175,14 @@ const About = () => {
                         </div>
                     </div>
 
-                    {/* BOTTOM SECTION - Matches .bottom-section styles exactly */}
+                    {/* BOTTOM SECTION */}
                     <div className="bg-[rgba(255,255,255,0.96)] rounded-[6px] max-w-[1100px] w-[95%] py-[50px] px-[40px] text-center shadow-[0_10px_30px_rgba(0,40,35,0.15)]">
-                        <span className="text-[#00796b] font-[700] text-[12px] mb-[12px] block uppercase tracking-[2px]">
+                        {/* Subtitle - Font: Bold (700) */}
+                        <span className="text-[#00796b] font-bold text-[12px] mb-[12px] block uppercase tracking-[2px]">
                             Neural AI
                         </span>
-                        <h1 className="text-[32px] font-[600] text-[#1a2e2b] leading-[1.3]">
+                        {/* Main Text - Font: SemiBold (600) */}
+                        <h1 className="text-[32px] font-semibold text-[#1a2e2b] leading-[1.3]">
                             Effortlessly build, customize, and launch<br className="hidden md:block"/> AI Agents tailored for your business.
                         </h1>
                     </div>
@@ -188,7 +192,8 @@ const About = () => {
                 {/* 3. BOARD OF NEURAL AI */}
                 <section className="py-24 px-4 md:px-0 bg-white">
                     <div className="text-center pb-12">
-                            <h2 className="text-[36px] font-[600] text-gray-900">Board of Neural AI</h2>
+                            {/* Board Title - Font: SemiBold (600) */}
+                            <h2 className="text-[36px] font-semibold text-gray-900">Board of Neural AI</h2>
                     </div>
                     <div className="text-gray-900"> 
                         <TeamSection />
@@ -199,7 +204,8 @@ const About = () => {
                 <section className="py-24 px-8 md:px-16 bg-gray-50/50 rounded-b-[2.5rem]">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                         <div className="max-w-2xl">
-                            <h2 className="text-4xl font-[700] text-gray-900 mb-6">Latest <span className="text-blue-600">Insights</span></h2>
+                            {/* Insights Title - Font: Bold (700) */}
+                            <h2 className="text-4xl font-bold text-gray-900 mb-6">Latest <span className="text-blue-600">Insights</span></h2>
                             <p className="text-lg text-gray-600">
                                 Explore our latest thoughts on AI, technology, and the future of business.
                             </p>
@@ -239,7 +245,7 @@ const About = () => {
                                                         <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider">
                                                             Article
                                                         </span>
-                                                        <h3 className="text-xl font-[700] text-gray-900 mt-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
+                                                        <h3 className="text-xl font-bold text-gray-900 mt-3 line-clamp-2 group-hover:text-blue-600 transition-colors duration-300">
                                                             {blog.title}
                                                         </h3>
                                                     </div>
