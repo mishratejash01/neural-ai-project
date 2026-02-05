@@ -15,10 +15,6 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// Assets for fallback logos (using Nirmaan/IITM if available in your structure, else text placeholders)
-import nirmaanLogo from "@/assets/nirmaan.png";
-import iitmLogo from "@/assets/iitm.svg.png";
-
 interface Blog {
   id: string;
   title: string;
@@ -81,29 +77,11 @@ const About = () => {
         fetchData();
     }, []);
 
-    // Fallback logos if DB is empty - Matching your specific list
-    const fallbackLogos = [
-        { name: "NITI Aayog", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/NITI_Aayog_logo.svg/1200px-NITI_Aayog_logo.svg.png" }, // Public placeholder or local asset
-        { name: "IIT Madras", src: iitmLogo },
-        { name: "Nirmaan", src: nirmaanLogo },
-        { name: "Neowise", src: "https://neowise.in/wp-content/uploads/2023/06/Neowise-Logo-Black.png" }, // Placeholder
-        { name: "Godrej", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Godrej_Group_logo.svg/2560px-Godrej_Group_logo.svg.png" },
-        { name: "Infosys", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/2560px-Infosys_logo.svg.png" },
-        { name: "Urban Company", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Urban_Clap_Logo.png/1200px-Urban_Clap_Logo.png" },
-        { name: "Tata Technologies", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Tata_Technologies_Logo.svg/2560px-Tata_Technologies_Logo.svg.png" },
-        { name: "Tata Capital", src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Tata_Capital_Logo.svg/2560px-Tata_Capital_Logo.svg.png" }
-    ];
-
-    // Determine which list to use
-    const displayLogos = visionaries.length > 0 
-        ? visionaries.map(v => ({ name: v.name, src: v.logo_url })) 
-        : fallbackLogos;
-
     return (
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - UPDATED: Reduced height, Frame + Rounding */}
+                {/* 1. HERO SECTION - Frame Preserved */}
                 <div className="p-4 md:p-6 bg-white">
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[80vh] bg-gray-100 overflow-hidden rounded-2xl shadow-sm border border-gray-100">
                         <motion.div 
@@ -124,29 +102,29 @@ const About = () => {
                 {/* 2. NEW DESIGN SECTION */}
                 <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen">
                     
-                    {/* LOGO MARQUEE - REPLACES STATIC LIST */}
-                    <div className="w-full py-[40px] opacity-70 overflow-hidden relative">
-                        {/* Gradient Masks for fade effect at edges */}
-                        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#e5fcf9] to-transparent z-10"></div>
-                        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#e5fcf9] to-transparent z-10"></div>
+                    {/* LOGO MARQUEE - Aligned to Card, No White Fade, Backend Data Only */}
+                    <div className="w-[95%] max-w-[1100px] py-[40px] opacity-70 overflow-hidden relative">
+                        {/* No absolute gradient masks here */}
                         
                         <div className="flex w-full">
+                            {/* Primary Loop */}
                             <div className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
-                                {displayLogos.map((logo, idx) => (
+                                {visionaries.map((logo) => (
                                     <img 
-                                        key={`l1-${idx}`} 
-                                        src={logo.src} 
+                                        key={`l1-${logo.id}`} 
+                                        src={logo.logo_url} 
                                         alt={logo.name} 
+                                        // "fading in it and out" maintained via opacity transition on hover
                                         className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
                                     />
                                 ))}
                             </div>
-                            {/* Duplicate for infinite loop */}
+                            {/* Duplicate Loop for Seamless Scrolling */}
                             <div aria-hidden="true" className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
-                                {displayLogos.map((logo, idx) => (
+                                {visionaries.map((logo) => (
                                     <img 
-                                        key={`l2-${idx}`} 
-                                        src={logo.src} 
+                                        key={`l2-${logo.id}`} 
+                                        src={logo.logo_url} 
                                         alt={logo.name} 
                                         className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" 
                                     />
