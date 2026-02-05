@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
-import { Target, Zap, Shield, Brain, ArrowRight } from "lucide-react";
+import { ArrowRight, Brain } from "lucide-react";
 import TeamSection from "@/components/ui/team";
 import placeholderHero from "@/assets/neural-ai-hero.jpg";
 import { supabase } from "@/integrations/supabase/client";
@@ -77,13 +77,6 @@ const About = () => {
         fetchData();
     }, []);
 
-    const edgeFeatures = [
-        { icon: Brain, title: "Research-Driven Core", description: "Solutions built on deep-tech research from IIT Madras." },
-        { icon: Zap, title: "Real-Time Processing", description: "Edge computing models delivering instant insights." },
-        { icon: Shield, title: "Ethical & Secure", description: "Security protocols designed to protect data integrity." },
-        { icon: Target, title: "Business-First ROI", description: "Engineered to solve problems and deliver measurable ROI." }
-    ];
-
     return (
         <Layout>
             <div className="w-full bg-white font-['Inter']">
@@ -104,59 +97,88 @@ const About = () => {
                     <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/30" />
                 </div>
 
-                {/* 2. THE NEURAL AI EDGE - No wrapper, direct section */}
-                <section className="py-24 px-8 md:px-16">
-                    <div className="text-center mb-20">
-                        <h2 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-gray-900">
-                            The Neural AI <span className="text-blue-600">Edge</span>
-                        </h2>
-                        <p className="text-gray-600 max-w-3xl mx-auto text-xl leading-relaxed">
-                            Why industry leaders choose us to power their intelligence infrastructure.
-                        </p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        {edgeFeatures.map((feature, index) => (
-                            <div key={index} className="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:border-blue-500/30 hover:shadow-xl transition-all duration-300 group">
-                                <div className="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
-                                    <feature.icon className="w-7 h-7 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                {/* 2. NEW DESIGN SECTION (Replaces Edge & Backing) */}
+                <div className="w-full flex flex-col items-center py-12 px-5 bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed">
+                    
+                    {/* LOGO BAR */}
+                    <div className="w-full flex justify-center items-center flex-wrap gap-10 py-10 opacity-70 mb-6">
+                        {visionaries.length > 0 ? (
+                            visionaries.map((v) => (
+                                <div key={v.id} className="group">
+                                    <img 
+                                        src={v.logo_url} 
+                                        alt={v.name} 
+                                        className="h-8 md:h-10 w-auto object-contain brightness-0 invert" 
+                                    />
                                 </div>
-                                <h3 className="text-xl font-bold mb-4 text-gray-900">{feature.title}</h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">{feature.description}</p>
+                            ))
+                        ) : (
+                            // Fallback purely for design matching if no data loads
+                            <div className="flex gap-10 text-white text-xs font-semibold tracking-widest uppercase">
+                                <span>NITI Aayog</span>
+                                <span>Infosys</span>
+                                <span>Tata Technologies</span>
                             </div>
-                        ))}
+                        )}
                     </div>
-                </section>
 
-                {/* 3. VISIONARIES (STATIC LOGOS) */}
-                <section className="py-24 px-8 md:px-16 bg-gray-50/30 border-y border-gray-100">
-                    <div className="container mx-auto">
-                        {/* Static Flex Container for Logos */}
-                        <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24">
-                            {visionaries.length > 0 ? (
-                                visionaries.map((v) => (
-                                    <div key={v.id} className="group">
-                                        <img 
-                                            src={v.logo_url} 
-                                            alt={v.name} 
-                                            className="h-16 md:h-20 w-auto object-contain grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500" 
-                                        />
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="text-gray-400 text-sm italic">Loading Partners...</div>
-                            )}
-                        </div>
+                    {/* MAIN CONTAINER CARD */}
+                    <div className="bg-white rounded-[6px] shadow-[0_20px_50px_rgba(0,40,35,0.2)] max-w-[1100px] w-full md:w-[95%] py-[70px] px-8 md:px-[40px] mb-[25px] text-center">
+                        <h2 className="text-[28px] font-medium text-[#1a2e2b] mb-[60px]">
+                            Foundational AI that businesses can rely on
+                        </h2>
 
-                        {/* TEXT BELOW LOGOS */}
-                        <div className="text-center mt-12">
-                            <p className="text-gray-400 italic text-lg font-['Inter']">
-                                Backing from
-                            </p>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-0">
+                            
+                            {/* Feature 1 */}
+                            <div className="flex flex-col items-center px-0 md:px-[40px] border-r-0 md:border-r border-dashed border-[#d1e2e1]">
+                                <div className="w-[68px] h-[68px] bg-[#f0fdfc] rounded-full flex items-center justify-center mb-[25px] text-[#00695c] border-[2px] border-[#12f7d6] shadow-[0_0_15px_rgba(18,247,214,0.25)]">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                                </div>
+                                <h3 className="text-[19px] font-semibold text-[#1a2e2b] mb-[15px]">Business First ROI</h3>
+                                <p className="text-[14px] leading-[1.6] text-[#506663] max-w-[260px]">
+                                    Designed for efficiency and scale. Our AI solutions focus on measurable productivity gains and rapid return on investment for enterprise needs.
+                                </p>
+                            </div>
+
+                            {/* Feature 2 */}
+                            <div className="flex flex-col items-center px-0 md:px-[40px] border-r-0 md:border-r border-dashed border-[#d1e2e1]">
+                                <div className="w-[68px] h-[68px] bg-[#f0fdfc] rounded-full flex items-center justify-center mb-[25px] text-[#00695c] border-[2px] border-[#12f7d6] shadow-[0_0_15px_rgba(18,247,214,0.25)]">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                                </div>
+                                <h3 className="text-[19px] font-semibold text-[#1a2e2b] mb-[15px]">Secure & Safe</h3>
+                                <p className="text-[14px] leading-[1.6] text-[#506663] max-w-[260px]">
+                                    AI that works on-prem, in the cloud, or at the edge. Available wherever you need it with enterprise-grade security.
+                                </p>
+                            </div>
+
+                            {/* Feature 3 */}
+                            <div className="flex flex-col items-center px-0 md:px-[40px]">
+                                <div className="w-[68px] h-[68px] bg-[#f0fdfc] rounded-full flex items-center justify-center mb-[25px] text-[#00695c] border-[2px] border-[#12f7d6] shadow-[0_0_15px_rgba(18,247,214,0.25)]">
+                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                                </div>
+                                <h3 className="text-[19px] font-semibold text-[#1a2e2b] mb-[15px]">State-of-the-art AI</h3>
+                                <p className="text-[14px] leading-[1.6] text-[#506663] max-w-[260px]">
+                                    Advanced and affordable AI models and tools built so your business can innovate with absolute confidence.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
-                </section>
 
-                {/* 4. BOARD OF NEURAL AI */}
+                    {/* BOTTOM SECTION */}
+                    <div className="bg-[rgba(255,255,255,0.96)] rounded-[6px] max-w-[1100px] w-full md:w-[95%] py-[50px] px-8 md:px-[40px] text-center shadow-[0_10px_30px_rgba(0,40,35,0.15)] mb-20">
+                        <span className="text-[#00796b] font-bold text-[12px] mb-[12px] block uppercase tracking-[2px]">
+                            Neural AI
+                        </span>
+                        <h1 className="text-[28px] md:text-[32px] font-semibold text-[#1a2e2b] leading-[1.3]">
+                            Effortlessly build, customize, and launch<br className="hidden md:block"/> AI Agents tailored for your business.
+                        </h1>
+                    </div>
+
+                </div>
+
+                {/* 3. BOARD OF NEURAL AI */}
                 <section className="py-24 px-4 md:px-0 bg-white">
                     <div className="text-center pb-12">
                             <h2 className="text-4xl font-semibold text-gray-900 font-['Inter']">Board of Neural AI</h2>
@@ -166,7 +188,7 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* 5. LATEST INSIGHTS (SLIDING BLOGS) */}
+                {/* 4. LATEST INSIGHTS (SLIDING BLOGS) */}
                 <section className="py-24 px-8 md:px-16 bg-gray-50/50 rounded-b-[2.5rem]">
                     <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                         <div className="max-w-2xl">
