@@ -10,11 +10,9 @@ import {
   Cog,
   Zap,
   ArrowRight,
-  Clock,
-  TrendingUp,
-  Shield
+  CheckCircle2
 } from "lucide-react";
-import { HeroGeometric } from "@/components/ui/shape-landing-hero";
+import { LampContainer } from "@/components/ui/lamp";
 import { motion } from "framer-motion";
 
 const Services = () => {
@@ -23,206 +21,114 @@ const Services = () => {
       icon: MessageSquare,
       title: "AI-Powered Chatbots",
       description: "Streamline customer support with intelligent chatbots that understand natural language and learn from interactions.",
-      slug: "chatbots"
+      slug: "chatbots",
+      features: ["24/7 Availability", "Multi-language Support", "Sentiment Analysis"]
     },
     {
       icon: Cog,
       title: "Custom AI Solutions",
       description: "Tailored AI systems that solve unique business challenges with scalable, secure architecture.",
-      slug: "custom-ai"
+      slug: "custom-ai",
+      features: ["Predictive Modeling", "Process Automation", "Legacy Integration"]
     },
     {
       icon: BarChart,
       title: "Data Analytics & Insights",
       description: "Transform raw data into actionable intelligence with advanced machine learning models.",
-      slug: "data-analytics"
+      slug: "data-analytics",
+      features: ["Real-time Dashboards", "Trend Forecasting", "Behavioral Analysis"]
     },
     {
       icon: Eye,
-      title: "Computer Vision Applications",
+      title: "Computer Vision",
       description: "Harness visual intelligence for object detection, quality control, and automated monitoring.",
-      slug: "computer-vision"
+      slug: "computer-vision",
+      features: ["Object Detection", "Facial Recognition", "Quality Inspection"]
     },
     {
       icon: Brain,
-      title: "Natural Language Processing",
+      title: "NLP & LLMs",
       description: "Create AI models that understand, interpret, and generate human language at scale.",
-      slug: "nlp"
+      slug: "nlp",
+      features: ["Document Summarization", "Semantic Search", "Content Generation"]
     },
     {
       icon: Zap,
       title: "Marketing Automation",
       description: "Boost marketing with AI-driven personalization and automated campaign optimization.",
-      slug: "marketing-automation"
+      slug: "marketing-automation",
+      features: ["Customer Segmentation", "Dynamic Content", "A/B Testing"]
     }
   ];
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <HeroGeometric
-        badge="Our Expertise"
-        title1="Our"
-        title2="AI Services"
-      />
-      <section className="py-24 gradient-hero">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-          >
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Clock className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">Fast Deployment</h3>
-              <p className="text-muted-foreground">Get your AI solutions up and running in weeks, not months, with our proven methodologies</p>
-            </div>
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <div className="w-20 h-20 gradient-teal rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <TrendingUp className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">Proven ROI</h3>
-              <p className="text-muted-foreground">Our clients see average 300% ROI within the first year through optimized operations</p>
-            </div>
-            <div className="text-center space-y-6 hover-lift bg-white/50 backdrop-blur-sm p-8 rounded-2xl border border-white/20">
-              <div className="w-20 h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto shadow-accent">
-                <Shield className="w-10 h-10 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold text-foreground">Enterprise Security</h3>
-              <p className="text-muted-foreground">Bank-level security and compliance built into every solution we deliver</p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      {/* LAMP HERO SECTION */}
+      <LampContainer>
+        <motion.h1
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="mt-8 bg-gradient-to-br from-slate-100 to-slate-400 py-4 bg-clip-text text-center text-4xl font-medium tracking-tight text-transparent md:text-7xl"
+        >
+          Intelligence, <br /> Scaled for Enterprise.
+        </motion.h1>
+        <motion.p
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           transition={{ delay: 0.6, duration: 0.8 }}
+           className="mt-4 text-center text-slate-300 max-w-2xl mx-auto text-lg md:text-xl font-light"
+        >
+          Comprehensive AI solutions designed to transform your data into decision-making power.
+        </motion.p>
+      </LampContainer>
 
-      {/* Services Grid */}
-      <section className="py-24 bg-surface-dark">
+      {/* MAIN SERVICES GRID */}
+      <section className="py-20 bg-background relative z-10 -mt-20">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-            className="text-center mb-20"
-          >
-            <h2 className="text-5xl font-bold mb-6">
-              Comprehensive <span className="text-gradient">AI Solutions</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Explore our detailed service offerings designed to transform your business operations
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => (
-              <Card key={index} className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500 rounded-3xl overflow-hidden">
-                <CardHeader className="p-8 text-center">
-                  <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-accent group-hover:scale-110 transition-smooth">
-                    <service.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <CardTitle className="text-2xl font-bold text-foreground mb-4">
-                    {service.title}
-                  </CardTitle>
-                  <CardDescription className="text-lg text-text-muted leading-relaxed mb-6">
-                    {service.description}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent className="p-8 pt-0">
-                  <Link to={`/services/${service.slug}`}>
-                    <Button className="w-full gradient-primary text-white hover:opacity-90 transition-smooth rounded-xl py-3 text-lg font-semibold shadow-accent group-hover:shadow-xl" size="lg">
-                      Learn More
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-smooth" />
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <Card className="h-full bg-card/50 backdrop-blur-sm border-border hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_-5px_rgba(var(--primary-rgb),0.3)] group overflow-hidden">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                      <service.icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl font-bold">{service.title}</CardTitle>
+                    <CardDescription className="text-muted-foreground pt-2">
+                      {service.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 mb-6">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-center text-sm text-muted-foreground">
+                          <CheckCircle2 className="w-4 h-4 text-primary mr-2" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link to={`/services/${service.slug}`}>
+                      <Button variant="ghost" className="w-full group/btn hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                        Explore Solution
+                        <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                      </Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section className="py-20 gradient-hero">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold mb-6">Our Process</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              We follow a proven methodology to ensure your AI implementation is successful,
-              on-time, and delivers measurable results.
-            </p>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-            className="grid grid-cols-1 md:grid-cols-4 gap-8"
-          >
-            {[
-              { step: "01", title: "Discovery", description: "We analyze your business needs and identify AI opportunities" },
-              { step: "02", title: "Strategy", description: "We design a custom AI roadmap tailored to your goals" },
-              { step: "03", title: "Development", description: "Our experts build and test your AI solution" },
-              { step: "04", title: "Deployment", description: "We launch your solution and provide ongoing support" }
-            ].map((item, index) => (
-              <div key={index} className="text-center space-y-4">
-                <div className="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto">
-                  <span className="text-white font-bold text-lg">{item.step}</span>
-                </div>
-                <h3 className="text-xl font-semibold">{item.title}</h3>
-                <p className="text-muted-foreground">{item.description}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-            className="max-w-3xl mx-auto"
-          >
-            <h2 className="text-4xl font-bold mb-6">
-              Not Sure Which Service You Need?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Our AI experts will analyze your business and recommend the perfect solution.
-              Schedule a free consultation to get started.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button size="lg" className="gradient-primary text-white hover:opacity-90 transition-smooth">
-                  Get Free Consultation
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-              <Link to="/demo">
-                <Button size="lg" variant="outline" className="border-accent text-accent hover:bg-accent hover:text-white">
-                  Watch Our Demo
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </Layout>
