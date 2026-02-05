@@ -9,7 +9,8 @@ import {
   Cog,
   Zap,
   ArrowRight,
-  FileText
+  FileText,
+  Play
 } from "lucide-react";
 
 const Services = () => {
@@ -68,8 +69,6 @@ const Services = () => {
       <div style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} className="min-h-screen flex flex-col font-sans">
         
         {/* HERO SECTION */}
-        {/* Changed to h-screen to ensure it takes up the full initial viewport */}
-        {/* Added pt-32 md:pt-40 to create significant space between navbar and content */}
         <section className="h-screen flex flex-col justify-center items-center px-4 pt-32 md:pt-40 pb-10 text-center">
           <div className="max-w-[900px] mx-auto">
             
@@ -133,8 +132,39 @@ const Services = () => {
           </div>
         </section>
 
+        {/* VIDEO FRAME SECTION */}
+        <section className="px-4 pb-24 flex justify-center">
+          <div className="container max-w-6xl">
+            <div 
+              className="w-full rounded-[30px] p-6 md:p-12 relative shadow-sm"
+              style={{
+                // Faded bluish and greenish gradient
+                background: "linear-gradient(135deg, rgba(224, 242, 254, 0.4) 0%, rgba(220, 252, 231, 0.4) 100%)",
+                border: "1px solid rgba(200, 230, 255, 0.5)"
+              }}
+            >
+              {/* Inner Video Player */}
+              <div className="relative w-full aspect-video rounded-2xl overflow-hidden shadow-2xl bg-black group cursor-pointer border border-white/50">
+                
+                {/* Play Button Overlay (Optional placeholder UI) */}
+                <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/10 transition-colors z-10">
+                   <div className="w-20 h-20 rounded-full bg-white/90 flex items-center justify-center shadow-lg backdrop-blur-sm group-hover:scale-110 transition-transform">
+                      <Play className="w-8 h-8 text-[#2d6a4f] fill-[#2d6a4f] ml-1" />
+                   </div>
+                </div>
+
+                {/* You can replace this img with an <iframe src="..."></iframe> or <video> tag */}
+                <div className="w-full h-full bg-slate-900 flex items-center justify-center text-white/50">
+                   <p className="text-lg font-medium">Video Player Placeholder</p>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* SERVICES GRID */}
-        <section className="py-24 px-4 relative z-10 bg-[#f8faf8]">
+        <section className="py-12 px-4 relative z-10 bg-[#f8faf8]">
           <div className="container mx-auto max-w-6xl">
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                {services.map((service, index) => (
