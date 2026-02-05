@@ -81,9 +81,9 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - Frame Preserved & Initial Position */}
-                {/* Wrapper with padding creates the 'frame' around the image */}
-                <div className="px-4 pt-4 pb-0 md:px-6 md:pt-6 bg-white">
+                {/* 1. HERO SECTION - Added White Space (padding-top) */}
+                {/* pt-24 (mobile) and md:pt-32 (desktop) adds the requested white space below navbar */}
+                <div className="px-4 pt-24 pb-0 md:px-6 md:pt-32 bg-white">
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-gray-100 overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
@@ -103,12 +103,11 @@ const About = () => {
                 {/* 2. NEW DESIGN SECTION */}
                 <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen">
                     
-                    {/* LOGO MARQUEE */}
-                    {/* Aligned to Card Width (max-w-[1100px]) */}
-                    {/* Mask Image applied for transparency fade (No white blocks) */}
+                    {/* LOGO MARQUEE - Backend Only, Fading via Mask */}
                     <div 
                         className="w-[95%] max-w-[1100px] py-[40px] overflow-hidden relative"
                         style={{ 
+                            // CSS Mask for true transparency fade
                             maskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
                             WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
                         }}
@@ -130,7 +129,7 @@ const About = () => {
                                 )}
                             </div>
                             
-                            {/* Loop 2: Duplicate for seamless scroll (Only if data exists) */}
+                            {/* Loop 2: Duplicate for seamless scroll */}
                             {visionaries.length > 0 && (
                                 <div aria-hidden="true" className="flex min-w-full shrink-0 animate-marquee items-center justify-around gap-10 md:gap-20 px-10">
                                     {visionaries.map((logo) => (
