@@ -88,7 +88,7 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION - Changed to h-screen for full height */}
+                {/* 1. HERO SECTION */}
                 <div ref={containerRef} className="relative w-full h-screen bg-gray-100 overflow-hidden">
                     <motion.div 
                         style={{ y }} 
@@ -127,7 +127,7 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* 3. VISIONARIES (STATIC LOGOS) - Removed border-y */}
+                {/* 3. VISIONARIES (STATIC LOGOS) */}
                 <section className="py-24 px-8 md:px-16 bg-gray-50/30">
                     <div className="container mx-auto">
                         {/* Static Flex Container for Logos */}
@@ -147,7 +147,7 @@ const About = () => {
                             )}
                         </div>
 
-                        {/* TEXT BELOW LOGOS (As Requested) */}
+                        {/* TEXT BELOW LOGOS */}
                         <div className="text-center mt-12">
                             <p className="text-gray-400 italic text-lg font-['Inter']">
                                 Backing from
@@ -223,7 +223,7 @@ const About = () => {
                                                         {blog.excerpt}
                                                     </p>
                                                     
-                                                    <div className="inline-flex items-center text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors mt-auto">
+                                                    <div className="flex items-center text-sm font-bold text-gray-900 group-hover:text-blue-600 transition-colors mt-auto">
                                                         Read More <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
                                                     </div>
                                                 </CardContent>
@@ -233,10 +233,14 @@ const About = () => {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <div className="flex justify-end gap-3 mt-10">
-                            <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
-                            <CarouselNext className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
-                        </div>
+                        
+                        {/* Conditionally Render Arrows if more than 3 blogs */}
+                        {blogs.length > 3 && (
+                            <div className="flex justify-end gap-3 mt-10">
+                                <CarouselPrevious className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
+                                <CarouselNext className="static translate-y-0 border-gray-200 hover:bg-white hover:shadow-md w-12 h-12" />
+                            </div>
+                        )}
                     </Carousel>
                 </section>
             </div>
