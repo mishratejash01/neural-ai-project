@@ -88,8 +88,8 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION */}
-                <div ref={containerRef} className="relative w-full h-[90vh] bg-gray-100 overflow-hidden">
+                {/* 1. HERO SECTION - Changed to h-screen for full height */}
+                <div ref={containerRef} className="relative w-full h-screen bg-gray-100 overflow-hidden">
                     <motion.div 
                         style={{ y }} 
                         className="absolute inset-0 w-full h-full"
@@ -127,8 +127,8 @@ const About = () => {
                     </div>
                 </section>
 
-                {/* 3. VISIONARIES (STATIC LOGOS) */}
-                <section className="py-24 px-8 md:px-16 bg-gray-50/30 border-y border-gray-100">
+                {/* 3. VISIONARIES (STATIC LOGOS) - Removed border-y */}
+                <section className="py-24 px-8 md:px-16 bg-gray-50/30">
                     <div className="container mx-auto">
                         {/* Static Flex Container for Logos */}
                         <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24">
