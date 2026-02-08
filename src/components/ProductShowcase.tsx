@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { 
-  Play, 
-  Volume2, 
   ShieldCheck, 
   Activity, 
   Users, 
@@ -25,10 +23,7 @@ export function ProductShowcase() {
         { text: "Safety Gear (PPE) Compliance", icon: <HardHat className="w-4 h-4" /> },
         { text: "Fire & Hazard Detection", icon: <Flame className="w-4 h-4" /> },
       ],
-      videoTitle: "Live Security Feed",
-      videoSubtitle: "Detecting threats in real-time",
       accentColor: "bg-[#eafaf1] text-[#2d6a4f]", // Green pill
-      progressColor: "bg-[#ef4444]" // Red progress bar for "Alert" feel
     },
     "Business Intelligence": {
       title: "Customer & Staff Insights",
@@ -39,10 +34,7 @@ export function ProductShowcase() {
         { text: "Demographic Analysis", icon: <UserCheck className="w-4 h-4" /> },
         { text: "Queue & Wait Time Analysis", icon: <Clock className="w-4 h-4" /> },
       ],
-      videoTitle: "Store Analytics Dashboard",
-      videoSubtitle: "Visualizing customer journeys",
       accentColor: "bg-[#f0f2ff] text-[#3e50f7]", // Blue pill
-      progressColor: "bg-[#3e50f7]" // Blue progress bar
     }
   };
 
@@ -55,10 +47,10 @@ export function ProductShowcase() {
   return (
     <section className="py-20 flex flex-col items-center justify-center w-full bg-[#f8faf8]">
       
-      {/* Section Header - UPDATED STATEMENT */}
+      {/* Section Header */}
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-5xl font-bold text-[#1a2e1a] mb-4">
-          complete visibility. <span className="text-[#2d6a4f]">absolute control.</span>
+          Complete Visibility. <span className="text-[#2d6a4f]">Absolute Control.</span>
         </h2>
       </div>
 
@@ -109,53 +101,25 @@ export function ProductShowcase() {
           </div>
         </div>
 
-        {/* Right Side: YouTube Video Embed */}
+        {/* Right Side: YouTube Video Embed (Interactive) */}
         <div className="flex-[1.3] relative">
           <div 
-            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 bg-black"
+            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] bg-black"
           >
-            {/* The YouTube Iframe */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none scale-[1.35]"> 
-               {/* scale-[1.35] zooms in slightly to hide any black bars or YT branding edges */}
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/hI9HQfCAw64?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=hI9HQfCAw64&modestbranding=1&playsinline=1" 
-                title="Neural AI Demo" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerPolicy="strict-origin-when-cross-origin" 
-                className="w-full h-full object-cover"
-              ></iframe>
-            </div>
-
-            {/* Dark Overlay Gradient to make text readable */}
-            <div 
-                className="absolute inset-0 pointer-events-none"
-                style={{ 
-                    background: activeTab === "Smart Monitoring" 
-                        ? "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,20,10,0.6) 100%)" // Green tint for security
-                        : "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(10,20,50,0.6) 100%)" // Blue tint for business
-                }} 
-            />
-
-            {/* Dynamic Video Overlay Text */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-[20px] text-center animate-in zoom-in-95 duration-500 key={activeTab} pointer-events-none">
-               <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-6 border border-white/20">
-                 <Play className="w-8 h-8 text-white fill-white ml-1" />
-               </div>
-               <h3 className="text-white/95 text-2xl font-bold mb-2 shadow-sm">{current.videoTitle}</h3>
-               <p className="text-white/80 text-sm shadow-sm">{current.videoSubtitle}</p>
-            </div>
-
-            {/* Static Player Bar */}
-            <div className="absolute bottom-[12px] left-[12px] right-[12px] h-[44px] bg-black/40 backdrop-blur-md rounded-[8px] flex items-center px-[15px] gap-[15px] border border-white/10 pointer-events-none">
-              <div className="text-white text-[14px]"><Play className="w-3 h-3 fill-current"/></div>
-              <div className="flex-1 h-[4px] bg-white/20 rounded-[2px] relative">
-                <div className={`absolute w-[60%] h-full rounded-[2px] ${current.progressColor}`}></div>
-              </div>
-              <div className="text-white opacity-80"><Volume2 className="w-4 h-4"/></div>
-            </div>
+            {/* We removed 'pointer-events-none' and scaling so controls are clickable and visible.
+                We set 'controls=1' in the src.
+            */}
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/hI9HQfCAw64?autoplay=1&mute=1&controls=1&showinfo=0&rel=0&loop=1&playlist=hI9HQfCAw64&modestbranding=1" 
+              title="Neural AI Demo" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              allowFullScreen
+              className="w-full h-full object-cover"
+            ></iframe>
           </div>
         </div>
       </div>
