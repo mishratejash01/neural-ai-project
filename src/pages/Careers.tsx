@@ -2,19 +2,8 @@
 import { useRef, useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Mail, Loader2, X } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
 
 // --- Types ---
 type Advisor = {
@@ -30,101 +19,9 @@ type Career = {
   location: string | null;
   type: string | null;
   is_active: boolean | null;
+  application_link: string | null; // Added this field
 };
 
-// --- INTERNAL COMPONENT: Job Application Modal ---
-// (Included here to prevent import errors)
-function JobApplicationModal({ isOpen, onClose, jobTitle = "General Application" }: { isOpen: boolean; onClose: () => void; jobTitle: string }) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    linkedin: "",
-    portfolio: "",
-    message: ""
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const { error } = await supabase.functions.invoke('resend_key_id', {
-        body: {
-          type: 'job_application',
-          jobTitle: jobTitle,
-          ...formData,
-          subject: `New Job Application: ${jobTitle} - ${formData.name}`
-        },
-      });
-
-      if (error) throw error;
-
-      toast.success("Application submitted successfully!");
-      onClose();
-      setFormData({ name: "", email: "", phone: "", linkedin: "", portfolio: "", message: "" });
-
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to submit application. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle>Apply for {jobTitle}</DialogTitle>
-          <DialogDescription>
-            Join Neural AI. Send us your details.
-          </DialogDescription>
-        </DialogHeader>
-
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Name *</label>
-              <Input required placeholder="Jane Doe" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
-            </div>
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Phone *</label>
-              <Input required placeholder="+91..." value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Email *</label>
-            <Input required type="email" placeholder="jane@example.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium">LinkedIn URL</label>
-            <Input placeholder="https://linkedin.com/in/..." value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} />
-          </div>
-
-           <div className="space-y-2">
-            <label className="text-sm font-medium">Portfolio / CV Link *</label>
-            <Input required placeholder="Google Drive / Website Link" value={formData.portfolio} onChange={e => setFormData({...formData, portfolio: e.target.value})} />
-          </div>
-
-          <div className="space-y-2">
-            <label className="text-sm font-medium">Why Neural AI?</label>
-            <Textarea placeholder="Tell us briefly about yourself..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} />
-          </div>
-
-          <Button type="submit" className="w-full bg-[#0d1a1a] hover:bg-[#2d6a4f]" disabled={isSubmitting}>
-            {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : "Submit Application"}
-          </Button>
-        </form>
-      </DialogContent>
-    </Dialog>
-  );
-}
-
-// --- MAIN PAGE COMPONENT ---
 export default function Careers() {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -132,8 +29,6 @@ export default function Careers() {
   const [advisors, setAdvisors] = useState<Advisor[]>([]);
   const [positions, setPositions] = useState<Career[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedJob, setSelectedJob] = useState("General Application");
 
   // Fetch Data from Supabase
   useEffect(() => {
@@ -145,7 +40,6 @@ export default function Careers() {
           .select('*');
         
         // Fetch Active Careers
-        // We use 'any' cast here to prevent TypeScript strictness if types generated don't match manually
         const { data: careersData } = await supabase
           .from('careers')
           .select('*')
@@ -173,12 +67,6 @@ export default function Careers() {
   const filter = useTransform(scrollYProgress, [0.4, 0.9], ["blur(0px)", "blur(10px)"]);
   const imageOpacity = useTransform(scrollYProgress, [0.5, 1], [1, 0.8]);
 
-  // Handle Application Click
-  const handleApply = (jobTitle: string) => {
-    setSelectedJob(jobTitle);
-    setIsModalOpen(true);
-  };
-
   return (
     <Layout>
       <style>{`
@@ -192,13 +80,6 @@ export default function Careers() {
           animation: scroll 20s linear infinite;
         }
       `}</style>
-
-      {/* --- APPLICATION MODAL --- */}
-      <JobApplicationModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        jobTitle={selectedJob} 
-      />
 
       {/* --- SECTION 1: HERO --- */}
       <div className="h-[90vh] bg-[#f6f6f2] flex flex-col items-center justify-center relative z-10">
@@ -247,7 +128,7 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* --- SECTION 4: ADVISORS (Dynamic) --- */}
+      {/* --- SECTION 4: ADVISORS --- */}
       <div className="relative z-20 bg-white py-16 border-t border-gray-100">
         <div className="text-center mb-10">
             <span className="font-['Inter'] text-xs tracking-[0.2em] uppercase text-gray-500 font-semibold">
@@ -287,7 +168,7 @@ export default function Careers() {
         )}
       </div>
 
-      {/* --- SECTION 5: OPEN POSITIONS (Dynamic) --- */}
+      {/* --- SECTION 5: OPEN POSITIONS (Direct Links) --- */}
       <div className="relative z-20 bg-[#f9fafb] py-32 px-6">
         <div className="max-w-4xl mx-auto">
             <h3 className="font-['Playfair_Display'] text-3xl text-[#0d1a1a] mb-12 text-center">Open Roles</h3>
@@ -299,10 +180,12 @@ export default function Careers() {
                     <div className="text-center text-gray-500 py-10">No open positions at the moment. Check back soon.</div>
                 ) : (
                     positions.map((pos) => (
-                        <div 
+                        <a 
                             key={pos.id} 
-                            onClick={() => handleApply(pos.title)}
-                            className="group bg-white p-6 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-300 flex items-center justify-between cursor-pointer shadow-sm hover:shadow-md"
+                            href={pos.application_link || "#"}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group bg-white p-6 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-300 flex items-center justify-between cursor-pointer shadow-sm hover:shadow-md no-underline"
                         >
                             <div>
                                 <h4 className="font-['Inter'] font-semibold text-lg text-[#0d1a1a] group-hover:text-[#2d6a4f] transition-colors">
@@ -321,14 +204,14 @@ export default function Careers() {
                             <div className="w-10 h-10 shrink-0 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#2d6a4f] group-hover:text-white transition-all">
                                 <ArrowRight className="w-5 h-5" />
                             </div>
-                        </div>
+                        </a>
                     ))
                 )}
             </div>
         </div>
       </div>
 
-      {/* --- SECTION 6: CTA CARD --- */}
+      {/* --- SECTION 6: CTA CARD (Mailto Link) --- */}
       <div className="relative z-20 bg-[#f9fafb] pb-32 px-6 flex justify-center">
         <div className="w-full max-w-4xl bg-[#eaf4f4] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-[#dceaea]">
             
@@ -341,13 +224,13 @@ export default function Careers() {
                 </p>
             </div>
 
-            <button 
-                onClick={() => handleApply("General Application")}
-                className="shrink-0 bg-[#ff6b35] hover:bg-[#e85d2a] text-white px-8 py-3 rounded-lg font-['Inter'] font-medium transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+            <a 
+                href="mailto:office@neuralai.in?subject=Application for Career Opportunity at Neural AI"
+                className="shrink-0 bg-[#ff6b35] hover:bg-[#e85d2a] text-white px-8 py-3 rounded-lg font-['Inter'] font-medium transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 no-underline"
             >
                 <Mail className="w-4 h-4" />
                 Send CV
-            </button>
+            </a>
 
         </div>
       </div>
