@@ -2,11 +2,10 @@ import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { ProductShowcase } from "@/components/ProductShowcase"; 
 import { FeaturesGrid } from "@/components/FeaturesGrid"; 
-import { CtaCard } from "@/components/CtaCard"; // <--- IMPORT HERE
+import { CtaCard } from "@/components/CtaCard"; 
 import { FileText } from "lucide-react";
 
 const Services = () => {
-  // Define theme colors
   const themeColors = {
     bg: "#f8faf8",
     textDark: "#1a2e1a",
@@ -15,13 +14,16 @@ const Services = () => {
 
   return (
     <Layout>
-      <div style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} className="min-h-screen flex flex-col font-sans">
+      {/* Added 'scale-[0.95] origin-top' for the zoomed-out effect */}
+      <div 
+        style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} 
+        className="min-h-screen flex flex-col font-sans transform scale-[0.95] origin-top"
+      >
         
         {/* 1. HERO SECTION */}
         <section className="h-screen flex flex-col justify-center items-center px-4 pt-32 md:pt-40 pb-10 text-center">
           <div className="max-w-[900px] mx-auto">
             
-            {/* Decorative Dots */}
             <div className="flex justify-center gap-[15px] mb-[30px] opacity-80">
               <div className="flex gap-[3px]">
                 {[...Array(5)].map((_, i) => (
@@ -40,7 +42,6 @@ const Services = () => {
               </div>
             </div>
 
-            {/* Typography */}
             <h1 className="text-[3.5rem] md:text-[5.2rem] font-[800] m-0 leading-[1.05] tracking-[-0.04em] text-[#1a2e1a]">
               Intelligence,
             </h1>
@@ -48,12 +49,10 @@ const Services = () => {
               Scaled for Enterprise.
             </h1>
 
-            {/* Subtitle */}
             <p className="mt-[35px] text-[1.1rem] md:text-[1.25rem] text-[#556b55] max-w-[600px] mx-auto leading-[1.6] font-normal">
               A suite architected to transform your raw data into security, user behaviour, and decision-making power.
             </p>
 
-            {/* Buttons */}
             <div className="mt-[50px] flex flex-col sm:flex-row justify-center gap-[16px] items-center">
               <Link to="/contact">
                 <button 
@@ -84,7 +83,7 @@ const Services = () => {
         {/* 3. FEATURES GRID */}
         <FeaturesGrid />
 
-        {/* 4. CTA CARD (Replaces old grid) */}
+        {/* 4. CTA CARD */}
         <CtaCard />
 
       </div>
