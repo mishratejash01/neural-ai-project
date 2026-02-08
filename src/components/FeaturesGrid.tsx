@@ -1,14 +1,14 @@
 import { 
-  Zap, 
-  Settings, 
-  Plug, 
-  Globe, 
-  Database,
-  Cpu,
-  Server,
-  Cloud,
-  ShieldCheck,
-  Code
+  Cctv, 
+  Smartphone, 
+  TrendingUp, 
+  Users, 
+  ShieldAlert, 
+  CheckCircle2,
+  BellRing,
+  Activity,
+  Footprints,
+  Clock
 } from "lucide-react";
 
 export function FeaturesGrid() {
@@ -19,78 +19,99 @@ export function FeaturesGrid() {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-[#1a1a1a]">
-            Made for <span className="text-[#2d6a4f] font-semibold">Developers</span>. Scales for <span className="text-[#2d6a4f] font-semibold">Enterprise</span>.
+            Features that drive <span className="text-[#2d6a4f] font-semibold">ROI</span>. Security that never <span className="text-[#2d6a4f] font-semibold">sleeps</span>.
           </h2>
         </div>
 
         {/* Top Row (3 Columns) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
           
-          {/* Card 1: Low Latency */}
+          {/* Card 1: Existing Hardware (Cost Saving) */}
           <div className="bg-white border border-[#f0f0f0] rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition-transform duration-200 shadow-sm hover:shadow-md h-[420px] relative overflow-hidden group">
             <h3 className="text-xl font-semibold mb-2 leading-tight">
-              Ultra-Low Latency<br/>Response
+              Works with Your<br/>Existing Cameras
             </h3>
             <p className="text-sm text-[#666] mb-8 min-h-[40px]">
-              Real-time threat detection with sub-second processing speed.
+              No need to buy expensive new hardware. We integrate directly with your current CCTV setup.
             </p>
             
             {/* Visual Area */}
             <div className="bg-[#f8f9fb] rounded-2xl flex-1 w-full relative overflow-hidden flex items-center justify-center">
-              <div className="z-10 text-5xl font-medium text-[#2d6a4f] flex items-baseline">
-                ~100<span className="text-xl ml-1 text-[#2d6a4f]/70">ms</span>
-              </div>
-              <div className="absolute bottom-5 left-6 text-xs text-[#ccc] font-medium tracking-wide">
-                MEDIAN DETECTION TIME
-              </div>
-              {/* Wave Background Graphic */}
-              <div className="absolute -right-6 -top-2 w-[160px] h-[200px] bg-gradient-to-br from-[#eafaf1] to-white rounded-[40%_60%_70%_30%_/_40%_50%_60%_50%] opacity-80 group-hover:scale-110 transition-transform duration-500"></div>
-            </div>
-          </div>
-
-          {/* Card 2: Configurable Controls */}
-          <div className="bg-white border border-[#f0f0f0] rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition-transform duration-200 shadow-sm hover:shadow-md h-[420px] relative overflow-hidden group">
-            <h3 className="text-xl font-semibold mb-2 leading-tight">
-              Configurable<br/>Alert Rules
-            </h3>
-            <p className="text-sm text-[#666] mb-8 min-h-[40px]">
-              Fine-tune detection sensitivity and zones to reduce false alarms.
-            </p>
-            
-            {/* Visual Area */}
-            <div className="bg-[#f8f9fb] rounded-2xl flex-1 w-full relative overflow-hidden flex items-center justify-center">
-              <div className="bg-white p-5 rounded-[20px] shadow-[0_10px_30px_rgba(0,0,0,0.05)] w-[200px] -rotate-[12deg] group-hover:rotate-0 transition-transform duration-300 border border-gray-100">
-                <div className="text-[10px] text-[#999] font-bold mb-2 uppercase tracking-wide">Sensitivity</div>
-                <div className="h-1 bg-[#2d6a4f] w-[70%] relative rounded-full mb-5">
-                   <div className="absolute -right-1 -top-1 w-3 h-3 bg-white border-[2px] border-[#2d6a4f] rounded-full shadow-sm"></div>
+              <div className="relative">
+                {/* Camera Icon */}
+                <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center shadow-lg border border-gray-100 relative z-10">
+                  <Cctv className="w-10 h-10 text-[#2d6a4f]" />
                 </div>
-                <div className="text-[10px] text-[#999] font-bold mb-2 uppercase tracking-wide">Confidence Threshold</div>
-                <div className="h-2 bg-[#eafaf1] w-full rounded-full relative overflow-hidden">
-                   <div className="absolute left-0 top-0 h-full w-[85%] bg-[#2d6a4f]/20 rounded-full"></div>
+                {/* Connection Line */}
+                <div className="absolute top-1/2 left-full w-16 h-1 bg-dashed border-t-2 border-[#ccc] -translate-y-1/2 z-0"></div>
+                {/* Checkmark Badge */}
+                <div className="absolute -right-12 top-1/2 -translate-y-1/2 w-12 h-12 bg-[#eafaf1] rounded-full flex items-center justify-center border border-[#2d6a4f]/20 z-10">
+                   <CheckCircle2 className="w-6 h-6 text-[#2d6a4f]" />
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Card 3: Integrations */}
+          {/* Card 2: Instant Alerts (Usability) */}
           <div className="bg-white border border-[#f0f0f0] rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition-transform duration-200 shadow-sm hover:shadow-md h-[420px] relative overflow-hidden group">
             <h3 className="text-xl font-semibold mb-2 leading-tight">
-              Plug-and-play<br/>Integrations
+              Instant WhatsApp<br/>& SMS Alerts
             </h3>
             <p className="text-sm text-[#666] mb-8 min-h-[40px]">
-              Connect seamlessly with your existing VMS and communication tools.
+              Get notified the second an incident occurs. Receive video clips directly on your phone.
+            </p>
+            
+            {/* Visual Area */}
+            <div className="bg-[#f8f9fb] rounded-2xl flex-1 w-full relative overflow-hidden flex items-center justify-center">
+               {/* Mobile Phone Mockup */}
+               <div className="w-[140px] bg-white border border-gray-200 shadow-xl rounded-[20px] p-3 -rotate-6 group-hover:rotate-0 transition-transform duration-300">
+                  <div className="w-8 h-1 bg-gray-200 rounded-full mx-auto mb-4"></div>
+                  {/* Notification Bubble */}
+                  <div className="bg-[#eafaf1] p-3 rounded-xl border border-[#2d6a4f]/10 mb-2 shadow-sm">
+                     <div className="flex items-center gap-2 mb-1">
+                        <ShieldAlert className="w-3 h-3 text-[#ef4444]" />
+                        <span className="text-[9px] font-bold text-[#1a1a1a]">Theft Detected</span>
+                     </div>
+                     <div className="h-1.5 w-[80%] bg-[#2d6a4f]/20 rounded-full"></div>
+                  </div>
+                  <div className="bg-gray-50 p-3 rounded-xl border border-gray-100">
+                     <div className="flex items-center gap-2 mb-1">
+                        <BellRing className="w-3 h-3 text-[#2d6a4f]" />
+                        <span className="text-[9px] font-bold text-[#1a1a1a]">Shop Opened</span>
+                     </div>
+                     <div className="h-1.5 w-[60%] bg-gray-200 rounded-full"></div>
+                  </div>
+               </div>
+            </div>
+          </div>
+
+          {/* Card 3: Staff Productivity (Efficiency) */}
+          <div className="bg-white border border-[#f0f0f0] rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition-transform duration-200 shadow-sm hover:shadow-md h-[420px] relative overflow-hidden group">
+            <h3 className="text-xl font-semibold mb-2 leading-tight">
+              Staff Productivity<br/>Tracking
+            </h3>
+            <p className="text-sm text-[#666] mb-8 min-h-[40px]">
+              Monitor attendance, idle time, and customer interactions to optimize workforce efficiency.
             </p>
             
             {/* Visual Area */}
             <div className="bg-[#f8f9fb] rounded-2xl flex-1 w-full relative overflow-hidden flex items-center justify-center">
               <div className="absolute inset-0 flex items-center justify-center">
-                {/* Badge 1 */}
-                <div className="absolute px-5 py-2.5 bg-[#2d6a4f] text-white rounded-xl font-semibold text-lg shadow-lg -rotate-6 -translate-x-8 -translate-y-4 z-10 group-hover:-translate-y-6 transition-transform duration-300 flex items-center gap-2">
-                   <ShieldCheck className="w-4 h-4" /> VMS
+                {/* Metric Card 1 */}
+                <div className="absolute px-5 py-3 bg-white text-[#1a1a1a] rounded-xl border border-gray-100 shadow-lg -rotate-3 -translate-x-4 -translate-y-6 z-10 group-hover:-translate-y-8 transition-transform duration-300">
+                   <div className="flex items-center gap-2 mb-1">
+                      <Clock className="w-4 h-4 text-[#ef4444]" />
+                      <span className="text-xs font-bold text-gray-500">IDLE TIME</span>
+                   </div>
+                   <div className="text-xl font-bold">-15% <span className="text-[10px] text-green-600 font-normal">↓</span></div>
                 </div>
-                {/* Badge 2 */}
-                <div className="absolute px-5 py-2.5 bg-white text-[#2d6a4f] border border-[#cfdccf] rounded-xl font-semibold text-lg shadow-sm rotate-6 translate-x-6 translate-y-4 group-hover:translate-y-6 transition-transform duration-300 flex items-center gap-2">
-                   <Cloud className="w-4 h-4" /> Cloud
+                {/* Metric Card 2 */}
+                <div className="absolute px-5 py-3 bg-[#2d6a4f] text-white rounded-xl shadow-lg rotate-3 translate-x-4 translate-y-4 group-hover:translate-y-6 transition-transform duration-300">
+                   <div className="flex items-center gap-2 mb-1">
+                      <Activity className="w-4 h-4 text-white" />
+                      <span className="text-xs font-bold text-white/80">EFFICIENCY</span>
+                   </div>
+                   <div className="text-xl font-bold">+24% <span className="text-[10px] text-white/80 font-normal">↑</span></div>
                 </div>
               </div>
             </div>
@@ -100,60 +121,72 @@ export function FeaturesGrid() {
         {/* Bottom Row (2 Columns) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[800px] mx-auto">
           
-          {/* Card 4: Environments (Replaces Languages) */}
+          {/* Card 4: Heatmaps (Revenue) */}
           <div className="bg-white border border-[#f0f0f0] rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition-transform duration-200 shadow-sm hover:shadow-md h-[380px] relative overflow-hidden group">
             <h3 className="text-xl font-semibold mb-2 leading-tight">
-              Deploy Across Any<br/>Environment
+              Customer Heatmaps<br/>& Analytics
             </h3>
             <p className="text-sm text-[#666] mb-8 min-h-[40px]">
-              Scalable deployment for retail, warehouses, offices, or public spaces.
+              Understand which aisles get the most traffic. Place high-margin products in hot zones.
             </p>
             
             {/* Visual Area */}
             <div className="bg-[#f8f9fb] rounded-2xl flex-1 w-full relative overflow-hidden flex items-center justify-center">
-              <div className="flex flex-wrap justify-center gap-4 max-w-[200px] text-[#2d6a4f]">
-                 <div className="flex flex-col items-center gap-2 p-3 bg-white rounded-xl shadow-sm hover:scale-110 transition-transform">
-                    <Cloud className="w-6 h-6" />
-                    <span className="text-[10px] font-bold">CLOUD</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 p-3 bg-white rounded-xl shadow-sm hover:scale-110 transition-transform delay-75">
-                    <Server className="w-6 h-6" />
-                    <span className="text-[10px] font-bold">ON-PREM</span>
-                 </div>
-                 <div className="flex flex-col items-center gap-2 p-3 bg-white rounded-xl shadow-sm hover:scale-110 transition-transform delay-150">
-                    <Cpu className="w-6 h-6" />
-                    <span className="text-[10px] font-bold">EDGE</span>
-                 </div>
-              </div>
+               {/* Simplified Heatmap Visual */}
+               <div className="w-[180px] h-[120px] bg-white border border-gray-100 rounded-lg shadow-sm grid grid-cols-4 grid-rows-3 gap-1 p-2">
+                  <div className="bg-[#2d6a4f]/10 rounded"></div>
+                  <div className="bg-[#ef4444]/80 rounded animate-pulse"></div> {/* Hot Zone */}
+                  <div className="bg-[#2d6a4f]/10 rounded"></div>
+                  <div className="bg-[#2d6a4f]/30 rounded"></div>
+                  
+                  <div className="bg-[#2d6a4f]/20 rounded"></div>
+                  <div className="bg-[#ef4444]/60 rounded"></div>
+                  <div className="bg-[#2d6a4f]/10 rounded"></div>
+                  <div className="bg-[#2d6a4f]/5 rounded"></div>
+                  
+                  <div className="bg-[#2d6a4f]/5 rounded"></div>
+                  <div className="bg-[#2d6a4f]/20 rounded"></div>
+                  <div className="bg-[#2d6a4f]/40 rounded"></div>
+                  <div className="bg-[#ef4444]/90 rounded animate-pulse"></div> {/* Hot Zone */}
+               </div>
+               <div className="absolute bottom-6 flex gap-4 text-[10px] font-bold text-gray-400">
+                  <span className="flex items-center gap-1"><div className="w-2 h-2 bg-[#ef4444] rounded-full"></div> HOT ZONE</span>
+                  <span className="flex items-center gap-1"><div className="w-2 h-2 bg-[#2d6a4f]/20 rounded-full"></div> COLD ZONE</span>
+               </div>
             </div>
           </div>
 
-          {/* Card 5: Model Library */}
+          {/* Card 5: Automated Vigilance (Security) */}
           <div className="bg-white border border-[#f0f0f0] rounded-[32px] p-8 flex flex-col hover:-translate-y-1 transition-transform duration-200 shadow-sm hover:shadow-md h-[380px] relative overflow-hidden group">
             <h3 className="text-xl font-semibold mb-2 leading-tight">
-              Extensive Model<br/>Library
+              24/7 Automated<br/>Vigilance
             </h3>
             <p className="text-sm text-[#666] mb-8 min-h-[40px]">
-              Choose from pre-trained models for theft, safety gear, fire, and more.
+              AI never sleeps or takes breaks. Continuous monitoring for fire, intrusion, and safety compliance.
             </p>
             
             {/* Visual Area */}
             <div className="bg-[#f8f9fb] rounded-2xl flex-1 w-full relative overflow-hidden flex items-center justify-center">
-              <div className="bg-white rounded-[20px] w-[180px] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-gray-100 group-hover:scale-105 transition-transform duration-300">
-                 <div className="text-[9px] text-[#aaa] font-bold mb-3 uppercase tracking-wider">SELECT MODEL</div>
-                 <div className="h-8 bg-[#eafaf1] rounded-lg mb-2 flex items-center px-3 border border-[#cfdccf]/30">
-                    <div className="w-2 h-2 rounded-full bg-[#2d6a4f] mr-2"></div>
-                    <div className="h-1.5 w-16 bg-[#2d6a4f]/20 rounded-full"></div>
-                 </div>
-                 <div className="h-8 bg-white border border-gray-100 rounded-lg mb-2 flex items-center px-3">
-                    <div className="w-2 h-2 rounded-full bg-gray-200 mr-2"></div>
-                    <div className="h-1.5 w-12 bg-gray-100 rounded-full"></div>
-                 </div>
-                 <div className="h-8 bg-white border border-gray-100 rounded-lg flex items-center px-3">
-                    <div className="w-2 h-2 rounded-full bg-gray-200 mr-2"></div>
-                    <div className="h-1.5 w-20 bg-gray-100 rounded-full"></div>
-                 </div>
-              </div>
+               <div className="flex gap-3">
+                  <div className="flex flex-col items-center gap-2">
+                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-gray-100 group-hover:scale-110 transition-transform">
+                        <ShieldAlert className="w-6 h-6 text-[#2d6a4f]" />
+                     </div>
+                     <span className="text-[10px] font-bold text-[#2d6a4f]">SECURITY</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2 mt-4">
+                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-gray-100 group-hover:scale-110 transition-transform delay-75">
+                        <Users className="w-6 h-6 text-[#2d6a4f]" />
+                     </div>
+                     <span className="text-[10px] font-bold text-[#2d6a4f]">SAFETY</span>
+                  </div>
+                  <div className="flex flex-col items-center gap-2">
+                     <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center border border-gray-100 group-hover:scale-110 transition-transform delay-150">
+                        <Footprints className="w-6 h-6 text-[#2d6a4f]" />
+                     </div>
+                     <span className="text-[10px] font-bold text-[#2d6a4f]">TRAFFIC</span>
+                  </div>
+               </div>
             </div>
           </div>
 
