@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useMediaQuery } from "@/hooks/use-mobile"; // Assuming you have this or use simple media query
+import { useState } from "react";
+import { useIsMobile } from "@/hooks/use-mobile"; // <--- FIXED IMPORT
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -23,7 +23,7 @@ import { ContactForm } from "@/components/ContactForm";
 
 export function CtaCard() {
   const [open, setOpen] = useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isMobile = useIsMobile(); // <--- FIXED USAGE (Returns true/false)
 
   // Shared content for the CTA Button
   const TriggerButton = (
@@ -60,7 +60,8 @@ export function CtaCard() {
           </div>
 
           {/* Responsive Popup Logic */}
-          {isDesktop ? (
+          {!isMobile ? (
+            // DESKTOP: Show Dialog
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
                 {TriggerButton}
@@ -76,6 +77,7 @@ export function CtaCard() {
               </DialogContent>
             </Dialog>
           ) : (
+            // MOBILE: Show Drawer from Bottom
             <Drawer open={open} onOpenChange={setOpen}>
               <DrawerTrigger asChild>
                 {TriggerButton}
