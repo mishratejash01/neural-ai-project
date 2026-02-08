@@ -4,9 +4,9 @@ import Layout from "@/components/layout/Layout";
 import { ProductShowcase } from "@/components/ProductShowcase"; 
 import { FeaturesGrid } from "@/components/FeaturesGrid"; 
 import { CtaCard } from "@/components/CtaCard"; 
-import { ContactForm } from "@/components/ContactForm"; // Importing the Chatbot Form
+import { ContactForm } from "@/components/ContactForm"; 
 import { useIsMobile } from "@/hooks/use-mobile";
-import { FileText, MessageSquareText } from "lucide-react";
+import { FileText } from "lucide-react";
 import {
   Drawer,
   DrawerContent,
@@ -24,6 +24,7 @@ const Services = () => {
 
   return (
     <Layout>
+      {/* Page Content with Zoom Out Effect */}
       <div 
         style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} 
         className="min-h-screen flex flex-col font-sans transform scale-[0.95] origin-top relative"
@@ -95,25 +96,12 @@ const Services = () => {
 
       </div>
 
-      {/* --- CHAT WIDGET IMPLEMENTATION --- */}
-      
-      {/* Floating Action Button (Always Visible) */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <button
-          onClick={() => setIsChatOpen(!isChatOpen)}
-          className="w-14 h-14 bg-[#142b14] hover:bg-[#2d6a4f] text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
-        >
-          {isChatOpen ? (
-            <span className="text-xl font-bold">×</span>
-          ) : (
-            <MessageSquareText className="w-6 h-6" />
-          )}
-        </button>
-      </div>
+      {/* --- CHAT WIDGET IMPLEMENTATION (No Floating Icon) --- */}
 
       {/* Desktop Chat Window (Bottom Right Popover) */}
       {!isMobile && isChatOpen && (
-        <div className="fixed bottom-24 right-6 w-[380px] h-[600px] z-50 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 animate-in slide-in-from-bottom-10 fade-in duration-300">
+        // Updated position to 'bottom-6' since FAB is gone
+        <div className="fixed bottom-6 right-6 w-[380px] h-[600px] z-50 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 animate-in slide-in-from-bottom-10 fade-in duration-300">
           <ContactForm onClose={() => setIsChatOpen(false)} />
         </div>
       )}
