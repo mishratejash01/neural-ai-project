@@ -19,7 +19,7 @@ type Career = {
   location: string | null;
   type: string | null;
   is_active: boolean | null;
-  application_link: string | null; // Added this field
+  application_link: string | null;
 };
 
 export default function Careers() {
@@ -34,16 +34,8 @@ export default function Careers() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch Advisors
-        const { data: advisorsData } = await supabase
-          .from('advisors')
-          .select('*');
-        
-        // Fetch Active Careers
-        const { data: careersData } = await supabase
-          .from('careers')
-          .select('*')
-          .eq('is_active', true) as any; 
+        const { data: advisorsData } = await supabase.from('advisors').select('*');
+        const { data: careersData } = await supabase.from('careers').select('*').eq('is_active', true) as any; 
         
         if (advisorsData) setAdvisors(advisorsData);
         if (careersData) setPositions(careersData);
@@ -66,6 +58,9 @@ export default function Careers() {
   const borderRadius = useTransform(scrollYProgress, [0.2, 0.8], ["0px", "40px"]);
   const filter = useTransform(scrollYProgress, [0.4, 0.9], ["blur(0px)", "blur(10px)"]);
   const imageOpacity = useTransform(scrollYProgress, [0.5, 1], [1, 0.8]);
+
+  // Create encoded mailto link
+  const mailToLink = `mailto:office@neuralai.in?subject=${encodeURIComponent("Application for Career Opportunity at Neural AI")}`;
 
   return (
     <Layout>
@@ -139,26 +134,14 @@ export default function Careers() {
         {advisors.length > 0 ? (
             <div className="overflow-hidden relative w-full">
                 <div className="flex w-[200%] animate-scroll">
-                    {/* First Set */}
                     <div className="flex w-1/2 justify-around items-center px-10 gap-8">
                         {advisors.map((advisor) => (
-                            <img 
-                              key={advisor.id} 
-                              src={advisor.logo_url} 
-                              alt={advisor.name} 
-                              className="h-8 md:h-12 w-auto object-contain opacity-40 grayscale hover:grayscale-0 transition-all duration-300" 
-                            />
+                            <img key={advisor.id} src={advisor.logo_url} alt={advisor.name} className="h-8 md:h-12 w-auto object-contain opacity-40 grayscale hover:grayscale-0 transition-all duration-300" />
                         ))}
                     </div>
-                    {/* Duplicate Set for Loop */}
                     <div className="flex w-1/2 justify-around items-center px-10 gap-8">
                         {advisors.map((advisor) => (
-                            <img 
-                              key={`dup-${advisor.id}`} 
-                              src={advisor.logo_url} 
-                              alt={advisor.name} 
-                              className="h-8 md:h-12 w-auto object-contain opacity-40 grayscale hover:grayscale-0 transition-all duration-300" 
-                            />
+                            <img key={`dup-${advisor.id}`} src={advisor.logo_url} alt={advisor.name} className="h-8 md:h-12 w-auto object-contain opacity-40 grayscale hover:grayscale-0 transition-all duration-300" />
                         ))}
                     </div>
                 </div>
@@ -168,11 +151,10 @@ export default function Careers() {
         )}
       </div>
 
-      {/* --- SECTION 5: OPEN POSITIONS (Direct Links) --- */}
+      {/* --- SECTION 5: OPEN POSITIONS --- */}
       <div className="relative z-20 bg-[#f9fafb] py-32 px-6">
         <div className="max-w-4xl mx-auto">
             <h3 className="font-['Playfair_Display'] text-3xl text-[#0d1a1a] mb-12 text-center">Open Roles</h3>
-            
             <div className="flex flex-col gap-4">
                 {isLoading ? (
                     <div className="text-center text-gray-400 py-10">Loading positions...</div>
@@ -188,16 +170,12 @@ export default function Careers() {
                             className="group bg-white p-6 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-300 flex items-center justify-between cursor-pointer shadow-sm hover:shadow-md no-underline"
                         >
                             <div>
-                                <h4 className="font-['Inter'] font-semibold text-lg text-[#0d1a1a] group-hover:text-[#2d6a4f] transition-colors">
-                                  {pos.title}
-                                </h4>
+                                <h4 className="font-['Inter'] font-semibold text-lg text-[#0d1a1a] group-hover:text-[#2d6a4f] transition-colors">{pos.title}</h4>
                                 <div className="flex flex-wrap gap-3 mt-2 text-sm text-gray-500 font-['Inter']">
                                     {pos.department && <span>{pos.department}</span>}
                                     {pos.department && <span>•</span>}
-                                    
                                     {pos.type && <span>{pos.type}</span>}
                                     {pos.type && pos.location && <span>•</span>}
-                                    
                                     {pos.location && <span>{pos.location}</span>}
                                 </div>
                             </div>
@@ -211,27 +189,22 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* --- SECTION 6: CTA CARD (Mailto Link) --- */}
+      {/* --- SECTION 6: CTA CARD --- */}
       <div className="relative z-20 bg-[#f9fafb] pb-32 px-6 flex justify-center">
         <div className="w-full max-w-4xl bg-[#eaf4f4] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-[#dceaea]">
-            
             <div className="text-center md:text-left">
-                <h3 className="font-['Playfair_Display'] text-2xl md:text-3xl text-[#0d1a1a] mb-2">
-                    Can't find your interested role?
-                </h3>
-                <p className="font-['Inter'] text-[#556b55] text-base md:text-lg">
-                    We are always looking for exceptional talent. Send us your CV.
-                </p>
+                <h3 className="font-['Playfair_Display'] text-2xl md:text-3xl text-[#0d1a1a] mb-2">Can't find your interested role?</h3>
+                <p className="font-['Inter'] text-[#556b55] text-base md:text-lg">We are always looking for exceptional talent. Send us your CV.</p>
             </div>
-
+            
+            {/* CORRECTED MAILTO LINK */}
             <a 
-                href="mailto:office@neuralai.in?subject=Application for Career Opportunity at Neural AI"
+                href={mailToLink}
                 className="shrink-0 bg-[#ff6b35] hover:bg-[#e85d2a] text-white px-8 py-3 rounded-lg font-['Inter'] font-medium transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2 no-underline"
             >
                 <Mail className="w-4 h-4" />
                 Send CV
             </a>
-
         </div>
       </div>
 
