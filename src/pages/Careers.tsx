@@ -23,18 +23,18 @@ export default function Careers() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;1,300&family=Inter:wght@300;400;500&display=swap');
       `}</style>
 
-      {/* --- SECTION 1: TEXT HERO (Landing) --- */}
-      <div className="h-screen bg-[#f6f6f2] flex flex-col items-center justify-center relative z-10">
+      {/* --- SECTION 1: TEXT HERO (Reduced height so image peeks up) --- */}
+      <div className="h-[80vh] bg-[#f6f6f2] flex flex-col items-center justify-center relative z-10">
           
-          {/* Top Label */}
+          {/* Top Label: Black, No Semicolon */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            <span className="font-['Inter'] text-[12px] tracking-[0.25em] uppercase text-[#7d8484] font-medium">
-              Neural AI ; Careers
+            <span className="font-['Inter'] text-[13px] tracking-[0.25em] uppercase text-black font-medium">
+              Neural AI Careers
             </span>
           </motion.div>
 
