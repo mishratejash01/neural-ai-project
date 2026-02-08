@@ -1,11 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, User, Building2, Phone, Mail, MessageSquare, Loader2, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Send, X, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
+// --- Types ---
 type Message = {
   id: string;
   role: 'bot' | 'user';
@@ -22,12 +20,13 @@ type FormData = {
 
 interface ContactFormProps {
   onClose?: () => void;
-  className?: string; // Accept className to fit into containers
+  className?: string;
 }
 
 export function ContactForm({ onClose, className }: ContactFormProps) {
+  // --- State ---
   const [messages, setMessages] = useState<Message[]>([
-    { id: '1', role: 'bot', content: "Hi there! I'm your Neural AI assistant. What's your good name?" }
+    { id: '1', role: 'bot', content: "Hi there! I'm your Neural AI assistant. To get started, what's your name?" }
   ]);
   const [inputValue, setInputValue] = useState("");
   const [currentStep, setCurrentStep] = useState<keyof FormData>('name');
@@ -39,26 +38,28 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to bottom whenever messages change
+  // --- Auto-scroll ---
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [messages, isTyping]);
 
+  // --- Logic ---
   const handleSendMessage = async () => {
     if (!inputValue.trim()) return;
 
     const userText = inputValue.trim();
-    setInputValue(""); // Clear input
-
+    setInputValue("");
+    
     // 1. Add User Message
-    const newMessages = [...messages, { id: Date.now().toString(), role: 'user' as const, content: userText }];
-    setMessages(newMessages);
+    setMessages(prev => [...prev, { id: Date.now().toString(), role: 'user', content: userText }]);
 
-    // 2. Update Form Data
+    // 2. Update Data
     const updatedFormData = { ...formData, [currentStep]: userText };
     setFormData(updatedFormData);
 
@@ -69,43 +70,43 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
     switch (currentStep) {
       case 'name':
         nextStep = 'email';
-        botResponse = `Nice to meet you, ${userText}. What's your email address?`;
+        botResponse = `Nice to meet you! What's your email address?`;
         break;
       case 'email':
         nextStep = 'phone';
-        botResponse = "Got it. Could you share your phone number?";
+        botResponse = "Thanks. And what's a good phone number to reach you at?";
         break;
       case 'phone':
         nextStep = 'company';
-        botResponse = "Thanks. What is your Company Name or Trade Name?";
+        botResponse = "Great. Which company are you with?";
         break;
       case 'company':
         nextStep = 'message';
-        botResponse = "Almost done. Please write your message to us.";
+        botResponse = "Almost done! How can we help you today?";
         break;
       case 'message':
         nextStep = 'done';
-        // Trigger Submission immediately after message
         await submitForm(updatedFormData);
-        return; 
+        return;
     }
 
     setCurrentStep(nextStep as keyof FormData);
     
-    // Simulate Bot Typing Delay
+    // Show Typing Indicator
+    setIsTyping(true);
     setTimeout(() => {
+      setIsTyping(false);
       setMessages(prev => [...prev, { 
         id: (Date.now() + 1).toString(), 
         role: 'bot', 
         content: botResponse 
       }]);
-    }, 600);
+    }, 800);
   };
 
   const submitForm = async (data: FormData) => {
-    setIsSubmitting(true);
-    setMessages(prev => [...prev, { id: 'processing', role: 'bot', content: "Just a moment, sending your request..." }]);
-
+    setIsTyping(true);
+    
     try {
       const { error } = await supabase.functions.invoke('resend_key_id', {
         body: {
@@ -115,25 +116,26 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
           phone: data.phone,
           company: data.company,
           message: data.message,
-          subject: "New Chatbot Lead"
+          subject: "New Neural Assistant Lead"
         },
       });
 
       if (error) throw error;
 
+      setIsTyping(false);
       setMessages(prev => [
-        ...prev.filter(m => m.id !== 'processing'),
-        { id: 'done', role: 'bot', content: "Request received! We'll be in touch shortly." }
+        ...prev,
+        { id: 'done', role: 'bot', content: "Got it! Thanks for reaching out. We'll be in touch soon." }
       ]);
       toast.success("Request sent successfully!");
 
     } catch (error) {
       console.error(error);
+      setIsTyping(false);
       setMessages(prev => [
-        ...prev.filter(m => m.id !== 'processing'),
-        { id: 'error', role: 'bot', content: "Oops, something went wrong. Please try again later." }
+        ...prev,
+        { id: 'error', role: 'bot', content: "Oops, connection error. Please try again later." }
       ]);
-      toast.error("Failed to send request.");
     } finally {
       setIsSubmitting(false);
     }
@@ -146,104 +148,92 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
     }
   };
 
-  // Helper to get input placeholder/type
-  const getInputProps = () => {
-    switch (currentStep) {
-      case 'email': return { placeholder: "name@example.com", type: "email", icon: <Mail className="w-4 h-4" /> };
-      case 'phone': return { placeholder: "+91...", type: "tel", icon: <Phone className="w-4 h-4" /> };
-      case 'company': return { placeholder: "Company Pvt Ltd", type: "text", icon: <Building2 className="w-4 h-4" /> };
-      case 'message': return { placeholder: "I'm interested in...", type: "text", icon: <MessageSquare className="w-4 h-4" /> };
-      default: return { placeholder: "Type your answer...", type: "text", icon: <User className="w-4 h-4" /> };
-    }
-  };
-
-  const inputProps = getInputProps();
-
   return (
-    <div className={`flex flex-col h-full bg-white text-[#1a1a1a] font-sans ${className}`}>
+    <div className={`flex flex-col h-full bg-white font-sans overflow-hidden ${className}`}>
       
-      {/* Header */}
-      <div className="p-4 border-b border-gray-100 flex items-center justify-between bg-white sticky top-0 z-10">
-        <div className="flex items-center gap-3">
-          <div className="relative">
-             <Avatar className="h-10 w-10 border border-gray-200">
-               <AvatarImage src="/neural-ai-logo.png" />
-               <AvatarFallback className="bg-[#142b14] text-white">NA</AvatarFallback>
-             </Avatar>
-             <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></span>
-          </div>
-          <div>
-            <h3 className="font-semibold text-sm">Neural AI Assistant</h3>
-            <p className="text-xs text-gray-500">Online</p>
+      {/* --- HEADER --- */}
+      <div className="p-6 flex items-center gap-3 border-b border-[#e5e7eb] bg-white shrink-0">
+        <div className="w-10 h-10 bg-[#111827] rounded-[14px] flex items-center justify-center shrink-0">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div className="flex-1">
+          <h1 className="text-[15px] font-semibold text-[#111827] leading-tight">Neural Assistant</h1>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className="w-1.5 h-1.5 bg-[#10b981] rounded-full"></span>
+            <span className="text-xs text-[#6b7280]">Online</span>
           </div>
         </div>
         {onClose && (
-          <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8">
-            <X className="w-4 h-4" />
-          </Button>
+          <button 
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
         )}
       </div>
 
-      {/* Chat Area */}
+      {/* --- MESSAGES AREA --- */}
       <div 
         ref={scrollRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-[#f8faf8]"
+        className="flex-1 p-6 overflow-y-auto flex flex-col gap-5 bg-white scroll-smooth"
       >
         {messages.map((msg) => (
           <div
             key={msg.id}
-            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            className={`max-w-[85%] px-[18px] py-[12px] text-[14px] leading-[1.5] shadow-sm animate-in fade-in zoom-in-95 duration-300 origin-bottom ${
+              msg.role === 'user'
+                ? 'self-end bg-[#111827] text-white italic rounded-[18px_18px_4px_18px]'
+                : 'self-start bg-[#f3f4f6] text-[#111827] rounded-[18px_18px_18px_4px]'
+            }`}
           >
-            <div
-              className={`max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed shadow-sm ${
-                msg.role === 'user'
-                  ? 'bg-[#142b14] text-white rounded-br-none'
-                  : 'bg-white border border-gray-100 text-gray-800 rounded-bl-none'
-              }`}
-            >
-              {msg.content}
-            </div>
+            {msg.content}
           </div>
         ))}
-        {isSubmitting && (
-           <div className="flex justify-start">
-             <div className="bg-white border border-gray-100 rounded-2xl rounded-bl-none px-4 py-3 shadow-sm">
-               <Loader2 className="w-4 h-4 animate-spin text-[#142b14]" />
-             </div>
-           </div>
+        
+        {/* Typing Indicator */}
+        {isTyping && (
+          <div className="self-start bg-[#f3f4f6] text-[#6b7280] rounded-[18px_18px_18px_4px] px-[18px] py-[12px] text-xs flex items-center gap-1 animate-in fade-in">
+             <span className="animate-bounce">●</span>
+             <span className="animate-bounce delay-100">●</span>
+             <span className="animate-bounce delay-200">●</span>
+          </div>
         )}
       </div>
 
-      {/* Input Area */}
-      <div className="p-4 bg-white border-t border-gray-100">
-        <div className="flex gap-2 relative">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-            {inputProps.icon}
-          </div>
-          <Input 
+      {/* --- INPUT AREA --- */}
+      <div className="p-[20px_24px_30px] bg-white border-t border-transparent">
+        {isTyping && <div className="text-xs text-[#6b7280] mb-2 pl-2 animate-pulse">AI is writing...</div>}
+        
+        <div className="flex items-center bg-[#f3f4f6] rounded-[50px] p-[6px_6px_6px_20px] transition-all border border-transparent focus-within:bg-white focus-within:border-[#d1d5db] focus-within:shadow-sm group">
+          <input
+            ref={inputRef}
+            type="text"
+            className="flex-1 bg-transparent border-none outline-none text-[14px] text-[#111827] h-10 placeholder:text-gray-400"
+            placeholder={currentStep === 'done' ? "Chat ended" : "Type a message..."}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder={inputProps.placeholder}
-            type={inputProps.type}
-            disabled={isSubmitting || currentStep === 'done' as any}
-            className="pl-10 pr-12 h-12 rounded-full border-gray-200 focus-visible:ring-[#142b14] bg-gray-50/50"
+            disabled={isTyping || currentStep === 'done' as any}
             autoFocus
+            autoComplete="off"
           />
-          <Button 
+          <button 
             onClick={handleSendMessage}
-            disabled={!inputValue.trim() || isSubmitting}
-            size="icon"
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-[#142b14] hover:bg-[#2d6a4f]"
+            disabled={!inputValue.trim() || isTyping}
+            className="w-10 h-10 bg-[#111827] rounded-full flex items-center justify-center shrink-0 transition-transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
           >
-            {currentStep === 'message' ? (
-                <span className="text-[10px] font-bold px-1">SEND</span>
+            {isSubmitting ? (
+              <Loader2 className="w-4 h-4 text-white animate-spin" />
             ) : (
-                <Send className="w-4 h-4" />
+              <Send className="w-[18px] h-[18px] text-white ml-0.5" />
             )}
-          </Button>
+          </button>
         </div>
       </div>
+
     </div>
   );
 }
