@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, X, Loader2 } from "lucide-react";
+import { Send, X, Loader2, Sparkles } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // --- Types ---
 type Message = {
@@ -14,7 +15,6 @@ type FormData = {
   name: string;
   email: string;
   phone: string;
-  company: string;
   message: string;
 };
 
@@ -34,13 +34,11 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
     name: "",
     email: "",
     phone: "",
-    company: "",
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
 
   // --- Auto-scroll ---
   useEffect(() => {
@@ -77,15 +75,12 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
         botResponse = "Thanks. And what's a good phone number to reach you at?";
         break;
       case 'phone':
-        nextStep = 'company';
-        botResponse = "Great. Which company are you with?";
-        break;
-      case 'company':
-        nextStep = 'message';
-        botResponse = "Almost done! How can we help you today?";
+        nextStep = 'message'; // Skipped Company
+        botResponse = "Great. Finally, how can we help you today?";
         break;
       case 'message':
         nextStep = 'done';
+        // Trigger Submission immediately
         await submitForm(updatedFormData);
         return;
     }
@@ -106,6 +101,7 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
 
   const submitForm = async (data: FormData) => {
     setIsTyping(true);
+    setIsSubmitting(true);
     
     try {
       const { error } = await supabase.functions.invoke('resend_key_id', {
@@ -114,9 +110,8 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
           fullName: data.name,
           email: data.email,
           phone: data.phone,
-          company: data.company,
           message: data.message,
-          subject: "New Neural Assistant Lead"
+          subject: "New Neural Assistant Lead (Demo Request)"
         },
       });
 
@@ -125,9 +120,9 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
       setIsTyping(false);
       setMessages(prev => [
         ...prev,
-        { id: 'done', role: 'bot', content: "Got it! Thanks for reaching out. We'll be in touch soon." }
+        { id: 'done', role: 'bot', content: "Request received! We'll be in touch shortly with your demo details." }
       ]);
-      toast.success("Request sent successfully!");
+      toast.success("Demo request sent successfully!");
 
     } catch (error) {
       console.error(error);
@@ -153,15 +148,14 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
       
       {/* --- HEADER --- */}
       <div className="p-6 flex items-center gap-3 border-b border-[#e5e7eb] bg-white shrink-0">
-        <div className="w-10 h-10 bg-[#111827] rounded-[14px] flex items-center justify-center shrink-0">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-          </svg>
-        </div>
+        <Avatar className="h-10 w-10 border border-gray-100 shadow-sm">
+          <AvatarImage src="/neural-ai-logo.png" alt="Neural AI" />
+          <AvatarFallback className="bg-[#111827] text-white">NA</AvatarFallback>
+        </Avatar>
         <div className="flex-1">
           <h1 className="text-[15px] font-semibold text-[#111827] leading-tight">Neural Assistant</h1>
           <div className="flex items-center gap-1.5 mt-0.5">
-            <span className="w-1.5 h-1.5 bg-[#10b981] rounded-full"></span>
+            <span className="w-1.5 h-1.5 bg-[#10b981] rounded-full animate-pulse"></span>
             <span className="text-xs text-[#6b7280]">Online</span>
           </div>
         </div>
@@ -194,7 +188,7 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
         ))}
         
         {/* Typing Indicator */}
-        {isTyping && (
+        {(isTyping || isSubmitting) && (
           <div className="self-start bg-[#f3f4f6] text-[#6b7280] rounded-[18px_18px_18px_4px] px-[18px] py-[12px] text-xs flex items-center gap-1 animate-in fade-in">
              <span className="animate-bounce">●</span>
              <span className="animate-bounce delay-100">●</span>
@@ -205,28 +199,36 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
 
       {/* --- INPUT AREA --- */}
       <div className="p-[20px_24px_30px] bg-white border-t border-transparent">
-        {isTyping && <div className="text-xs text-[#6b7280] mb-2 pl-2 animate-pulse">AI is writing...</div>}
-        
         <div className="flex items-center bg-[#f3f4f6] rounded-[50px] p-[6px_6px_6px_20px] transition-all border border-transparent focus-within:bg-white focus-within:border-[#d1d5db] focus-within:shadow-sm group">
           <input
-            ref={inputRef}
             type="text"
             className="flex-1 bg-transparent border-none outline-none text-[14px] text-[#111827] h-10 placeholder:text-gray-400"
             placeholder={currentStep === 'done' ? "Chat ended" : "Type a message..."}
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            disabled={isTyping || currentStep === 'done' as any}
+            disabled={isTyping || isSubmitting || currentStep === 'done' as any}
             autoFocus
             autoComplete="off"
           />
+          
+          {/* Dynamic Button: Changes to "Request Demo" at the final step */}
           <button 
             onClick={handleSendMessage}
-            disabled={!inputValue.trim() || isTyping}
-            className="w-10 h-10 bg-[#111827] rounded-full flex items-center justify-center shrink-0 transition-transform hover:scale-105 active:scale-95 disabled:opacity-50 disabled:hover:scale-100"
+            disabled={!inputValue.trim() || isTyping || isSubmitting}
+            className={`h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
+              currentStep === 'message' 
+                ? 'w-auto px-4 bg-[#10b981] hover:bg-[#059669] gap-2' // Green Request Button
+                : 'w-10 bg-[#111827] hover:scale-105 active:scale-95'   // Standard Send Button
+            }`}
           >
             {isSubmitting ? (
               <Loader2 className="w-4 h-4 text-white animate-spin" />
+            ) : currentStep === 'message' ? (
+              <>
+                <span className="text-white text-xs font-bold whitespace-nowrap">Request Demo</span>
+                <Sparkles className="w-3 h-3 text-white fill-white/20" />
+              </>
             ) : (
               <Send className="w-[18px] h-[18px] text-white ml-0.5" />
             )}
