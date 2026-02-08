@@ -1,131 +1,98 @@
-import { useEffect } from "react";
+import { useRef } from "react";
 import Layout from "@/components/layout/Layout";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function Careers() {
+  const containerRef = useRef<HTMLDivElement>(null);
   
-  // Set document title
-  useEffect(() => {
-    document.title = "Efficiency Wanted | Neural AI";
-  }, []);
+  // Scroll Hooks for Animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  // Transform values based on scroll
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
+  const borderRadius = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const filter = useTransform(scrollYProgress, [0, 1], ["blur(0px)", "blur(10px)"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.6]);
+  const textY = useTransform(scrollYProgress, [0, 1], [100, 0]);
 
   return (
     <Layout>
-      <div className="relative min-h-screen flex flex-col justify-center items-center text-center overflow-hidden font-sans">
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;1,300&family=Inter:wght@300;400&display=swap');
+      `}</style>
+
+      <div ref={containerRef} className="relative min-h-[200vh] bg-[#f6f6f2] font-sans">
         
-        {/* INJECTED STYLES to ensure exact fidelity to your design */}
-        <style>{`
-          /* Import Fonts */
-          @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;1,300&family=Inter:wght@300&display=swap');
+        {/* STICKY IMAGE CONTAINER */}
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+          
+          {/* Animated Image Frame */}
+          <motion.div 
+            style={{ scale, borderRadius, filter, opacity }}
+            className="absolute top-0 w-full h-full z-0 overflow-hidden shadow-2xl origin-top"
+          >
+            {/* Placeholder for Office/Team Image - Replace src with actual image */}
+            <img 
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2301&auto=format&fit=crop" 
+              alt="Neural AI Office" 
+              className="w-full h-full object-cover"
+            />
+            
+            {/* Dark Overlay for text readability if needed */}
+            <div className="absolute inset-0 bg-black/20"></div>
+          </motion.div>
 
-          :root {
-            --bg-color: #f6f6f2;
-            --text-color: #0d1a1a;
-            --muted-color: #7d8484;
-          }
+          {/* TEXT CONTENT (Overlays the image initially, then sits nicely) */}
+          <div className="relative z-10 flex flex-col items-center text-center mt-[20vh]">
+            
+            {/* "Neural AI Careers" Label */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="mb-6"
+            >
+              <span className="font-['Inter'] text-[13px] tracking-[0.3em] uppercase text-white drop-shadow-md font-medium bg-black/30 px-4 py-1.5 rounded-full backdrop-blur-md border border-white/20">
+                Neural AI ; Careers
+              </span>
+            </motion.div>
 
-          /* Page Background */
-          .careers-bg {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-          }
+            {/* Main Headline: "Efficiency Wanted" */}
+            <motion.h1 
+              style={{ y: textY }}
+              className="font-['Playfair_Display'] font-light text-[clamp(60px,10vw,140px)] leading-[0.9] text-white drop-shadow-lg uppercase tracking-wide flex flex-col items-center gap-2 mix-blend-overlay"
+            >
+              <span className="block">Efficiency</span>
+              <span className="block italic opacity-90">Wanted</span>
+            </motion.h1>
 
-          .careers-bg::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("https://www.transparenttextures.com/patterns/p6.png");
-            opacity: 0.03;
-            pointer-events: none;
-          }
+          </div>
 
-          /* Brand Label Animation */
-          .brand-label {
-            font-family: 'Inter', sans-serif;
-            font-size: 13px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: var(--muted-color);
-            font-weight: 300;
-            animation: fadeIn 1.5s ease;
-          }
-
-          /* Headline Typography */
-          .career-headline {
-            font-family: 'Playfair Display', serif;
-            font-weight: 300;
-            font-size: clamp(64px, 12vw, 140px);
-            line-height: 1.1;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-color);
-          }
-
-          /* Reveal Animations */
-          .reveal-text {
-            display: block;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          }
-
-          .reveal-delay {
-            animation-delay: 0.3s;
-          }
-
-          /* Decorative Line */
-          .decoration-line {
-            position: absolute;
-            bottom: 60px;
-            width: 1px;
-            height: 60px;
-            background: var(--text-color);
-            opacity: 0.2;
-            animation: grow 2s ease;
-            left: 50%;
-            transform: translateX(-50%);
-          }
-
-          /* Keyframes */
-          @keyframes revealUp {
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
-          }
-
-          @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-          }
-
-          @keyframes grow {
-            from { height: 0; }
-            to { height: 60px; }
-          }
-        `}</style>
-
-        {/* Background Layer */}
-        <div className="careers-bg"></div>
-
-        {/* Top Header */}
-        <header className="absolute top-[100px] w-full text-center">
-          <div className="brand-label">Neural AI Careers</div>
-        </header>
-
-        {/* Main Headline */}
-        <div className="flex flex-col gap-[10px] z-10">
-          <h1 className="career-headline">
-            <span className="reveal-text">Efficiency</span>
-            <span className="reveal-text reveal-delay">Wanted</span>
-          </h1>
+          {/* Scroll Indicator */}
+          <motion.div 
+            style={{ opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]) }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white flex flex-col items-center gap-2"
+          >
+            <span className="text-[10px] tracking-widest uppercase opacity-80">Scroll</span>
+            <div className="w-[1px] h-12 bg-white/50"></div>
+          </motion.div>
         </div>
 
-        {/* Bottom Decoration */}
-        <div className="decoration-line"></div>
-        
+        {/* EXTRA CONTENT SPACE (To allow scrolling) */}
+        <div className="h-screen bg-[#f6f6f2] relative z-20 flex items-center justify-center">
+            <div className="text-center max-w-2xl px-6">
+                <p className="font-['Playfair_Display'] text-3xl text-[#0d1a1a] leading-relaxed">
+                   "We don't just build AI. We build the minds that build the future."
+                </p>
+                <button className="mt-8 px-8 py-3 bg-[#0d1a1a] text-white rounded-full font-['Inter'] text-sm tracking-wider hover:bg-[#2d6a4f] transition-colors">
+                    VIEW OPEN ROLES
+                </button>
+            </div>
+        </div>
+
       </div>
     </Layout>
   );
