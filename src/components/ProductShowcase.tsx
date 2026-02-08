@@ -1,32 +1,31 @@
 import { useState } from "react";
 import { 
+  Play, 
+  Volume2, 
   ShieldCheck, 
   Activity, 
   Users, 
-  AlertTriangle, 
-  Play, 
-  Volume2 
+  AlertTriangle 
 } from "lucide-react";
 
 export function ProductShowcase() {
+  // State for the custom sub-nav
   const [activeTab, setActiveTab] = useState("Smart Monitoring");
 
   return (
-    <section className="py-24 bg-[#f8faf8] flex flex-col items-center justify-center w-full border-t border-b border-[#cfdccf]/30">
+    <section className="py-20 flex flex-col items-center justify-center w-full bg-[#f8faf8]">
       
-      {/* Section Header */}
-      <div className="text-center mb-12">
+      {/* Section Header (Optional, matches the clean look) */}
+      <div className="text-center mb-10">
         <h2 className="text-3xl md:text-5xl font-bold text-[#1a2e1a] mb-4">
           Intelligence in <span className="text-[#2d6a4f]">Real-Time</span>
         </h2>
-        <p className="text-[#556b55] text-lg max-w-2xl mx-auto">
-          Experience how Neural AI transforms standard surveillance into actionable business insights.
-        </p>
       </div>
 
-      {/* Nav Pills */}
+      {/* Custom Sub-Navigation (Exact Copy of Design) */}
       <div 
-        className="flex mb-[30px] bg-white border border-[#eee] rounded-[100px] p-[4px] shadow-sm"
+        className="flex mb-[30px] bg-white border border-[#eee] rounded-[100px] p-[4px]"
+        style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.02)" }}
       >
         {["Smart Monitoring", "User Behavior", "Analytics"].map((tab) => (
           <div 
@@ -34,7 +33,7 @@ export function ProductShowcase() {
             onClick={() => setActiveTab(tab)}
             className={`px-[24px] py-[10px] text-[14px] font-[500] cursor-pointer rounded-[100px] transition-colors duration-200 ${
               activeTab === tab 
-              ? "bg-[#eafaf1] text-[#2d6a4f]" 
+              ? "bg-[#eafaf1] text-[#2d6a4f]" // Updated to Green theme for Neural AI
               : "text-[#757575] hover:bg-gray-50"
             }`}
           >
@@ -43,9 +42,9 @@ export function ProductShowcase() {
         ))}
       </div>
 
-      {/* Main Feature Card */}
+      {/* Main Card Container (Exact Copy of Design) */}
       <div 
-        className="w-[95%] max-w-[1100px] bg-white border border-[#f0f0f0] rounded-[40px] flex flex-col md:flex-row p-[30px] md:p-[50px] gap-[40px]"
+        className="w-[95%] max-w-[1100px] bg-white border border-[#f0f0f0] rounded-[40px] flex flex-col md:flex-row p-[30px] md:p-[50px] gap-[40px] mb-[50px]"
         style={{ boxShadow: "0 10px 40px rgba(0,0,0,0.03)" }}
       >
         {/* Left Side Content */}
@@ -75,30 +74,34 @@ export function ProductShowcase() {
           </div>
         </div>
 
-        {/* Right Side Video Placeholder */}
+        {/* Right Side Video (Exact Design with Neural AI Colors) */}
         <div className="flex-[1.3] relative group cursor-pointer">
           <div 
-            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform duration-500 group-hover:scale-[1.02]"
+            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-transform duration-500 group-hover:scale-[1.01]"
             style={{ 
               background: "linear-gradient(135deg, #1a2e1a 0%, #2d6a4f 100%)" 
             }}
           >
-            {/* Video Overlay Content */}
+            {/* Mockup Content Overlay */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-[20px] text-center">
-              <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all">
+               <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-6 group-hover:bg-white/20 transition-all border border-white/20">
                  <Play className="w-8 h-8 text-white fill-white ml-1" />
-              </div>
-              <h3 className="text-white/90 text-2xl font-bold mb-2">Live Intelligence</h3>
-              <p className="text-white/60 text-sm">Behavior analysis & object detection in action</p>
+               </div>
+               <h3 className="text-white/95 text-2xl font-bold mb-2">Live Intelligence</h3>
+               <p className="text-white/70 text-sm">Behavior analysis & object detection in action</p>
             </div>
 
-            {/* Fake Player Bar for realism */}
+            {/* Player Bar (Exact Copy) */}
             <div className="absolute bottom-[12px] left-[12px] right-[12px] h-[44px] bg-black/40 backdrop-blur-md rounded-[8px] flex items-center px-[15px] gap-[15px] border border-white/10">
-              <div className="text-white text-[14px]"><Play className="w-3 h-3 fill-current"/></div>
-              <div className="flex-1 h-[4px] bg-white/20 rounded-[2px] relative">
+              <div className="text-white text-[14px] cursor-pointer"><Play className="w-3 h-3 fill-current"/></div>
+              <div className="flex-1 h-[4px] bg-white/20 rounded-[2px] relative cursor-pointer">
                 <div className="absolute w-[45%] h-full bg-[#7fb07f] rounded-[2px]"></div>
+                {/* Optional Time tooltip */}
+                <div className="absolute top-[-28px] left-[45%] -translate-x-1/2 bg-white text-black text-[10px] font-[700] px-[6px] py-[2px] rounded-[4px]">
+                    02:15
+                </div>
               </div>
-              <div className="text-white opacity-80"><Volume2 className="w-4 h-4"/></div>
+              <div className="text-white opacity-80 cursor-pointer"><Volume2 className="w-4 h-4"/></div>
             </div>
           </div>
         </div>
