@@ -1,42 +1,14 @@
-import { useState } from "react";
-import { useIsMobile } from "@/hooks/use-mobile"; // <--- FIXED IMPORT
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { ContactForm } from "@/components/ContactForm";
+import { Sparkles } from "lucide-react";
 
-export function CtaCard() {
-  const [open, setOpen] = useState(false);
-  const isMobile = useIsMobile(); // <--- FIXED USAGE (Returns true/false)
+interface CtaCardProps {
+  onOpenChat: () => void;
+}
 
-  // Shared content for the CTA Button
-  const TriggerButton = (
-    <button className="relative z-10 bg-white/25 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-white/40 hover:-translate-y-0.5 transition-all duration-300">
-      Get a Demo
-    </button>
-  );
-
+export function CtaCard({ onOpenChat }: CtaCardProps) {
   return (
     <section className="py-24 px-4 flex justify-center bg-[#fcfcfc]">
       <div className="w-full max-w-[1100px] bg-white p-6 rounded-[60px] shadow-[0_10px_40px_rgba(0,0,0,0.05)] border border-[#eee]">
         
-        {/* Reduced Height to 300px */}
         <div className="w-full h-[300px] rounded-[45px] relative overflow-hidden flex flex-col items-center justify-center text-center bg-gradient-to-b from-[#0f2027] via-[#203a43] to-[#2c5364]">
           
           {/* Geometric Grid Background */}
@@ -49,7 +21,7 @@ export function CtaCard() {
           {/* Bottom Glow */}
           <div className="absolute -bottom-[50px] left-0 right-0 h-[100px] bg-white blur-[40px] opacity-60"></div>
 
-          {/* Main Content - Humanized ROI Text */}
+          {/* Main Content */}
           <div className="relative z-10 mb-8">
             <h1 className="text-white text-[32px] font-normal mb-2 tracking-tight">
               Security that pays for itself.
@@ -59,47 +31,16 @@ export function CtaCard() {
             </p>
           </div>
 
-          {/* Responsive Popup Logic */}
-          {!isMobile ? (
-            // DESKTOP: Show Dialog
-            <Dialog open={open} onOpenChange={setOpen}>
-              <DialogTrigger asChild>
-                {TriggerButton}
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Schedule a Demo</DialogTitle>
-                  <DialogDescription>
-                    See how Neural AI can reduce costs and improve efficiency.
-                  </DialogDescription>
-                </DialogHeader>
-                <ContactForm />
-              </DialogContent>
-            </Dialog>
-          ) : (
-            // MOBILE: Show Drawer from Bottom
-            <Drawer open={open} onOpenChange={setOpen}>
-              <DrawerTrigger asChild>
-                {TriggerButton}
-              </DrawerTrigger>
-              <DrawerContent>
-                <DrawerHeader className="text-left">
-                  <DrawerTitle>Schedule a Demo</DrawerTitle>
-                  <DrawerDescription>
-                    See how Neural AI can reduce costs and improve efficiency.
-                  </DrawerDescription>
-                </DrawerHeader>
-                <div className="px-4 pb-4">
-                  <ContactForm />
-                </div>
-                <DrawerFooter className="pt-2">
-                  <DrawerClose asChild>
-                    <Button variant="outline">Cancel</Button>
-                  </DrawerClose>
-                </DrawerFooter>
-              </DrawerContent>
-            </Drawer>
-          )}
+          {/* Trigger Button - Calls parent to open Chat */}
+          <button 
+            onClick={(e) => {
+              e.preventDefault(); // Prevent any default link behavior
+              onOpenChat();
+            }}
+            className="relative z-10 bg-white/25 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-white/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 cursor-pointer"
+          >
+            <Sparkles className="w-4 h-4" /> Get a Demo
+          </button>
 
         </div>
       </div>
