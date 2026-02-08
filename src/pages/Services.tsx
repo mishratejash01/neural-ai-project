@@ -15,7 +15,9 @@ import {
   BookOpen,
   Megaphone,
   Tv,
-  Radio
+  Radio,
+  ShieldCheck, // Added for Smart Monitoring
+  BarChart3,   // Added for Analytics
 } from "lucide-react";
 import { useState } from "react";
 
@@ -77,7 +79,7 @@ const Services = () => {
     <Layout>
       <div style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} className="min-h-screen flex flex-col font-sans">
         
-        {/* 1. RESTORED MINT HERO SECTION (Previous Design) */}
+        {/* 1. RESTORED MINT HERO SECTION */}
         <section className="h-screen flex flex-col justify-center items-center px-4 pt-32 md:pt-40 pb-10 text-center">
           <div className="max-w-[900px] mx-auto">
             
@@ -138,9 +140,8 @@ const Services = () => {
           </div>
         </section>
 
-        {/* 2. DUBBING & LOCALIZATION UI SECTION (New Addition) */}
+        {/* 2. DUBBING & LOCALIZATION UI SECTION */}
         <section className="py-20 flex flex-col items-center justify-center w-full">
-            
             {/* Custom Sub-Navigation */}
             <div 
                 className="flex mb-[30px] bg-white border border-[#eee] rounded-[100px] p-[4px]"
@@ -232,7 +233,83 @@ const Services = () => {
             </div>
         </section>
 
-        {/* 3. SERVICES GRID */}
+        {/* 3. NEW FEATURE SECTION: Smart Monitoring & Analytics */}
+        <section className="py-24 px-4 bg-[#142b14] text-white relative overflow-hidden">
+          {/* Background accents */}
+          <div className="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20 pointer-events-none">
+             <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-[#2d6a4f] rounded-full blur-[100px]" />
+             <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-[#40916c] rounded-full blur-[100px]" />
+          </div>
+
+          <div className="container mx-auto max-w-6xl relative z-10">
+            
+            <div className="text-center mb-16 max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 tracking-tight">
+                Complete Visibility. <br/>
+                <span className="text-[#7fb07f]">Zero Blind Spots.</span>
+              </h2>
+              <p className="text-lg text-gray-300">
+                Stop relying on passive recording. Upgrade to active intelligence that detects threats and analyzes behavior in real-time.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-8 mb-24">
+               {/* Card 1: Smart Monitoring */}
+               <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-[32px] hover:bg-white/10 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-xl bg-[#2d6a4f]/30 flex items-center justify-center mb-6 text-[#7fb07f]">
+                     <ShieldCheck className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-white">Smart Monitoring</h3>
+                  <p className="text-gray-400 leading-relaxed mb-6">
+                    Transform your existing CCTV infrastructure into an intelligent security system. 
+                    Our Smart Monitoring operates 24/7 to detect theft, ensure safety compliance, 
+                    and track employee attendance in real-time—alerting you the moment an incident occurs.
+                  </p>
+                  <button className="text-[#7fb07f] font-semibold flex items-center hover:translate-x-1 transition-transform">
+                     Explore Security <ArrowRight className="ml-2 w-4 h-4" />
+                  </button>
+               </div>
+
+               {/* Card 2: Analytics */}
+               <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-10 rounded-[32px] hover:bg-white/10 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-xl bg-[#2d6a4f]/30 flex items-center justify-center mb-6 text-[#7fb07f]">
+                     <BarChart3 className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-white">User Behavior Analytics</h3>
+                  <p className="text-gray-400 leading-relaxed mb-6">
+                     Go beyond simple recording. Unlock deep analytics based on actual user behavior, 
+                     including customer footfall heatmaps, emotion detection, and staff productivity metrics. 
+                     Turn visual data into actionable business intelligence.
+                  </p>
+                  <button className="text-[#7fb07f] font-semibold flex items-center hover:translate-x-1 transition-transform">
+                     View Analytics <ArrowRight className="ml-2 w-4 h-4" />
+                  </button>
+               </div>
+            </div>
+
+            {/* Video Section */}
+            <div className="rounded-[32px] overflow-hidden border border-white/10 bg-black/40 shadow-2xl relative aspect-video group cursor-pointer w-full max-w-5xl mx-auto">
+               {/* Placeholder for Video */}
+               <div className="absolute inset-0 bg-gradient-to-br from-[#1a2e1a] to-[#000000] flex items-center justify-center">
+                  <div className="text-center p-6">
+                    <p className="text-[#7fb07f] font-semibold tracking-widest uppercase text-sm mb-4">Watch the Demo</p>
+                    <h3 className="text-3xl font-bold text-white mb-8">See Neural AI in Action</h3>
+                    <p className="text-gray-400 text-sm max-w-md mx-auto">Click to play the video overview of our security and analytics dashboard.</p>
+                  </div>
+               </div>
+               
+               {/* Play Button */}
+               <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform duration-300">
+                     <Play className="w-10 h-10 text-white fill-white ml-2" />
+                  </div>
+               </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* 4. SERVICES GRID */}
         <section className="py-24 px-4 relative z-10">
           <div className="container mx-auto max-w-6xl">
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
