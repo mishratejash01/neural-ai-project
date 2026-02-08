@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Send, X, Loader2, Sparkles } from "lucide-react";
+import { Send, X, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -75,12 +75,11 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
         botResponse = "Thanks. And what's a good phone number to reach you at?";
         break;
       case 'phone':
-        nextStep = 'message'; // Skipped Company
+        nextStep = 'message';
         botResponse = "Great. Finally, how can we help you today?";
         break;
       case 'message':
         nextStep = 'done';
-        // Trigger Submission immediately
         await submitForm(updatedFormData);
         return;
     }
@@ -212,23 +211,20 @@ export function ContactForm({ onClose, className }: ContactFormProps) {
             autoComplete="off"
           />
           
-          {/* Dynamic Button: Changes to "Request Demo" at the final step */}
+          {/* Dynamic Button */}
           <button 
             onClick={handleSendMessage}
             disabled={!inputValue.trim() || isTyping || isSubmitting}
             className={`h-10 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
               currentStep === 'message' 
-                ? 'w-auto px-4 bg-[#10b981] hover:bg-[#059669] gap-2' // Green Request Button
+                ? 'w-auto px-6 bg-[#111827] hover:scale-105 active:scale-95' // Black Request Button
                 : 'w-10 bg-[#111827] hover:scale-105 active:scale-95'   // Standard Send Button
             }`}
           >
             {isSubmitting ? (
               <Loader2 className="w-4 h-4 text-white animate-spin" />
             ) : currentStep === 'message' ? (
-              <>
-                <span className="text-white text-xs font-bold whitespace-nowrap">Request Demo</span>
-                <Sparkles className="w-3 h-3 text-white fill-white/20" />
-              </>
+              <span className="text-white text-xs font-bold whitespace-nowrap">Request Demo</span>
             ) : (
               <Send className="w-[18px] h-[18px] text-white ml-0.5" />
             )}
