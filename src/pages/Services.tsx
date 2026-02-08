@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
-import { ProductShowcase } from "@/components/ProductShowcase"; // <--- NOW IMPORTED CORRECTLY
+import { ProductShowcase } from "@/components/ProductShowcase"; 
+import { FeaturesGrid } from "@/components/FeaturesGrid"; // <--- IMPORT HERE
 import {
   MessageSquare,
   BarChart,
@@ -129,10 +130,13 @@ const Services = () => {
         </section>
 
         {/* 2. PRODUCT SHOWCASE SECTION (Imported) */}
-        {/* This now pulls directly from src/components/ProductShowcase.tsx */}
         <ProductShowcase />
 
-        {/* 3. SERVICES GRID */}
+        {/* 3. NEW FEATURES GRID (Imported) */}
+        {/* Placed here below Product Showcase as requested */}
+        <FeaturesGrid />
+
+        {/* 4. SERVICES GRID */}
         <section className="py-24 px-4 relative z-10">
           <div className="container mx-auto max-w-6xl">
              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
