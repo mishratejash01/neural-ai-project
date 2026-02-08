@@ -1,11 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { ProductShowcase } from "@/components/ProductShowcase"; 
 import { FeaturesGrid } from "@/components/FeaturesGrid"; 
 import { CtaCard } from "@/components/CtaCard"; 
-import { FileText } from "lucide-react";
+import { ContactForm } from "@/components/ContactForm"; // Importing the Chatbot Form
+import { useIsMobile } from "@/hooks/use-mobile";
+import { FileText, MessageSquareText } from "lucide-react";
+import {
+  Drawer,
+  DrawerContent,
+} from "@/components/ui/drawer";
 
 const Services = () => {
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const isMobile = useIsMobile();
+
   const themeColors = {
     bg: "#f8faf8",
     textDark: "#1a2e1a",
@@ -14,16 +24,14 @@ const Services = () => {
 
   return (
     <Layout>
-      {/* Added 'scale-[0.95] origin-top' for the zoomed-out effect */}
       <div 
         style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} 
-        className="min-h-screen flex flex-col font-sans transform scale-[0.95] origin-top"
+        className="min-h-screen flex flex-col font-sans transform scale-[0.95] origin-top relative"
       >
         
         {/* 1. HERO SECTION */}
         <section className="h-screen flex flex-col justify-center items-center px-4 pt-32 md:pt-40 pb-10 text-center">
           <div className="max-w-[900px] mx-auto">
-            
             <div className="flex justify-center gap-[15px] mb-[30px] opacity-80">
               <div className="flex gap-[3px]">
                 {[...Array(5)].map((_, i) => (
@@ -73,20 +81,54 @@ const Services = () => {
                 </button>
               </Link>
             </div>
-
           </div>
         </section>
 
-        {/* 2. PRODUCT SHOWCASE SECTION */}
+        {/* 2. PRODUCT SHOWCASE */}
         <ProductShowcase />
 
         {/* 3. FEATURES GRID */}
         <FeaturesGrid />
 
-        {/* 4. CTA CARD */}
-        <CtaCard />
+        {/* 4. CTA CARD (Triggers Chat) */}
+        <CtaCard onOpenChat={() => setIsChatOpen(true)} />
 
       </div>
+
+      {/* --- CHAT WIDGET IMPLEMENTATION --- */}
+      
+      {/* Floating Action Button (Always Visible) */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={() => setIsChatOpen(!isChatOpen)}
+          className="w-14 h-14 bg-[#142b14] hover:bg-[#2d6a4f] text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110"
+        >
+          {isChatOpen ? (
+            <span className="text-xl font-bold">×</span>
+          ) : (
+            <MessageSquareText className="w-6 h-6" />
+          )}
+        </button>
+      </div>
+
+      {/* Desktop Chat Window (Bottom Right Popover) */}
+      {!isMobile && isChatOpen && (
+        <div className="fixed bottom-24 right-6 w-[380px] h-[600px] z-50 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 animate-in slide-in-from-bottom-10 fade-in duration-300">
+          <ContactForm onClose={() => setIsChatOpen(false)} />
+        </div>
+      )}
+
+      {/* Mobile Drawer */}
+      {isMobile && (
+        <Drawer open={isChatOpen} onOpenChange={setIsChatOpen}>
+          <DrawerContent className="h-[85vh] outline-none">
+             <div className="h-full pt-4">
+                <ContactForm onClose={() => setIsChatOpen(false)} />
+             </div>
+          </DrawerContent>
+        </Drawer>
+      )}
+
     </Layout>
   );
 };
