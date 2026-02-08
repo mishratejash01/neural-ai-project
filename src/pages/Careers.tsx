@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown } from "lucide-react";
 
 export default function Careers() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,17 +8,13 @@ export default function Careers() {
   // Track scroll progress of the Image Section only
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"], // Animation starts when section enters view
+    offset: ["start end", "end start"], 
   });
 
   // Animation Values
-  // 1. Scale: Shrinks from full width (1) to smaller (0.85)
-  const scale = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.9]); // Delayed start
-  // 2. Border Radius: Corners round as it shrinks
+  const scale = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.9]);
   const borderRadius = useTransform(scrollYProgress, [0.2, 0.8], ["0px", "40px"]);
-  // 3. Blur: Image gets blurry as you scroll away
-  const blur = useTransform(scrollYProgress, [0.4, 0.9], ["blur(0px)", "blur(10px)"]);
-  // 4. Opacity: Fades slightly
+  const filter = useTransform(scrollYProgress, [0.4, 0.9], ["blur(0px)", "blur(10px)"]);
   const imageOpacity = useTransform(scrollYProgress, [0.5, 1], [1, 0.8]);
 
   return (
@@ -49,28 +44,17 @@ export default function Careers() {
             <span className="block italic font-light opacity-90 animate-in slide-in-from-bottom-8 fade-in duration-1000 delay-200">Wanted</span>
           </h1>
 
-          {/* Scroll Indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 text-[#0d1a1a] flex flex-col items-center gap-2"
-          >
-            <span className="text-[10px] tracking-widest uppercase opacity-60">Scroll</span>
-            <div className="w-[1px] h-12 bg-[#0d1a1a]/20"></div>
-          </motion.div>
-
       </div>
 
       {/* --- SECTION 2: IMAGE FRAME (Scroll to Shrink) --- */}
       <div ref={containerRef} className="h-[150vh] relative bg-[#f6f6f2]">
         
-        {/* Sticky Wrapper: Keeps image visible while we scroll the 150vh height */}
+        {/* Sticky Wrapper */}
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
           {/* Animated Image Frame */}
           <motion.div 
-            style={{ scale, borderRadius, filter: blur, opacity: imageOpacity }}
+            style={{ scale, borderRadius, filter, opacity: imageOpacity }}
             className="w-full h-full z-0 overflow-hidden bg-black shadow-2xl origin-center"
           >
             <img 
@@ -83,7 +67,7 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* --- SECTION 3: CONTENT (Normal Flow - No Overlap) --- */}
+      {/* --- SECTION 3: CONTENT --- */}
       <div className="relative z-20 bg-white py-32 px-6">
         <div className="max-w-4xl mx-auto text-center">
           
