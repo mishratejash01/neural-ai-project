@@ -1,27 +1,65 @@
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client"; 
+import { JobApplicationModal } from "@/components/JobApplicationModal";
 
-// Placeholder data for Advisors (Simulating backend data)
-const advisors = [
-  { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/2560px-Google_2015_logo.svg.png" },
-  { name: "Microsoft", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png" },
-  { name: "IIT Bombay", logo: "https://upload.wikimedia.org/wikipedia/en/thumb/1/1d/Indian_Institute_of_Technology_Bombay_Logo.svg/1200px-Indian_Institute_of_Technology_Bombay_Logo.svg.png" },
-  { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/2560px-Amazon_logo.svg.png" },
-  { name: "Intel", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Intel_logo.svg/2560px-Intel_logo.svg.png" },
-];
+// --- Types based on your SQL Schema ---
+type Advisor = {
+  id: string;
+  name: string;
+  logo_url: string;
+};
 
-// Placeholder data for Positions
-const positions = [
-  { title: "Senior Computer Vision Engineer", type: "Remote", dept: "Engineering" },
-  { title: "B2B Sales Executive", type: "On-site (Noida)", dept: "Sales" },
-  { title: "Full Stack Developer", type: "Hybrid", dept: "Engineering" },
-];
+type Career = {
+  id: string;
+  title: string;
+  department: string | null;
+  location: string | null;
+  type: string | null;
+  salary_range: string | null;
+  experience_required: string | null;
+  is_active: boolean | null;
+};
 
 export default function Careers() {
   const containerRef = useRef<HTMLDivElement>(null);
   
+  // State
+  const [advisors, setAdvisors] = useState<Advisor[]>([]);
+  const [positions, setPositions] = useState<Career[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJob, setSelectedJob] = useState("General Application");
+
+  // Fetch Data from Supabase
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch Advisors
+        const { data: advisorsData } = await supabase
+          .from('advisors')
+          .select('*');
+        
+        // Fetch Active Careers
+        const { data: careersData } = await supabase
+          .from('careers')
+          .select('*')
+          .eq('is_active', true); // Using your new column name 'is_active'
+        
+        if (advisorsData) setAdvisors(advisorsData);
+        if (careersData) setPositions(careersData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Animation Hooks
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"], 
@@ -31,6 +69,12 @@ export default function Careers() {
   const borderRadius = useTransform(scrollYProgress, [0.2, 0.8], ["0px", "40px"]);
   const filter = useTransform(scrollYProgress, [0.4, 0.9], ["blur(0px)", "blur(10px)"]);
   const imageOpacity = useTransform(scrollYProgress, [0.5, 1], [1, 0.8]);
+
+  // Handle Application Click
+  const handleApply = (jobTitle: string) => {
+    setSelectedJob(jobTitle);
+    setIsModalOpen(true);
+  };
 
   return (
     <Layout>
@@ -46,6 +90,13 @@ export default function Careers() {
         }
       `}</style>
 
+      {/* --- APPLICATION MODAL --- */}
+      <JobApplicationModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        jobTitle={selectedJob} 
+      />
+
       {/* --- SECTION 1: HERO --- */}
       <div className="h-[90vh] bg-[#f6f6f2] flex flex-col items-center justify-center relative z-10">
           <motion.div 
@@ -54,6 +105,7 @@ export default function Careers() {
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
+            {/* BLACK TEXT as requested */}
             <span className="font-['Inter'] text-[13px] tracking-[0.25em] uppercase text-black font-medium">
               Neural AI Careers
             </span>
@@ -93,7 +145,7 @@ export default function Careers() {
         </div>
       </div>
 
-      {/* --- SECTION 4: ADVISORS (Marquee) --- */}
+      {/* --- SECTION 4: ADVISORS (Dynamic) --- */}
       <div className="relative z-20 bg-white py-16 border-t border-gray-100">
         <div className="text-center mb-10">
             <span className="font-['Inter'] text-xs tracking-[0.2em] uppercase text-gray-500 font-semibold">
@@ -101,50 +153,80 @@ export default function Careers() {
             </span>
         </div>
         
-        <div className="overflow-hidden relative w-full">
-            <div className="flex w-[200%] animate-scroll">
-                {/* First Set */}
-                <div className="flex w-1/2 justify-around items-center px-10">
-                    {advisors.map((advisor, index) => (
-                        <img key={index} src={advisor.logo} alt={advisor.name} className="h-8 md:h-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-300" />
-                    ))}
-                </div>
-                {/* Duplicate Set for Infinite Loop */}
-                <div className="flex w-1/2 justify-around items-center px-10">
-                    {advisors.map((advisor, index) => (
-                        <img key={`dup-${index}`} src={advisor.logo} alt={advisor.name} className="h-8 md:h-12 opacity-40 grayscale hover:grayscale-0 transition-all duration-300" />
-                    ))}
+        {advisors.length > 0 ? (
+            <div className="overflow-hidden relative w-full">
+                <div className="flex w-[200%] animate-scroll">
+                    {/* First Set */}
+                    <div className="flex w-1/2 justify-around items-center px-10 gap-8">
+                        {advisors.map((advisor) => (
+                            <img 
+                              key={advisor.id} 
+                              src={advisor.logo_url} 
+                              alt={advisor.name} 
+                              className="h-8 md:h-12 w-auto object-contain opacity-40 grayscale hover:grayscale-0 transition-all duration-300" 
+                            />
+                        ))}
+                    </div>
+                    {/* Duplicate Set for Loop */}
+                    <div className="flex w-1/2 justify-around items-center px-10 gap-8">
+                        {advisors.map((advisor) => (
+                            <img 
+                              key={`dup-${advisor.id}`} 
+                              src={advisor.logo_url} 
+                              alt={advisor.name} 
+                              className="h-8 md:h-12 w-auto object-contain opacity-40 grayscale hover:grayscale-0 transition-all duration-300" 
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
-        </div>
+        ) : (
+          <div className="text-center text-sm text-gray-400">Loading advisors...</div>
+        )}
       </div>
 
-      {/* --- SECTION 5: OPEN POSITIONS --- */}
+      {/* --- SECTION 5: OPEN POSITIONS (Dynamic) --- */}
       <div className="relative z-20 bg-[#f9fafb] py-32 px-6">
         <div className="max-w-4xl mx-auto">
             <h3 className="font-['Playfair_Display'] text-3xl text-[#0d1a1a] mb-12 text-center">Open Roles</h3>
             
             <div className="flex flex-col gap-4">
-                {positions.map((pos, idx) => (
-                    <div key={idx} className="group bg-white p-6 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-300 flex items-center justify-between cursor-pointer shadow-sm hover:shadow-md">
-                        <div>
-                            <h4 className="font-['Inter'] font-semibold text-lg text-[#0d1a1a] group-hover:text-[#2d6a4f] transition-colors">{pos.title}</h4>
-                            <div className="flex gap-3 mt-2 text-sm text-gray-500 font-['Inter']">
-                                <span>{pos.dept}</span>
-                                <span>•</span>
-                                <span>{pos.type}</span>
+                {isLoading ? (
+                    <div className="text-center text-gray-400 py-10">Loading positions...</div>
+                ) : positions.length === 0 ? (
+                    <div className="text-center text-gray-500 py-10">No open positions at the moment. Check back soon.</div>
+                ) : (
+                    positions.map((pos) => (
+                        <div 
+                            key={pos.id} 
+                            onClick={() => handleApply(pos.title)}
+                            className="group bg-white p-6 rounded-xl border border-gray-200 hover:border-gray-400 transition-all duration-300 flex items-center justify-between cursor-pointer shadow-sm hover:shadow-md"
+                        >
+                            <div>
+                                <h4 className="font-['Inter'] font-semibold text-lg text-[#0d1a1a] group-hover:text-[#2d6a4f] transition-colors">
+                                  {pos.title}
+                                </h4>
+                                <div className="flex flex-wrap gap-3 mt-2 text-sm text-gray-500 font-['Inter']">
+                                    {pos.department && <span>{pos.department}</span>}
+                                    {pos.department && <span>•</span>}
+                                    
+                                    {pos.type && <span>{pos.type}</span>}
+                                    {pos.type && pos.location && <span>•</span>}
+                                    
+                                    {pos.location && <span>{pos.location}</span>}
+                                </div>
+                            </div>
+                            <div className="w-10 h-10 shrink-0 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#2d6a4f] group-hover:text-white transition-all">
+                                <ArrowRight className="w-5 h-5" />
                             </div>
                         </div>
-                        <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center group-hover:bg-[#2d6a4f] group-hover:text-white transition-all">
-                            <ArrowRight className="w-5 h-5" />
-                        </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
         </div>
       </div>
 
-      {/* --- SECTION 6: CTA CARD ("Can't find your role?") --- */}
+      {/* --- SECTION 6: CTA CARD --- */}
       <div className="relative z-20 bg-[#f9fafb] pb-32 px-6 flex justify-center">
         <div className="w-full max-w-4xl bg-[#eaf4f4] rounded-2xl p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 border border-[#dceaea]">
             
@@ -157,13 +239,13 @@ export default function Careers() {
                 </p>
             </div>
 
-            <a 
-                href="mailto:careers@neuralai.com"
+            <button 
+                onClick={() => handleApply("General Application")}
                 className="shrink-0 bg-[#ff6b35] hover:bg-[#e85d2a] text-white px-8 py-3 rounded-lg font-['Inter'] font-medium transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
             >
                 <Mail className="w-4 h-4" />
                 Send CV
-            </a>
+            </button>
 
         </div>
       </div>
