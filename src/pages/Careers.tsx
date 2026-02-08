@@ -1,11 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef, useEffect, useState } from "react";
 import Layout from "@/components/layout/Layout";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Mail } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client"; 
-import { JobApplicationModal } from "@/components/JobApplicationModal";
+import { ArrowRight, Mail, Loader2, X } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 
-// --- Types based on your SQL Schema ---
+// --- Types ---
 type Advisor = {
   id: string;
   name: string;
@@ -18,11 +29,102 @@ type Career = {
   department: string | null;
   location: string | null;
   type: string | null;
-  salary_range: string | null;
-  experience_required: string | null;
   is_active: boolean | null;
 };
 
+// --- INTERNAL COMPONENT: Job Application Modal ---
+// (Included here to prevent import errors)
+function JobApplicationModal({ isOpen, onClose, jobTitle = "General Application" }: { isOpen: boolean; onClose: () => void; jobTitle: string }) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    linkedin: "",
+    portfolio: "",
+    message: ""
+  });
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.functions.invoke('resend_key_id', {
+        body: {
+          type: 'job_application',
+          jobTitle: jobTitle,
+          ...formData,
+          subject: `New Job Application: ${jobTitle} - ${formData.name}`
+        },
+      });
+
+      if (error) throw error;
+
+      toast.success("Application submitted successfully!");
+      onClose();
+      setFormData({ name: "", email: "", phone: "", linkedin: "", portfolio: "", message: "" });
+
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to submit application. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>Apply for {jobTitle}</DialogTitle>
+          <DialogDescription>
+            Join Neural AI. Send us your details.
+          </DialogDescription>
+        </DialogHeader>
+
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Name *</label>
+              <Input required placeholder="Jane Doe" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Phone *</label>
+              <Input required placeholder="+91..." value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Email *</label>
+            <Input required type="email" placeholder="jane@example.com" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">LinkedIn URL</label>
+            <Input placeholder="https://linkedin.com/in/..." value={formData.linkedin} onChange={e => setFormData({...formData, linkedin: e.target.value})} />
+          </div>
+
+           <div className="space-y-2">
+            <label className="text-sm font-medium">Portfolio / CV Link *</label>
+            <Input required placeholder="Google Drive / Website Link" value={formData.portfolio} onChange={e => setFormData({...formData, portfolio: e.target.value})} />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-medium">Why Neural AI?</label>
+            <Textarea placeholder="Tell us briefly about yourself..." value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} />
+          </div>
+
+          <Button type="submit" className="w-full bg-[#0d1a1a] hover:bg-[#2d6a4f]" disabled={isSubmitting}>
+            {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : "Submit Application"}
+          </Button>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// --- MAIN PAGE COMPONENT ---
 export default function Careers() {
   const containerRef = useRef<HTMLDivElement>(null);
   
@@ -43,10 +145,11 @@ export default function Careers() {
           .select('*');
         
         // Fetch Active Careers
+        // We use 'any' cast here to prevent TypeScript strictness if types generated don't match manually
         const { data: careersData } = await supabase
           .from('careers')
           .select('*')
-          .eq('is_active', true); // Using your new column name 'is_active'
+          .eq('is_active', true) as any; 
         
         if (advisorsData) setAdvisors(advisorsData);
         if (careersData) setPositions(careersData);
@@ -105,7 +208,6 @@ export default function Careers() {
             transition={{ duration: 0.8 }}
             className="mb-8"
           >
-            {/* BLACK TEXT as requested */}
             <span className="font-['Inter'] text-[13px] tracking-[0.25em] uppercase text-black font-medium">
               Neural AI Careers
             </span>
