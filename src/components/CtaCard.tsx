@@ -1,5 +1,3 @@
-import { Sparkles } from "lucide-react";
-
 interface CtaCardProps {
   onOpenChat: () => void;
 }
@@ -31,15 +29,15 @@ export function CtaCard({ onOpenChat }: CtaCardProps) {
             </p>
           </div>
 
-          {/* Trigger Button - Calls parent to open Chat */}
+          {/* Trigger Button - Icon Removed */}
           <button 
             onClick={(e) => {
-              e.preventDefault(); // Prevent any default link behavior
+              e.preventDefault(); 
               onOpenChat();
             }}
-            className="relative z-10 bg-white/25 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-white/40 hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2 cursor-pointer"
+            className="relative z-10 bg-white/25 backdrop-blur-md border border-white/30 text-white px-8 py-3.5 rounded-full text-sm font-medium hover:bg-white/40 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
           >
-            <Sparkles className="w-4 h-4" /> Get a Demo
+            Get a Demo
           </button>
 
         </div>
