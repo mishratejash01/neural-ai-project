@@ -23,10 +23,10 @@ export default function Careers() {
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;1,300&family=Inter:wght@300;400;500&display=swap');
       `}</style>
 
-      {/* --- SECTION 1: TEXT HERO (Reduced height so image peeks up) --- */}
-      <div className="h-[80vh] bg-[#f6f6f2] flex flex-col items-center justify-center relative z-10">
+      {/* --- SECTION 1: TEXT HERO (Increased height to 90vh) --- */}
+      <div className="h-[90vh] bg-[#f6f6f2] flex flex-col items-center justify-center relative z-10">
           
-          {/* Top Label: Black, No Semicolon */}
+          {/* Top Label */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
