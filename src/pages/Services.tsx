@@ -1,68 +1,17 @@
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { ProductShowcase } from "@/components/ProductShowcase"; 
-import { FeaturesGrid } from "@/components/FeaturesGrid"; // <--- IMPORT HERE
-import {
-  MessageSquare,
-  BarChart,
-  Eye,
-  Brain,
-  Cog,
-  Zap,
-  ArrowRight,
-  FileText
-} from "lucide-react";
+import { FeaturesGrid } from "@/components/FeaturesGrid"; 
+import { CtaCard } from "@/components/CtaCard"; // <--- IMPORT HERE
+import { FileText } from "lucide-react";
 
 const Services = () => {
-  // Define the custom colors from your design to use in the grid
+  // Define theme colors
   const themeColors = {
     bg: "#f8faf8",
     textDark: "#1a2e1a",
     textMuted: "#556b55",
-    primary: "#142b14",
-    cardBg: "#ffffff",
-    border: "#cfdccf",
-    iconColor: "#2d6a4f"
   };
-
-  const services = [
-    {
-      icon: MessageSquare,
-      title: "AI-Powered Chatbots",
-      description: "Streamline customer support with intelligent chatbots that understand natural language.",
-      slug: "chatbots"
-    },
-    {
-      icon: Cog,
-      title: "Custom AI Solutions",
-      description: "Tailored AI systems that solve unique business challenges with scalable architecture.",
-      slug: "custom-ai"
-    },
-    {
-      icon: BarChart,
-      title: "Data Analytics",
-      description: "Transform raw data into actionable intelligence with advanced machine learning models.",
-      slug: "data-analytics"
-    },
-    {
-      icon: Eye,
-      title: "Computer Vision",
-      description: "Harness visual intelligence for object detection, quality control, and monitoring.",
-      slug: "computer-vision"
-    },
-    {
-      icon: Brain,
-      title: "NLP & LLMs",
-      description: "Create AI models that understand, interpret, and generate human language at scale.",
-      slug: "nlp"
-    },
-    {
-      icon: Zap,
-      title: "Marketing Automation",
-      description: "Boost marketing with AI-driven personalization and automated campaign optimization.",
-      slug: "marketing-automation"
-    }
-  ];
 
   return (
     <Layout>
@@ -129,44 +78,14 @@ const Services = () => {
           </div>
         </section>
 
-        {/* 2. PRODUCT SHOWCASE SECTION (Imported) */}
+        {/* 2. PRODUCT SHOWCASE SECTION */}
         <ProductShowcase />
 
-        {/* 3. NEW FEATURES GRID (Imported) */}
-        {/* Placed here below Product Showcase as requested */}
+        {/* 3. FEATURES GRID */}
         <FeaturesGrid />
 
-        {/* 4. SERVICES GRID */}
-        <section className="py-24 px-4 relative z-10">
-          <div className="container mx-auto max-w-6xl">
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {services.map((service, index) => (
-                 <div 
-                   key={index}
-                   className="group p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1"
-                   style={{ 
-                     backgroundColor: themeColors.cardBg, 
-                     border: `1px solid ${themeColors.border}`,
-                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)"
-                   }}
-                 >
-                   <div className="mb-6 inline-flex p-3 rounded-xl bg-[#7fb07f]/10 group-hover:bg-[#7fb07f]/20 transition-colors">
-                     <service.icon className="w-8 h-8" style={{ color: themeColors.iconColor }} />
-                   </div>
-                   <h3 className="text-xl font-bold mb-3" style={{ color: themeColors.textDark }}>
-                     {service.title}
-                   </h3>
-                   <p className="mb-6 leading-relaxed" style={{ color: themeColors.textMuted }}>
-                     {service.description}
-                   </p>
-                   <Link to={`/services/${service.slug}`} className="inline-flex items-center text-sm font-semibold transition-colors hover:opacity-80" style={{ color: themeColors.primary }}>
-                     Learn more <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-                   </Link>
-                 </div>
-               ))}
-             </div>
-          </div>
-        </section>
+        {/* 4. CTA CARD (Replaces old grid) */}
+        <CtaCard />
 
       </div>
     </Layout>
