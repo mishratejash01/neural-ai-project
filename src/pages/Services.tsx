@@ -24,10 +24,12 @@ const Services = () => {
 
   return (
     <Layout>
-      {/* Page Content with Zoom Out Effect */}
+      {/* NOTE: The chat widget is OUTSIDE this div to ensure 'fixed' positioning 
+         works correctly relative to the viewport, not the scaled container.
+      */}
       <div 
         style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} 
-        className="min-h-screen flex flex-col font-sans transform scale-[0.95] origin-top relative"
+        className="min-h-screen flex flex-col font-sans transform scale-[0.95] origin-top relative z-0"
       >
         
         {/* 1. HERO SECTION */}
@@ -91,25 +93,23 @@ const Services = () => {
         {/* 3. FEATURES GRID */}
         <FeaturesGrid />
 
-        {/* 4. CTA CARD (Triggers Chat) */}
+        {/* 4. CTA CARD */}
         <CtaCard onOpenChat={() => setIsChatOpen(true)} />
 
       </div>
 
-      {/* --- CHAT WIDGET IMPLEMENTATION (No Floating Icon) --- */}
+      {/* --- CHAT WIDGET IMPLEMENTATION --- */}
+      {/* Positioned fixed relative to viewport, z-index 50 to sit on top */}
 
-      {/* Desktop Chat Window (Bottom Right Popover) */}
       {!isMobile && isChatOpen && (
-        // Updated position to 'bottom-6' since FAB is gone
         <div className="fixed bottom-6 right-6 w-[380px] h-[600px] z-50 bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 animate-in slide-in-from-bottom-10 fade-in duration-300">
           <ContactForm onClose={() => setIsChatOpen(false)} />
         </div>
       )}
 
-      {/* Mobile Drawer */}
       {isMobile && (
         <Drawer open={isChatOpen} onOpenChange={setIsChatOpen}>
-          <DrawerContent className="h-[85vh] outline-none">
+          <DrawerContent className="h-[85vh] outline-none z-50">
              <div className="h-full pt-4">
                 <ContactForm onClose={() => setIsChatOpen(false)} />
              </div>
