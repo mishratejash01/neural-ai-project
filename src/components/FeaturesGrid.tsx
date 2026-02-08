@@ -16,10 +16,10 @@ export function FeaturesGrid() {
     <section className="py-24 px-4 bg-white text-[#1a1a1a] font-sans">
       <div className="container mx-auto max-w-[1200px]">
         
-        {/* Header */}
+        {/* Header - UPDATED: Smaller Size, Regular Font */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-normal tracking-tight text-[#1a1a1a]">
-            Features that drive <span className="text-[#2d6a4f] font-semibold">ROI</span>. Security that never <span className="text-[#2d6a4f] font-semibold">sleeps</span>.
+          <h2 className="text-3xl md:text-4xl font-normal tracking-tight text-[#1a1a1a]">
+            Features that drive <span className="text-[#2d6a4f] font-medium">ROI</span>. Security that never <span className="text-[#2d6a4f] font-medium">sleeps</span>.
           </h2>
         </div>
 
