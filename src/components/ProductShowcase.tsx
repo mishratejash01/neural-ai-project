@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { 
+  Play, 
+  Volume2, 
   ShieldCheck, 
   Activity, 
   Users, 
@@ -23,7 +25,10 @@ export function ProductShowcase() {
         { text: "Safety Gear (PPE) Compliance", icon: <HardHat className="w-4 h-4" /> },
         { text: "Fire & Hazard Detection", icon: <Flame className="w-4 h-4" /> },
       ],
+      videoTitle: "Live Security Feed",
+      videoSubtitle: "Detecting threats in real-time",
       accentColor: "bg-[#eafaf1] text-[#2d6a4f]", // Green pill
+      progressColor: "bg-[#ef4444]" // Red progress bar
     },
     "Business Intelligence": {
       title: "Customer & Staff Insights",
@@ -34,7 +39,10 @@ export function ProductShowcase() {
         { text: "Demographic Analysis", icon: <UserCheck className="w-4 h-4" /> },
         { text: "Queue & Wait Time Analysis", icon: <Clock className="w-4 h-4" /> },
       ],
+      videoTitle: "Store Analytics Dashboard",
+      videoSubtitle: "Visualizing customer journeys",
       accentColor: "bg-[#f0f2ff] text-[#3e50f7]", // Blue pill
+      progressColor: "bg-[#3e50f7]" // Blue progress bar
     }
   };
 
@@ -101,25 +109,56 @@ export function ProductShowcase() {
           </div>
         </div>
 
-        {/* Right Side: YouTube Video Embed (Interactive) */}
+        {/* Right Side: Clean Video with Custom Bar */}
         <div className="flex-[1.3] relative">
           <div 
-            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] bg-black"
+            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 bg-black group"
           >
-            {/* We removed 'pointer-events-none' and scaling so controls are clickable and visible.
-                We set 'controls=1' in the src.
-            */}
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src="https://www.youtube.com/embed/hI9HQfCAw64?autoplay=1&mute=1&controls=1&showinfo=0&rel=0&loop=1&playlist=hI9HQfCAw64&modestbranding=1" 
-              title="Neural AI Demo" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              referrerPolicy="strict-origin-when-cross-origin" 
-              allowFullScreen
-              className="w-full h-full object-cover"
-            ></iframe>
+            {/* 1. YouTube Background (Pointer events none = No interaction with YT directly) */}
+            <div className="absolute inset-0 w-full h-full pointer-events-none scale-[1.35]"> 
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src="https://www.youtube.com/embed/hI9HQfCAw64?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=hI9HQfCAw64&modestbranding=1&playsinline=1" 
+                title="Neural AI Demo" 
+                frameBorder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerPolicy="strict-origin-when-cross-origin" 
+                className="w-full h-full object-cover"
+              ></iframe>
+            </div>
+
+            {/* 2. Dark Overlay Gradient (Better Visibility for text/bar) */}
+            <div 
+                className="absolute inset-0 pointer-events-none"
+                style={{ 
+                    background: activeTab === "Smart Monitoring" 
+                        ? "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,20,10,0.4) 100%)" 
+                        : "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,20,50,0.4) 100%)" 
+                }} 
+            />
+
+            {/* 3. Custom Bottom Player Bar (The "Own Control" Design) */}
+            <div className="absolute bottom-[12px] left-[12px] right-[12px] h-[44px] bg-black/40 backdrop-blur-md rounded-[8px] flex items-center px-[15px] gap-[15px] border border-white/10 z-10">
+              
+              {/* Play/Pause Icon (Visual Only) */}
+              <div className="text-white text-[14px] cursor-pointer hover:scale-110 transition-transform">
+                <Play className="w-3 h-3 fill-current"/>
+              </div>
+              
+              {/* Progress Bar (Visual Only) */}
+              <div className="flex-1 h-[4px] bg-white/20 rounded-[2px] relative cursor-pointer group/bar">
+                <div className={`absolute w-[60%] h-full rounded-[2px] ${current.progressColor}`}></div>
+                {/* Hover Effect on Bar */}
+                <div className="absolute right-[40%] top-1/2 -translate-y-1/2 w-3 h-3 bg-white rounded-full opacity-0 group-hover/bar:opacity-100 shadow-lg transition-opacity"></div>
+              </div>
+              
+              {/* Volume Icon */}
+              <div className="text-white opacity-80 cursor-pointer hover:opacity-100">
+                <Volume2 className="w-4 h-4"/>
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
