@@ -1,164 +1,172 @@
-import { useState } from "react";
-import { 
-  Play, 
-  Volume2, 
-  ShieldCheck, 
-  Activity, 
-  Users, 
-  AlertTriangle,
-  Flame,
-  HardHat,
-  Clock,
-  Map,
-  UserCheck
+import { Link } from "react-router-dom";
+import Layout from "@/components/layout/Layout";
+import { ProductShowcase } from "@/components/ProductShowcase"; // <--- NOW IMPORTED CORRECTLY
+import {
+  MessageSquare,
+  BarChart,
+  Eye,
+  Brain,
+  Cog,
+  Zap,
+  ArrowRight,
+  FileText
 } from "lucide-react";
 
-export function ProductShowcase() {
-  // 1. Define the content for the two distinct perspectives
-  const content = {
-    "Smart Monitoring": {
-      title: "Proactive Security",
-      description: "Turn passive CCTV into an active threat prevention system. Detect incidents before they escalate.",
-      points: [
-        { text: "Theft & Shoplifting Detection", icon: <ShieldCheck className="w-4 h-4" /> },
-        { text: "Real-time Intrusion Alerts", icon: <AlertTriangle className="w-4 h-4" /> },
-        { text: "Safety Gear (PPE) Compliance", icon: <HardHat className="w-4 h-4" /> },
-        { text: "Fire & Hazard Detection", icon: <Flame className="w-4 h-4" /> },
-      ],
-      videoTitle: "Live Security Feed",
-      videoSubtitle: "Detecting threats in real-time",
-      accentColor: "bg-[#eafaf1] text-[#2d6a4f]", // Green pill
-      progressColor: "bg-[#ef4444]" // Red progress bar for "Alert" feel
-    },
-    "Business Intelligence": {
-      title: "Customer & Staff Insights",
-      description: "Optimize operations with data-driven behavioral analytics. Understand your space like never before.",
-      points: [
-        { text: "Customer Heatmaps & Flow", icon: <Map className="w-4 h-4" /> },
-        { text: "Staff Productivity Tracking", icon: <Users className="w-4 h-4" /> },
-        { text: "Demographic Analysis", icon: <UserCheck className="w-4 h-4" /> },
-        { text: "Queue & Wait Time Analysis", icon: <Clock className="w-4 h-4" /> },
-      ],
-      videoTitle: "Store Analytics Dashboard",
-      videoSubtitle: "Visualizing customer journeys",
-      accentColor: "bg-[#f0f2ff] text-[#3e50f7]", // Blue pill
-      progressColor: "bg-[#3e50f7]" // Blue progress bar
-    }
+const Services = () => {
+  // Define the custom colors from your design to use in the grid
+  const themeColors = {
+    bg: "#f8faf8",
+    textDark: "#1a2e1a",
+    textMuted: "#556b55",
+    primary: "#142b14",
+    cardBg: "#ffffff",
+    border: "#cfdccf",
+    iconColor: "#2d6a4f"
   };
 
-  type TabKey = keyof typeof content;
-  const [activeTab, setActiveTab] = useState<TabKey>("Smart Monitoring");
-
-  // Helper to get current content
-  const current = content[activeTab];
+  const services = [
+    {
+      icon: MessageSquare,
+      title: "AI-Powered Chatbots",
+      description: "Streamline customer support with intelligent chatbots that understand natural language.",
+      slug: "chatbots"
+    },
+    {
+      icon: Cog,
+      title: "Custom AI Solutions",
+      description: "Tailored AI systems that solve unique business challenges with scalable architecture.",
+      slug: "custom-ai"
+    },
+    {
+      icon: BarChart,
+      title: "Data Analytics",
+      description: "Transform raw data into actionable intelligence with advanced machine learning models.",
+      slug: "data-analytics"
+    },
+    {
+      icon: Eye,
+      title: "Computer Vision",
+      description: "Harness visual intelligence for object detection, quality control, and monitoring.",
+      slug: "computer-vision"
+    },
+    {
+      icon: Brain,
+      title: "NLP & LLMs",
+      description: "Create AI models that understand, interpret, and generate human language at scale.",
+      slug: "nlp"
+    },
+    {
+      icon: Zap,
+      title: "Marketing Automation",
+      description: "Boost marketing with AI-driven personalization and automated campaign optimization.",
+      slug: "marketing-automation"
+    }
+  ];
 
   return (
-    <section className="py-20 flex flex-col items-center justify-center w-full bg-[#f8faf8]">
-      
-      {/* Section Header - UPDATED STATEMENT */}
-      <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-5xl font-bold text-[#1a2e1a] mb-4">
-          complete visibility. <span className="text-[#2d6a4f]">absolute control.</span>
-        </h2>
-      </div>
-
-      {/* Differentiator Bar (Tabs) */}
-      <div 
-        className="flex mb-[30px] bg-white border border-[#eee] rounded-[100px] p-[4px]"
-        style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.02)" }}
-      >
-        {(Object.keys(content) as TabKey[]).map((tab) => (
-          <div 
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`px-[24px] py-[10px] text-[14px] font-[500] cursor-pointer rounded-[100px] transition-all duration-300 ${
-              activeTab === tab 
-              ? current.accentColor 
-              : "text-[#757575] hover:bg-gray-50"
-            }`}
-          >
-            {tab}
-          </div>
-        ))}
-      </div>
-
-      {/* Main Content Card */}
-      <div 
-        className="w-[95%] max-w-[1100px] bg-white border border-[#f0f0f0] rounded-[40px] flex flex-col md:flex-row p-[30px] md:p-[50px] gap-[40px] mb-[50px] transition-all duration-300"
-        style={{ boxShadow: "0 10px 40px rgba(0,0,0,0.03)" }}
-      >
-        {/* Left Side: Dynamic Text Content */}
-        <div className="flex-1 flex flex-col justify-center animate-in fade-in slide-in-from-left-4 duration-500 key={activeTab}">
-          <h2 className="text-[32px] font-[600] text-[#2d2d2d] mb-[8px] tracking-[-0.5px]">
-            {current.title}
-          </h2>
-          <p className="text-[15px] text-[#757575] mb-[40px]">
-            {current.description}
-          </p>
-
-          <div className="flex flex-col gap-[12px] items-start">
-            {current.points.map((item, idx) => (
-              <div 
-                key={idx}
-                className="flex items-center bg-[#f2f2f2] px-[18px] py-[10px] rounded-[20px] text-[14px] font-[400] text-[#444]"
-              >
-                <span className="mr-[10px] opacity-70">{item.icon}</span>
-                {item.text}
+    <Layout>
+      <div style={{ backgroundColor: themeColors.bg, color: themeColors.textDark, fontFamily: "'Inter', sans-serif" }} className="min-h-screen flex flex-col font-sans">
+        
+        {/* 1. HERO SECTION */}
+        <section className="h-screen flex flex-col justify-center items-center px-4 pt-32 md:pt-40 pb-10 text-center">
+          <div className="max-w-[900px] mx-auto">
+            
+            {/* Decorative Dots */}
+            <div className="flex justify-center gap-[15px] mb-[30px] opacity-80">
+              <div className="flex gap-[3px]">
+                {[...Array(5)].map((_, i) => (
+                  <div key={`g1-${i}`} className="w-[4px] h-[4px] rounded-[1px] bg-[#7fb07f]" />
+                ))}
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Side: YouTube Video Embed */}
-        <div className="flex-[1.3] relative">
-          <div 
-            className="w-full h-full min-h-[380px] rounded-[24px] overflow-hidden relative flex shadow-[0_20px_50px_rgba(0,0,0,0.1)] transition-all duration-500 bg-black"
-          >
-            {/* The YouTube Iframe */}
-            <div className="absolute inset-0 w-full h-full pointer-events-none scale-[1.35]"> 
-               {/* scale-[1.35] zooms in slightly to hide any black bars or YT branding edges */}
-              <iframe 
-                width="100%" 
-                height="100%" 
-                src="https://www.youtube.com/embed/hI9HQfCAw64?autoplay=1&mute=1&controls=0&showinfo=0&rel=0&loop=1&playlist=hI9HQfCAw64&modestbranding=1&playsinline=1" 
-                title="Neural AI Demo" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerPolicy="strict-origin-when-cross-origin" 
-                className="w-full h-full object-cover"
-              ></iframe>
-            </div>
-
-            {/* Dark Overlay Gradient to make text readable */}
-            <div 
-                className="absolute inset-0 pointer-events-none"
-                style={{ 
-                    background: activeTab === "Smart Monitoring" 
-                        ? "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,20,10,0.6) 100%)" // Green tint for security
-                        : "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(10,20,50,0.6) 100%)" // Blue tint for business
-                }} 
-            />
-
-            {/* Dynamic Video Overlay Text */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-[20px] text-center animate-in zoom-in-95 duration-500 key={activeTab} pointer-events-none">
-               <div className="w-20 h-20 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-6 border border-white/20">
-                 <Play className="w-8 h-8 text-white fill-white ml-1" />
-               </div>
-               <h3 className="text-white/95 text-2xl font-bold mb-2 shadow-sm">{current.videoTitle}</h3>
-               <p className="text-white/80 text-sm shadow-sm">{current.videoSubtitle}</p>
-            </div>
-
-            {/* Static Player Bar */}
-            <div className="absolute bottom-[12px] left-[12px] right-[12px] h-[44px] bg-black/40 backdrop-blur-md rounded-[8px] flex items-center px-[15px] gap-[15px] border border-white/10 pointer-events-none">
-              <div className="text-white text-[14px]"><Play className="w-3 h-3 fill-current"/></div>
-              <div className="flex-1 h-[4px] bg-white/20 rounded-[2px] relative">
-                <div className={`absolute w-[60%] h-full rounded-[2px] ${current.progressColor}`}></div>
+              <div className="flex gap-[3px]">
+                {[...Array(5)].map((_, i) => (
+                  <div key={`g2-${i}`} className="w-[4px] h-[4px] rounded-[1px] bg-[#2d6a4f]" />
+                ))}
               </div>
-              <div className="text-white opacity-80"><Volume2 className="w-4 h-4"/></div>
+              <div className="flex gap-[3px]">
+                {[...Array(5)].map((_, i) => (
+                  <div key={`g3-${i}`} className="w-[4px] h-[4px] rounded-[1px] bg-[#1b4332]" />
+                ))}
+              </div>
             </div>
+
+            {/* Typography */}
+            <h1 className="text-[3.5rem] md:text-[5.2rem] font-[800] m-0 leading-[1.05] tracking-[-0.04em] text-[#1a2e1a]">
+              Intelligence,
+            </h1>
+            <h1 className="text-[3.5rem] md:text-[5.2rem] font-[800] m-0 leading-[1.05] tracking-[-0.04em] bg-clip-text text-transparent bg-gradient-to-br from-[#2d6a4f] via-[#1b4332] to-[#40916c]">
+              Scaled for Enterprise.
+            </h1>
+
+            {/* Subtitle */}
+            <p className="mt-[35px] text-[1.1rem] md:text-[1.25rem] text-[#556b55] max-w-[600px] mx-auto leading-[1.6] font-normal">
+              A suite architected to transform your raw data into security, user behaviour, and decision-making power.
+            </p>
+
+            {/* Buttons */}
+            <div className="mt-[50px] flex flex-col sm:flex-row justify-center gap-[16px] items-center">
+              <Link to="/contact">
+                <button 
+                  className="px-[32px] py-[14px] text-[0.9rem] font-[600] rounded-[8px] cursor-pointer transition-all duration-300 flex items-center gap-[10px] text-white shadow-[0_4px_14px_rgba(20,43,20,0.15)] hover:-translate-y-[1px] hover:shadow-[0_6px_20px_rgba(20,43,20,0.25)]"
+                  style={{ backgroundColor: "#142b14", border: "1px solid #142b14" }}
+                >
+                  Get Started
+                </button>
+              </Link>
+              
+              <Link to="/docs">
+                <button 
+                  className="px-[32px] py-[14px] text-[0.9rem] font-[600] rounded-[8px] cursor-pointer transition-all duration-300 flex items-center gap-[10px] bg-transparent hover:bg-[#2d6a4f]/5"
+                  style={{ color: "#1a2e1a", border: "1.5px solid #cfdccf" }}
+                >
+                  <FileText className="w-4 h-4" />
+                  Product Doc
+                </button>
+              </Link>
+            </div>
+
           </div>
-        </div>
+        </section>
+
+        {/* 2. PRODUCT SHOWCASE SECTION (Imported) */}
+        {/* This now pulls directly from src/components/ProductShowcase.tsx */}
+        <ProductShowcase />
+
+        {/* 3. SERVICES GRID */}
+        <section className="py-24 px-4 relative z-10">
+          <div className="container mx-auto max-w-6xl">
+             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               {services.map((service, index) => (
+                 <div 
+                   key={index}
+                   className="group p-8 rounded-2xl transition-all duration-300 hover:-translate-y-1"
+                   style={{ 
+                     backgroundColor: themeColors.cardBg, 
+                     border: `1px solid ${themeColors.border}`,
+                     boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02)"
+                   }}
+                 >
+                   <div className="mb-6 inline-flex p-3 rounded-xl bg-[#7fb07f]/10 group-hover:bg-[#7fb07f]/20 transition-colors">
+                     <service.icon className="w-8 h-8" style={{ color: themeColors.iconColor }} />
+                   </div>
+                   <h3 className="text-xl font-bold mb-3" style={{ color: themeColors.textDark }}>
+                     {service.title}
+                   </h3>
+                   <p className="mb-6 leading-relaxed" style={{ color: themeColors.textMuted }}>
+                     {service.description}
+                   </p>
+                   <Link to={`/services/${service.slug}`} className="inline-flex items-center text-sm font-semibold transition-colors hover:opacity-80" style={{ color: themeColors.primary }}>
+                     Learn more <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                   </Link>
+                 </div>
+               ))}
+             </div>
+          </div>
+        </section>
+
       </div>
-    </section>
+    </Layout>
   );
-}
+};
+
+export default Services;
