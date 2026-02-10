@@ -1,8 +1,4 @@
-{
-type: uploaded file
-fileName: src/components/ui/ClientLogos.tsx
-fullContent:
-"use client";
+use client";
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -88,4 +84,4 @@ export function ClientLogos() {
     </section>
   );
 }
-}
+
