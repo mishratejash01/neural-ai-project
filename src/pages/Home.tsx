@@ -1,8 +1,3 @@
-{
-type: uploaded file
-fileName: src/pages/Home.tsx
-fullContent:
-// src/pages/Home.tsx
 
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
@@ -193,4 +188,4 @@ const Home = () => {
 };
 
 export default Home;
-}
+
