@@ -9,7 +9,7 @@ interface Blog {
   id: string;
   title: string;
   image_url: string;
-  content: string;
+  content: string; // This contains HTML string
   created_at: string;
 }
 
@@ -95,14 +95,10 @@ const BlogDetail = () => {
         style={{ width: `${scrollProgress * 100}%` }}
       />
 
-      {/* Container: 
-         - pt-40: Added extra spacing below navbar to prevent overlap.
-         - font-['Inter']: Enforces the requested font family.
-      */}
       <div className="bg-white min-h-screen pb-40 pt-40 font-['Inter'] selection:bg-gray-100 selection:text-black">
         
         {/* MAIN CONTAINER: W-[75%] */}
-        <main className="w-[75%] mx-auto">
+        <main className="w-[90%] md:w-[75%] mx-auto">
           
           {/* --- TOP METADATA --- */}
           <div className="flex items-center justify-between mb-12 border-b border-gray-100 pb-8">
@@ -113,12 +109,12 @@ const BlogDetail = () => {
                <span className="text-sm font-medium text-gray-900 mt-2">{date}</span>
             </div>
             <Link to="/about" className="group flex items-center text-gray-400 hover:text-black transition-colors">
-                <span className="text-xs font-medium mr-2 opacity-0 group-hover:opacity-100 transition-opacity">Back</span>
-                <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+                <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" />
+                <span className="text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">Back</span>
             </Link>
           </div>
 
-          {/* --- HERO IMAGE (Static, No Hover Effect) --- */}
+          {/* --- HERO IMAGE --- */}
           <div className="w-full aspect-[21/9] rounded-2xl overflow-hidden mb-16 border border-gray-100 shadow-sm relative">
             {blog.image_url ? (
                <img 
@@ -134,20 +130,22 @@ const BlogDetail = () => {
           </div>
 
           {/* --- MAIN HEADING --- */}
-          {/* Font Weight: 800 (Extrabold), Tracking: -0.05em to match design */}
-          <h1 className="text-5xl md:text-[4rem] leading-[1.1] font-extrabold tracking-[-0.05em] text-black mb-16 max-w-none">
+          <h1 className="text-4xl md:text-[4rem] leading-[1.1] font-extrabold tracking-[-0.05em] text-black mb-16 max-w-none">
              {blog.title}
           </h1>
 
-          {/* --- CONTENT BODY --- */}
-          {/* Font Weight: 400 (Normal), Text Color: Gray-800 */}
+          {/* --- CONTENT BODY (UPDATED) --- */}
           <div className="w-full">
-            <div className="prose prose-xl max-w-none text-[1.25rem] leading-[1.8] text-gray-800 font-normal whitespace-pre-wrap">
-               {blog.content}
-            </div>
+            {/* 1. Removed 'whitespace-pre-wrap' because HTML handles spacing.
+                2. Added 'dangerouslySetInnerHTML' to interpret the HTML tags from Supabase.
+            */}
+            <div 
+                className="prose prose-xl max-w-none text-[1.125rem] md:text-[1.25rem] leading-[1.8] text-gray-800 font-normal prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 prose-img:rounded-xl"
+                dangerouslySetInnerHTML={{ __html: blog.content }} 
+            />
           </div>
 
-          {/* --- FOOTER (Doc ID Removed) --- */}
+          {/* --- FOOTER --- */}
           <div className="mt-32 pt-10 border-t border-gray-100 flex justify-end items-center">
             <div className="flex items-center space-x-3">
                <span className="relative flex h-2 w-2">
