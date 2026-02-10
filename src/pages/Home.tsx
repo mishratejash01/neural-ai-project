@@ -1,238 +1,153 @@
 // src/pages/Home.tsx
 
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 import { SplineHero } from "@/components/layout/SplineHero";
+import { ProductShowcase } from "@/components/ProductShowcase";
 import { ClientLogos } from "@/components/ui/ClientLogos";
-import {
-  Brain,
-  BarChart,
-  Eye,
-  MessageSquare,
-  Cog,
-  Zap,
-  ArrowRight,
-  Shield,
-  Clock,
-  TrendingUp,
-  Play,
-  Cpu,
-} from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
+
+// Images for "Backed By" section
+import nirmaanLogo from "@/assets/nirmaan.png";
+import iitmLogo from "@/assets/iitm.svg.png";
 
 const Home = () => {
-  const services = [
+  // Dummy data for Featured Blogs since we don't have a dynamic blog backend yet
+  const featuredBlogs = [
     {
-      icon: Brain,
-      title: "Custom Model Development",
-      description: "Build ML models tuned to your data and KPIs",
-      tagline: "Production-ready AI tailored to your business",
+      id: 1,
+      category: "Computer Vision",
+      title: "The Future of Retail Intelligence",
+      excerpt: "How AI-powered computer vision is transforming loss prevention and customer analytics in modern retail stores.",
+      date: "Oct 12, 2025"
     },
     {
-      icon: MessageSquare,
-      title: "LLM Integration & Prompt Engineering",
-      description:
-        "Integrate language models into workflows with safety guardrails",
-      tagline: "Intelligent conversation systems",
+      id: 2,
+      category: "Generative AI",
+      title: "Building Custom LLMs for Enterprise",
+      excerpt: "A deep dive into fine-tuning large language models on proprietary data for secure business applications.",
+      date: "Sep 28, 2025"
     },
     {
-      icon: Eye,
-      title: "Computer Vision & Imaging",
-      description: "Automate image inspection, detection and visual understanding",
-      tagline: "AI-powered visual intelligence",
-    },
-    {
-      icon: BarChart,
-      title: "Predictive Analytics & Forecasting",
-      description: "Turn historical data into accurate forecasts and signals",
-      tagline: "Data-driven decision making",
-    },
-    {
-      icon: Cog,
-      title: "MLOps & Productionization",
-      description:
-        "From prototype to 24/7 production: robust pipelines, monitoring and retraining",
-      tagline: "Enterprise-grade deployment",
-    },
-    {
-      icon: Zap,
-      title: "Automation & RPA with AI",
-      description: "Reduce repetitive tasks by combining rules + ML",
-      tagline: "Intelligent process automation",
-    },
-  ];
-
-  const stats = [
-    { value: "99%", label: "Uptime in Production", icon: Shield },
-    { value: "4-12", label: "Weeks to Deploy", icon: Clock },
-    { value: "300%", label: "Average ROI", icon: TrendingUp },
-    { value: "24/7", label: "AI Monitoring", icon: Cpu },
+      id: 3,
+      category: "Automation",
+      title: "Optimizing Logistics with Predictive AI",
+      excerpt: "Case study: Reducing delivery times by 30% using neural network-based route optimization algorithms.",
+      date: "Sep 15, 2025"
+    }
   ];
 
   return (
     <Layout>
-      {/* New Hero Section */}
+      {/* 1. Hero Section */}
       <SplineHero />
 
-      {/* Stats Section */}
-      <section className="py-20 bg-surface-dark border-y border-border">
+      {/* 2. Backed By Section */}
+      <section className="py-12 bg-background border-y border-border/50">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <Card
-                key={index}
-                className="text-center group hover-lift bg-transparent border-none shadow-none"
+          <div className="flex flex-col items-center justify-center space-y-6">
+            <p className="text-sm font-semibold text-muted-foreground uppercase tracking-widest">
+              Incubated & Backed By
+            </p>
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 opacity-80 hover:opacity-100 transition-opacity duration-500">
+              <a 
+                href="https://nirmaan.iitm.ac.in/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:scale-105 transition-transform duration-300"
               >
-                <CardHeader>
-                  <div className="flex items-center justify-center mb-3">
-                    <stat.icon className="w-8 h-8 text-primary mr-3" />
-                    <div className="text-4xl md:text-5xl font-bold text-neon">
-                      {stat.value}
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-muted-foreground font-medium">
-                    {stat.label}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                <img 
+                  src={nirmaanLogo} 
+                  alt="Nirmaan IIT Madras" 
+                  className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" 
+                />
+              </a>
+              <a 
+                href="https://www.iitm.ac.in/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:scale-105 transition-transform duration-300"
+              >
+                <img 
+                  src={iitmLogo} 
+                  alt="IIT Madras" 
+                  className="h-16 md:h-20 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300" 
+                />
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Services Preview */}
-      <section className="py-24 relative overflow-hidden bg-background">
-        <div className="absolute inset-0 tech-grid opacity-20" />
+      {/* 3. Product Showcase Section */}
+      <ProductShowcase />
+
+      {/* 4. Trusted By Innovators Section */}
+      <ClientLogos />
+
+      {/* 5. Featured Blogs Section */}
+      <section className="py-24 bg-surface-dark relative overflow-hidden">
+        {/* Background Grid Effect */}
+        <div className="absolute inset-0 tech-grid opacity-10 pointer-events-none" />
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Comprehensive <span className="text-gradient">AI Solutions</span>
-            </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              From custom model development to production deployment, we deliver
-              end-to-end AI solutions that transform your business operations.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {services.map((service, index) => (
-              <Card
-                key={index}
-                className="bg-card/50 backdrop-blur-sm border-border hover-lift hover-glow group transition-all duration-500"
-              >
-                <CardHeader className="text-center">
-                  <div className="w-16 h-16 gradient-neon rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-neon">
-                    <service.icon className="w-8 h-8 text-primary-foreground" />
-                  </div>
-                  <CardTitle className="text-xl text-foreground group-hover:text-neon transition-colors">
-                    {service.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm text-primary font-medium">
-                    {service.tagline}
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">
-                    {service.description}
-                  </p>
-                  <Button variant="ghost" size="sm" className="w-full">
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Link to="/services">
-              <Button size="lg" className="group">
-                View All Services
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+            <div className="max-w-2xl">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Featured <span className="text-gradient">Insights</span>
+              </h2>
+              <p className="text-muted-foreground text-lg">
+                Latest updates, technology deep dives, and success stories from our engineering team.
+              </p>
+            </div>
+            <Link to="/about">
+              <Button variant="outline" className="group">
+                View All Articles
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
-        </div>
-      </section>
 
-      {/* Client Logos Section */}
-      <ClientLogos />
-
-      {/* Demo Teaser */}
-      <section className="py-24 bg-surface-dark relative overflow-hidden">
-        <div className="absolute inset-0 gradient-glow opacity-50" />
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
-              See Our AI in <span className="text-gradient">Action</span>
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8 animate-slide-up">
-              Watch a live demonstration of our ML models processing real data,
-              or try our interactive sandbox to experience the power of AI
-              firsthand.
-            </p>
-
-            <div className="relative mb-12 group hover-lift">
-              <div className="aspect-video bg-gradient-to-br from-surface-darker to-card rounded-2xl border border-border flex items-center justify-center shadow-elevated hover:shadow-neon-lg transition-all">
-                <div className="text-center">
-                  <div className="w-20 h-20 gradient-neon rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform shadow-neon-lg">
-                    <Play className="w-10 h-10 text-primary-foreground ml-1" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {featuredBlogs.map((blog) => (
+              <Card 
+                key={blog.id} 
+                className="bg-card/40 backdrop-blur-sm border-border hover:border-primary/50 hover:bg-card/60 transition-all duration-300 group overflow-hidden"
+              >
+                {/* Decorative gradient top bar */}
+                <div className="h-2 w-full bg-gradient-to-r from-primary/20 via-primary to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <CardHeader>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-xs font-semibold text-primary px-2 py-1 rounded-full bg-primary/10 border border-primary/20">
+                      {blog.category}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {blog.date}
+                    </span>
                   </div>
-                  <p className="text-lg text-muted-foreground">
-                    Demo Video Coming Soon
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors leading-tight">
+                    {blog.title}
+                  </CardTitle>
+                </CardHeader>
+                
+                <CardContent>
+                  <p className="text-muted-foreground text-sm mb-6 line-clamp-3">
+                    {blog.excerpt}
                   </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/demo">
-                <Button size="lg" className="group">
-                  <Play className="mr-2 w-5 h-5" />
-                  Request Live Demo
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </Link>
-              <Link to="/portfolio">
-                <Button variant="outline" size="lg">
-                  View Case Studies
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-20 border-t border-border bg-background">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-3xl font-bold mb-4">
-              Stay ahead with AI insights
-            </h2>
-            <p className="text-muted-foreground mb-8">
-              Get monthly AI playbooks with real case studies and
-              implementation guides.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-foreground"
-              />
-              <Button size="lg">
-                Subscribe
-              </Button>
-            </div>
+                  
+                  <Link 
+                    to={`/blog/${blog.id}`} 
+                    className="inline-flex items-center text-sm font-medium text-foreground hover:text-primary transition-colors"
+                  >
+                    Read Article 
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
