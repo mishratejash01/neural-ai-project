@@ -1,3 +1,7 @@
+{
+type: uploaded file
+fileName: src/pages/Home.tsx
+fullContent:
 // src/pages/Home.tsx
 
 import { Link } from "react-router-dom";
@@ -5,15 +9,15 @@ import Layout from "@/components/layout/Layout";
 import { SplineHero } from "@/components/layout/SplineHero";
 import { ProductShowcase } from "@/components/ProductShowcase";
 import { ClientLogos } from "@/components/ui/ClientLogos";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge"; // Ensure you have this component, or use a styled span
+import { Badge } from "@/components/ui/badge"; 
 import { ArrowRight, Calendar, User } from "lucide-react";
 
 // Images for "Backed By" section
 import nirmaanLogo from "@/assets/nirmaan.png";
 import iitmLogo from "@/assets/iitm.svg.png";
-// Placeholder image for blogs (using the svg you have)
+// Placeholder image for blogs
 import placeholderImage from "/placeholder.svg"; 
 
 const Home = () => {
@@ -25,7 +29,7 @@ const Home = () => {
       excerpt: "How AI-powered computer vision is transforming loss prevention and customer analytics in modern retail stores.",
       date: "Oct 12, 2025",
       author: "Dr. Saurabh Shanu",
-      image: placeholderImage // Replace with real image imports if available
+      image: placeholderImage 
     },
     {
       id: 2,
@@ -59,7 +63,8 @@ const Home = () => {
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">
               Incubated & Backed By
             </p>
-            <div className="flex flex-wrap justify-center items-center gap-12 grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500">
+            {/* REMOVED 'grayscale' class to keep logos colored */}
+            <div className="flex flex-wrap justify-center items-center gap-12 opacity-100 transition-all duration-500">
               <a 
                 href="https://nirmaan.iitm.ac.in/" 
                 target="_blank" 
@@ -188,3 +193,4 @@ const Home = () => {
 };
 
 export default Home;
+}
