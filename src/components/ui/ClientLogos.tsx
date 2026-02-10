@@ -1,9 +1,10 @@
-// src/components/ui/ClientLogos.tsx
-
+{
+type: uploaded file
+fileName: src/components/ui/ClientLogos.tsx
+fullContent:
 "use client";
 import React from "react";
-import { GradientHeading } from "@/components/ui/gradient-heading";
-import { LogoCarousel } from "@/components/ui/logo-carousel";
+import { motion } from "framer-motion";
 
 // Importing your client logos
 import adsyntraLogo from "@/assets/clients/adsyntra.png";
@@ -13,8 +14,8 @@ import karoStartupLogo from "@/assets/clients/karo_startup_logo.jpeg";
 import sitlovoLogo from "@/assets/clients/sitlovo.png";
 import uiLogo from "@/assets/clients/ui_logo_.png";
 
-// Creating the logo array with the required structure
-const allLogos = [
+// Creating the logo array
+const logos = [
   { name: "Adsyntra", id: 1, src: adsyntraLogo },
   { name: "Anantya", id: 2, src: anantyaLogo },
   { name: "Jitsie", id: 3, src: jitsieLogo },
@@ -24,25 +25,67 @@ const allLogos = [
 ];
 
 export function ClientLogos() {
+  // Duplicate logos multiple times to ensure seamless scrolling on wide screens
+  const marqueeLogos = [...logos, ...logos, ...logos, ...logos];
+
   return (
-    // Changed background to surface-dark to match other sections
     <section className="py-24 bg-surface-dark relative overflow-hidden">
-      {/* Added the tech-grid background for consistency */}
+      {/* Background Grid */}
       <div className="absolute inset-0 tech-grid opacity-20" />
+      
       <div className="container mx-auto px-4 relative z-10">
-        <div className="mx-auto flex w-full max-w-screen-lg flex-col items-center space-y-12">
+        <div className="mx-auto flex w-full flex-col items-center space-y-12">
+          
+          {/* Header Section with requested Typography */}
           <div className="text-center">
-            <h2 className="text-3xl md:text-4xl font-bold">
-              Trusted By <span className="text-gradient">Innovators</span>
+            <h2 className="text-3xl md:text-4xl">
+              <span className="font-sans font-semibold italic text-foreground">Trusted By</span>{" "}
+              <span className="text-gradient font-bold">Innovators</span>
             </h2>
           </div>
 
-          {/* New container to style the carousel like a card */}
-          <div className="w-full max-w-5xl p-4 md:p-8 bg-card/50 backdrop-blur-sm border border-border rounded-2xl">
-            <LogoCarousel columnCount={4} logos={allLogos} />
+          {/* Marquee Container */}
+          <div className="w-full relative overflow-hidden mask-gradient-x">
+            {/* mask-gradient-x (concept): You might want to add a CSS class or inline style 
+               to fade the edges: mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            */}
+            <div 
+              className="flex items-center"
+              style={{
+                maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+                WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)"
+              }}
+            >
+              <motion.div
+                className="flex items-center gap-12 md:gap-24 pr-12 md:pr-24"
+                animate={{
+                  x: ["0%", "-50%"],
+                }}
+                transition={{
+                  duration: 30, // Adjust speed here (higher = slower)
+                  ease: "linear",
+                  repeat: Infinity,
+                }}
+              >
+                {marqueeLogos.map((logo, index) => (
+                  <div
+                    key={`${logo.id}-${index}`}
+                    className="relative w-32 h-20 md:w-40 md:h-24 flex-shrink-0 flex items-center justify-center grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
+                  >
+                    <img
+                      src={logo.src}
+                      alt={logo.name}
+                      className="max-w-full max-h-full object-contain"
+                    />
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
   );
+}
 }
