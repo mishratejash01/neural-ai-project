@@ -3,7 +3,6 @@ import Layout from "@/components/layout/Layout";
 import { Link } from "react-router-dom";
 import { ArrowRight, Brain } from "lucide-react";
 import TeamSection from "@/components/ui/team";
-import placeholderHero from "@/assets/neural-ai-hero.jpg";
 import { supabase } from "@/integrations/supabase/client";
 import {
   Carousel,
@@ -29,7 +28,6 @@ interface Visionary {
 }
 
 const About = () => {
-    const [heroImage, setHeroImage] = useState<string>(placeholderHero);
     const [blogs, setBlogs] = useState<Blog[]>([]);
     const [visionaries, setVisionaries] = useState<Visionary[]>([]);
     const [api, setApi] = useState<CarouselApi>();
@@ -59,17 +57,7 @@ const About = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            // 1. Fetch Hero Image
-            const { data: imgData } = await supabase
-                .from('about_hero_images')
-                .select('image_url')
-                .eq('is_active', true)
-                .limit(1)
-                .single();
-
-            if (imgData?.image_url) setHeroImage(imgData.image_url);
-
-            // 2. Fetch Blogs
+            // Fetch Blogs
             const { data: blogData } = await supabase
                 .from('blogs')
                 .select('*')
@@ -77,7 +65,7 @@ const About = () => {
 
             if (blogData) setBlogs(blogData);
 
-            // 3. Fetch Visionaries (Partners/Incubators)
+            // Fetch Visionaries (Partners/Incubators)
             const { data: visData, error: visError } = await supabase
                 .from('visionaries')
                 .select('*')
@@ -94,26 +82,40 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION */}
+                {/* 1. HERO SECTION (VIDEO BACKGROUND) */}
                 <div className="px-4 pt-6 pb-12 md:px-6 md:pt-8 md:pb-16 bg-white">
-                    <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-gray-100 overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
+                    <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-black overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
                             className="absolute inset-0 w-full h-full"
                         >
-                            <img 
-                                src={heroImage} 
-                                alt="Neural AI Hero" 
-                                className="w-full h-full object-cover"
-                                loading="eager"
+                            {/* Google Drive Video Embed */}
+                            <iframe 
+                                src="https://drive.google.com/file/d/1f2XC2xaLcN6ZrXvMJLjbFnrljNb28Pri/preview?autoplay=1&mute=1&controls=0&modestbranding=1"
+                                className="w-full h-full object-cover md:scale-125" // Scale up slightly to avoid black bars if aspect ratio differs
+                                allow="autoplay; encrypted-media; fullscreen"
+                                title="Neural AI Cinematic Hero"
+                                style={{ 
+                                    pointerEvents: "none", // Prevents clicking (pausing/unmuting)
+                                    border: "none"
+                                }}
                             />
                         </motion.div>
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/30" />
+                        
+                        {/* Gradient Overlay for Text Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
+                        
+                        {/* Optional Hero Text Overlay (If needed) */}
+                        <div className="absolute bottom-10 left-6 md:bottom-20 md:left-12 z-10">
+                            <h1 className="text-white text-4xl md:text-6xl font-bold tracking-tight drop-shadow-lg">
+                                Vision Beyond Sight.
+                            </h1>
+                        </div>
                     </div>
                 </div>
 
                 {/* 2. NEW DESIGN SECTION */}
-                <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen rounded-t-3xl md:rounded-t-[3rem] overflow-hidden">
+                <div className="w-full flex flex-col items-center py-[20px] bg-[radial-gradient(circle_at_center,#e0fbf8_0%,#002d28_100%)] bg-fixed min-h-screen rounded-t-3xl md:rounded-t-[3rem] overflow-hidden -mt-8 relative z-20">
                     
                     {/* LOGO MARQUEE */}
                     <div 
@@ -268,7 +270,6 @@ const About = () => {
                                                         <span className="text-[10px] font-bold text-blue-600 uppercase tracking-wider font-['Inter']">
                                                             Article
                                                         </span>
-                                                        {/* Removed group-hover:text-blue-600 */}
                                                         <h3 className="text-lg md:text-xl font-bold text-gray-900 mt-3 line-clamp-2 transition-colors duration-300 font-['Inter']">
                                                             {blog.title}
                                                         </h3>
