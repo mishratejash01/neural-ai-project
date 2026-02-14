@@ -57,7 +57,7 @@ const About = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            // Fetch Blogs
+            // 1. Fetch Blogs
             const { data: blogData } = await supabase
                 .from('blogs')
                 .select('*')
@@ -65,7 +65,7 @@ const About = () => {
 
             if (blogData) setBlogs(blogData);
 
-            // Fetch Visionaries (Partners/Incubators)
+            // 2. Fetch Visionaries (Partners/Incubators)
             const { data: visData, error: visError } = await supabase
                 .from('visionaries')
                 .select('*')
@@ -82,28 +82,32 @@ const About = () => {
         <Layout>
             <div className="w-full bg-white font-['Inter']">
                 
-                {/* 1. HERO SECTION (VIDEO BACKGROUND) */}
+                {/* 1. HERO SECTION (YOUTUBE VIDEO) */}
                 <div className="px-4 pt-6 pb-12 md:px-6 md:pt-8 md:pb-16 bg-white">
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-black overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
-                            className="absolute inset-0 w-full h-full flex items-center justify-center"
+                            className="absolute inset-0 w-full h-full"
                         >
-                            {/* YOUTUBE EMBED HACK:
-                                1. scale-[1.35] -> Zooms in 135% to push the YouTube Logo and Title Bar OUT of the view.
-                                2. pointer-events-none -> Prevents hovering (which shows controls) and clicking (pausing).
+                            {/* YOUTUBE 1080p HACK:
+                                1. w-[150%] h-[150%] -> Makes the player HUGE. This forces YouTube to serve the 1080p stream 
+                                   because it thinks the player is very large.
+                                2. top-1/2 left-1/2 -translate... -> Centers the huge player so the branding is cropped out.
+                                3. &vq=hd1080 -> Explicitly requests HD quality.
                             */}
-                            <iframe 
-                                src="https://www.youtube.com/embed/q-Idvt5J1PI?autoplay=1&mute=1&controls=0&loop=1&playlist=q-Idvt5J1PI&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1"
-                                className="w-full h-full aspect-video scale-[1.35] pointer-events-none" 
-                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                title="Neural AI Cinematic Hero"
-                                style={{ border: "none" }}
-                            />
+                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] pointer-events-none">
+                                <iframe 
+                                    src="https://www.youtube.com/embed/q-Idvt5J1PI?autoplay=1&mute=1&controls=0&loop=1&playlist=q-Idvt5J1PI&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1&vq=hd1080"
+                                    className="w-full h-full"
+                                    allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                    title="Neural AI Cinematic Hero"
+                                    style={{ border: "none" }}
+                                />
+                            </div>
                         </motion.div>
                         
-                        {/* Gradient Overlay (Optional: Makes the video fade nicely into the bottom) */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 pointer-events-none" />
+                        {/* Gradient Overlay for Text Readability */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/40 pointer-events-none" />
                         
                     </div>
                 </div>
