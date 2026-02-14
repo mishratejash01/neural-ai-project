@@ -95,8 +95,10 @@ export function ProductShowcase() {
   const createPlayer = () => {
     if (playerRef.current) return; // Prevent double init
 
+    const videoId = 'aUCMy2zql-Y'; // Updated Video ID
+
     playerRef.current = new window.YT.Player('neural-player', {
-      videoId: 'aUCMy2zql-Y', // SpaceX Video ID
+      videoId: videoId,
       playerVars: {
         autoplay: 1,
         controls: 0,      // Hide native controls
@@ -107,7 +109,7 @@ export function ProductShowcase() {
         showinfo: 0,
         mute: 1,          // Start muted (required for autoplay)
         loop: 1,
-        playlist: 'hI9HQfCAw64' // Required for loop to work
+        playlist: videoId // REQUIRED: Playlist must match video ID for loop to work
       },
       events: {
         onReady: (event: any) => {
@@ -279,11 +281,6 @@ export function ProductShowcase() {
                     style={{ width: `${progress}%` }}
                   />
                 </div>
-                {/* Thumb (Visible on hover) */}
-                {/* <div 
-                  className="w-3 h-3 bg-white rounded-full absolute pointer-events-none opacity-0 group-hover/bar:opacity-100 transition-opacity shadow-sm"
-                  style={{ left: `calc(${progress}% - 6px)` }}
-                /> */}
               </div>
               
               {/* Mute/Unmute Button */}
