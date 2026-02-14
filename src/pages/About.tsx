@@ -89,28 +89,27 @@ const About = () => {
                             style={{ y }} 
                             className="absolute inset-0 w-full h-full"
                         >
-                            {/* Google Drive Video Embed */}
-                            <iframe 
-                                src="https://drive.google.com/file/d/1f2XC2xaLcN6ZrXvMJLjbFnrljNb28Pri/preview?autoplay=1&mute=1&controls=0&modestbranding=1"
-                                className="w-full h-full object-cover md:scale-125" // Scale up slightly to avoid black bars if aspect ratio differs
-                                allow="autoplay; encrypted-media; fullscreen"
-                                title="Neural AI Cinematic Hero"
-                                style={{ 
-                                    pointerEvents: "none", // Prevents clicking (pausing/unmuting)
-                                    border: "none"
-                                }}
-                            />
+                            {/* FIX: Google Drive embeds often block autoplay or refuse to load due to CSP (Security) headers.
+                               Best Practice: Download the video file and put it in your 'public' folder.
+                               Example path: /assets/videos/hero-video.mp4
+                            */}
+                            <video
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-full h-full object-cover md:scale-125"
+                                poster="/assets/neural-ai-hero.jpg" // Fallback image while loading
+                            >
+                                {/* Replace this src with your local file path after downloading */}
+                                <source src="https://drive.google.com/uc?export=download&id=1f2XC2xaLcN6ZrXvMJLjbFnrljNb28Pri" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
                         </motion.div>
                         
-                        {/* Gradient Overlay for Text Readability */}
+                        {/* Gradient Overlay for Text Readability - Kept for style, but text is removed */}
                         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
                         
-                        {/* Optional Hero Text Overlay (If needed) */}
-                        <div className="absolute bottom-10 left-6 md:bottom-20 md:left-12 z-10">
-                            <h1 className="text-white text-4xl md:text-6xl font-bold tracking-tight drop-shadow-lg">
-                                Vision Beyond Sight.
-                            </h1>
-                        </div>
                     </div>
                 </div>
 
