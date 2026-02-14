@@ -87,28 +87,22 @@ const About = () => {
                     <div ref={containerRef} className="relative w-full h-[85vh] md:h-[90vh] bg-black overflow-hidden rounded-2xl md:rounded-[2rem] shadow-sm border border-gray-100">
                         <motion.div 
                             style={{ y }} 
-                            className="absolute inset-0 w-full h-full"
+                            className="absolute inset-0 w-full h-full flex items-center justify-center"
                         >
-                            {/* FIX: Google Drive embeds often block autoplay or refuse to load due to CSP (Security) headers.
-                               Best Practice: Download the video file and put it in your 'public' folder.
-                               Example path: /assets/videos/hero-video.mp4
+                            {/* FIX: Using iframe with transform scale to hide controls.
+                                The 'pointer-events-none' prevents pausing on click.
                             */}
-                            <video
-                                autoPlay
-                                loop
-                                muted
-                                playsInline
-                                className="w-full h-full object-cover md:scale-125"
-                                poster="/assets/neural-ai-hero.jpg" // Fallback image while loading
-                            >
-                                {/* Replace this src with your local file path after downloading */}
-                                <source src="https://drive.google.com/uc?export=download&id=1f2XC2xaLcN6ZrXvMJLjbFnrljNb28Pri" type="video/mp4" />
-                                Your browser does not support the video tag.
-                            </video>
+                            <iframe 
+                                src="https://drive.google.com/file/d/1f2XC2xaLcN6ZrXvMJLjbFnrljNb28Pri/preview?autoplay=1&mute=1&controls=0&modestbranding=1"
+                                className="w-[150%] h-[150%] object-cover pointer-events-none" 
+                                allow="autoplay; encrypted-media; fullscreen"
+                                title="Neural AI Cinematic Hero"
+                                style={{ border: "none" }}
+                            />
                         </motion.div>
                         
-                        {/* Gradient Overlay for Text Readability - Kept for style, but text is removed */}
-                        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/60 pointer-events-none" />
+                        {/* Gradient Overlay (Optional: Makes the video fade nicely into the bottom) */}
+                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/40 pointer-events-none" />
                         
                     </div>
                 </div>
