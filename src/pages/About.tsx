@@ -89,13 +89,14 @@ const About = () => {
                             style={{ y }} 
                             className="absolute inset-0 w-full h-full flex items-center justify-center"
                         >
-                            {/* FIX: Using iframe with transform scale to hide controls.
-                                The 'pointer-events-none' prevents pausing on click.
+                            {/* YOUTUBE EMBED HACK:
+                                1. scale-[1.35] -> Zooms in 135% to push the YouTube Logo and Title Bar OUT of the view.
+                                2. pointer-events-none -> Prevents hovering (which shows controls) and clicking (pausing).
                             */}
                             <iframe 
-                                src="https://drive.google.com/file/d/1f2XC2xaLcN6ZrXvMJLjbFnrljNb28Pri/preview?autoplay=1&mute=1&controls=0&modestbranding=1"
-                                className="w-[150%] h-[150%] object-cover pointer-events-none" 
-                                allow="autoplay; encrypted-media; fullscreen"
+                                src="https://www.youtube.com/embed/q-Idvt5J1PI?autoplay=1&mute=1&controls=0&loop=1&playlist=q-Idvt5J1PI&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&fs=0&disablekb=1"
+                                className="w-full h-full aspect-video scale-[1.35] pointer-events-none" 
+                                allow="autoplay; encrypted-media; gyroscope; picture-in-picture"
                                 title="Neural AI Cinematic Hero"
                                 style={{ border: "none" }}
                             />
