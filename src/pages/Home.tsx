@@ -139,9 +139,12 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="hidden sm:block h-12 w-px bg-white/20"></div>
-                  <Button className="bg-white text-gray-900 hover:bg-gray-100 transition-colors rounded-full px-8 py-6 text-sm font-semibold shadow-[0_0_20px_rgba(255,255,255,0.15)]">
-                    Join the Waitlist
-                  </Button>
+                  {/* Updated Link to the new Anant page */}
+                  <Link to="/anant">
+                    <Button className="bg-white text-gray-900 hover:bg-gray-100 transition-colors rounded-full px-8 py-6 text-sm font-semibold shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                      Explore the Architecture
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
