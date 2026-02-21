@@ -5,7 +5,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Anant from "./pages/Anant"; // <-- Added Anant import
 import Services from "./pages/Services";
 import Demo from "./pages/Demo";
 import Testimonials from "./pages/Testimonials";
@@ -30,7 +29,7 @@ import LogisticsOptimization from "./pages/LogisticsOptimization";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import ScrollToTop from "@/components/ScrollToTop";
-import BlogDetail from "./pages/BlogDetail";
+import BlogDetail from "./pages/BlogDetail"; // <-- 1. Import BlogDetail
 
 const queryClient = new QueryClient();
 
@@ -45,10 +44,9 @@ const App = () => (
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           
-          {/* Added Anant Route */}
-          <Route path="/anant" element={<Anant />} />
-          
+          {/* 2. Add the dynamic route for blog details */}
           <Route path="/blog/:id" element={<BlogDetail />} />
+
           <Route path="/services" element={<Services />} />
           <Route path="/services/chatbots" element={<ChatbotsService />} />
           <Route path="/services/custom-ai" element={<CustomAIService />} />
