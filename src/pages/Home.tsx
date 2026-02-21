@@ -10,7 +10,7 @@ import { ClientLogos } from "@/components/ui/ClientLogos";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge"; 
-import { ArrowRight, Calendar, User } from "lucide-react";
+import { ArrowRight, Calendar, User, Sparkles, BrainCircuit } from "lucide-react";
 
 // Images for "Backed By" section
 import nirmaanLogo from "@/assets/nirmaan.png";
@@ -98,6 +98,60 @@ const Home = () => {
                   className="h-14 md:h-16 w-auto object-contain" 
                 />
               </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Anant 1.0 Sovereign LLM Announcement Section */}
+      <section className="py-16 bg-white relative overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-gray-900 via-slate-800 to-black text-white shadow-2xl border border-gray-800 transition-transform duration-500 hover:scale-[1.01]">
+            {/* Abstract background ambient glows */}
+            <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-primary/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+            <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+
+            <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center justify-between gap-10">
+              <div className="max-w-2xl space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-sm font-medium text-blue-200 shadow-inner">
+                  <Sparkles className="w-4 h-4 text-blue-300" />
+                  <span>Project Announcement</span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 pb-2">
+                  Anant 1.0
+                </h2>
+                
+                <p className="text-xl md:text-2xl font-light text-gray-300">
+                  Our Sovereign Large Language Model
+                </p>
+                
+                <p className="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl">
+                  We are building the future of independent AI. Anant 1.0 is a highly secure, sovereign foundation model engineered for contextual depth, strict data privacy, and powerful generative capabilities tailored for the future.
+                </p>
+
+                <div className="flex flex-wrap items-center gap-6 pt-6">
+                  <div className="flex flex-col">
+                    <span className="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Expected Launch</span>
+                    <span className="text-xl font-semibold text-white flex items-center gap-2">
+                      <Calendar className="w-5 h-5 text-primary" />
+                      May 2027
+                    </span>
+                  </div>
+                  <div className="hidden sm:block h-12 w-px bg-white/20"></div>
+                  <Button className="bg-white text-gray-900 hover:bg-gray-100 transition-colors rounded-full px-8 py-6 text-sm font-semibold shadow-[0_0_20px_rgba(255,255,255,0.15)]">
+                    Join the Waitlist
+                  </Button>
+                </div>
+              </div>
+
+              {/* Visual representation / icon */}
+              <div className="hidden lg:flex items-center justify-center relative w-72 h-72">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 to-blue-500/30 rounded-full blur-3xl animate-pulse"></div>
+                <div className="relative bg-white/5 border border-white/10 p-8 rounded-full backdrop-blur-sm shadow-2xl">
+                  <BrainCircuit className="w-24 h-24 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.8)] z-10 relative" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
